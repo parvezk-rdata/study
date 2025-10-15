@@ -1,0 +1,30 @@
+legacy.sty is a placeholder name for a local LaTeX package used to keep older or project-specific settings separate from the main, modern preamble so that documents remain backward compatible without cluttering current configuration.
+
+​
+Typical uses
+
+    Backward compatibility: preserves old macros, deprecated package options, or legacy formatting that existing chapters or collaborators still rely on, while allowing newer settings to live elsewhere.
+
+​
+
+Isolation of risky tweaks: contains low-level commands (e.g., those needing makeatletter) or overrides that might conflict with newer packages, keeping them out of the primary preamble.
+
+​
+
+Controlled migration: serves as a staging area to gradually replace legacy commands with modern equivalents without breaking existing content.
+
+    ​
+
+How to deploy
+
+    Load it at the end of the preamble chain so newer packages and styles initialize first, and legacy overrides take effect only where intended.
+
+​
+
+Document every macro or override inside legacy.sty with comments and version/date tags using ProvidesPackage to track provenance and ease future removal.
+
+    ​
+
+When to avoid it
+
+    If no backward compatibility is needed, keep everything in modular preamble fragments and omit legacy.sty to reduce complexity and potential conflicts

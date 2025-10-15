@@ -1,0 +1,17 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\chapter{Introduction}
+Large documents benefit from modular design: a single root preamble, centralized assets, and per-chapter source files ease collaboration and reuse \parencite{lamport1986latex,knuth1990texbook}. See \cref{fig:intro-diagram}. 
+
+\section{Motivation}
+This layout reduces path fragility and avoids duplicated configuration by keeping images under \texttt{./images} and bibliographies under \texttt{./bib}. Cross-references, lists, and numbering stay consistent from the root.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.7\linewidth]{intro/diagram1.pdf}
+  \caption{High-level project structure.}
+  \label{fig:intro-diagram}
+\end{figure}
+
+\end{document}

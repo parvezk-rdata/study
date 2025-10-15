@@ -1,0 +1,32 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\chapter{Methods}
+We adopt a chapter-per-folder, section-per-file approach with a single build target. The bibliography is unified via \texttt{biblatex} and \texttt{biber}, registered once in the preamble \parencite{lehman2015biblatex}. 
+
+\section{Data and Model}
+Table \ref{tab:settings} summarizes notional settings. Figure \ref{fig:methods-pipeline} illustrates the pipeline.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{@{}ll@{}}
+  \toprule
+  Setting & Value \\
+  \midrule
+  Engine & lualatex \\
+  Bibliography & biblatex/biber \\
+  Graphics path & ./images/... \\
+  \bottomrule
+  \end{tabular}
+  \caption{Build-related settings.}
+  \label{tab:settings}
+\end{table}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.8\linewidth]{methods/pipeline.pdf}
+  \caption{Processing pipeline.}
+  \label{fig:methods-pipeline}
+\end{figure}
+
+\end{document}

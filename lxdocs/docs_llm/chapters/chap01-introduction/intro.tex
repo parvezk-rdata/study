@@ -1,0 +1,21 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\chapter{Introduction}
+
+% Pull in section files from the local sections/ folder.
+% Each of these files should start with \section{...} (not \chapter).
+\input{sections/background}
+\input{sections/contributions}
+\input{sections/outline}
+
+% Figures specific to this chapter can still be referenced here
+% using centralized graphics paths defined in the preamble.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.7\linewidth]{intro/diagram1.pdf}
+  \caption{High-level project structure.}
+  \label{fig:intro-diagram}
+\end{figure}
+
+\end{document}
