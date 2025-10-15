@@ -15,6 +15,7 @@
 *.pdf
 *temp_delete*
 
+chapters/chap01-introduction/intro.synctex.gz
 
 # Allow
 # !static/css/bootstrap-styled.css
