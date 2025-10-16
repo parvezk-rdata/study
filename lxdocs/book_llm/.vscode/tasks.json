@@ -2,34 +2,32 @@
     "version": "2.0.0",
     "tasks": [
       {
-        "label": "Build LaTeX PDF (script)",
+        "label": "LaTeX Build",
         "type": "shell",
-        "command": "${workspaceFolder}/zz_run_script.sh",
-        "args": ["${workspaceFolder}/main"],
+        "command": "bash",
+        "args": ["-c", "rm -f *.pdf && latexmk -C && latexmk -pdf -interaction=nonstopmode ${fileBasename} && rm -f *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.log *.lof *.lot *.out *.run.xml *.toc *.tmp && mv ${fileBasenameNoExtension}.pdf ${workspaceFolder}/zz_pdf "],
         "options": {
-          "cwd": "${workspaceFolder}"
+          "cwd": "${fileDirname}"
         },
         "presentation": {
           "reveal": "always",
           "panel": "dedicated",
           "clear": true
-        },
-        "problemMatcher": []
+        }
       },
       {
-        "label": "Clean LaTeX build",
+        "label": "LaTeX Clean",
         "type": "shell",
-        "command": "${workspaceFolder}/zz_clean_script.sh",
-        "args": ["${workspaceFolder}/main"],
+        "command": "bash",
+        "args": ["-c", "rm -f *.pdf *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.log *.lof *.lot *.out *.run.xml *.toc *.tmp  ${workspaceFolder}/zz_pdf/${fileBasenameNoExtension}.pdf "],
         "options": {
-          "cwd": "${workspaceFolder}"
+          "cwd": "${fileDirname}"
         },
         "presentation": {
           "reveal": "always",
           "panel": "dedicated",
           "clear": true
-        },
-        "problemMatcher": []
+        }
       }
     ]
   }
