@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build LaTeX PDF (script)",
+        "type": "shell",
+        "command": "./zz_run_script.sh",
+        "args": ["${fileBasenameNoExtension}"],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated",
+          "clear": true
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "Clean LaTeX build",
+        "type": "shell",
+        "command": "./zz_clean_script.sh",
+        "args": ["${fileBasenameNoExtension}"],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated",
+          "clear": true
+        },
+        "problemMatcher": []
+      }
+    ]
+  }
+  
