@@ -4,8 +4,8 @@
       {
         "label": "Build LaTeX PDF (script)",
         "type": "shell",
-        "command": "./zz_run_script.sh",
-        "args": ["${fileBasenameNoExtension}"],
+        "command": "${workspaceFolder}/zz_run_script.sh",
+        "args": ["${workspaceFolder}/main"],
         "options": {
           "cwd": "${workspaceFolder}"
         },
@@ -19,8 +19,8 @@
       {
         "label": "Clean LaTeX build",
         "type": "shell",
-        "command": "./zz_clean_script.sh",
-        "args": ["${fileBasenameNoExtension}"],
+        "command": "${workspaceFolder}/zz_clean_script.sh",
+        "args": ["${workspaceFolder}/main"],
         "options": {
           "cwd": "${workspaceFolder}"
         },
