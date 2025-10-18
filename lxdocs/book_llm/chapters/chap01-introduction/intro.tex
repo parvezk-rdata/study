@@ -1,12 +1,22 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
 
-\chapter{Introduction}
+\chapter{LLM}
 
 % Pull in section files from the local sections/ folder.
 % Each of these files should start with \section{...} (not \chapter).
 
 % \input{sections/background}
-\subfile{sections/background}
+% \subfile{sections/background}
+
+\section{What LLMs do}
+	\begin{enumerate}
+		\item Probabilistic sequence models
+		\item They don’t plan full sentences; they add one token at a time.
+		\item Guess the next token based on previous tokens.
+		\item Each new word is chosen based on probabilities calculated from the words before it.
+		\item The model does not decide the whole sentence at once, it builds it step by step.
+	\end{enumerate}
+Your ref \parencite{Hang2024}.
 
 \end{document}
