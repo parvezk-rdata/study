@@ -1,0 +1,57 @@
+a latex tutorial PDF, created using latex which contains “live code + output” demonstration.
+
+=> Each example has separate `.tex` file inside an `example_codes/` directory.
+=> Each chapter (`tables.tex`, `lists.tex`, etc.) includes these files twice:
+    : Once using `\input{...}` → to render the actual LaTeX output.
+    : Once using `\lstinputlisting{...}` → to display the source code verbatim.
+=> The `\subfile` command is used to include chapter files(ex \subfile{chapters/chap02-tables/tables})
+=> The `\subfix` command is used for correct relative paths (example \input{\subfix{example_codes/table_01_simple_example.tex}})
+=> No float or minipage environments are used, since they can create awkward white spaces or split examples across pages.
+=> Page control is done manually:
+    : \newpage → Starts a new page.
+    : \clearpage → Starts a new page and flushes pending floats, ensuring clean layout control.
+    : \documentclass[../../main.tex]{subfiles}
+    : \subfile, \subfix, \input
+
+
+latex-help-book/
+│
+├── main.tex
+│
+├── preamble/
+│   ├── main.tex
+│   ├── packages.tex
+│   ├── macros_constants.tex
+│   └── styles
+│           ├── main.tex
+│           ├── tables              --> tex files for various table styles
+│           ├── figures             --> tex files for various figure styles
+│           ├── misc
+│           ├── text_styles.tex
+│           └── ... more ...
+│
+├── chapters/
+│   └── chap02-tables/
+│   │   ├── tables.tex
+│   │   └── example_codes/
+│   │       ├── table_01_simple_example
+│   │       ├── table_02_color_table.tex
+│   │       ├── table_03_fancy_table_example.tex
+│   │       └── ... more ...
+│   │
+│   ├── chap03-lists/
+│   │   ├── lists.tex
+│   │   └── example_codes/
+│   │       └── ... more ...
+│   │
+│   └── chap04-figures/
+│   │   ├── figures.tex
+│   │   └── example_codes/
+│   │       └── ... more ...
+│   │        
+├── bib/
+│   └── references.bib
+│
+└── images/
+    └── ... any figures ...
+

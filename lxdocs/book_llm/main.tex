@@ -1,16 +1,33 @@
-% \documentclass[12pt]{report}
-\documentclass[12pt,a4paper]{book}
+% \documentclass[12pt,a4paper]{book}
+% \documentclass[oneside,openany]{book}
 
-\input{preamble/preamble.tex}
+% following avoids blank page when new chaper starts with odd no
+\documentclass[12pt,a4paper,openany]{book}
+
+
+\input{preamble/main_preamble.tex}
 
 \begin{document}
 
-% If the document class is report, remove \frontmatter
+% Front Matter (unnumbered pages)
 \frontmatter
-% \input{frontmatter/titlepage}
-% \input{frontmatter/abstract}
-% \input{frontmatter/acknowledgments}
-% \input{frontmatter/dedication}
+
+% \title{The \LaTeX{} Help Book}
+% \author{New User}
+% \maketitle
+
+\input{frontmatter/titlepage.tex}
+%\cleardoublepage
+
+\input{frontmatter/abstract.tex}
+%\cleardoublepage
+
+\input{frontmatter/dedication.tex}
+%\cleardoublepage
+
+\input{frontmatter/acknowledgments.tex}
+%\cleardoublepage
+
 \tableofcontents  
 \listoffigures  
 \listoftables
@@ -18,9 +35,7 @@
 % If the document class is report, remove \mainmatter
 \mainmatter
 \subfile{chapters/chap01-introduction/intro}
-% \subfile{chapters/chap02-methods/methods}
-% \subfile{chapters/chap03-results/results}
-% \subfile{chapters/chap04-conclusion/conclusion}
+\clearpage
 
 % If the document class is report, remove \backmatter
 \backmatter
