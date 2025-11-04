@@ -11,9 +11,9 @@
 
 \section{What LLMs do}
 	\begin{enumerate}
+		\item Token Prediction : Guess the next token based on previous tokens.
 		\item Probabilistic sequence models
 		\item They don’t plan full sentences; they add one token at a time.
-		\item Guess the next token based on previous tokens.
 		\item Each new word is chosen based on probabilities calculated from the words before it.
 		\item The model does not decide the whole sentence at once, it builds it step by step.
 	\end{enumerate}
@@ -24,8 +24,38 @@
 		\item The model calculates possible next tokens and their scores.
 		\item A function called \textit{softmax} turns scores into probabilities (for example, ``mat = 70\%, floor = 20\%, bed = 10\%'').
 		\item The model then picks the next token depending on settings:
-		\input{\subfix{images/token_prediction.tex}}
+		\begin{enumerate}
+			\item Greedy  :  always pick the top choice (most likely).
+			\item Top-k  : only consider the top k tokens.
+			\item Top-p (nucleus) :  only consider tokens whose probabilities add up to p.
+			\item Temperature  :  controls randomness (low = predictable, high = creative).
+		\end{enumerate}
+		\item For accurate answers, use low randomness.
+		\item For creative answers, use higher randomness.
 	\end{enumerate}
+
+	\clearpage
+
+	\section{Example: "The cat sat on \rule{1cm}{0.15mm} "}
+		\begin{enumerate}
+			\item The model thinks of options like "mat", "floor", "chair".
+			\item It assigns probabilities, then selects one depending on the method above.
+			\input{\subfix{images/token_prediction.tex}}
+			\item The model does not just give one answer, it gives probabilities for all possible words.
+			\item This allows flexibility.
+			\input{\subfix{images/token_prediction_02.tex}}
+		\end{enumerate}
+
+	\section{Context window}
+		\begin{enumerate}
+			\item Limits the maximum number of tokens it can see at once. (It is like memory)
+			\item includes your current question, previous conversation history, and any extra documents provided.
+			\item Each new message adds tokens, so the conversation gets longer.
+			\item If you go past the limit, old text is dropped or summarized.
+			\item The context window is like the model’s short-term memory. It is limited in size, so old text may be dropped.
+		\end{enumerate}
+		
+	\clearpage
 
 Your ref \parencite{Ref01}.
 
