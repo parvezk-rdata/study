@@ -1,0 +1,27 @@
+% \documentclass[12pt,a4paper]{book}
+% \documentclass[oneside,openany]{book}
+
+% following avoids blank page when new chaper starts with odd no
+\documentclass[12pt,a4paper,openany]{book}
+
+\input{preamble/main_preamble.tex}
+
+\begin{document}
+
+	\mainmatter
+	
+	\chapter{LLM} 
+	
+	\section{Growing conversation}
+	
+	\begin{enumerate}
+		\item Token Prediction : Guess the next token based on previous tokens.
+		\item Probabilistic sequence models
+		\item They don’t plan full sentences; they add one token at a time.
+		\item Each new word is chosen based on probabilities calculated from the words before it.
+		\item The model does not decide the whole sentence at once, it builds it step by step.
+	\end{enumerate}
+
+	\clearpage
+
+\end{document}
