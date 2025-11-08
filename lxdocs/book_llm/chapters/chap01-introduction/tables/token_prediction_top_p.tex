@@ -1,0 +1,13 @@
+\begin{simpleTable}{Values and Their meaning}
+    \def\cellOneB{\makecell[l]{picks from most likely words.\\Good for accuracy but may repeat}}
+    \def\cellTwoB{Balanced. Works well for most tasks}
+    % \def\cellThreeB{\textbf{Very open/creative, less predictable. Useful for storytelling or brainstorming}}
+    \def\cellThreeB{\makecell[l]{Very open/creative, less predictable.\\Useful for storytelling or brainstorming}}
+    
+    \begin{tabular}{|c|c|} \hline
+        0.1–0.5 		    & \cellOneB     \\ \hline
+        0.85–0.95		    & \cellTwoB		\\ \hline
+        $> 0.95$			& \cellThreeB   \\ \hline
+    \end{tabular}
+\end{simpleTable}
+

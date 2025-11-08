@@ -23,15 +23,7 @@
 		\item Text is split into small units called tokens (like "Cat", "sat", "on").
 		\item The model calculates possible next tokens and their scores.
 		\item A function called \textit{softmax} turns scores into probabilities (for example, ``mat = 70\%, floor = 20\%, bed = 10\%'').
-		\item The model then picks the next token depending on settings:
-		\begin{enumerate}
-			\item Greedy  :  always pick the top choice (most likely).
-			\item Top-k  : only consider the top k tokens.
-			\item Top-p (nucleus) :  only consider tokens whose probabilities add up to p.
-			\item Temperature  :  controls randomness (low = predictable, high = creative).
-		\end{enumerate}
-		\item For accurate answers, use low randomness.
-		\item For creative answers, use higher randomness.
+		\item The model then picks the next token depending on settings: Greedy, Top-k, Top-p(nucleus) etc. 
 	\end{enumerate}
 
 	\clearpage
@@ -53,8 +45,22 @@
 			\item Each new message adds tokens, so the conversation gets longer.
 			\item If you go past the limit, old text is dropped or summarized.
 			\item The context window is like the model’s short-term memory. It is limited in size, so old text may be dropped.
-		\end{enumerate}
+		\end{enumerate} 
 		
+	\section{The model then picks the next token depending on settings}
+		\begin{enumerate}
+			\item Greedy  :  always pick the top choice (most likely).
+			\item Top-k  : only consider the top k tokens.
+				\input{\subfix{tables/token_prediction_top_k.tex}}
+			\item Top-p (nucleus) :  only consider tokens whose probabilities add up to p.
+				\input{\subfix{tables/token_prediction_top_p.tex}}
+			\item Temperature  :  controls randomness (low = predictable, high = creative).
+				\input{\subfix{tables/token_prediction_temp.tex}}
+			\item For accurate answers, use low randomness.
+			\item For creative answers, use higher randomness.
+			\input{\subfix{tables/token_prediction_algos.tex}}
+			\item Temperature
+		\end{enumerate}
 	\clearpage
 
 Your ref \parencite{Ref01}.
