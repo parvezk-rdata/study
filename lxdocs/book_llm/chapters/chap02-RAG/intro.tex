@@ -1,0 +1,114 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\chapter{RAG}
+
+\section{RAG Steps}
+	\begin{enumerate}
+		\item User Query
+		\item Embedding of Query
+		\item Semantic Search in Vector DB
+		\item Retrieve Relevant Chunks
+		\item Augmentation (Query + Chunks)
+		\item LLM Generation (Answer)
+	\end{enumerate}
+	\input{\subfix{images/rag.tex}}
+	\clearpage
+
+\section{\textbf{Retrieval-Augmented Generation (RAG)}}
+	\begin{enumerate}
+		\item A technique that gives large language models (LLMs) additional information (context) along with your prompt.
+		
+		\item RAG is a type of AI workflow.
+		
+		\item RAG reduces the need for frequent fine-tuning, but does not completely eliminate it.
+		
+		\item It sends domain-specific knowledge with prompts, which may not always be present in the training data.
+		
+		\item \textbf{Retrieval}
+		\begin{enumerate}
+			\item vector DBs are common but not the only option.
+			
+			\item Other options : BM25/sparse indexes, hybrid systems, or external search.
+		\end{enumerate}
+
+		\item \textbf{Augmentation} : give (prompt+retrieved chunks) to LLM.
+
+		\item \textbf{Generation} : generate response using the Augmented data.
+		
+		\item RAG as Memory Manager
+		\begin{enumerate}
+			\item \textbf{Context Window} : Short-term memory (small capacity)
+			\item \textbf{Vector DB} : Long-term memory (big capacity)
+			\item \textbf{RAG} : Smart connector (brings only what’s needed into context)
+		\end{enumerate}
+	\end{enumerate}
+
+
+\section{\textbf{LLM/RAG Design strategy}}
+
+	\begin{enumerate}
+		\item \textcolor{red}{Selection of Embedding Model to convert data into embedding vectors.}
+		\item \textcolor{red}{Tune parameters of the Embedding Model.}
+		\item \textcolor{red}{Tune parameters of Semantic Search.}
+		\item Chunking.
+		\item Embedding.
+		\item Retrieval.
+		\item Token prediction — Greedy, Top-\textit{k}, Top-\textit{p}, Temperature.
+	\end{enumerate}
+	\clearpage
+
+\section{\textbf{Embeddings}}	
+	\begin{enumerate}
+		\item \textcolor{red}{Are numeric vectors that can have 100s or 1000s of dimensions.}
+		\item \textcolor{red}{Embedding models are trained on large datasets.}
+		\item \textcolor{red}{Embedding models convert objects into embeddings.}
+		\item Embeddings have a close semantic meaning, while there can be some loss.
+		\item Embeddings provide dense vectors and enable similarity search.
+		\item \textbf{Problems:}
+			\begin{itemize}
+				\item may miss some content 
+				\item may mis‑rank content
+				\item bring back results that are close but not exactly right
+			\end{itemize}
+		\item Quality of embeddings — depends on the model used and how many numbers (dimensions) it creates.
+		\item Instead of searching by words, we search using meaning (embedding).
+	\end{enumerate}
+
+	\section{Chunking Strategy (Split into Chunks) : determine the size and overlap of each chunk}	
+	\begin{enumerate}
+		\item Large Document
+		\item Decide Chunk Size (small/medium/large)
+		\item Decide Overlap (0%, 20%, 30%)
+		\item Perform Split 
+		\item Store as Embeddings in Vector DB
+	\end{enumerate}
+	\clearpage
+
+	\section{Context Window}	
+	\begin{enumerate}
+		\item the memory of the LLM
+		\item The upper bound of what the LLM can keep track of
+		\item Represents how much context LLM can hold at a given time.
+		\input{\subfix{tables/context_window.tex}}
+	\end{enumerate}
+
+	\section{Context engineering}
+	\begin{enumerate}
+		\item Similar to prompt engineering, reloading the right context for the question/query.
+		\item Engineering for the right context is extremely important as it directly affects the context window, and this is where RAG comes into picture.
+		\item RAG manages LLM’s context by retrieving information from a vector DB.
+		\item The application can retrieve the right context from the vector DB for the LLM when needed.
+		\item Vector DB enables the LLM to store only necessary information instead of the whole document.
+		\item Retrieval enables the LLM to add only relevant information in the context window.
+	\end{enumerate}
+
+	\section{Strategies to search in a large database of documents.}
+	\begin{enumerate}
+		\item Attach files to the LLM and query. (there is a limit)
+		\item Search the documents based on title/contents. And then rank them based on relevance with the prompt. (time consuming to search entire database of docs)
+		\item Summarize all docs and create searchable chunks. In summary there may be losses of the context.
+		\item Hence the strategy for RAG search is to convert the data into embedding in Vector DB and perform semantic search. Embedding preserves meaning while there can be some loss
+	\end{enumerate}
+
+\end{document}

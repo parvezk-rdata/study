@@ -46,8 +46,9 @@
 			\item If you go past the limit, old text is dropped or summarized.
 			\item The context window is like the model’s short-term memory. It is limited in size, so old text may be dropped.
 		\end{enumerate} 
-		
-	\section{The model then picks the next token depending on settings}
+	
+	\section{Settings for various Algorithms}
+	\thispagestyle{plain}
 		\begin{enumerate}
 			\item Greedy  :  always pick the top choice (most likely).
 			\item Top-k  : only consider the top k tokens.
@@ -56,13 +57,22 @@
 				\input{\subfix{tables/token_prediction_top_p.tex}}
 			\item Temperature  :  controls randomness (low = predictable, high = creative).
 				\input{\subfix{tables/token_prediction_temp.tex}}
-			\item For accurate answers, use low randomness.
-			\item For creative answers, use higher randomness.
+			\item For reliable and accurate answers, use low values(randomness).
+			\item For variety and creative answers, use higher values.
 			\input{\subfix{tables/token_prediction_algos.tex}}
-			\item Temperature
 		\end{enumerate}
 	\clearpage
 
+	\section{General Tips}
+		\begin{itemize}
+			\item Use lower randomness (low temperature, low top-k/p) for reliable answers; use higher values for creativity.
+			\item Start with defaults: \texttt{Temperature = 1.0}, \texttt{Top-p = 0.9} works for many cases.
+			\item Adjust one setting at a time to see its effect.
+			\item Run several samples to check what works best.
+			\item Very high temperature with high top-k/p can make text confusing or off-topic.
+			\item Always test and adjust to find the best balance for your task.
+		\end{itemize}
+	
 Your ref \parencite{Ref01}.
 
 \end{document}
