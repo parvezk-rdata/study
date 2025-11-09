@@ -26,9 +26,9 @@
 			\end{enumerate}
 		\item Instead of searching by words we search using meaning(embedding)
 	\end{enumerate}
-	\input{\subfix{images/embedding_models.tex}}
-\clearpage
+	\clearpage
 
+	\input{\subfix{images/embedding_models.tex}}
 
 \section{Embedding Models(Maps)}
 	
@@ -38,23 +38,59 @@
 		\item Embedding models are trained on large data sets and learn to turn data into numbers.
 		\item Types of data include: text, image, audio, video, code, graphs etc.
 		\item Examples:
-		\begin{itemize}
+		\begin{enumerate}
 			\item Image to text: \textbf{CLIP}
 			\item Text: \textbf{GloVe} (old), \textbf{Sentence-BERT}, \textbf{BGE}
 			\item Speech/Audio: \textbf{Wav2Vec}
-		\end{itemize}
+		\end{enumerate}
 	\end{enumerate}
 
+	\section{ Why need vectors}
+		\begin{enumerate}
+			\item Most ML models can’t use raw text directly
+			\item they need the text converted into numbers first.
+		\end{enumerate}
+	\clearpage
 
-	\section{Why need vectors}
-	\begin{enumerate}
-		\item Most ML models can’t use raw text directly
-		\item they need the text converted into numbers first.
-	\end{enumerate}
-
+	\section{Choice of Embedding Model depends on various factors}
 	\input{\subfix{tables/embedding_models.tex}}
 	\clearpage
 
+	\section{Embedding Models Details}
+	\begin{enumerate}
+		\item \textbf{Word Embedding Models} are trained on huge collections of text (like Wikipedia, books, or articles).
+	
+		\item \textbf{Preprocessing before training:}
+		\begin{enumerate}
+			\item \textbf{Tokenization:} Splitting text into words or pieces.
+			\item \textbf{Removing stopwords and punctuation:} Sometimes done depending on the method.
+		\end{enumerate}
+	
+		\item \textbf{Context Window:}
+		\begin{enumerate}
+			\item The model looks at a sliding window of words.
+			\item \textbf{Example:} In the sentence ``The cat sat on the mat’’, if the target word is ``cat'', its context might be [The, sat].
+			\item This helps the model learn how words appear together.
+		\end{enumerate}
+	
+		\item \textbf{Prediction Task:}
+		\begin{enumerate}
+			\item The model is trained to predict words from context (or vice versa).
+			\item \textbf{Example methods:}
+			\begin{enumerate}
+				\item \textbf{CBOW (Continuous Bag of Words):} Predict target word from context.
+				\item \textbf{Skip-gram:} Predict context words from a target word.
+			\end{enumerate}
+		\end{enumerate}
+	
+		\item \textbf{Learning Word Relationships:}
+		\begin{enumerate}
+			\item During training, the model adjusts its internal parameters.
+			\item Words that appear in similar contexts end up with similar vectors.
+			\item \textbf{Example:} “king” and “queen” are closer to each other than “king” and “banana”.
+		\end{enumerate}
+	\end{enumerate}
+	\clearpage
 
 	\section{NLP}
 	\begin{enumerate}
@@ -63,5 +99,55 @@
 	\end{enumerate}
 
 	\input{\subfix{tables/nlp.tex}}
+	
+	\section{Word Embedings}
+	\begin{enumerate}
+		\item {\color{red}Are created by training models on large corpus of text like Wikipedia. Preprocessing, tokenization, removing stop words and punctuators.}
+		\item {\color{red}A sliding context window identifies target and context words which allow the model to learn word relationships.}
+		\item {\color{red}The model is trained to predict based on their context and it positions semantically similar words close together in vector space.}
+		\item {\color{red}Throughout the training the parameters are adjusted.}
+	\end{enumerate}
 
+	
+	\section{Embedding types}
+
+	\begin{enumerate}
+		\color{red}
+		\item \textbf{Frequency Based:} uses frequency of words in a text.
+		\begin{enumerate}
+			\item \textbf{TF-IDF:} Term Frequency–Inverse Document Frequency. Words frequent in one document but not frequent in others. Common words like \textit{the}, \textit{and}, \textit{or} etc.\ have lower TF-IDF scores.
+		\end{enumerate}
+		\item \textbf{Prediction Based Embedding:} captures semantic relationships and contextual information between words. For example, the word \textit{dog} is related to words like \textit{bark}, \textit{bite}, \textit{tail}, etc.
+	\end{enumerate}
+
+	\clearpage
+
+	\section{Models to generate embeddings}
+
+	\begin{enumerate}
+		\item \textcolor{red}{Word2Vec (Google)}
+			\begin{enumerate}
+				\item \textcolor{red}{CBOW (Continuous Bag of Words): predicts a target word based on its surrounding words.}
+				\item \textcolor{red}{Skip-gram: predicts context words given a target word.}
+			\end{enumerate}
+		\item \textcolor{red}{GloVe}
+			\begin{enumerate}
+				\item \textcolor{red}{Global Vectors for Word Representation}
+				\item \textcolor{red}{Uses co-occurrence statistics to create a vector space.}
+				\item \textcolor{red}{Analyzes how often words appear together in the entire corpus (collection of text).}
+			\end{enumerate}
+	\end{enumerate}
+
+	\section{Transformer models : }
+	\begin{enumerate}
+		\item \textcolor{red}{Traditional models use a fixed vector for each word.}
+		\item \textcolor{red}{Uses contextual based embedding.}
+		\item \textcolor{red}{Representation of a word changes based on surrounding context.}
+		\item \textcolor{red}{Example: the word \textbf{bank} has two different meanings in the following sentences:}
+		\begin{enumerate}
+			\item \textcolor{red}{I go to the bank to deposit money.}
+			\item \textcolor{red}{I sit on the bank of a river.}
+		\end{enumerate}
+	\end{enumerate}
+	
 \end{document}
