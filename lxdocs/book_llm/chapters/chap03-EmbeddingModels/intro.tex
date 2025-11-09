@@ -1,0 +1,67 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\chapter{Embedding Models}
+
+% \input{\subfix{images/Embedding_Models.tex}}
+%  \input{\subfix{tables/context_window.tex}}
+
+\section{Embeddings Vectors}
+	\begin{enumerate}
+		\item Are numeric vectors with many dimensions.
+		\item often have 100 to 2,000+ dimensions.
+		\item Vectors are typically dense (many non-zero values)
+		\item Similarity check
+			\begin{enumerate}
+				\item We compare them , and find how “close”  two vectors are.
+				\item Common methods: cosine similarity or Euclidean distance
+				\item Help grouping related ideas even if words differ. Example, “car” and “automobile” will have similar embeddings
+			\end{enumerate}
+		\item Problems
+			\begin{enumerate}
+				\item Embeddings have a close semantic meaning, while there can be some loss.
+				\item may miss some content
+				\item may mis‑rank content : similar‑but‑wrong items can appear above correct ones
+				\item bring back results that are close but not exactly right
+			\end{enumerate}
+		\item Instead of searching by words we search using meaning(embedding)
+	\end{enumerate}
+	\input{\subfix{images/embedding_models.tex}}
+\clearpage
+
+
+\section{Embedding Models(Maps)}
+	
+	\begin{enumerate}
+		\item Are special AI models.
+		\item Embedding models (\textit{map}) convert data (objects) into embeddings.
+		\item Embedding models are trained on large data sets and learn to turn data into numbers.
+		\item Types of data include: text, image, audio, video, code, graphs etc.
+		\item Examples:
+		\begin{itemize}
+			\item Image to text: \textbf{CLIP}
+			\item Text: \textbf{GloVe} (old), \textbf{Sentence-BERT}, \textbf{BGE}
+			\item Speech/Audio: \textbf{Wav2Vec}
+		\end{itemize}
+	\end{enumerate}
+
+
+	\section{Why need vectors}
+	\begin{enumerate}
+		\item Most ML models can’t use raw text directly
+		\item they need the text converted into numbers first.
+	\end{enumerate}
+
+	\input{\subfix{tables/embedding_models.tex}}
+	\clearpage
+
+
+	\section{NLP}
+	\begin{enumerate}
+		\item helps machines understand human language
+		\item NLP tasks that use word embeddings
+	\end{enumerate}
+
+	\input{\subfix{tables/nlp.tex}}
+
+\end{document}

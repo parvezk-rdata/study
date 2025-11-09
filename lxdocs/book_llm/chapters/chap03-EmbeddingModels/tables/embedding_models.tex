@@ -1,0 +1,49 @@
+\begin{simpleTable}{}
+    
+    \def\cellOneA{Modality}
+    \def\cellOneB{Type of data - Text, image, audio, video, or a mix}
+
+    \def\cellTwoA{Chunking size}
+    \def\cellTwoB{Some models handle longer chunks better than others}
+
+    \def\cellThreeA{\multirow{3}{*}{Embedding size}}
+    \def\cellThreeBA{Number of dimensions in vector}
+    \def\cellThreeBB{Big vectors slower, memory intensive, capture more meaning}
+    \def\cellThreeBC{Small vectors faster and lighter, but may lose detail}
+    
+    \def\cellFourA{\multirow{2}{*}{Latency(speed) and cost}}
+    \def\cellFourBA{Less accurate and quick}
+    \def\cellFourBB{slower but more accurate}
+    
+    \def\cellFiveA{\multirow{2}{*}{Domain or specialty}}
+    \def\cellFiveBA{Domain like medical or legal}
+    \def\cellFiveBB{Domain-specific models usually perform better for specialized text}
+    
+    \def\cellSixA{\multirow{2}{*}{Keyword vs meaning focus}}
+    \def\cellSixBA{If exact word matches are important, combine sparse + dense models}
+    \def\cellSixBB{If meaning is enough, dense embeddings alone work fine}
+
+    \def\cellSevenA{Languages}
+    \def\cellSevenB{multilingual model to handle multiple languages}
+    
+    \def\cellEightA{\multirow{2}{*}{Evaluation}}
+    \def\cellEightBA{test on a small sample of your own data}
+    \def\cellEightBB{Chose model which gives the best balance of accuracy, speed, and cost}
+
+    \begin{tabular}{|c|c|} \hline
+        \cellOneA       & \cellOneB         \\ \hline
+        \cellTwoA       & \cellTwoB         \\ \hline
+        \cellThreeA     & \cellThreeBA      \\ \cline{2-2}
+                        & \cellThreeBB      \\ \cline{2-2}
+                        & \cellThreeBC      \\ \hline
+        \cellFourA      & \cellFourBA       \\ \cline{2-2}
+                        & \cellFourBB       \\ \hline
+        \cellFiveA      & \cellFiveBA       \\ \cline{2-2}
+                        & \cellFiveBB       \\ \hline
+        \cellSixA       & \cellSixBA        \\ \cline{2-2}
+                        & \cellSixBB        \\ \hline
+        \cellSevenA     & \cellSevenB       \\ \hline
+        \cellEightA     & \cellEightBA      \\ \cline{2-2}
+                        & \cellEightBB      \\ \hline
+    \end{tabular}
+\end{simpleTable}
