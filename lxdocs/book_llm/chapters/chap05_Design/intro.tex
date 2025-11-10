@@ -1,0 +1,33 @@
+% \documentclass[12pt,a4paper]{book}
+% \documentclass[oneside,openany]{book}
+
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+	
+\chapter{Design} 
+	
+\section{RAG Steps} 
+
+\section{Vector DB} 
+
+\section{Embedding Model} 
+
+\section{Steps}
+
+\begingroup
+% Define "variables" (macros) for table cells using \def or \newcommand
+
+\def\cellOneB{\textbf{Apple \newline Orange}}
+\def\cellTwoB{\shortstack{\textbf{Apple} \\ \textbf{ Orange}}}
+
+\begin{center}
+	\begin{tabular}{|c|p{4cm}|} % Use p{width} for the second column
+		\hline
+		newline            	& \cellOneB          \\ \hline
+		shortstack       	& \cellTwoB          \\ \hline
+	\end{tabular}
+\end{center}
+\endgroup
+
+
+\end{document}

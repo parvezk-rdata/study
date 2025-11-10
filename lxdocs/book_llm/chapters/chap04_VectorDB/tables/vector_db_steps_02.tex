@@ -1,0 +1,81 @@
+\begin{simpleTable}{Customizing The Cells}
+		
+    \def\cellOneA{\multirow{3}{*}{1}}
+    \def\cellOneB{\multirow{3}{*}{Collect data}}
+    \def\cellOneCA{text, audio, images, or videos}
+    \def\cellOneCB{note metadata - source ID, timestamp and any special tags}
+    \def\cellOneCC{If needed, split into small, meaningful chunks with overlaps}
+    
+    \def\cellTwoA{\multirow{4}{*}{2}}
+    \def\cellTwoB{\multirow{4}{*}{Preprocess}}
+    \def\cellTwoCA{Clean the data}
+    \def\cellTwoCB{Normalize text (lowercase, remove stopwords if needed)}
+    \def\cellTwoCC{Transcribe audio into text, extract frames from video, resize images}
+    \def\cellTwoCD{Remove sensitive or private info}
+    
+    \def\cellThreeA{\multirow{3}{*}{3}}
+    \def\cellThreeB{\multirow{3}{*}{Chunking}}
+    \def\cellThreeCA{If data is too big, then decide chunk size and overlap}
+    \def\cellThreeCB{split into small, meaningful chunks with overlaps}
+    
+    \def\cellFourA{\multirow{3}{*}{4}}
+    \def\cellFourB{\multirow{3}{*}{Choose Tools}}
+    \def\cellFourCA{Embedding Models that fits chunk size and for text, images, etc}
+    \def\cellFourCB{decide how long the vector is (dimension) }
+    \def\cellFourCC{decide how similarity is measured (distance metric)}
+    
+    \def\cellFiveA{\multirow{3}{*}{5}}
+    \def\cellFiveB{\multirow{3}{*}{Create Embeddings}}
+    \def\cellFiveCA{Use the model to convert chunks into a vector}
+    \def\cellFiveCB{Give each one a fixed ID}
+    \def\cellFiveCC{attach metadata for easier searching later (e.g., author, date, topic) }
+    
+    
+    \def\cellSixA{\multirow{3}{*}{6}}
+    \def\cellSixB{\multirow{3}{*}{Store in Vector DB}}
+    \def\cellSixCA{Save the vector + chunk ID + metadata in the database}
+    \def\cellSixCB{database automatically builds index using algorithms (HNSW, PQ) }
+    
+    
+    \def\cellSevenA{\multirow{4}{*}{7}}
+    \def\cellSevenB{\multirow{4}{*}{search (query)}}
+    \def\cellSevenCA{search text is also turned into a vector}
+    \def\cellSevenCB{database finds the closest matches (top-k results)}
+    \def\cellSevenCC{You can also add filters (e.g., “only from 2024”)}
+    \def\cellSevenCD{Sometimes results are verified with another AI model for better accuracy}
+    
+    \def\cellEightA{\multirow{3}{*}{8}}
+    \def\cellEightB{\multirow{3}{*}{Fetch data}}
+    \def\cellEightCA{Use the stored IDs to pull the real text, image, or video}
+    \def\cellEightCB{Show it to the user, or pass it to an LLM as extra context in RAG}
+    \def\cellEightCC{decide how long to keep things stored or delete them}
+    
+    
+    \begin{tabular}{|c|c|c|} \hline
+        \cellOneA       & \cellOneB     &   \cellOneCA      \\ \cline{3-3}
+                        &				&   \cellOneCB     	\\ \cline{3-3}
+                        &				&   \cellOneCC      \\ \hline
+        \cellTwoA       & \cellTwoB     &   \cellTwoCA      \\ \cline{3-3}
+                        &				&   \cellTwoCB     	\\ \cline{3-3}
+                        &				&   \cellTwoCC      \\ \cline{3-3}
+                        &				&   \cellTwoCD      \\ \hline
+        \cellThreeA     & \cellThreeB   &   \cellThreeCA    \\ \cline{3-3}
+                        &				&   \cellThreeCB    \\ \hline
+        \cellFourA      & \cellFourB    &   \cellFourCA     \\ \cline{3-3}
+                        &				&   \cellFourCB    	\\ \cline{3-3}
+                        &				&   \cellFourCC     \\ \hline
+        \cellFiveA      & \cellFiveB    &   \cellFiveCA     \\ \cline{3-3}
+                        &				&   \cellFiveCB     \\ \cline{3-3}
+                        &				&   \cellFiveCC     \\ \hline
+        \cellSixA       & \cellSixB     &   \cellSixCA      \\ \cline{3-3}
+                        &				&	\cellSixCB      \\ \hline
+        \cellSevenA     & \cellSevenB   &   \cellSevenCA    \\ \cline{3-3}
+                        &				&   \cellSevenCB    \\ \cline{3-3}
+                        &				&   \cellSevenCC    \\ \cline{3-3}
+                        &				&   \cellSevenCD    \\ \hline
+        \cellEightA     & \cellEightB   &   \cellEightCA    \\ \cline{3-3}
+                        &				&   \cellEightCB    \\ \cline{3-3}
+                        &				&   \cellEightCC    \\ \hline
+    
+    \end{tabular}
+\end{simpleTable}

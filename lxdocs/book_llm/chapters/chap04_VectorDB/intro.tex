@@ -1,0 +1,131 @@
+% \documentclass[12pt,a4paper]{book}
+% \documentclass[oneside,openany]{book}
+
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+	
+\chapter{Vector Data Base} 
+	
+\section{Vector DB}
+	
+	\begin{enumerate}
+		\item Stores vector embeddings derived from unstructured data 
+		\item raw content is linked or stored separately depending on the system
+			\input{\subfix{tables/vector_db_schema.tex}}
+		\item Examples - Chroma, Pinecone
+		\item designed for vectors only, unlike normal databases
+		\item Support for CRUD (Create, Read, Update, Delete)
+		\item Allow metadata filtering (e.g., “find only documents from 2024”).
+		\item Benefits of Vector DB
+		\begin{enumerate}
+			\item Flexibility : works for many data types like text, image, audio and video
+			\item Scalability : can scale for 100 crores data points.
+			\item Speed and performance
+		\end{enumerate} 
+	\end{enumerate}
+	\clearpage
+
+\section{Search in vector DB}
+	
+	\begin{enumerate}
+		\item Semantic search 
+		\item Search semantically by meaning not by keyword(exact word overlap)
+		\item Measures 
+		\begin{enumerate}
+			\item How close(similar meaning) the vectors are
+			\item Compare vectors using math measures (like angle or distance)
+			\item Uses math methods like cosine similarity or inner product instead of exact word matches
+		\end{enumerate} 
+		\item Use ANN(approximate nearest neighbor) search like HNSW, IVF, PQ
+	\end{enumerate}
+	\input{\subfix{images/vector_db.tex}}
+
+\section{Retrieval Strategy}
+	
+	\begin{enumerate}
+	\item \textcolor{red}{Scoring and chunk overlap} 
+	\item control the threshold of how similar the words should be, use additional filters in the data set
+	\item In practice, top‑k with similarity + metadata filters is common
+	\item many systems add hybrid retrieval and reranking to boost recall/precision
+	\end{enumerate}
+	\clearpage
+	
+\section{Ways to search vectors in Vector Database}
+	
+	\begin{enumerate}
+		\item Exact match 
+		\begin{enumerate}
+			\item finds a perfect match by matching every vector.
+			\item Too slow
+		\end{enumerate}
+		\item Exact closest Match
+		\begin{enumerate}
+			\item Finds the true nearest neighbors
+			\item Too slow
+		\end{enumerate}
+		\item Approximate Closest Match (ANN – Approximate Nearest Neighbor)
+		\begin{enumerate}
+			\item Instead of checking all vectors, it uses indexes
+			\item Finds vectors that are likely to be the closest matches
+			\item fast, scalable, slightly less accurate
+		\end{enumerate}
+	\end{enumerate}
+	
+\section{Vector indexing}
+	
+	\begin{enumerate}
+		\item Why we need it 
+		\begin{enumerate}
+			\item Can store millions of vectors with many dimensions
+			\item Comparing a query vector with all stored vectors will be too slow
+		\end{enumerate}
+		\item What indexing does
+		\begin{enumerate}
+			\item creates a smart structure
+			\item helps the system quickly find similar vectors without checking every single one
+		\end{enumerate}
+		\item Trade-off
+		\begin{enumerate}
+			\item makes the search much faster but can sacrifice some accuracy
+			\item it may miss the exact best match sometimes
+			\item Instead, it finds vectors that are very close (approximate nearest neighbors)
+		\end{enumerate}
+		\item Algorithms used
+		\begin{enumerate}
+			\item Uses special algorithms called Approximate Nearest Neighbor (ANN)
+			\item Examples: HNSW, IVF, PQ
+		\end{enumerate}
+	\end{enumerate}
+	\clearpage
+	
+\section{Vector indexing Approaches : }
+
+	\begin{enumerate}
+		\item HNSW  
+		\begin{enumerate}
+			\item Think of it like a map with layers
+			\item Vectors are connected in a graph
+			\item At higher layers, only a few broad connections exist
+			\item As you move down layers, connections get more detailed
+			\item The system can quickly “navigate” through these layers to find similar vectors
+		\end{enumerate}
+		\item IVF
+		\begin{enumerate}
+			\item Inverted file index
+			\item Divides cluster space into clusters and finds only relevant clusters
+			\item When you search, the system looks only in the most relevant clusters, not everywhere
+		\end{enumerate}
+		
+	\end{enumerate}
+	
+	\clearpage
+	
+\section{Steps}
+	\input{\subfix{tables/vector_db_steps_02.tex}}
+
+	
+\section{ \textcolor{red}{Open source technologies for vector databases} }
+	
+\clearpage
+
+\end{document}
