@@ -1,0 +1,157 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\chapter{Research prompts}
+
+I am a beginner trying to read research papers with the aim of identifying research gaps so I can publish my own papers.\par However, I have no prior experience with research or reading academic papers, and I find it quite challenging due to several issues.\newline These include difficult English, complex paper structures, poorly explained content, and limited background knowledge on the topics discussed.\par Currently, I have decided to focus my research on AI/ML, specifically the use of large language models (LLMs) in education.\par I would like to discuss how you can assist me in understanding research papers.\newline It would be helpful if you could provide me with a list of clear, well-structured prompts that I can use to gradually build my comprehension---from the basics to a thorough understanding of any research paper.\par 
+	\clearpage
+\section{Prompts}
+	
+	\begin{enumerate}
+		\item Act as my research mentor. For each part or section, explain key ideas and ask me reflective questions so I can build understanding.
+		\item Give a list of tools/technologies/methods/methodologies they used in this paper
+		\item What is the the initial input and final output of the work propesed by this paper.
+		\item What the stages which converts input(example a prompt) to final output(example mcq questions)
+		\item Create a diagram/table/flowchart showing how all these components interact in the MCQGen pipeline?
+		\item Convert this into a visual diagram (flowchart-style image) showing arrows and boxes
+		\item Give a step-by-step narrative explanation of each stage (like how data flows and decisions happen)?
+		\item What new thing the paper as done or proposed and what was the earlier approach
+		\item Summarize this paper simply for a beginner
+		\item Explain what each section of this paper contributes
+		\item Explain the technical terms and equations simply.
+		\item Explain how their experiment works and what they found
+		\item Evaluate the paper’s methodology and reliability
+		\item List research gaps or open problems from this paper
+		\item Suggest related works or follow-up papers
+		\item Based on these gaps, suggest possible research ideas for me
+	\end{enumerate}
+
+	\clearpage
+
+	\section*{Prompt Categories for Understanding Research Papers}
+
+\begin{enumerate}[label=\textbf{\Alph*.}, leftmargin=2em]
+
+\item \textbf{Quick / Beginner Prompts}
+  \begin{itemize}
+    \item Give a TL;DR of this paper (one sentence)
+	\item Give a 2-sentence explanation aimed at a high-school student
+    \item Summarize this paper for a beginner in 5 bullet points: problem, why it matters, what they did, how they evaluated it, main result
+    \item Translate the abstract into plain English. Replace technical words with everyday words.
+    \item List 10 glossary terms from this paper and define each in one sentence.
+	\item Translate the abstract into plain English. Replace technical words with everyday words
+	\item Explain what each section of this paper contributes
+	\item Explain the technical terms and equations simply.
+	\item Explain how their experiment works and what they found
+	\item Evaluate the paper’s methodology and reliability
+	\item What new thing the paper as done or proposed and what was the earlier approach
+  \end{itemize}
+
+\item \textbf{Structure / Components Prompts/ Process \& Dataflow Prompts}
+  \begin{itemize}
+    \item List all tools / technologies / methods / methodologies used in this paper (e.g., models,libraries, datasets, metrics)
+    \item What is the the initial input and final output of the work propesed by this paper
+    \item What the pipeline stages which converts input(example a prompt) to final output(example mcq questions)
+    \item Create a short checklist of what I’d need to implement a minimal working version (code libraries, hardware, dataset, hyperparameters).
+	\item Explain step-by-step how input data is transformed into the output — write it as a numbered sequence.
+	\item Make a table: left column = stage name, middle = what happens there, right = inputs/outputs of that stage.
+  \end{itemize}
+
+\item \textbf{Visuals \& Diagrams Prompts}
+  \begin{itemize}
+    \item Create a concise flowchart description (text) I can use to draw a diagram: nodes and arrows labeled.
+    \item Create a diagram/table/flowchart showing how all these components interact?
+	\item Convert this into a visual diagram (flowchart-style image) showing arrows and boxes
+	\item Give a step-by-step narrative explanation of each stage (like how data flows and decisions happen)?
+	\item Convert the pipeline into pseudocode (short, main functions only).
+	\item Generate a flowchart description (boxes + arrows) for the model pipeline suitable for slide creation.
+    \item Create a simple diagram caption and a short legend for each box in the flowchart.
+    \item List the exact labels and a recommended layout (horizontal/vertical) to draw the diagram in PowerPoint.
+  \end{itemize}
+
+\item \textbf{Math, Algorithms, and Code Prompts}
+  \begin{itemize}
+    \item Explain the main equations line-by-line. For each variable, say what it represents and its units if any.
+    \item Show a worked toy example (numerical) through the core equation / algorithm (use small numbers).
+    \item Translate the method into Python-like pseudocode, with function names and comments.
+    \item If I wanted a minimal reproducible code snippet, what are the 8–12 lines of code I could start with?
+    \item Identify hyperparameters, their roles, and good starting values (with justification).
+  \end{itemize}
+
+\item \textbf{Evaluation, Baselines, and Experiments Prompts}
+  \begin{itemize}
+    \item List the datasets used, their sizes, and why they are appropriate or not.
+    \item Summarize the evaluation metrics and explain what each one means in practice.
+    \item Compare the paper’s method with the baselines: what improves and by how much (numbers)?
+    \item Suggest 3 ablation experiments to test which parts of the model matter most.
+  \end{itemize}
+
+\item \textbf{Critique \& Limitations Prompts}
+  \begin{itemize}
+    \item List 8 strengths and 8 weaknesses of the paper — be concrete and specific.
+    \item Identify any unstated or hidden assumptions the authors make.
+    \item Find possible failure modes or data regimes where their approach will break.
+    \item Point out questionable experimental choices or missing baselines.
+  \end{itemize}
+
+\item \textbf{Research Gap / Idea Generation Prompts}
+  \begin{itemize}
+    \item Based on this paper, suggest 6 follow-up research questions or directions.
+    \item Propose 4 concrete, publishable project ideas that extend or improve this paper (include a one-sentence hypothesis and one experiment each).
+    \item Find low-effort / high-impact experiments I could run in 1–2 weeks to get publishable results.
+    \item Suggest related fields or communities (conferences/journals) that would be interested in this work.
+	\item List research gaps or open problems from this paper
+	\item Suggest related works or follow-up papers
+	\item Based on these gaps, suggest possible research ideas for me
+\end{itemize}
+
+\item \textbf{Reproducibility \& Implementation Prompts}
+  \begin{itemize}
+    \item Give me a step-by-step reproducibility checklist: data download → preprocessing commands → training command → evaluation command.
+    \item List exact hardware and runtime estimates (GPU type, memory, time) for training the model at published scale (rough estimate).
+    \item Create a minimal dataset / toy dataset and the code to test the idea quickly.
+  \end{itemize}
+
+\item \textbf{Writing, Presentation \& Literature Mapping Prompts}
+  \begin{itemize}
+    \item Write a concise Related Work paragraph that places this paper among similar efforts (3–4 sentences).
+    \item Draft a paragraph that summarizes this paper to include in my literature review.
+    \item Create 6 slide titles and one-line bullet points for a 6-slide presentation of this paper.
+    \item Find 8 papers cited by this paper and give a 1-sentence summary for each (if you can access them).
+  \end{itemize}
+
+\item \textbf{LLM-in-Education Specialization Prompts}
+  \begin{itemize}
+    \item Explain how this paper's method could be adapted for educational use-cases (MCQ generation, feedback, tutoring).
+    \item Give 6 concrete ways a large language model could be integrated into this pipeline for education-specific improvements.
+    \item List ethical / fairness / safety issues when using LLMs in education and how to test for them.
+  \end{itemize}
+
+\item \textbf{Practical Usage Prompts}
+  \begin{itemize}
+    \item I am uploading [paper.pdf]. Start by giving me: 1) TL;DR (1 sentence), 2) Beginner summary (3 bullets), 3) Top 5 weaknesses.
+    \item Here is the PDF. Produce a slide deck outline (6 slides) and a diagram description of the pipeline.
+    \item Take this paper and suggest 3 reproducible experiments I can run in 2 weeks on a single GPU; include datasets and approximate time.
+  \end{itemize}
+
+\end{enumerate}
+
+	\section{Goal}
+	
+	\begin{enumerate}
+		\item Learn how to read and understand research papers
+		\item Extract the key ideas and identify research gaps
+		\item Gradually build enough knowledge to design and publish your own paper in AI + Education (LLMs)
+		\item LLm can generate
+		\begin{enumerate}
+			\item Plain-English summary (for beginner comprehension)
+			\item Concept map (explaining how ideas are related)
+			\item Methodology flow explanation
+			\item Glossary of technical terms
+			\item Critical evaluation (strengths, limitations, assumptions)
+			\item Research gaps + possible extensions
+			\item Template for your literature review
+		\end{enumerate}
+	\end{enumerate}
+
+\end{document}

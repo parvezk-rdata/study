@@ -1,0 +1,24 @@
+% \documentclass[12pt,a4paper]{book}
+% \documentclass[oneside,openany]{book}
+
+% following avoids blank page when new chaper starts with odd no
+\documentclass[12pt,a4paper,openany]{book}
+
+
+\input{preamble/main_preamble.tex}
+
+\begin{document}
+
+% Front Matter (unnumbered pages)
+\frontmatter
+
+\title{The Research Help Book}
+\author{New User}
+\maketitle
+
+% If the document class is report, remove \mainmatter
+\mainmatter
+\subfile{chapters/chap01/intro}
+\clearpage
+
+\end{document}

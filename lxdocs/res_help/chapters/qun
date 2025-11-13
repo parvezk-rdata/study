@@ -1,0 +1,79 @@
+=> Quick / Beginner Prompts
+Give a TL;DR of this paper (one sentence) 
+Give a 2-sentence explanation aimed at a high-school student
+Summarize this paper for a beginner in 5 bullet points: problem, why it matters, what they did, how they evaluated it, main result
+List 10 glossary terms from this paper and define each in one sentence.
+Translate the abstract into plain English. Replace technical words with everyday words
+Explain what each section of this paper contributes
+Explain the technical terms and equations simply.
+Explain how their experiment works and what they found
+Evaluate the paper’s methodology and reliability
+What new thing the paper as done or proposed and what was the earlier approach
+
+=> Structure / Components Prompts, Process & Dataflow Prompts
+List all tools / technologies / methods / methodologies used in this paper (e.g., models,libraries, datasets, metrics)
+What is the the initial input and final output of the work propesed by this paper
+What the pipeline stages which converts input(example a prompt) to final output(example mcq questions)
+Create a short checklist of what I’d need to implement a minimal working version (code libraries, hardware, dataset, hyperparameters).
+Explain step-by-step how input data is transformed into the output — write it as a numbered sequence.
+Make a table: left column = stage name, middle = what happens there, right = inputs/outputs of that stage.
+
+=> Visuals & Diagrams Prompts
+Create a concise flowchart description (text) I can use to draw a diagram: nodes and arrows labeled.
+Create a diagram/table/flowchart showing how all these components interact?
+Convert this into a visual diagram (flowchart-style image) showing arrows and boxes
+Give a step-by-step narrative explanation of each stage (like how data flows and decisions happen)?
+Convert the pipeline into pseudocode (short, main functions only).
+Generate a flowchart description (boxes + arrows) for the model pipeline suitable for slide creation.
+Create a simple diagram caption and a short legend for each box in the flowchart
+List the exact labels and a recommended layout (horizontal/vertical) to draw the diagram in PowerPoint
+
+=> Math, Algorithms, and Code Prompts
+Explain the main equations line-by-line. For each variable, say what it represents and its units if any
+Show a worked toy example (numerical) through the core equation / algorithm (use small numbers)
+Translate the method into Python-like pseudocode, with function names and comments
+If I wanted a minimal reproducible code snippet, what are the 8–12 lines of code I could start with?
+Identify hyperparameters, their roles, and good starting values (with justification).
+
+=> Evaluation, Baselines, and Experiments Prompts
+List the datasets used, their sizes, and why they are appropriate or not.
+Summarize the evaluation metrics and explain what each one means in practice.
+Compare the paper’s method with the baselines: what improves and by how much (numbers)?
+Suggest 3 ablation experiments to test which parts of the model matter most.
+
+=> Critique & Limitations Prompts
+List 8 strengths and 8 weaknesses of the paper — be concrete and specific.
+Identify any unstated or hidden assumptions the authors make.
+Find possible failure modes or data regimes where their approach will break
+Point out questionable experimental choices or missing baselines.
+
+=> Research Gap / Idea Generation Prompts
+Based on this paper, suggest 6 follow-up research questions or directions.
+Propose 4 concrete, publishable project ideas that extend or improve this paper (include a one-sentence hypothesis and one experiment each).
+Find low-effort / high-impact experiments I could run in 1–2 weeks to get publishable results
+Suggest related fields or communities (conferences/journals) that would be interested in this work.
+List research gaps or open problems from this paper
+Suggest related works or follow-up papers
+Based on these gaps, suggest possible research ideas for me
+
+=> Reproducibility & Implementation Prompts
+Give me a step-by-step reproducibility checklist: data download --> preprocessing commands --> training command -->  evaluation command.
+List exact hardware and runtime estimates (GPU type, memory, time) for training the model at published scale (rough estimate).
+Create a minimal dataset / toy dataset and the code to test the idea quickly.
+
+=> Writing, Presentation & Literature Mapping Prompts
+Write a concise Related Work paragraph that places this paper among similar efforts (3–4 sentences).
+Draft a paragraph that summarizes this paper to include in my literature review.
+Create 6 slide titles and one-line bullet points for a 6-slide presentation of this paper.
+Find 8 papers cited by this paper and give a 1-sentence summary for each (if you can access them).
+
+=> LLM-in-Education Specialization Prompts
+Explain how this paper’s method could be adapted for educational use-cases (MCQ generation, feedback, tutoring).
+Give 6 concrete ways a large language model could be integrated into this pipeline for education-specific improvements.
+List ethical / fairness / safety issues when using LLMs in education and how to test for them
+
+=> Practical Usage Prompts
+I am uploading [paper.pdf]. Start by giving me: 1) TL;DR (1 sentence), 2) Beginner summary (3 bullets), 3) Top 5 weaknesses.
+Here is the PDF. Produce a slide deck outline (6 slides) and a diagram description of the pipeline.
+Take this paper and suggest 3 reproducible experiments I can run in 2 weeks on a single GPU; include datasets and approximate time.
+
