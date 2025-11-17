@@ -214,6 +214,82 @@ Below is a simple explanation of how MCQGen works step-by-step. It shows how inf
 
 \end{enumerate}
 
+\section{Stages}
+
+\begin{description}
+  \item[Stage 1 — \textbf{Input \& Settings}] 
+    \begin{itemize}
+      \item \textbf{Input to this stage:} A block of educational text (e.g., a paragraph, a lesson, or chapter) and simple settings (topic, difficulty level, grade, number of questions).
+      \item \textbf{What happens (simple):} The system receives the text you want questions from and the preferences you choose (like how hard you want the questions).
+      \item \textbf{Tools used:} A web form or file upload in the system; no heavy AI yet.
+      \item \textbf{Output of this stage:} Clean text and a short settings record (e.g., ``topic = photosynthesis, difficulty = easy, 5 questions'').
+    \end{itemize}
+
+  \item[Stage 2 — \textbf{Preprocessing \& Text Cleaning}] 
+    \begin{itemize}
+      \item \textbf{Input to this stage:} The raw text and settings from Stage 1.
+      \item \textbf{What happens (simple):} The text is cleaned: extra spaces removed, long sentences optionally split, and key terms extracted (words or phrases that are important). This makes the text easier for the model to use.
+      \item \textbf{Tools used:} Basic text-processing code (like simple scripts that split sentences and find keywords).
+      \item \textbf{Output of this stage:} A cleaned, shorter set of text passages and a list of important keywords.
+    \end{itemize}
+
+  \item[Stage 3 — \textbf{Knowledge Retrieval (optional RAG)}] 
+    \begin{itemize}
+      \item \textbf{Input to this stage:} Cleaned text and keywords.
+      \item \textbf{What happens (simple):} The system looks up extra helpful information from a small database or collection of teacher-made questions/examples (this helps the model avoid mistakes and add variety). This is called retrieval-augmented generation (RAG).
+      \item \textbf{Tools used:} A searchable collection (index) plus a retriever program that finds related lines or example questions.
+      \item \textbf{Output of this stage:} A short set of retrieved facts or example MCQs that will be given to the LLM as helpful context.
+    \end{itemize}
+
+  \item[Stage 4 — \textbf{Prompt Construction / Instruction Building}]
+    \begin{itemize}
+      \item \textbf{Input to this stage:} Cleaned text, keywords, retrieved facts, and the user settings.
+      \item \textbf{What happens (simple):} The system builds a clear instruction (a ``prompt'') that tells the LLM exactly how to make MCQs: how many, the format, what counts as a good wrong option, and what difficulty to target.
+      \item \textbf{Tools used:} Template prompts (pre-written instruction templates) that are filled in with the specific text, examples, and settings.
+      \item \textbf{Output of this stage:} A ready-to-send prompt (text) for the LLM that bundles the lesson content + examples + explicit rules.
+    \end{itemize}
+
+  \item[Stage 5 — \textbf{LLM Generation}] 
+    \begin{itemize}
+      \item \textbf{Input to this stage:} The assembled prompt and any retrieved context (from Stage 3).
+      \item \textbf{What happens (simple):} The large language model (LLM) reads the prompt and generates MCQ items: question stems, one correct answer, and several distractors (wrong choices). It may also provide short explanations for the correct answers.
+      \item \textbf{Tools used:} A big language model (an LLM) accessed via an API or local model. The model is instructed by the prompt created earlier.
+      \item \textbf{Output of this stage:} Raw generated MCQs (text that contains the questions, options, and explanations).
+    \end{itemize}
+
+  \item[Stage 6 — \textbf{Post-processing \& Filtering}] 
+    \begin{itemize}
+      \item \textbf{Input to this stage:} The raw MCQs from the LLM.
+      \item \textbf{What happens (simple):} The system checks each MCQ for simple problems: duplicate options, two correct answers, grammar mistakes, or factual errors that are easy to spot. It may fix wording and format the question neatly.
+      \item \textbf{Tools used:} Rule-based checks (small programs) and sometimes another quick model pass to rewrite or correct phrasing.
+      \item \textbf{Output of this stage:} A cleaned, well-formatted list of MCQs ready for evaluation.
+    \end{itemize}
+
+  \item[Stage 7 — \textbf{Quality Evaluation \& Student Simulation}] 
+    \begin{itemize}
+      \item \textbf{Input to this stage:} Clean MCQs from Stage 6.
+      \item \textbf{What happens (simple):} The system evaluates how good the questions are. It can do this by (a) using automatic metrics, (b) comparing to expert (teacher) examples, or (c) simulating student answers using models to see if questions behave sensibly (easy questions are answered correctly by simulated \"easy\" students, etc.).
+      \item \textbf{Tools used:} Scoring scripts, small classifier models, or LLM-based simulated students for automatic signals about difficulty and clarity.
+      \item \textbf{Output of this stage:} Quality scores and labels (for example: \textit{good / needs revision / poor}) and a confidence value for each question.
+    \end{itemize}
+
+  \item[Stage 8 — \textbf{Personalization \& Packaging}] 
+    \begin{itemize}
+      \item \textbf{Input to this stage:} The scored MCQs and user settings (grade/difficulty preferences).
+      \item \textbf{What happens (simple):} The system picks and orders questions to match the student's level (for example, easier ones first), adds metadata (topic, difficulty, learning objective), and creates the final quiz package (could be a file, a web page, or a set of questions to show in an app).
+      \item \textbf{Tools used:} Simple selection logic and formatting code (to create the final quiz).
+      \item \textbf{Output of this stage:} A final structured quiz: a list of MCQs with correct answers, distractors, explanations, difficulty tags, and any metadata for the teacher or student to use.
+    \end{itemize}
+
+  \item[Stage 9 — \textbf{(Optional) Human Review \& Feedback Loop}] 
+    \begin{itemize}
+      \item \textbf{Input to this stage:} The final quiz package and quality reports.
+      \item \textbf{What happens (simple):} A teacher or content expert can review the generated questions and accept or edit them. Their edits are stored and used to improve future generation (the system learns what kinds of corrections are common).
+      \item \textbf{Tools used:} A web editor interface and a small database for storing reviewed items and feedback.
+      \item \textbf{Output of this stage:} Improved question bank and better future generations (system gets better with human corrections).
+    \end{itemize}
+\end{description}
+
   
 
 \end{document}
