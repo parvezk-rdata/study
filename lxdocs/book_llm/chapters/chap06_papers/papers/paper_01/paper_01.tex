@@ -1,0 +1,219 @@
+\documentclass[../../../../main.tex]{subfiles}
+\begin{document}
+
+
+% \input{\subfix{images/Embedding_Models.tex}}
+% \input{\subfix{tables/context_window.tex}}
+
+\chapter{MCQGen: A Large Language Model-Driven MCQ Generator for Personalized Learning} 
+	
+	\section{Information}
+	
+	\begin{enumerate}
+		\item IEEE Access
+		\item DOI : 10.1109/ACCESS.2024.3420709
+		\item \url{https://drive.google.com/file/d/1KkfsKJhbx3S2hLeA6iMZsXpkQdwaRPMb/view?usp=drive_link}
+	\end{enumerate}
+
+	\section{TL;DR of this paper aimed at a novice school student(beginner-friendly) in point vise manner}
+	
+	\begin{enumerate} 
+    \item Teachers spend a lot of time making good multiple-choice questions (MCQs) for students. 
+    \item MCQGen is a smart computer program that uses a big language model to help make these questions quickly. 
+    \item It carefully picks information from textbooks or notes to make sure questions are correct and meaningful. 
+    \item The program makes sure each question has one right answer and several tricky but wrong choices. 
+    \item MCQGen can change question difficulty based on how well the student learns. 
+    \item This helps students practice better by giving questions that fit their learning needs. 
+    \item The system also double-checks questions so they don’t have mistakes or confusing wording. 
+    \item Overall, MCQGen helps teachers save time and helps students learn smarter using personalized questions. 
+  \end{enumerate}
+
+  \section{Summarize this paper in aimed at a beginner school student. Cover these aspects: the problem the paper addresses, why this problem matters, what the authors did to solve it, how they tested or evaluated their work, and the main result or finding.}
+  \begin{itemize} 
+    \item \textbf{Problem:} Teachers need to create many good multiple-choice questions (MCQs) for students, but making these questions takes a lot of time and skill. 
+    \item \textbf{Why it matters:} Having many high-quality questions helps students practice better and learn more effectively, but creating those questions manually is hard and slow. 
+    \item \textbf{What the authors did:} The authors made a computer system called MCQGen that uses a large language model (LLM) to automatically create MCQs. It chooses relevant content, creates a question and correct answer, makes tricky wrong choices, and adjusts the question difficulty to fit the student’s level. 
+    \item \textbf{How they tested it:} They ran experiments comparing MCQGen to older methods by checking if the questions were correct, clear, and matched the lesson. They also tested if the questions suited different student needs. 
+    \item \textbf{Main result:} MCQGen made better questions that were more accurate, had good wrong answers, and could be personalized to help students learn better than previous automatic methods.
+  \end{itemize}
+
+  \clearpage
+
+	\section{List all glossary terms from this paper and explain each, aimed at a beginner school student.}
+	  \begin{itemize} 
+      \item \textbf{Multiple-Choice Question (MCQ):} A question with one correct answer and several wrong answers for you to choose from. 
+      \item \textbf{Large Language Model (LLM):} A very smart computer program that can understand and write human language like stories, answers, or questions. 
+      \item \textbf{Distractor:} A wrong answer in a multiple-choice question that looks believable to make the question challenging. 
+      \item \textbf{Personalized Learning:} Teaching that changes the questions or lessons to fit what each student needs or knows best. 
+      \item \textbf{Question Stem:} The main part of a question that tells you what is being asked. 
+      \item \textbf{Answer Key:} The correct answer to a question. 
+      \item \textbf{Hallucination (in AI):} When the computer makes up wrong or made-up information instead of facts. \item \textbf{Pipeline:} A step-by-step process where each step helps make sure the final result (like a good question) is correct and useful. 
+      \item \textbf{Validation:} Checking carefully if something is correct, such as checking if the questions and answers make sense. 
+      \item \textbf{Difficulty Level:} How easy or hard a question is for a student. 
+    \end{itemize}
+
+  \clearpage
+
+    \section{What new thing the paper as done or proposed and what was the earlier approach , aimed at a beginner school student.}
+      \begin{itemize} 
+        \item \textbf{What was done before:} 
+          \begin{itemize} 
+            \item Earlier computer programs made multiple-choice questions (MCQs) using simple rules or small models. 
+            \item These old methods often created questions that were easy, not very clear, or had bad wrong answers that were either too obvious or confusing. 
+            \item Sometimes, the questions didn’t match the lesson well, and personalized learning was not common. 
+          \end{itemize} 
+          \item \textbf{What this paper did new:} 
+          \begin{itemize} 
+            \item The paper introduced MCQGen, which uses a big smart model called a Large Language Model (LLM) to make questions. 
+            \item MCQGen carefully picks content from lessons to make sure questions are correct and related to the topic. 
+            \item It makes tricky but fair wrong answers (called distractors) so students think harder. 
+            \item It can change question difficulty and topics based on what the student needs, making learning personalized. 
+            \item The paper also has a multi-step checking system that filters out bad or confusing questions automatically. 
+          \end{itemize} 
+          \item \textbf{Why this is better:} 
+            \begin{itemize} 
+              \item MCQGen makes questions faster and better than old programs. 
+              \item Students get questions that match their learning level and needs. 
+              \item Teachers save time and students learn smarter. 
+          \end{itemize} 
+    \end{itemize}
+
+    \clearpage
+
+    \section{List all tools / technologies / methods / methodologies used in this paper (e.g., models,libraries, datasets, metrics), aimed at a beginner school student}
+
+    \begin{itemize} 
+      \item \textbf{Large Language Model (LLM):} A smart computer program (like ChatGPT) that can read and write in human language to help make questions and answers. 
+      \item \textbf{MCQGen Pipeline:} A step-by-step process that helps make sure each multiple-choice question is clear, correct, and fits the lesson. 
+      \item \textbf{Datasets (Lesson Content):} Information from textbooks, notes, or other school materials used to make questions so they match what students are learning. 
+      \item \textbf{Automatic Checking and Filtering:} Computer programs that double-check the questions to make sure they do not have mistakes or confusing wording. 
+      \item \textbf{Difficulty Level Detection:} Methods that decide if a question is easy, medium, or hard, so each student gets the right level of challenge. 
+      \item \textbf{Personalization System:} A part of the tool that chooses questions based on what each student needs to practice more. 
+      \item \textbf{Metrics (Ways of Measuring):} Special ways to compare and judge the questions, like checking if they are accurate, fair, and helpful for learning. 
+      \item \textbf{Quality Control Methods:} Extra rules and strategies to make sure each question has one right answer, no repeats, and makes sense. 
+    \end{itemize}
+
+    \section{What is the the initial input and final output of the work propesed by this paper. aimed at a beginner school student.}
+    \begin{itemize} 
+      \item \textbf{Initial Input:} 
+        \begin{itemize} 
+          \item School lesson materials (like textbook chapters, notes, or learning topics). 
+          \item A profile about the student (such as what topics or skills they need more practice with, and their learning level). 
+        \end{itemize} 
+        \item \textbf{Final Output:} 
+        \begin{itemize} 
+          \item A set of ready-to-use multiple-choice questions (MCQs) about the lesson. 
+          \item Each MCQ includes one correct answer and several believable wrong answers (distractors). 
+          \item The questions match the student’s level and practice needs, helping them learn in a way that fits them best. 
+        \end{itemize} 
+      \end{itemize}
+
+      \clearpage
+
+      \section{What the pipeline stages which converts input to final output.}
+      \begin{itemize} 
+    
+    \item \textbf{Stage 1: Content Selection} 
+      \begin{itemize} 
+        \item The system reads the lesson materials and picks important parts to make questions from. 
+      \end{itemize} 
+      \item \textbf{Stage 2: Correct Answer Generation} 
+        \begin{itemize} 
+          \item It creates a correct answer based on the chosen content. 
+        \end{itemize} 
+      \item \textbf{Stage 3: Question Stem Generation} 
+        \begin{itemize} 
+          \item It writes the main part of the question (the question stem) that relates clearly to the correct answer. 
+        \end{itemize} 
+      \item \textbf{Stage 4: Distractor (Wrong Answer) Generation} 
+        \begin{itemize} 
+          \item It makes several believable but wrong answers so the question is challenging. 
+        \end{itemize} 
+      \item \textbf{Stage 5: Quality and Validity Checks} 
+        \begin{itemize} 
+          \item The system checks if the question has only one correct answer, no confusing wording, and matches the lesson well. 
+        \end{itemize} 
+      \item \textbf{Stage 6: Personalization} 
+        \begin{itemize} 
+          \item It adjusts the question difficulty and topic focus based on the student’s learning needs. 
+        \end{itemize} 
+      \item \textbf{Stage 7: Final Output} 
+        \begin{itemize} 
+          \item The system produces a ready-to-use multiple-choice question with one correct and several wrong answers, personalized for the student. 
+        \end{itemize} 
+    \end{itemize}
+
+    \clearpage
+
+    \section{Make a table with 5 columns: stage name, input to this stage, description, tools used, outputs of this stage. your answer should be aimed at a beginner school stu- dent.write latex code. the table should not be truncated in page. all collumns should be visibel.}
+    \input{\subfix{table_01.tex}}
+
+    \clearpage
+
+\section{Give a step-by-step narrative explanation of each stage (like how data flows and decisions happen)? your answer should be aimed at a beginner school student}
+
+Below is a simple explanation of how MCQGen works step-by-step. It shows how information moves through the system and what decisions are made to create good personalized multiple-choice questions (MCQs). This is written for beginner school students.
+
+\begin{enumerate}[leftmargin=*, label=\textbf{Stage \arabic*:}]
+
+\item \textbf{Content Selection}
+\begin{itemize}
+  \item Input: The system gets lesson materials like textbook chapters or notes.
+  \item What happens: MCQGen reads through the lesson and picks important sentences or facts that would make good questions.
+  \item Decisions: It chooses content that is clear, relevant, and covers important topics.
+  \item Output: A small piece of the lesson ready for question generation.
+\end{itemize}
+
+\item \textbf{Correct Answer Generation}
+\begin{itemize}
+  \item Input: The selected content from the previous step.
+  \item What happens: MCQGen uses a Large Language Model (LLM), a smart computer program, to find or create the correct answer based on the content.
+  \item Decisions: The LLM chooses factual and precise answers matching the lesson.
+  \item Output: A correct answer statement.
+\end{itemize}
+
+\item \textbf{Question Stem Generation}
+\begin{itemize}
+  \item Input: The correct answer and the selected content.
+  \item What happens: MCQGen asks the LLM to write a clear question that leads to the correct answer.
+  \item Decisions: The question should be easy to understand and directly related to the answer.
+  \item Output: The question text (called the question stem).
+\end{itemize}
+
+\item \textbf{Distractor Generation}
+\begin{itemize}
+  \item Input: The question stem and the correct answer.
+  \item What happens: The LLM generates multiple wrong but believable answers called distractors.
+  \item Decisions: Distractors must look reasonable so students think carefully but should never be correct.
+  \item Output: Several wrong answer choices.
+\end{itemize}
+
+\item \textbf{Quality and Validity Checks}
+\begin{itemize}
+  \item Input: The full MCQ (question, correct answer, distractors).
+  \item What happens: Automated programs check for problems like multiple correct answers, confusing words, or off-topic questions.
+  \item Decisions: If a problem is found, the question is fixed or discarded.
+  \item Output: Verified, clear, and correct MCQs ready for personalization.
+\end{itemize}
+
+\item \textbf{Personalization}
+\begin{itemize}
+  \item Input: Verified MCQs and information about the student (what they need to practice and their difficulty level).
+  \item What happens: The system selects and possibly modifies questions to match the student’s current learning needs and skills.
+  \item Decisions: Choose questions that help the student improve without being too easy or too hard.
+  \item Output: Personalized MCQ set ready for the student.
+\end{itemize}
+
+\item \textbf{Final Output}
+\begin{itemize}
+  \item Input: Personalized MCQs.
+  \item What happens: The questions are given to the student to practice and learn.
+  \item Decisions: None at this step, but feedback from student answers can guide future personalization.
+  \item Output: Ready-to-use multiple-choice questions tailored for the student’s learning.
+\end{itemize}
+
+\end{enumerate}
+
+  
+
+\end{document}

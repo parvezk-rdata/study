@@ -5,7 +5,10 @@
         "label": "LaTeX Build",
         "type": "shell",
         "command": "bash",
-        "args": ["-c", "rm -f *.pdf && latexmk -C && latexmk -pdf -interaction=nonstopmode ${fileBasename} && rm -f *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.log *.lof *.lot *.out *.run.xml *.toc *.tmp && mv ${fileBasenameNoExtension}.pdf ${workspaceFolder}/zz_pdf "],
+        "args": [
+          "-c",
+          "rm -f *.pdf && latexmk -C && latexmk -pdf -interaction=nonstopmode ${fileBasename} && rm -f *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.log *.lof *.lot *.out *.run.xml *.toc *.tmp && mv ${fileBasenameNoExtension}.pdf ${workspaceFolder}/zz_pdf "
+        ],
         "options": {
           "cwd": "${fileDirname}"
         },
@@ -13,13 +16,21 @@
           "reveal": "always",
           "panel": "dedicated",
           "clear": true
+        },
+        "problemMatcher": [],
+        "group": {
+          "kind": "build",
+          "isDefault": true
         }
       },
       {
         "label": "LaTeX Clean",
         "type": "shell",
         "command": "bash",
-        "args": ["-c", "rm -f *.pdf *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.log *.lof *.lot *.out *.run.xml *.toc *.tmp  ${workspaceFolder}/zz_pdf/${fileBasenameNoExtension}.pdf "],
+        "args": [
+          "-c",
+          "rm -f *.pdf *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.log *.lof *.lot *.out *.run.xml *.toc *.tmp  ${workspaceFolder}/zz_pdf/${fileBasenameNoExtension}.pdf "
+        ],
         "options": {
           "cwd": "${fileDirname}"
         },
