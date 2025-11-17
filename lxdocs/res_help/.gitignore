@@ -19,4 +19,5 @@ chapters/chap01-introduction/intro.synctex.gz
 
 # Allow
 # !static/css/bootstrap-styled.css
-!subjects/CSO/topics/*.pdf
+# !subjects/CSO/topics/*.pdf
+!zz_pdf/main.pdf
