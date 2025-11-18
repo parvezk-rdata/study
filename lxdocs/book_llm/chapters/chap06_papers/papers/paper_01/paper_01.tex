@@ -7,289 +7,327 @@
 
 \chapter{MCQGen: A Large Language Model-Driven MCQ Generator for Personalized Learning} 
 	
-	\section{Information}
+	\section{Information }
 	
 	\begin{enumerate}
-		\item IEEE Access
-		\item DOI : 10.1109/ACCESS.2024.3420709
+		\item \cite{Hang2024}
+    \item IEEE Access , DOI : 10.1109/ACCESS.2024.3420709
 		\item \url{https://drive.google.com/file/d/1KkfsKJhbx3S2hLeA6iMZsXpkQdwaRPMb/view?usp=drive_link}
 	\end{enumerate}
 
-	\section{TL;DR of this paper aimed at a novice school student(beginner-friendly) in point vise manner}
+	\section{Summarize this paper in aimed at a beginner school student. Cover these aspects: the problem the paper addresses, why this problem matters, what the authors did to solve it, how they tested or evaluated their work, and the main result or finding.}
 	
-	\begin{enumerate} 
-    \item Teachers spend a lot of time making good multiple-choice questions (MCQs) for students. 
-    \item MCQGen is a smart computer program that uses a big language model to help make these questions quickly. 
-    \item It carefully picks information from textbooks or notes to make sure questions are correct and meaningful. 
-    \item The program makes sure each question has one right answer and several tricky but wrong choices. 
-    \item MCQGen can change question difficulty based on how well the student learns. 
-    \item This helps students practice better by giving questions that fit their learning needs. 
-    \item The system also double-checks questions so they don’t have mistakes or confusing wording. 
-    \item Overall, MCQGen helps teachers save time and helps students learn smarter using personalized questions. 
+	\begin{enumerate}
+    \item They built a system called MCQGen to make MCQ (Multiple Choice Questions) for tests and practice.
+    \item personalized learning, where each student gets questions that fit their understanding.
   \end{enumerate}
 
-  \section{Summarize this paper in aimed at a beginner school student. Cover these aspects: the problem the paper addresses, why this problem matters, what the authors did to solve it, how they tested or evaluated their work, and the main result or finding.}
-  \begin{itemize} 
-    \item \textbf{Problem:} Teachers need to create many good multiple-choice questions (MCQs) for students, but making these questions takes a lot of time and skill. 
-    \item \textbf{Why it matters:} Having many high-quality questions helps students practice better and learn more effectively, but creating those questions manually is hard and slow. 
-    \item \textbf{What the authors did:} The authors made a computer system called MCQGen that uses a large language model (LLM) to automatically create MCQs. It chooses relevant content, creates a question and correct answer, makes tricky wrong choices, and adjusts the question difficulty to fit the student’s level. 
-    \item \textbf{How they tested it:} They ran experiments comparing MCQGen to older methods by checking if the questions were correct, clear, and matched the lesson. They also tested if the questions suited different student needs. 
-    \item \textbf{Main result:} MCQGen made better questions that were more accurate, had good wrong answers, and could be personalized to help students learn better than previous automatic methods.
-  \end{itemize}
-
   \clearpage
 
-	\section{List all glossary terms from this paper and explain each, aimed at a beginner school student.}
-	  \begin{itemize} 
-      \item \textbf{Multiple-Choice Question (MCQ):} A question with one correct answer and several wrong answers for you to choose from. 
-      \item \textbf{Large Language Model (LLM):} A very smart computer program that can understand and write human language like stories, answers, or questions. 
-      \item \textbf{Distractor:} A wrong answer in a multiple-choice question that looks believable to make the question challenging. 
-      \item \textbf{Personalized Learning:} Teaching that changes the questions or lessons to fit what each student needs or knows best. 
-      \item \textbf{Question Stem:} The main part of a question that tells you what is being asked. 
-      \item \textbf{Answer Key:} The correct answer to a question. 
-      \item \textbf{Hallucination (in AI):} When the computer makes up wrong or made-up information instead of facts. \item \textbf{Pipeline:} A step-by-step process where each step helps make sure the final result (like a good question) is correct and useful. 
-      \item \textbf{Validation:} Checking carefully if something is correct, such as checking if the questions and answers make sense. 
-      \item \textbf{Difficulty Level:} How easy or hard a question is for a student. 
-    \end{itemize}
+  \section{What is the the initial input and final output of the work propesed by this paper. aimed at a beginner school student.}
+	
+	\begin{enumerate}
+    \item Input : A paragraph or text that the questions should be based on.
+    \item Output: MCQ questions
+    \begin{enumerate}
+      \item question stem
+      \item correct answer
+      \item three or four wrong options (distractors)
+      \item Difficulty level
+      \item Bloom’s Taxonomy level
+    \end{enumerate}
+  \end{enumerate}
+
+  \section{What the pipeline stages which converts input to final output. Give a step-by-step narrative explanation of each stage (like how data flows and decisions happen)? your answer should be aimed at a beginner school student. Just write the names of the stages we will discuss each stage later.}
+  \begin{enumerate}
+    \item Input text collection
+    \item Preprocessing / cleaning
+    \item Important-sentence / concept extraction
+    \item Content selection and target spotting
+    \item Prompt construction for the LLM
+    \item LLM generation (question + correct answer + distractors)
+    \item Postprocessing and automatic quality checks
+    \item Difficulty estimation and Bloom’s level classification
+    \item Human review / validation (optional)
+    \item Formatting and final output delivery
+  \end{enumerate}
 
   \clearpage
+  \section{Make a table with 5 columns: stage name, input to this stage, description, tools used, outputs of this stage. your answer should be aimed at a beginner school student.write latex code. the table should not be truncated in page. all collumns should be visibel.}
+    \input{\subfix{table_02.tex}}
 
-    \section{What new thing the paper as done or proposed and what was the earlier approach , aimed at a beginner school student.}
-      \begin{itemize} 
-        \item \textbf{What was done before:} 
-          \begin{itemize} 
-            \item Earlier computer programs made multiple-choice questions (MCQs) using simple rules or small models. 
-            \item These old methods often created questions that were easy, not very clear, or had bad wrong answers that were either too obvious or confusing. 
-            \item Sometimes, the questions didn’t match the lesson well, and personalized learning was not common. 
-          \end{itemize} 
-          \item \textbf{What this paper did new:} 
-          \begin{itemize} 
-            \item The paper introduced MCQGen, which uses a big smart model called a Large Language Model (LLM) to make questions. 
-            \item MCQGen carefully picks content from lessons to make sure questions are correct and related to the topic. 
-            \item It makes tricky but fair wrong answers (called distractors) so students think harder. 
-            \item It can change question difficulty and topics based on what the student needs, making learning personalized. 
-            \item The paper also has a multi-step checking system that filters out bad or confusing questions automatically. 
-          \end{itemize} 
-          \item \textbf{Why this is better:} 
-            \begin{itemize} 
-              \item MCQGen makes questions faster and better than old programs. 
-              \item Students get questions that match their learning level and needs. 
-              \item Teachers save time and students learn smarter. 
-          \end{itemize} 
-    \end{itemize}
+  \clearpage
+  \section{Stage 1 - Input \& Settings }
+  \begin{enumerate}
+    \item \textbf{Input to this stage:} educational text and simple settings (topic, difficulty level, grade, number of questions).
+    \item \textbf{Output of this stage:} a set of clean, readable text chunks.
+    \item \textbf{What happens (simple):} System breaks input text into clean small chunks if the text is large.
+    \item \textbf{Tools used:} A web form or file upload in the system; no heavy AI yet.
+  \end{enumerate}
 
-    \clearpage
 
-    \section{List all tools / technologies / methods / methodologies used in this paper (e.g., models,libraries, datasets, metrics), aimed at a beginner school student}
+  \section{Stage 2 - Preprocessing \& Text Cleaning}
+    \begin{enumerate}
+      \item \textbf{Input to this stage:} clean text chunks from Stage 1.
+      \item \textbf{Output of this stage:} well-formatted text ready for sentence extraction.
+      \item \textbf{What happens (simple):} system removes extra spaces, strange symbols, repeated lines, and makes sure sentences end properly.
+      \item \textbf{Tools used:} basic text-cleaning scripts (no AI), simple Python string functions.
+    \end{enumerate}
 
-    \begin{itemize} 
-      \item \textbf{Large Language Model (LLM):} A smart computer program (like ChatGPT) that can read and write in human language to help make questions and answers. 
-      \item \textbf{MCQGen Pipeline:} A step-by-step process that helps make sure each multiple-choice question is clear, correct, and fits the lesson. 
-      \item \textbf{Datasets (Lesson Content):} Information from textbooks, notes, or other school materials used to make questions so they match what students are learning. 
-      \item \textbf{Automatic Checking and Filtering:} Computer programs that double-check the questions to make sure they do not have mistakes or confusing wording. 
-      \item \textbf{Difficulty Level Detection:} Methods that decide if a question is easy, medium, or hard, so each student gets the right level of challenge. 
-      \item \textbf{Personalization System:} A part of the tool that chooses questions based on what each student needs to practice more. 
-      \item \textbf{Metrics (Ways of Measuring):} Special ways to compare and judge the questions, like checking if they are accurate, fair, and helpful for learning. 
-      \item \textbf{Quality Control Methods:} Extra rules and strategies to make sure each question has one right answer, no repeats, and makes sense. 
-    \end{itemize}
-
-    \section{What is the the initial input and final output of the work propesed by this paper. aimed at a beginner school student.}
-    \begin{itemize} 
-      \item \textbf{Initial Input:} 
-        \begin{itemize} 
-          \item School lesson materials (like textbook chapters, notes, or learning topics). 
-          \item A profile about the student (such as what topics or skills they need more practice with, and their learning level). 
-        \end{itemize} 
-        \item \textbf{Final Output:} 
-        \begin{itemize} 
-          \item A set of ready-to-use multiple-choice questions (MCQs) about the lesson. 
-          \item Each MCQ includes one correct answer and several believable wrong answers (distractors). 
-          \item The questions match the student’s level and practice needs, helping them learn in a way that fits them best. 
-        \end{itemize} 
-      \end{itemize}
-
-      \clearpage
-
-      \section{What the pipeline stages which converts input to final output.}
-      \begin{itemize} 
+    \section{Stage 3 - Important Sentence Extraction}
+      \begin{enumerate}
+        \item \textbf{Input to this stage:} cleaned text chunks from Stage 2.
+        \item \textbf{Output of this stage:} ranked important sentences and target-worthy content units.
+        \item \textbf{What happens (technical):} 
+          \begin{enumerate}
+            \item sentences are segmented and parsed. Paper do not specify the exact NLP library or parser(like spaCy, NLTK, or OpenNLP). Use AI to check if there is supplementary code / GitHub repo for MCQGen.
+            \item each sentence is scored using TF--IDF relevance weighting,
+            \item key phrases are extracted using RAKE (Rapid Automatic Keyword Extraction),
+            \item semantic similarity models (Sentence-BERT embeddings) are used to check conceptual importance,
+            \item Named Entity Recognition (NER) is applied to detect entities, concepts, and definition-bearing elements,
+            \item a sentence-importance ranking algorithm selects top candidate sentences for question generation.
+          \end{enumerate}
+        \item \textbf{Tools used:} TF--IDF vectorizer, RAKE keyword extractor, Sentence-BERT (SBERT) embeddings, spaCy or similar NER models, sentence scoring and ranking algorithms.
+      \end{enumerate}
     
-    \item \textbf{Stage 1: Content Selection} 
-      \begin{itemize} 
-        \item The system reads the lesson materials and picks important parts to make questions from. 
-      \end{itemize} 
-      \item \textbf{Stage 2: Correct Answer Generation} 
-        \begin{itemize} 
-          \item It creates a correct answer based on the chosen content. 
-        \end{itemize} 
-      \item \textbf{Stage 3: Question Stem Generation} 
-        \begin{itemize} 
-          \item It writes the main part of the question (the question stem) that relates clearly to the correct answer. 
-        \end{itemize} 
-      \item \textbf{Stage 4: Distractor (Wrong Answer) Generation} 
-        \begin{itemize} 
-          \item It makes several believable but wrong answers so the question is challenging. 
-        \end{itemize} 
-      \item \textbf{Stage 5: Quality and Validity Checks} 
-        \begin{itemize} 
-          \item The system checks if the question has only one correct answer, no confusing wording, and matches the lesson well. 
-        \end{itemize} 
-      \item \textbf{Stage 6: Personalization} 
-        \begin{itemize} 
-          \item It adjusts the question difficulty and topic focus based on the student’s learning needs. 
-        \end{itemize} 
-      \item \textbf{Stage 7: Final Output} 
-        \begin{itemize} 
-          \item The system produces a ready-to-use multiple-choice question with one correct and several wrong answers, personalized for the student. 
-        \end{itemize} 
-    \end{itemize}
+    \clearpage
+
+    \section{Stage 4 - Content Selection \& Target Spotting (Technical Version)}
+      \begin{enumerate}
+        \item \textbf{Input to this stage:} ranked important sentences and extracted key phrases from Stage 3.
+        \item \textbf{Output of this stage:} a finalized target concept or fact (the “focus point”) for MCQ generation.
+        \item \textbf{What happens (technical):}
+        \begin{enumerate}
+          \item apply semantic role labeling (SRL) to identify the predicate–argument structure of each important sentence,
+          \item detect candidate answer-bearing units (entities, definitions, numerical values, named concepts),
+          \item score each candidate target using:
+            \begin{enumerate}
+              \item TF--IDF relevance,
+              \item SBERT semantic centrality,
+              \item NER type importance,
+              \item frequency and uniqueness within the text,
+            \end{enumerate}
+          \item eliminate targets that are too vague, too broad, or not factually testable,
+          \item select one high-value target concept or fact that can be used to generate a clear MCQ.
+        \end{enumerate}
+        \item \textbf{Tools used:} semantic role labeling (SRL) models, sentence embeddings (SBERT), TF--IDF scoring, spaCy NER, rule-based target selection filters.
+      \end{enumerate}
 
     \clearpage
 
-    \section{Make a table with 5 columns: stage name, input to this stage, description, tools used, outputs of this stage. your answer should be aimed at a beginner school stu- dent.write latex code. the table should not be truncated in page. all collumns should be visibel.}
-    \input{\subfix{table_01.tex}}
+    \section{Stage 5 — Prompt Construction for the LLM }
+      \begin{enumerate}
+        \item \textbf{Input to this stage:} selected target concept/fact and its source sentence from Stage 4.
+        \item \textbf{Output of this stage:} a structured, instruction-based prompt ready for the LLM.
+        \item \textbf{What happens (technical):}
+        \begin{enumerate}
+          \item construct an instruction template specifying:
+            \begin{enumerate}
+              \item task type (MCQ generation),
+              \item number of options,
+              \item requirement for one correct answer + distractors,
+              \item context sentence or supporting text,
+              \item clarity, grade level, and cognitive level constraints,
+            \end{enumerate}
+          \item embed the target concept into the prompt as the “answer source,”
+          \item add constraints to ensure:
+            \begin{enumerate}
+              \item distractors are plausible but clearly incorrect,
+              \item the MCQ aligns with the target concept,
+              \item no hallucination beyond provided text,
+            \end{enumerate}
+          \item convert all components into a formatted prompt string suitable for the LLM.
+        \end{enumerate}
+        \item \textbf{Tools used:} predefined prompt templates, string-formatting scripts, rule-based constraint insertion, prompt validation heuristics.
+      \end{enumerate}
+    
+    \section{Stage 6 — LLM Question Generation }
+      \begin{enumerate}
+        \item The system uses the \textbf{Google Gemini-Pro 1.0 LLM} (as explicitly stated in the paper) to generate MCQs.
+        \item The LLM receives the structured prompt constructed in Stage~5, including:
+          \begin{enumerate}
+              \item the cleaned and chunked input text,
+              \item desired number of questions,
+              \item difficulty level,
+              \item required cognitive level (Bloom’s),
+              \item formatting constraints,
+              \item distractor quality guidelines,
+              \item output schema for MCQs.
+          \end{enumerate}
+        
+        \clearpage
 
+        \item The LLM is instructed to produce the following for each MCQ:
+          \begin{enumerate}
+              \item a stem,
+              \item one correct answer,
+              \item three distractors,
+              \item explanation (rationale),
+              \item metadata tags (difficulty, Bloom level).
+          \end{enumerate}
+    
+        \item The LLM outputs questions in the enforced \textbf{JSON schema} specified by the authors:
+          \begin{enumerate}
+              \item \texttt{"question\_text": ...}
+              \item \texttt{"options": [...]} 
+              \item \texttt{"correct\_answer": ...}
+              \item \texttt{"distractors": [...]} 
+              \item \texttt{"explanation": ...}
+              \item \texttt{"metadata": \{ ... \}}
+          \end{enumerate}
+    
+        \item The authors explicitly emphasize:
+          \begin{enumerate}
+              \item \textbf{Consistency}: Every generated MCQ must follow the schema without deviation.
+              \item \textbf{Content Fidelity}: Questions must be strictly derived from the provided text chunk.
+              \item \textbf{Distractor Quality}: Distractors must be plausible but incorrect, and not overlap with correct answer.
+              \item \textbf{Difficulty Alignment}: The LLM must adjust phrasing and distractor complexity according to assigned difficulty.
+          \end{enumerate}
+    
+        \item The system relies entirely on the LLM for:
+          \begin{enumerate}
+              \item question formation,
+              \item linguistic validity,
+              \item distractor semantics,
+              \item explanation generation.
+          \end{enumerate}
+      \end{enumerate}
+    
+    \clearpage
+    \section{Stage 7 — Post-Generation Evaluation }
+      \begin{enumerate}
+        \item The authors apply an \textbf{automated rule-based evaluation} to verify the structural and semantic correctness of the LLM-generated MCQs.
+        \item The system checks for \textbf{JSON schema compliance}.  
+          \begin{enumerate}
+              \item All required fields must be present.
+              \item No fields may be empty.
+              \item Options must include exactly one correct answer and the required number of distractors.
+          \end{enumerate}
+        \item The system performs \textbf{content validation}:
+          \begin{enumerate}
+              \item Each MCQ must align with the information present in the corresponding text chunk.
+              \item The stem must not introduce extraneous or hallucinated content.
+          \end{enumerate}
+        \item The authors implement \textbf{duplicate detection}:
+          \begin{enumerate}
+              \item MCQs with repeating stems or overlapping answer options are removed.
+          \end{enumerate}
+        \item The authors conduct a \textbf{difficulty-level verification}:
+          \begin{enumerate}
+              \item Generated questions must match the difficulty level and Bloom category specified during prompt construction.
+          \end{enumerate}
+        \item The system applies \textbf{linguistic and syntactic correctness checks}:
+          \begin{enumerate}
+              \item Grammar,
+              \item readability,
+              \item clarity,
+              \item absence of ambiguous phrasing.
+          \end{enumerate}
+        \item The authors mention \textbf{LLM error detection rules} to catch:
+          \begin{enumerate}
+              \item malformed questions,
+              \item contradictory options,
+              \item distractors overlapping with the correct answer,
+              \item incorrectly formatted outputs.
+          \end{enumerate}
+        
+        \clearpage
+
+        \item MCQs that fail any of the above checks are marked for \textbf{regeneration}.
+          \begin{enumerate}
+            \item The authors apply an \textbf{automated rule-based evaluation} to verify the structural and semantic correctness of the LLM-generated MCQs.
+            \item The system checks for \textbf{JSON schema compliance}.  
+              \begin{enumerate}
+                  \item All required fields must be present.
+                  \item No fields may be empty.
+                  \item Options must include exactly one correct answer and the required number of distractors.
+              \end{enumerate}
+            \item The system performs \textbf{content validation}:
+              \begin{enumerate}
+                  \item Each MCQ must align with the information present in the corresponding text chunk.
+                  \item The stem must not introduce extraneous or hallucinated content.
+              \end{enumerate}
+    
+            \item The authors implement \textbf{duplicate detection}:
+              \begin{enumerate}
+                  \item MCQs with repeating stems or overlapping answer options are removed.
+              \end{enumerate}
+    
+            \item The authors conduct a \textbf{difficulty-level verification}:
+              \begin{enumerate}
+                  \item Generated questions must match the difficulty level and Bloom category specified during prompt construction.
+              \end{enumerate}
+    
+            \item The system applies \textbf{linguistic and syntactic correctness checks}:
+              \begin{enumerate}
+                  \item Grammar,
+                  \item readability,
+                  \item clarity,
+                  \item absence of ambiguous phrasing.
+              \end{enumerate}
+            \item The authors mention \textbf{LLM error detection rules} to catch:
+              \begin{enumerate}
+                  \item malformed questions,
+                  \item contradictory options,
+                  \item distractors overlapping with the correct answer,
+                  \item incorrectly formatted outputs.
+              \end{enumerate}
+            \item MCQs that fail any of the above checks are marked for \textbf{regeneration}.
+        \end{enumerate}
+      \end{enumerate}
+    
+    \clearpage
+    \section{Stage 8 — Question Quality Filtering and Scoring}
+      \begin{enumerate}
+        \item The authors apply an \textbf{automated quality scoring mechanism} to each generated MCQ.
+        \item They use a set of \textbf{quality metrics} defined in the system:
+          \begin{enumerate}
+              \item relevance to the source text,
+              \item correctness of the key (correct option),
+              \item clarity of the stem,
+              \item appropriateness of distractors,
+              \item cognitive level alignment with Bloom’s taxonomy,
+              \item difficulty-level alignment.
+          \end{enumerate}
+        \item The system assigns a \textbf{numeric quality score} to every MCQ based on these metrics.
+        \item MCQs that fall below a predefined \textbf{quality threshold} are filtered out.
+        \item The authors use this filtering step to ensure:
+          \begin{enumerate}
+              \item only pedagogically valid MCQs are selected,
+              \item no low-quality or ambiguous items pass into the final set,
+              \item only questions matching user-specified difficulty or Bloom level remain.
+          \end{enumerate}
+        \item The final output of this stage is a list of \textbf{high-quality, valid MCQs} with associated quality scores.
+      \end{enumerate}
+      
     \clearpage
 
-\section{Give a step-by-step narrative explanation of each stage (like how data flows and decisions happen)? your answer should be aimed at a beginner school student}
-
-Below is a simple explanation of how MCQGen works step-by-step. It shows how information moves through the system and what decisions are made to create good personalized multiple-choice questions (MCQs). This is written for beginner school students.
-
-\begin{enumerate}[leftmargin=*, label=\textbf{Stage \arabic*:}]
-
-\item \textbf{Content Selection}
-\begin{itemize}
-  \item Input: The system gets lesson materials like textbook chapters or notes.
-  \item What happens: MCQGen reads through the lesson and picks important sentences or facts that would make good questions.
-  \item Decisions: It chooses content that is clear, relevant, and covers important topics.
-  \item Output: A small piece of the lesson ready for question generation.
-\end{itemize}
-
-\item \textbf{Correct Answer Generation}
-\begin{itemize}
-  \item Input: The selected content from the previous step.
-  \item What happens: MCQGen uses a Large Language Model (LLM), a smart computer program, to find or create the correct answer based on the content.
-  \item Decisions: The LLM chooses factual and precise answers matching the lesson.
-  \item Output: A correct answer statement.
-\end{itemize}
-
-\item \textbf{Question Stem Generation}
-\begin{itemize}
-  \item Input: The correct answer and the selected content.
-  \item What happens: MCQGen asks the LLM to write a clear question that leads to the correct answer.
-  \item Decisions: The question should be easy to understand and directly related to the answer.
-  \item Output: The question text (called the question stem).
-\end{itemize}
-
-\item \textbf{Distractor Generation}
-\begin{itemize}
-  \item Input: The question stem and the correct answer.
-  \item What happens: The LLM generates multiple wrong but believable answers called distractors.
-  \item Decisions: Distractors must look reasonable so students think carefully but should never be correct.
-  \item Output: Several wrong answer choices.
-\end{itemize}
-
-\item \textbf{Quality and Validity Checks}
-\begin{itemize}
-  \item Input: The full MCQ (question, correct answer, distractors).
-  \item What happens: Automated programs check for problems like multiple correct answers, confusing words, or off-topic questions.
-  \item Decisions: If a problem is found, the question is fixed or discarded.
-  \item Output: Verified, clear, and correct MCQs ready for personalization.
-\end{itemize}
-
-\item \textbf{Personalization}
-\begin{itemize}
-  \item Input: Verified MCQs and information about the student (what they need to practice and their difficulty level).
-  \item What happens: The system selects and possibly modifies questions to match the student’s current learning needs and skills.
-  \item Decisions: Choose questions that help the student improve without being too easy or too hard.
-  \item Output: Personalized MCQ set ready for the student.
-\end{itemize}
-
-\item \textbf{Final Output}
-\begin{itemize}
-  \item Input: Personalized MCQs.
-  \item What happens: The questions are given to the student to practice and learn.
-  \item Decisions: None at this step, but feedback from student answers can guide future personalization.
-  \item Output: Ready-to-use multiple-choice questions tailored for the student’s learning.
-\end{itemize}
-
-\end{enumerate}
-
-\section{Stages}
-
-\begin{description}
-  \item[Stage 1 — \textbf{Input \& Settings}] 
-    \begin{itemize}
-      \item \textbf{Input to this stage:} A block of educational text (e.g., a paragraph, a lesson, or chapter) and simple settings (topic, difficulty level, grade, number of questions).
-      \item \textbf{What happens (simple):} The system receives the text you want questions from and the preferences you choose (like how hard you want the questions).
-      \item \textbf{Tools used:} A web form or file upload in the system; no heavy AI yet.
-      \item \textbf{Output of this stage:} Clean text and a short settings record (e.g., ``topic = photosynthesis, difficulty = easy, 5 questions'').
-    \end{itemize}
-
-  \item[Stage 2 — \textbf{Preprocessing \& Text Cleaning}] 
-    \begin{itemize}
-      \item \textbf{Input to this stage:} The raw text and settings from Stage 1.
-      \item \textbf{What happens (simple):} The text is cleaned: extra spaces removed, long sentences optionally split, and key terms extracted (words or phrases that are important). This makes the text easier for the model to use.
-      \item \textbf{Tools used:} Basic text-processing code (like simple scripts that split sentences and find keywords).
-      \item \textbf{Output of this stage:} A cleaned, shorter set of text passages and a list of important keywords.
-    \end{itemize}
-
-  \item[Stage 3 — \textbf{Knowledge Retrieval (optional RAG)}] 
-    \begin{itemize}
-      \item \textbf{Input to this stage:} Cleaned text and keywords.
-      \item \textbf{What happens (simple):} The system looks up extra helpful information from a small database or collection of teacher-made questions/examples (this helps the model avoid mistakes and add variety). This is called retrieval-augmented generation (RAG).
-      \item \textbf{Tools used:} A searchable collection (index) plus a retriever program that finds related lines or example questions.
-      \item \textbf{Output of this stage:} A short set of retrieved facts or example MCQs that will be given to the LLM as helpful context.
-    \end{itemize}
-
-  \item[Stage 4 — \textbf{Prompt Construction / Instruction Building}]
-    \begin{itemize}
-      \item \textbf{Input to this stage:} Cleaned text, keywords, retrieved facts, and the user settings.
-      \item \textbf{What happens (simple):} The system builds a clear instruction (a ``prompt'') that tells the LLM exactly how to make MCQs: how many, the format, what counts as a good wrong option, and what difficulty to target.
-      \item \textbf{Tools used:} Template prompts (pre-written instruction templates) that are filled in with the specific text, examples, and settings.
-      \item \textbf{Output of this stage:} A ready-to-send prompt (text) for the LLM that bundles the lesson content + examples + explicit rules.
-    \end{itemize}
-
-  \item[Stage 5 — \textbf{LLM Generation}] 
-    \begin{itemize}
-      \item \textbf{Input to this stage:} The assembled prompt and any retrieved context (from Stage 3).
-      \item \textbf{What happens (simple):} The large language model (LLM) reads the prompt and generates MCQ items: question stems, one correct answer, and several distractors (wrong choices). It may also provide short explanations for the correct answers.
-      \item \textbf{Tools used:} A big language model (an LLM) accessed via an API or local model. The model is instructed by the prompt created earlier.
-      \item \textbf{Output of this stage:} Raw generated MCQs (text that contains the questions, options, and explanations).
-    \end{itemize}
-
-  \item[Stage 6 — \textbf{Post-processing \& Filtering}] 
-    \begin{itemize}
-      \item \textbf{Input to this stage:} The raw MCQs from the LLM.
-      \item \textbf{What happens (simple):} The system checks each MCQ for simple problems: duplicate options, two correct answers, grammar mistakes, or factual errors that are easy to spot. It may fix wording and format the question neatly.
-      \item \textbf{Tools used:} Rule-based checks (small programs) and sometimes another quick model pass to rewrite or correct phrasing.
-      \item \textbf{Output of this stage:} A cleaned, well-formatted list of MCQs ready for evaluation.
-    \end{itemize}
-
-  \item[Stage 7 — \textbf{Quality Evaluation \& Student Simulation}] 
-    \begin{itemize}
-      \item \textbf{Input to this stage:} Clean MCQs from Stage 6.
-      \item \textbf{What happens (simple):} The system evaluates how good the questions are. It can do this by (a) using automatic metrics, (b) comparing to expert (teacher) examples, or (c) simulating student answers using models to see if questions behave sensibly (easy questions are answered correctly by simulated \"easy\" students, etc.).
-      \item \textbf{Tools used:} Scoring scripts, small classifier models, or LLM-based simulated students for automatic signals about difficulty and clarity.
-      \item \textbf{Output of this stage:} Quality scores and labels (for example: \textit{good / needs revision / poor}) and a confidence value for each question.
-    \end{itemize}
-
-  \item[Stage 8 — \textbf{Personalization \& Packaging}] 
-    \begin{itemize}
-      \item \textbf{Input to this stage:} The scored MCQs and user settings (grade/difficulty preferences).
-      \item \textbf{What happens (simple):} The system picks and orders questions to match the student's level (for example, easier ones first), adds metadata (topic, difficulty, learning objective), and creates the final quiz package (could be a file, a web page, or a set of questions to show in an app).
-      \item \textbf{Tools used:} Simple selection logic and formatting code (to create the final quiz).
-      \item \textbf{Output of this stage:} A final structured quiz: a list of MCQs with correct answers, distractors, explanations, difficulty tags, and any metadata for the teacher or student to use.
-    \end{itemize}
-
-  \item[Stage 9 — \textbf{(Optional) Human Review \& Feedback Loop}] 
-    \begin{itemize}
-      \item \textbf{Input to this stage:} The final quiz package and quality reports.
-      \item \textbf{What happens (simple):} A teacher or content expert can review the generated questions and accept or edit them. Their edits are stored and used to improve future generation (the system learns what kinds of corrections are common).
-      \item \textbf{Tools used:} A web editor interface and a small database for storing reviewed items and feedback.
-      \item \textbf{Output of this stage:} Improved question bank and better future generations (system gets better with human corrections).
-    \end{itemize}
-\end{description}
-
-  
+    \section{Stage 9 — Final MCQ Assembly and Delivery}
+      \begin{enumerate}
+        \item The system collects all \textbf{high-quality MCQs} that passed the evaluation and filtering stages.
+        \item These MCQs are \textbf{assembled into a structured output format}:
+          \begin{enumerate}
+              \item JSON format,
+              \item compatible with learning platforms,
+              \item includes metadata such as Bloom level, difficulty, topic, and source chunk.
+          \end{enumerate}
+        \item The authors provide an \textbf{exportable output}, which allows the generated MCQs to be:
+          \begin{enumerate}
+              \item downloaded,
+              \item integrated into e-learning tools,
+              \item used for assessments or practice tests.
+          \end{enumerate}
+        
+        \item The system also supports \textbf{multiple MCQ types}, and the final output preserves:
+          \begin{enumerate}
+              \item stem,
+              \item options,
+              \item correct answer key,
+              \item Bloom category,
+              \item difficulty level,
+              \item reasoning or explanation (when generated).
+          \end{enumerate}
+        \item The final assembled set represents the end-to-end output of the MCQGen pipeline.
+      \end{enumerate}
 
 \end{document}

@@ -1,0 +1,89 @@
+\begin{table}[h!]
+    \centering
+    \footnotesize
+    \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.8cm}|
+                                    >{\raggedright\arraybackslash}p{2.5cm}|
+                                    X|
+                                    >{\raggedright\arraybackslash}p{2.8cm}|
+                                    >{\raggedright\arraybackslash}p{2.8cm}|}
+    \hline
+    \textbf{Stage Name} & 
+    \textbf{Input to This Stage} & 
+    \textbf{Description (Simple Explanation)} & 
+    \textbf{Tools Used} & 
+    \textbf{Output of This Stage} \\
+    \hline
+    
+    Input Text Collection &
+    Lesson paragraph or study content &
+    The system receives the text from which MCQs will be made. &
+    Teacher-provided text, PDFs, or typed content &
+    Raw text ready for processing \\
+    \hline
+    
+    Preprocessing / Cleaning &
+    Raw text &
+    Removes extra spaces, special characters, and makes the text clean and readable for the system. &
+    Text-cleaning scripts, Python tools &
+    Clean, well-formatted text \\
+    \hline
+    
+    Important Sentence Extraction &
+    Clean text &
+    Finds the most important lines or ideas that MCQs should be based on. &
+    Sentence ranking, keyword detection, NLP methods &
+    Key sentences or main ideas \\
+    \hline
+    
+    Content Selection \& Target Spotting &
+    Key sentences &
+    Chooses which concept or fact should become the main MCQ question. &
+    Rule-based filters, concept identifiers &
+    Selected concept or target fact \\
+    \hline
+    
+    Prompt Construction for LLM &
+    Selected concept &
+    Creates a structured message (prompt) to ask the LLM to generate a question and answer. &
+    Prompt templates, formatting tools &
+    LLM-ready prompt \\
+    \hline
+    
+    LLM Question Generation &
+    LLM-ready prompt &
+    The Large Language Model reads the prompt and generates the MCQ (question, correct answer, wrong options). &
+    LLMs like GPT-4, Mixtral, etc. &
+    Draft MCQ set \\
+    \hline
+    
+    Postprocessing \& Quality Checks &
+    Draft MCQ &
+    Fixes grammar, removes mistakes, and checks if question matches the text. &
+    Grammar checkers, rule-based validators &
+    Cleaned, improved MCQ \\
+    \hline
+    
+    Difficulty \& Bloom’s Level Classification &
+    Clean MCQ &
+    The system judges how hard the MCQ is and what type of thinking it tests. &
+    Difficulty models, Bloom classifiers, LLM-based scoring &
+    Difficulty level + Bloom’s level labels \\
+    \hline
+    
+    Human Review (Optional) &
+    Labeled MCQ &
+    Teacher checks if MCQ looks good and makes small changes if needed. &
+    Teacher judgment &
+    Final approved MCQ \\
+    \hline
+    
+    Final Output Delivery &
+    Reviewed MCQ &
+    The final MCQs are formatted and presented nicely for quizzes or worksheets. &
+    Formatting scripts, export tools &
+    Complete MCQ question set \\
+    \hline
+    
+    \end{tabularx}
+    \caption{MCQGen Pipeline Stages in Simple Beginner-Friendly Language}
+\end{table}
