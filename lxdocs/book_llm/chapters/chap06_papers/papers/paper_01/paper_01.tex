@@ -330,4 +330,171 @@
         \item The final assembled set represents the end-to-end output of the MCQGen pipeline.
       \end{enumerate}
 
+      \clearpage
+  \section{Stage A1 - Input \& Settings }
+    \begin{enumerate}
+        \item input : 
+          \begin{enumerate}
+            \item lesson data  
+            \item topic/subject 
+            \item target grade/age
+            \item difficulty level (easy/medium/hard)
+            \item Bloom category (if required)
+            \item number of MCQs to generate
+          \end{enumerate}  
+          \item output : A data-structure(may be json) containing clean lesson data and settings.
+          \item process :
+            \begin{enumerate}
+              \item Input lesson text and user settings
+              \item Clean text 
+              \item Validate input to check if necessary information is present to generate the mcq.
+              \item Save information into a data-structure.
+            \end{enumerate}
+          \item tools
+            \begin{enumerate}
+              \item Web form to input data
+              \item PDF-to-text engine
+              \item DOCX parser (paper mentions generic preprocessing, not specific software)
+            \end{enumerate}
+    \end{enumerate}
+
+  \section{Stage A2 - Text Chunking (Atomic Breakdown) }
+    \begin{enumerate}
+        \item input : Clean lesson text.
+        \item Output : small, clean, logically meaningful chunks 
+        \item process :
+          \begin{enumerate}
+            \item If the text is very short then treat entire text as one chunk.
+            \item For long text do segmentation
+            \item Group sentences into meaningful chunks so that each chunk covers one idea.
+          \end{enumerate} 
+          \item tools
+            \begin{enumerate}
+              \item Sentence segmentation algorithm : create a list of sentences from a big text.
+              \item Sentence grouping logic : group sentences into chunks
+              \item Semantic similarity check (lightweight) : Validate each chunk covers one idea or sub-topic
+            \end{enumerate}
+    \end{enumerate}  
+  
+    \clearpage
+
+  \section{Stage A3 - Tokenize the Text }
+    \begin{enumerate}
+        \item input : Chunks.
+        \item Output : important tokens(words)
+        \item process :
+          \begin{enumerate}
+            \item Split the chunk into individual words (tokens)
+            \item Convert all words to lowercase.
+            \item Remove punctuation from tokens.
+          \end{enumerate} 
+          \item tools : Tokenizer
+    \end{enumerate}  
+
+  \section{Stage A4 - Remove Stopwords }
+    \begin{enumerate}
+        \item input : Chunks.
+        \item Output : important tokens(words)
+        \item process :
+          \begin{enumerate}
+            \item Split the chunk into individual words (tokens)
+            \item Convert all words to lowercase.
+            \item Remove punctuation from tokens.
+          \end{enumerate} 
+          \item tools : Tokenizer
+    \end{enumerate}  
+
+  \section{Stage A5 - Remove Stopwords }
+    \begin{enumerate}
+        \item input : Tokens.
+        \item Output : important tokens(words)
+        \item process : Remove all stopwords(the, is, at etc)
+        \item tools : Stopword filter
+    \end{enumerate}    
+
+  \section{Stage A6 - Lemmatize Remaining Tokens }
+    \begin{enumerate}
+        \item input : Tokens.
+        \item Output : important tokens(words)
+        \item process : Convert words to base form (running:run), (students:student)
+        \item tools : Lemmatizer
+    \end{enumerate}
+
+  \section{Stage A7 -  kewords(TF-IDF) extraction }
+    \begin{enumerate}
+        \item input : Tokens.
+        \item Output : TF-IDF Scores of tokens(words)
+        \item process : Rank words from highest to lowest importance based on TF-IDF Scores
+        \item tools : TF-IDF
+    \end{enumerate}
+
+  \section{Stage A8 - phrases(RAKE) extraction }
+    \begin{enumerate}
+        \item input : chunks.
+        \item Output : top-ranked phrases
+        \item process : Extract multi-word phrases. Score each phrase based on word co-occurrence. Keep top-ranked phrases.
+        \item tools : RAKE algorithm
+    \end{enumerate}
+
+  \section{Stage A9 - concepts(TextRank) extraction }
+    \begin{enumerate}
+        \item input : chunks.
+        \item Output : top-scoring concepts
+        \item process : Build a graph of words linked by co-occurrence. Apply PageRank-like scoring.
+        \item tools : TextRank algorithm
+    \end{enumerate}  
+
+  \section{Stage A10 - Compare and Merge Keywords }
+    \begin{enumerate}
+        \item input : tokens, phrases, concepts.
+        \item Output : Filtered keywords list
+        \item process : Combine results(TF-IDF, RAKE, TextRank). Remove duplicates and Select top N keyword
+        \item tools : Keyword merging and scoring script
+    \end{enumerate}  
+
+  \section{Stage A11 - Identify Entities (Optional but mentioned in paper) }
+    \begin{enumerate}
+        \item input : chunks.
+        \item Output : entities to be added to concept list
+        \item process : Identify people, places, dates, scientific terms
+        \item tools : NER module
+    \end{enumerate} 
+
+  \section{Stage A12 - Topic Modeling (Chunk-Level) }
+    \begin{enumerate}
+        \item input : chunks.
+        \item Output : most relevant topic terms
+        \item process : Detect hidden topics within the chunk and Add them to concept list.
+        \item tools : LDA (Latent Dirichlet Allocation) or similar method, Topic modeling engine
+    \end{enumerate} 
+
+  \section{Stage A13 - Semantic Filtering }
+    \begin{enumerate}
+        \item input : keywords.
+        \item Output : relevant keywords
+        \item process : Compare extracted keywords with the original chunk. Remove - overly general words, out-of-context words, statistically irrelevant words.
+        \item tools : Semantic similarity / relevance scoring
+    \end{enumerate} 
+
+  \section{Stage A14 - Final list of keywords }
+    \begin{enumerate}
+        \item input : keywords, multi word phrases, topic terms, named entities.
+        \item Output : final concept list
+        \item process : Extract top rated concepts.
+        \item tools : Not known
+    \end{enumerate}    
+
+    \section{ideas}
+      \begin{enumerate}
+        \item generate flow charts
+        \item generate questions based on flow charts
+      \end{enumerate}
+
+    \section{Prompt to understand paper}
+      \begin{enumerate}
+        \item What the pipeline stages which converts input to final output. Give a step-by-step narrative explanation of each stage (like how data flows and decisions happen)? your answer should be aimed at a beginner school student. Just write the names of the stages we will discuss each stage later.
+        \item for each stage write the algorithm that converts input to the output.
+        \item write all the tools used in the order they have been used in the pipe-line.
+      \end{enumerate}
+
 \end{document}
