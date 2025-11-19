@@ -391,19 +391,6 @@
           \item tools : Tokenizer
     \end{enumerate}  
 
-  \section{Stage A4 - Remove Stopwords }
-    \begin{enumerate}
-        \item input : Chunks.
-        \item Output : important tokens(words)
-        \item process :
-          \begin{enumerate}
-            \item Split the chunk into individual words (tokens)
-            \item Convert all words to lowercase.
-            \item Remove punctuation from tokens.
-          \end{enumerate} 
-          \item tools : Tokenizer
-    \end{enumerate}  
-
   \section{Stage A5 - Remove Stopwords }
     \begin{enumerate}
         \item input : Tokens.
@@ -486,9 +473,31 @@
 
     \section{Prompt to understand paper}
       \begin{enumerate}
-        \item What the pipeline stages which converts input to final output. Give a step-by-step narrative explanation of each stage (like how data flows and decisions happen)? your answer should be aimed at a beginner school student. Just write the names of the stages we will discuss each stage later.
-        \item for each stage write the algorithm that converts input to the output.
-        \item write all the tools used in the order they have been used in the pipe-line.
+        \item What zz
       \end{enumerate}
+
+      \section{Ideas}
+        \begin{enumerate}
+          \item What zz
+        \end{enumerate}
+
+    \section{Tools List}
+    \begin{enumerate}
+      \item PDF-to-text engine
+      \item DOCX parser (paper mentions generic preprocessing, not specific software)
+      \item Sentence segmentation algorithm : create a list of sentences from a big text.
+      \item Sentence grouping logic : group sentences into chunks
+      \item Semantic similarity check (lightweight) : Validate each chunk covers one idea or sub-topic Tokenizer
+      \item Tokenizer
+      \item Stopword filter
+      \item Lemmatizer
+      \item TF-IDF
+      \item RAKE algorithm
+      \item TextRank algorithm
+      \item Keyword merging and scoring script
+      \item NER module
+      \item LDA (Latent Dirichlet Allocation) or similar method, Topic modeling engine
+      \item Semantic similarity / relevance scoring
+    \end{enumerate}
 
 \end{document}
