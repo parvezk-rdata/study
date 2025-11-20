@@ -550,10 +550,10 @@
           \item tools : scoring module described in paper.
       \end{enumerate}
   
-    \section{Stage A25 -  }
+    \section{Stage A25 - Build prompt }
       \begin{enumerate}
           \item input :  Prompt Template, Output Schema Format(json), chunk text, target concept, distractors candidates, difficulty, blooms level, instructions
-          \item Output : Json filled with details(to be send to the LLM)
+          \item Output : complete, structured prompt(Json) for the LLM, filled with details
           \item process : Produce a complete, structured prompt for the LLM. Insert details in the Prompt Template(json). Add instructions such as 
             \begin{enumerate} 
               \item Generate exactly one MCQ
@@ -562,17 +562,82 @@
               \item Output format must follow JSON / structured text
               \item specify Output Schema Format(json) 
             \end{enumerate}
-          \item tools : prompt template manager, handler to insert data, 
+          \item tools : prompt builder, prompt template manager, handler to insert data, 
       \end{enumerate}
   
-    \section{Stage A -  }
+    \section{Stage A26 - Generate MCQs using LLM }
       \begin{enumerate}
-          \item input : 
-          \item Output : 
+          \item input : prompt, LLM API, inference parameters. 
+          \item Output : Set of MCQs
           \item process : 
-          \item tools : 
-      \end{enumerate}        
+          \begin{enumerate}
+            \item Set values for temperature, top-k, top-p, max tokens, repetition penalty, deterministic or creative mode etc. 
+            \item Group constructed prompts into batches to fits within token constraints.
+            \item Submit prompt batches to the LLM via API
+            \item Parse the LLM response into structured MCQ format
+          \end{enumerate}
+          \item tools : LLM API, HuggingFace transformers, HTTP API
+      \end{enumerate}
   
+    \section{Stage A27 - Linguistic Quality Check }
+      \begin{enumerate}
+          \item input : Set of MCQs
+          \item Output : MCQ with grammar issues
+          \item process : various Quality Check, Measure readability scores
+          \item tools : spaCy, LanguageTool, Grammarly API, Flesch–Kincaid
+      \end{enumerate}
+  
+    \section{Stage A28 -  Content Correctness Verification }
+      \begin{enumerate}
+          \item input : Set of MCQs
+          \item Output : MCQ with issues
+          \item process : 
+          \begin{enumerate}
+            \item Ensure stems provide sufficient context.
+            \item Evaluate alignment with extracted key concepts.
+            \item Compare correct answer with ground truth extracted from chunks, concepts
+            \item Use semantic similarity scoring (cosine similarity via sentence-transformers).
+          \end{enumerate}
+          \item tools : not known
+      \end{enumerate}          
+  
+      \section{Stage A29 - Distractor Plausibility }
+      \begin{enumerate}
+          \item input : Set of MCQs
+          \item Output : MCQ with issues
+          \item process : 
+          \begin{enumerate}
+            \item Score semantic distance from correct answer
+            \item Reject distractors that are implausible or correct
+            \item Reject distractors that are too close to the correct answer.
+          \end{enumerate}
+          \item tools : not known
+      \end{enumerate}          
+
+  
+      \section{Stage A30 -  Final Decision}
+      \begin{enumerate}
+          \item input : Set of MCQs
+          \item Output : Refined set of MCQs
+          \item process :  Accept if
+          \begin{enumerate}
+            \item passes schema
+            \item high correctness
+            \item relevant
+          \end{enumerate}
+          \item tools : not known
+      \end{enumerate}          
+      
+  
+      \section{Stage A31 - Final list of MCQsStage 9 with the same atomic-level depth }
+      \begin{enumerate}
+          \item Filter by difficulty level
+          \item Filter by Bloom's taxonomy level
+          \item Filter by grade-level relevance.
+          \item Keep only MCQs that align with topic and key concepts of the lesson
+          \item score the mcq and select Top-K Questions 
+      \end{enumerate}          
+
   \section{Imp points}
     \begin{enumerate}
         \item Ask chatgpt what steps(Algorithm, stages) it uses to create a mcq question from lesson text.
