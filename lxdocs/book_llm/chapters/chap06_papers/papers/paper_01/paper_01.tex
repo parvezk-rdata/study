@@ -470,10 +470,114 @@
         \item process : Extract top rated concepts.
         \item tools : Not known
     \end{enumerate} 
+    \section{Stage A15 - Generate Concept Embeddings }
+      \begin{enumerate}
+          \item input : final concept list
+          \item Output : vector for each concept.
+          \item process : Convert each concept into a vector using embeddings (word embeddings or sentence embeddings).
+          \item tools : pretrained embedding model (paper uses embedding-based analysis).
+      \end{enumerate}
+  
+    \section{Stage A16 - Build Semantic Similarity Matrix }
+      \begin{enumerate}
+          \item input : vector for each concept
+          \item Output : similarity matrix.
+          \item process : Compute similarity scores (cosine similarity).
+          \item tools : similarity module
+      \end{enumerate}
+  
+    \section{Stage A17 - Identify Concepts That Are Too Similar }
+      \begin{enumerate}
+          \item input : similarity matrix.
+          \item Output : list of terms with extremely high similarity.
+          \item process : based of a threshold mark the terms which are extremely high similar. Avoid them (they might accidentally be second correct answers).
+          \item tools : threshold-based similarity filter
+      \end{enumerate}
+  
+    \section{Stage A18 - Identify Concepts That Are Too Dissimilar }
+      \begin{enumerate}
+          \item input : similarity matrix.
+          \item Output : list of terms with extremely high dissimilarity.
+          \item process : based of a threshold mark the terms which are high dissimilarity. Avoid them (unsuitable as distractors).
+          \item tools : dissimilarity filter
+      \end{enumerate} 
+  
+    \section{Stage A19 - Extract Lexical Relations }
+      \begin{enumerate}
+          \item input : final concept list(check this once).
+          \item Output : related lexical nodes
+          \item process : Build a lexical relation graph. Check synonyms (avoid — too close). Check hypernyms/hyponyms (general/specific terms). Extract related but incorrect terms.
+          \item tools : WordNet or similar lexical database (paper mentions semantic/lexical analysis)
+      \end{enumerate}
+  
+    \section{Stage A20 - Generate Candidate Distractor Pool }
+      \begin{enumerate}
+          \item input : semantically close but not identical concepts, related lexical nodes, related entities.
+          \item Output : list of raw distractor candidates
+          \item process : Merge
+          \item tools : candidate pool builder
+      \end{enumerate}
+  
+    \section{Stage A21 - Apply Rule-Based Filtering to remove undesirable distractos }
+      \begin{enumerate}
+          \item input : list of raw distractor candidates
+          \item Output : filtered list of distractor candidates
+          \item process : Remove words that appear inside the chunk’s answer sentence. Remove negations (e.g., "not", "never"). Remove words that change grammatical class (noun needed : remove verbs). Remove rare or overly technical terms inappropriate for grade level.
+          \item tools : rule-based filter (paper clearly mentions rule-based checks).
+      \end{enumerate}
+  
+    \section{Stage A22 - Apply Difficulty-Level Constraints }
+      \begin{enumerate}
+          \item input : filtered list of distractor candidates
+          \item Output : filtered list of distractor candidates
+          \item process : If difficulty is easy then distractors should be simpler and more visually different. If difficulty is hard then distractors should be conceptually closer.
+          \item tools : difficulty-based scoring.
+      \end{enumerate}
+  
+    \section{Stage A23 - Apply Blooms Taxonomy Constraints }
+      \begin{enumerate}
+          \item input : filtered list of distractor candidates
+          \item Output : filtered list of distractor candidates
+          \item process : Remember then distractors based on surface similarity.. Understand/Apply then distractors must require deeper reasoning. Remove distractors inconsistent with targeted Bloom category.
+          \item tools : Bloom mapping rules.
+      \end{enumerate}
+  
+    \section{Stage A24 - Score Remaining Candidate Distractors }
+      \begin{enumerate}
+          \item input : filtered list of distractor candidates, semantic similarity, lexical appropriateness, difficulty match, Bloom-level alignment.
+          \item Output : top-ranked distractor candidates for each target concept
+          \item process : numeric score based on semantic similarity, lexical appropriateness, difficulty match, Bloom-level alignment
+          \item tools : scoring module described in paper.
+      \end{enumerate}
+  
+    \section{Stage A25 -  }
+      \begin{enumerate}
+          \item input :  Prompt Template, Output Schema Format(json), chunk text, target concept, distractors candidates, difficulty, blooms level, instructions
+          \item Output : Json filled with details(to be send to the LLM)
+          \item process : Produce a complete, structured prompt for the LLM. Insert details in the Prompt Template(json). Add instructions such as 
+            \begin{enumerate} 
+              \item Generate exactly one MCQ
+              \item Use the provided concept as the correct answer
+              \item Use distractor candidates but do not repeat the correct answer
+              \item Output format must follow JSON / structured text
+              \item specify Output Schema Format(json) 
+            \end{enumerate}
+          \item tools : prompt template manager, handler to insert data, 
+      \end{enumerate}
+  
+    \section{Stage A -  }
+      \begin{enumerate}
+          \item input : 
+          \item Output : 
+          \item process : 
+          \item tools : 
+      \end{enumerate}        
   
   \section{Imp points}
     \begin{enumerate}
         \item Ask chatgpt what steps(Algorithm, stages) it uses to create a mcq question from lesson text.
+        \item techinque of this paper is to create a prompt for the LLM to get a mcq. This prompt will contain a concept and its destractors.
+        \item Improve mcqGen for multiple correct choices, currently it has only one correct answers.
     \end{enumerate} 
 
 
@@ -485,6 +589,8 @@
       \section{Ideas}
         \begin{enumerate}
           \item Technique to create distractors for mcq. 
+          \item Use the technique presented in MCQ gen paper to create(generate) explanation/tutorial of a research paper. 
+          \item Improve mcqGen for multiple correct choices, currently it has only one correct answers.
         \end{enumerate}
 
     \section{Tools List}
