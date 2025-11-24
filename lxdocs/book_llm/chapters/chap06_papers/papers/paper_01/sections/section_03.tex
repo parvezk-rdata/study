@@ -1,0 +1,19 @@
+\section{Stage-2: Text Encoding Standardization}
+
+\begin{enumerate}
+    \item \textbf{Description:} The MCQGen paper does not explicitly discuss text encoding standardization. However, standard NLP practice requires all text to be in a uniform character encoding to ensure consistent processing and avoid encoding-related errors.
+    
+    \item \textbf{Input:}  Formatted text from previous stage that may contain mixed or inconsistent character encodings.
+    
+    \item \textbf{Output:} \textcolor{red}{\textbf{[INFERRED]}}  Text fully standardized to UTF-8 encoding, with corrupted or incompatible characters replaced or removed.
+    
+    \item \textbf{Tool/Method/Algorithm:} \textcolor{red}{\textbf{[INFERRED]}} Encoding detection and conversion tools (e.g., Python's `chardet` for detection and `encode`/`decode` methods for conversion).
+    
+    \item \textbf{Process:} \textcolor{red}{\textbf{[INFERRED]}} 
+    \begin{itemize}
+        \item Detect character encoding of the input text.
+        \item Convert all text to UTF-8 encoding.
+        \item Replace or remove corrupted characters that cannot be converted.
+        \item Normalize Unicode characters as needed to maintain consistency.
+    \end{itemize}
+\end{enumerate}

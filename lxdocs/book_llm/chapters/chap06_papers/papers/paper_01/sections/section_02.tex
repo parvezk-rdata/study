@@ -1,0 +1,18 @@
+\section{Stage-1: Regex-Based Character Filtering and Normalization}
+    \begin{enumerate}
+        \item \textbf{Description:} The MCQGen paper does NOT provide explicit details about regex-based character filtering or text normalization. The paper acknowledges that a ``knowledge base'' is constructed from external sources but abstracts away low-level text cleaning techniques. 
+        
+        \item \textbf{Input:} Raw lesson text.
+        
+        \item \textbf{Output:} \textcolor{red}{\textbf{[INFERRED]}} Formatted and cleaned text ready for the next stage, with:
+          \begin{enumerate}
+            \item All HTML tags removed, any text between \verb|<| and \verb|>|.
+              \item Special characters filtered out (e.g., \texttt{\$, @, \#, \%, \&, *}).
+              \item Whitespace normalized (single spaces, leading and trailing whitespace removed, consistent line breaks).
+              \item Fixing spaces around punctuation(. , ? !  : ; etc).
+          \end{enumerate}
+        
+        \item \textbf{Tool/Method/Algorithm:} \textcolor{red}{\textbf{[INFERRED]}} Regex (Regular Expression) pattern matching and substitution.
+
+        \item \textbf{Process:} \textcolor{red}{\textbf{[INFERRED]}} Apply a sequence of regex patterns in order to clean the input text.
+    \end{enumerate}

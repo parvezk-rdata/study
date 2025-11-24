@@ -15,64 +15,14 @@
 		\item \url{https://drive.google.com/file/d/1KkfsKJhbx3S2hLeA6iMZsXpkQdwaRPMb/view?usp=drive_link}
 	\end{enumerate}
 
-
-  \section{Pipeline stages which converts input to final output. }
-  \begin{enumerate}\item \textbf{Knowledge Base Preparation}
-    \begin{enumerate}
-        \item Stage-1: Text Preprocessing and Cleaning
-        
-        \item Stage-2: Text Tokenization
-        
-        \item Stage-3: Text Chunking/Segmentation
-        
-        \item Stage-4: Embedding/Vectorization
-        
-        \item Stage-5: Vector Database Indexing
-    \end{enumerate}
-    
-    \item \textbf{Query Processing and Retrieval}
-    \begin{enumerate}
-        \item Stage-6: Query Formulation
-        
-        \item Stage-7: Semantic Retrieval
-    \end{enumerate}
-    
-    \item \textbf{MCQ Generation and Refinement}
-    \begin{enumerate}
-        \item Stage-8: Context-Aware MCQ Generation using LLM
-        
-        \item Stage-9: Chain-of-Thought Prompt Engineering
-        
-        \item Stage-10: Self-Refine MCQ Refinement
-    \end{enumerate}
-    
-    \item \textbf{Quality Assurance and Output}
-    \begin{enumerate}
-        \item Stage-11: MCQ Validation and Evaluation
-        
-        \item Stage-12: Final Output Formatting
-    \end{enumerate}
-  \end{enumerate}
-
-  \section*{Stage-1: Regex-Based Character Filtering and Normalization}
-    \begin{enumerate}
-        \item \textbf{Description:} The MCQGen paper does NOT provide explicit details about regex-based character filtering or text normalization. The paper acknowledges that a ``knowledge base'' is constructed from external sources but abstracts away low-level text cleaning techniques. 
-        
-        \item \textbf{Input:} Raw lesson text.
-        
-        \item \textbf{Output:} \textcolor{red}{\textbf{[INFERRED]}} Formatted and cleaned text ready for the next stage, with:
-          \begin{enumerate}
-              \item All HTML tags removed, e.g., using pattern \texttt{<[^>]*>} to match any text between \texttt{<} and \texttt{>}.
-              \item Special characters filtered out (e.g., \texttt{\$, @, \#, \%, \&, *}) using a pattern such as \texttt{[\$@\#\%\&*]}.
-              \item Whitespace normalized (single spaces, leading and trailing whitespace removed, consistent line breaks).
-              \item Punctuation properly spaced.
-              \item Text ready for encoding standardization in Stage-2.
-          \end{enumerate}
-        
-        \item \textbf{Tool/Method/Algorithm:} \textcolor{red}{\textbf{[INFERRED]}} Regex (Regular Expression) pattern matching and substitution.
-
-        \item \textbf{Process:} \textcolor{red}{\textbf{[INFERRED]}} Apply a sequence of regex patterns in order to clean the input text.
-    \end{enumerate}
+  \clearpage
+  \input{\subfix{sections/section_01.tex}}
+  
+  \clearpage
+  \input{\subfix{sections/section_02.tex}}
+  
+  \clearpage
+  \input{\subfix{sections/section_03.tex}}
 
 
   \section{Imp points}
