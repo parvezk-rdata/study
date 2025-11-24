@@ -6,6 +6,21 @@
 I am a beginner trying to read research papers with the aim of identifying research gaps so I can publish my own papers.\par However, I have no prior experience with research or reading academic papers, and I find it quite challenging due to several issues.\newline These include difficult English, complex paper structures, poorly explained content, and limited background knowledge on the topics discussed.\par Currently, I have decided to focus my research on AI/ML, specifically the use of large language models (LLMs) in education.\par I would like to discuss how you can assist me in understanding research papers.\newline It would be helpful if you could provide me with a list of clear, well-structured prompts that I can use to gradually build my comprehension---from the basics to a thorough understanding of any research paper.\par 
 \clearpage
 
+\section{Prompts to create pipeline stages}
+	
+  \begin{enumerate}
+    \item What is the the initial input and final output of the work propesed by this paper. aimed at a beginner school student.
+    \item instruction to create pipe line stages
+    \begin{enumerate}
+      \item Identified all tools, methods, and algorithms mentioned in the paper. After that, these tools should be arranged in the order in which they work, from beginning to end. Each tool or method then becomes one stage. Finally, the whole pipeline must be checked to ensure that the stages are correct, that each stage has only one main tool or method, and that the data flow is continuous and logical. The most important idea is that every tool, method, or algorithm used in the paper must be treated as one separate stage. Each stage should perform only one action. The output of one stage becomes the input of the next stage, forming a simple straight flow from the beginning to the end of the process. we shoud have as many stages equal to the number of tool/methods/algorithms used in the proposed work of this paper.
+      \item For each stage, explicit information from the paper must be recorded, while inferred standard practices must be marked separately. Anything that comes directly from the paper is marked as explicit. Anything that is not written in the paper but is normally done in such systems should be marked as inferred. This difference must always be clearly shown. When uncertain, it is safer to mark something as inferred rather than claiming that the paper said it. Use visual distinction (e.g., red color, [INFERRED] tags) to differentiate these in all sections.
+      \item Each stage must follow a fixed structure. First, a description of what the stage does must be given, including explicit and inferred parts. Next, the input of the stage must be explained, showing exactly what type of data enters it. Then the output must be described, showing what type of data leaves the stage. Finally, the internal process of the stage must be explained. The process section should describe how the input is transformed into the output.
+      \item  search the the paper to extract(identify) all explicitly mentioned tools/methods/algorithms, arrange them in order, and present them as a list before we start creating individual stages     
+      \item discuss with me description, input, output, tools/methods/algorithms and process used in Stage 1 of the pipeline based on the research paper.
+    \end{enumerate}
+  \end{enumerate}
+
+
 \section{My prompts}
 	
   \begin{enumerate}
