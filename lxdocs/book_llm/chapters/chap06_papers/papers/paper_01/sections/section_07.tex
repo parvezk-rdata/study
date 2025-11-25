@@ -1,0 +1,18 @@
+\section*{Stage-6: Vector Database Indexing}
+
+\begin{enumerate}
+    \item \textbf{Description:} The MCQGen paper indicates the use of an external knowledge base integrated via the Retrieval-Augmented Generation (RAG) framework, which typically requires indexing vector embeddings for efficient semantic search. While the paper does not detail the indexing mechanism explicitly, this step is crucial for fast and accurate retrieval. \textcolor{red}{\textbf{[INFERRED]}}
+    
+    \item \textbf{Input:} A list of vector embeddings corresponding to text chunks. \textcolor{red}{\textbf{[INFERRED]}}
+    
+    \item \textbf{Output:}  A vector-indexed knowledge base where embeddings are stored in a data structure optimized for fast similarity queries, such as a vector search index or approximate nearest neighbor (ANN) index. \textcolor{red}{\textbf{[INFERRED]}}
+    
+    \item \textbf{Tool/Method/Algorithm:}  \textcolor{red}{\textbf{[INFERRED]}} Use of vector database solutions and indexing algorithms, such as FAISS, Annoy, or HNSW, to build indexes supporting efficient similarity search on embedding data.
+    
+    \item \textbf{Process:}
+    \begin{itemize}
+        \item \textcolor{red}{\textbf{[INFERRED]}} Insert each vector embedding from Stage-5 into the vector database.
+        \item \textcolor{red}{\textbf{[INFERRED]}} Organize and structure the embeddings using indexing algorithms to allow efficient approximate or exact nearest neighbor search.
+        \item \textcolor{red}{\textbf{[INFERRED]}} Maintain metadata linking each vector to its original text chunk for retrieval mappings in the next stages.
+    \end{itemize}
+\end{enumerate}

@@ -1,0 +1,18 @@
+\section*{Stage-5: Embedding/Vectorization}
+
+\begin{enumerate}
+    \item \textbf{Description:} \textcolor{green}{\textbf{[EXPLICIT]}} The MCQGen paper explicitly mentions the use of vector embeddings as part of its Retrieval-Augmented Generation (RAG) framework to represent text chunks for semantic similarity search and retrieval.
+    
+    \item \textbf{Input:}  A list of semantically coherent text chunks. \textcolor{red}{\textbf{[INFERRED]}} The paper does not detail chunking, but this input is a logical prerequisite for embedding.
+    
+    \item \textbf{Output:} \textcolor{green}{\textbf{[EXPLICIT]}} A list of dense vector embeddings representing each text chunk in a semantic vector space, suitable for efficient similarity computations and retrieval. 
+    
+    \item \textbf{Tool/Method/Algorithm:}  \textcolor{green}{\textbf{[EXPLICIT]}} Pretrained embedding models or encoders (e.g., BERT, Sentence-BERT, or proprietary embedding models) are used to convert text chunks into vector representations.
+    
+    \item \textbf{Process:}
+    \begin{itemize}
+        \item \textcolor{green}{\textbf{[EXPLICIT]}} Each text chunk is passed through a pretrained embedding model that transforms the natural language text into a fixed-length numeric vector capturing semantic meaning.
+        \item \textcolor{red}{\textbf{[INFERRED]}} Embeddings are normalized/scaled as needed for downstream vector similarity computations.
+        \item \textcolor{green}{\textbf{[EXPLICIT]}} The resulting vectors form the basis of the Vector Database used in Stage-6 for semantic retrieval.
+    \end{itemize}
+\end{enumerate}

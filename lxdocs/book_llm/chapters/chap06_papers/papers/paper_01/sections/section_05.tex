@@ -1,0 +1,24 @@
+\section*{Stage-4: Text Chunking/Segmentation}
+
+\begin{enumerate}
+    \item \textbf{Description:} The MCQGen paper does not explicitly detail chunking or segmentation; however, chunking is a standard preprocessing step in NLP especially for retrieval-augmented systems to split text into manageable pieces for embedding and retrieval purposes. \textcolor{red}{\textbf{[INFERRED]}}
+
+    \item \textbf{Input:} Tokenized lesson text from previous stage. \textcolor{red}{\textbf{[INFERRED]}}
+    
+    \item \textbf{Output:} \textcolor{red}{\textbf{[INFERRED]}} List (or collection) of chunks. Each chunk
+        \begin{enumerate}
+            \item Represents a semantically coherent segment of the text
+            \item can represent a sentence or paragraph(logically grouped set of sentences).
+            \item Is designed to capture a meaningful piece of information
+        \end{enumerate}
+    
+    \item \textbf{Tool/Method/Algorithm:}  \textcolor{red}{\textbf{[INFERRED]}} Chunking algorithms or heuristics based on sentence boundaries, fixed token count windows, sliding windows, or semantic coherence measures.
+    
+    \item \textbf{Process:} Segmentation is done using one or a combination of the following:
+        \begin{itemize}
+            \item Sentence boundary detection to keep chunks aligned with natural sentences.
+            \item Fixed-size token windows with overlapping sliding windows to capture context.
+            \item Semantic or topical coherence measures to group related tokens.
+        \end{itemize}
+
+\end{enumerate}

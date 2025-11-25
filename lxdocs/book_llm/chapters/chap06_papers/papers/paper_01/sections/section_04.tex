@@ -1,0 +1,17 @@
+\section{Stage-3: Text Tokenization}
+
+\begin{enumerate}
+    \item \textbf{Description:} The MCQGen paper does not explicitly describe a separate tokenization step, but any NLP pipeline that converts text into embeddings or uses LLMs assumes that the text is tokenized before further processing.[web:107][web:151] \textcolor{red}{\textbf{[INFERRED]}}
+
+    \item \textbf{Input:} Formatted lesson text from previous stage.
+    
+    \item \textbf{Output:}  A ordered sequence(list) of tokens representing the text, where each token is typically a word or subword unit, ready for chunking/segmentation or direct embedding. \textcolor{red}{\textbf{[INFERRED]}}
+    
+    \item \textbf{Tool/Method/Algorithm:} \textcolor{red}{\textbf{[INFERRED]}} A tokenizer (e.g., whitespace/punctuation-based tokenizer, or the LLM’s own subword tokenizer such as BPE or WordPiece).[web:154][web:159]
+    
+    \item \textbf{Process:} \textcolor{red}{\textbf{[INFERRED]}} Split the input text into tokens using a tokenizer
+        \begin{itemize}
+            \item For simple word tokenization, split on spaces and punctuation so that each meaningful word becomes a token.[web:154][web:161]
+            \item For model-specific tokenization, use the LLM’s tokenizer to convert the text into subword tokens that match the model’s vocabulary.[web:159]
+        \end{itemize}
+\end{enumerate}
