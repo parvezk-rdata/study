@@ -1,0 +1,26 @@
+\section*{Stage-9: Construction of Custom Combined Prompt}
+      \begin{enumerate}
+          \item \textbf{Description:} This stage constructs a enhanced  prompt that is ready for submission as input to the LLM API. The purpose of prompt templates is to shape and constrain the LLM’s generation behavior, ensuring the production of well-structured and meaningful MCQs. \textcolor{green}{\textbf{[EXPLICIT]}}
+          
+          \item \textbf{Input:} 
+          \begin{itemize}
+              \item User’s original instruction \textcolor{green}{\textbf{[EXPLICIT]}}
+              \item Context( retrieved chunks) \textcolor{red}{\textbf{[INFERRED]}}
+              \item Predefined prompt templates or engineered instructions specifying output format and content. \textcolor{green}{\textbf{[EXPLICIT]}}
+          \end{itemize}
+          
+          \item \textbf{Output:} \textcolor{red}{\textbf{[INFERRED]}} Custom Combined Prompt, ready for LLM API submission.
+          
+          \item \textbf{Tool/Method/Algorithm:}
+          \begin{itemize}
+              \item Construction logic, merging text blocks via string concatenation, templating engines, or prompt assembly frameworks. \textcolor{red}{\textbf{[INFERRED]}}
+          \end{itemize}
+          
+          \item \textbf{Process:}
+          \begin{itemize}
+              \item \textcolor{red}{\textbf{[INFERRED]}} Combine the user’s configuration (topic, difficulty, number of questions) with the text chunks retrieved from the vector database.  
+              \item \textcolor{green}{\textbf{[EXPLICIT]}} Integrate prompt templates that specify how questions, answers, and distractors should be formatted and generated.  
+              \item \textcolor{red}{\textbf{[INFERRED]}} Format the combined content into a coherent, structured prompt suitable for the LLM input.  
+              \item \textcolor{red}{\textbf{[INFERRED]}} Output the final prompt string to be used for LLM querying.  
+          \end{itemize}
+      \end{enumerate}

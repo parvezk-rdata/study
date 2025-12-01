@@ -1,0 +1,21 @@
+\section{Stage-8: Semantic Retrieval of chunks from vector DB}
+      \begin{enumerate}
+          \item \textbf{Description:} \textcolor{green}{\textbf{[EXPLICIT]}} The MCQGen paper explicitly discusses the use of Retrieval-Augmented Generation (RAG), which involves retrieving relevant knowledge from a vector database based on semantic similarity between the query and stored embeddings. 
+          
+          \item \textbf{Input:} \textcolor{red}{\textbf{[INFERRED]}} 
+          \begin{itemize}
+              \item Semantic query embedding. 
+              \item Vector-indexed knowledge base.
+          \end{itemize}
+          
+          \item \textbf{Output:} \textcolor{green}{\textbf{[EXPLICIT]}} A ranked list of retrieved text chunks or documents relevant to the query, which provides contextual knowledge for MCQ generation. 
+          
+          \item \textbf{Tool/Method/Algorithm:} \textcolor{green}{\textbf{[EXPLICIT]}} Vector similarity search algorithms (e.g., cosine similarity)
+          
+          \item \textbf{Process:}
+          \begin{itemize}
+              \item \textcolor{green}{\textbf{[EXPLICIT]}} Perform a nearest neighbor search in the vector database using the semantic query embedding.
+              \item \textcolor{red}{\textbf{[INFERRED]}} Rank the retrieved results based on similarity scores.
+              \item \textcolor{green}{\textbf{[EXPLICIT]}} Return the top relevant chunks as context for MCQ generation in Stage-9.
+          \end{itemize}
+      \end{enumerate}

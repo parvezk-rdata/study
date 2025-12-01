@@ -1,0 +1,75 @@
+\section{Novel Research Directions for MCQ Generation (2025+ Publication Potential)}
+
+Here are \textbf{10 high-impact research gaps} identified from recent literature, each positioned to extend MCQGen and similar systems:
+
+\begin{enumerate}
+    \item \textbf{Multi-Agent LLM Systems for MCQ Generation} \cite{web:305}
+    \begin{itemize}
+        \item Multi-agent workflows where specialized agents handle: Context retriever $\rightarrow$ Question framer $\rightarrow$ Distractor generator $\rightarrow$ Validator
+        \item \textit{Paper angle:} ``Agent orchestration outperforms single LLM pipelines by 25\% on expert rubrics''
+    \end{itemize}
+
+    \item \textbf{Adaptive Difficulty MCQs with Real-Time Student Feedback} \cite{web:12}
+    \begin{itemize}
+        \item Generate MCQs that adjust difficulty based on student's previous answers in real-time
+        \item \textit{Paper angle:} ``Dynamic Bloom's level adjustment during assessment improves learning outcomes''
+    \end{itemize}
+
+    \item \textbf{Multimodal MCQ Generation (Text + Images + Diagrams)}
+    \begin{itemize}
+        \item Extend RAG to handle textbooks with figures/tables, generate MCQs testing visual reasoning
+        \item \textit{Paper angle:} ``Multimodal MCQs 40\% better at higher-order Bloom's assessment''
+    \end{itemize}
+
+    \item \textbf{Domain-Specific Fine-Tuning for Clinical/Medical MCQs} \cite{web:304}
+    \begin{itemize}
+        \item Fine-tune smaller LLMs on medical licensing exam datasets for superior clinical reasoning MCQs
+        \item \textit{Paper angle:} ``Specialized medical LLM beats GPT-4o on USMLE-style vignette questions''
+    \end{itemize}
+
+    \item \textbf{Explainable MCQ Generation with Verifiable Rationales}
+    \begin{itemize}
+        \item Each generated MCQ comes with LLM-generated explanations linking back to source chunks
+        \item \textit{Paper angle:} ``Transparent MCQs enable educator trust and student learning from wrong answers''
+    \end{itemize}
+
+    \item \textbf{Cross-Lingual MCQ Generation} \cite{web:227}
+    \begin{itemize}
+        \item Single pipeline generates equivalent MCQs in multiple languages with culturally adapted distractors
+        \item \textit{Paper angle:} ``Zero-shot multilingual MCQ generation maintains 90\% quality equivalence''
+    \end{itemize}
+
+    \item \textbf{Gemini/Llama-3.1 Benchmarking Against GPT-4} \cite{web:208}
+    \begin{itemize}
+        \item Systematic comparison of newer open-weight models vs proprietary for MCQ generation
+        \item \textit{Paper angle:} ``Llama-3.1-405B matches GPT-4o quality at 10\% inference cost''
+    \end{itemize}
+
+    \item \textbf{Student-Authored Content $\rightarrow$ MCQ Pipeline}
+    \begin{itemize}
+        \item Convert student essays/homework into personalized MCQs for practice testing
+        \item \textit{Paper angle:} ``Student-sourced MCQs improve retention 30\% over teacher-generated''
+    \end{itemize}
+
+    \item \textbf{MCQ Difficulty Prediction \& Calibration Model}
+    \begin{itemize}
+        \item Train classifier to predict MCQ difficulty before deployment, auto-adjust generation parameters
+        \item \textit{Paper angle:} ``IRT-calibrated MCQ generation reduces educator review time by 60\%''
+    \end{itemize}
+
+    \item \textbf{Hybrid Human-AI Collaborative MCQ Writing}
+    \begin{itemize}
+        \item LLM proposes MCQs $\rightarrow$ Human educator edits $\rightarrow$ LLM learns from edits for next iteration
+        \item \textit{Paper angle:} ``Collaborative pipeline 2x faster than pure human writing with equal quality''
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Highest Impact:} \textbf{Multi-agent systems (\#1)} or \textbf{adaptive difficulty (\#2)} - both address scalability gaps in current single-LLM pipelines \cite{web:12,web:305}.
+
+\subsection{Quick-Start Paper Template}
+\begin{verbatim}
+Title: "[NEW APPROACH] for High-Quality MCQ Generation: Extending MCQGen Pipeline"
+Abstract: Builds on MCQGen by adding [YOUR INNOVATION] achieving [X% improvement]
+Pipeline: Insert your innovation at Stage-[N], validate against MCQGen baseline
+Evaluation: Expert rubric + automated metrics + student trial (n=100+)
+\end{verbatim}

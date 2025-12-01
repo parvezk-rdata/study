@@ -1,6 +1,6 @@
-\section{Pipeline stages which converts input to final output. }
+\section{Pipeline stages which convert input to final output.}
   \begin{enumerate}
-    \item \textbf{Knowledge Base Preparation}
+    \item \textbf{Knowledge Base Preparation (Preparing an indexed vector DB to act as Knowledge Base)}
       \begin{enumerate}
           \item Stage-1: Regex-Based Character Filtering and Normalization
           
@@ -19,22 +19,22 @@
       \begin{enumerate}
           \item Stage-7: Query Formulation
           
-          \item Stage-8: Semantic Retrieval
+          \item Stage-8: Semantic Retrieval of chunks from vector DB
       \end{enumerate}
     
     \item \textbf{MCQ Generation and Refinement}
     \begin{enumerate}
-        \item Stage-9: Context-Aware MCQ Generation using LLM
-        
-        \item Stage-10: Chain-of-Thought Prompt Engineering
-        
-        \item Stage-11: Self-Refine MCQ Refinement
+        \item Stage-9:  Construction of Custom Combined Prompt
+        \item Stage-10: MCQ Generation (Initial draft and Context-Aware[chunk based] )
+        \item Stage-11: Prompt Construction for Chain-of-Thought
+        \item Stage-12: MCQ Generation(refined using Chain-of-Thought Guided)
+        \item Stage-13: Self-Refine MCQ Refinement
     \end{enumerate}
     
     \item \textbf{Quality Assurance and Output}
     \begin{enumerate}
-        \item Stage-12: MCQ Validation and Evaluation
+        \item Stage-13: MCQ Validation and Evaluation
         
-        \item Stage-13: Final Output Formatting
+        \item Stage-14: Final Output Formatting
     \end{enumerate}
   \end{enumerate}

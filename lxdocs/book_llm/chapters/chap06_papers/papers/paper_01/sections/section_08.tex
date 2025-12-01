@@ -1,0 +1,21 @@
+\section{Stage-7: Query Formulation}
+    \begin{enumerate}
+        \item \textbf{Description:} \textcolor{red}{\textbf{[INFERRED]}} The MCQGen paper does not explicitly describe the query formulation step. However, it is a necessary part of the Retrieval-Augmented Generation framework, where user inputs such as topic, difficulty, and learning objectives are converted into a semantic search query to retrieve relevant text chunks.
+
+        \item \textbf{Input:} \textcolor{red}{\textbf{[INFERRED]}} 
+        \begin{itemize}
+            \item User and instructor preferences (e.g., topic, difficulty level, Bloom’s taxonomy category, number of MCQs).
+            \item Related metadata or configuration specifying the targeted knowledge scope.
+        \end{itemize}
+        
+        \item \textbf{Output:} \textcolor{red}{\textbf{[INFERRED]}}  A semantic search query or query embedding crafted to represent user preferences for retrieving relevant knowledge chunks from the vector index.
+        
+        \item \textbf{Tool/Method/Algorithm:} \textcolor{red}{\textbf{[INFERRED]}} Natural language processing techniques for query construction (could involve prompt templates or embedding generation).
+        
+        \item \textbf{Process:} \textcolor{red}{\textbf{[INFERRED]}} 
+        \begin{itemize}
+            \item Extract relevant aspects of user input and educational goals.
+            \item Convert input into a structured or unstructured semantic query.
+            \item Generate the vector embedding of the query for similarity search against the vector database.
+        \end{itemize}
+    \end{enumerate}

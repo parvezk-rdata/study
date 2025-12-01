@@ -1,0 +1,17 @@
+\section{Stage-10: Context-Aware MCQ Generation using LLM}
+    \begin{enumerate}
+        \item \textbf{Description:} This stage sends the special prompt to LLM. LLM generates simple MCQs. The MCQs are context aware means they are based on retrived chunks. \textcolor{green}{\textbf{[EXPLICIT]}}
+
+        \item \textbf{Input:} Custom Combined Prompt \textcolor{red}{\textbf{[INFERRED]}}
+        
+        \item \textbf{Output:} \textcolor{green}{\textbf{[EXPLICIT]}} A list of ready-made multiple-choice questions. Each question has:
+            \begin{itemize}
+                \item The question stem
+                \item One correct answer
+                \item 3–4 wrong answers that look right but aren't
+            \end{itemize}
+        
+        \item \textbf{Tool/Method/Algorithm:} LLM \textcolor{red}{\textbf{[INFERRED]}}
+        
+        \item \textbf{Process:} Perform API call to LLM and send Custom Combined Prompt \textcolor{red}{\textbf{[INFERRED]}}
+    \end{enumerate}

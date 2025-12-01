@@ -1,0 +1,43 @@
+\section{MCQGen Core Innovations Summary}
+
+The MCQGen paper introduces the following key innovations in automated MCQ generation:
+
+\begin{enumerate}
+    \item \textbf{Context-aware prompt design}
+    \begin{itemize}
+        \item Using prompts that explicitly condition MCQ generation on both user's learning requirements (topic, difficulty, cognitive level) and retrieved context from knowledge base
+        \item \textit{Stage:} Stage-9: Combined Prompt Construction \textcolor{red}{\textbf{[INFERRED]}}
+    \end{itemize}
+
+    \item \textbf{RAG-based MCQ generation}
+    \begin{itemize}
+        \item Integrating retrieval-augmented generation so LLM generates questions grounded in semantically retrieved chunks rather than model knowledge alone
+        \item \textit{Stage:} Stages 7--10: Query Processing through Initial MCQ Generation \textcolor{red}{\textbf{[INFERRED]}}
+    \end{itemize}
+
+    \item \textbf{Chain-of-Thought (CoT) prompting}
+    \begin{itemize}
+        \item Specialized CoT prompts enable LLM to ``think step-by-step'' when constructing/refining MCQs, improving reasoning quality and distractor plausibility
+        \item \textit{Stage:} Stages 11--12: CoT Prompt Construction and Guided Generation \textcolor{red}{\textbf{[INFERRED]}}
+    \end{itemize}
+
+    \item \textbf{Two-pass MCQ generation}
+    \begin{itemize}
+        \item Splitting generation into initial draft pass followed by CoT-guided refinement pass, rather than single-shot generation
+        \item \textit{Stage:} Stages 10 and 12: Initial and CoT-Refined MCQ Generation \textcolor{red}{\textbf{[INFERRED]}}
+    \end{itemize}
+
+    \item \textbf{Iterative self-critique and correction loop for MCQs}
+    \begin{itemize}
+        \item LLM repeatedly critiques and revises its own questions using expert-style rubrics across multiple iterations and API calls
+        \item \textit{Stage:} Stage-13: Self-Refine MCQ Refinement \textbf{(NEW STAGE)} \textcolor{red}{\textbf{[INFERRED]}}
+    \end{itemize}
+
+    \item \textbf{Rubric-based MCQ validation and evaluation}
+    \begin{itemize}
+        \item Multi-criteria rubrics (clarity, difficulty, relevance, distractor quality) with automated metrics and human expert validation to select final MCQs
+        \item \textit{Stage:} Stage-14: MCQ Validation and Evaluation \textbf{(NEW STAGE)} \textcolor{red}{\textbf{[INFERRED]}}
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Total:} \textbf{6 core innovations} transforming standard RAG+LLM into a sophisticated, iteratively refined MCQ generation pipeline [web:14].
