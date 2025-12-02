@@ -1,0 +1,54 @@
+\begingroup
+
+    % ---------- Row 1 ----------
+    \def\cellOneA{\textbf{Tool}}
+    \def\cellOneB{\textbf{Input}}
+    \def\cellOneC{\textbf{Output}}
+    \def\cellOneD{\textbf{Description}}
+    
+    % ---------- Row 2 ----------
+    \def\cellTwoA{RAG}
+    \def\cellTwoB{\makecell[l]{User query \\ Vector DB}} 
+    \def\cellTwoC{Semantically relevant knowledge \textcolor{green}{chunks} }
+    \def\cellTwoD{}
+    
+    % ---------- Row 3 ----------
+    \def\cellThreeA{RAG}
+    \def\cellThreeB{\makecell[l]{User query \\ Vector DB}} 
+    \def\cellThreeC{Semantically relevant knowledge \textcolor{green}{chunks} }
+    \def\cellThreeD{}
+    
+    \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{4.5cm}|>{\raggedright\arraybackslash}p{6cm}|} \hline
+        \cellOneA   & \cellOneB     & \cellOneC     & \cellOneD     \\ \hline
+        \cellTwoA   & \cellTwoB     & \cellTwoC     & \cellTwoD     \\ \hline
+        
+        \textbf{Prompt Templates} & 
+        RAG chunks \newline User input (topic, difficulty, Bloom's level)  & 
+        Custom Combined Prompt & 
+        Guides LLM to generate initial MCQs. [EXPLICIT] \\ \hline
+
+        \textbf{LLM} & 
+        Combined prompt &
+        Initial MCQ drafts & 
+        \\ \hline
+
+        \textbf{CoT Prompt Templates} & 
+        Initial MCQ drafts, CoT reasoning instructions & 
+        CoT enhanced prompt & 
+        Guides the LLM to "think step-by-step" to improving reasoning quality and distractor plausibility. [EXPLICIT] \\ \hline
+
+        \textbf{LLM } & 
+        CoT enhanced  prompt & 
+        Refined MCQs & 
+        improved reasoning, clearer stems, and more plausible distractors [EXPLICIT] \\ \hline
+
+        
+        \multicolumn{4}{|c|}{Iterative(loop) Self-Refine } \\ \hline
+
+       
+
+
+    \end{longtable}
+    
+\endgroup
+    
