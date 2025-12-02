@@ -1,42 +1,43 @@
 \section{MCQGen Paper Innovations Mapped to Pipeline Stages}
         \begin{enumerate}
-            \item \textbf{Context-aware prompt templates integrating RAG retrieval with user specifications}
+
+            \item \textbf{Uses of RAG to enhanced LLM for MCQ generation (core system novelty)}
+            \begin{itemize}
+                \item \textit{Stage:} Stage-10: MCQ Generation (Initial draft and Context-Aware)
+                \item \textit{Explicit:} First system to use RAG specifically for MCQ creation. Used semantically retrieved chunks rather than model knowledge alone \textbf{[EXPLICIT]}
+                \item \textit{Inferred:} Operational API call structure using combined prompt \textcolor{red}{\textbf{[INFERRED]}}
+            \end{itemize}
+
+            \item \textbf{Use of Context-aware prompt templates}
             \begin{itemize}
                 \item \textit{Stage:} Stage-9: Combined Prompt Construction
                 \item \textit{Explicit:} Authors designed specialized prompt templates that combine retrieved knowledge chunks with user-configured parameters (topic, difficulty, Bloom's taxonomy) \textbf{[EXPLICIT]}
                 \item \textit{Inferred:} Specific merging logic for creating the combined prompt structure \textcolor{red}{\textbf{[INFERRED]}}
             \end{itemize}
 
-            \item \textbf{RAG-enhanced LLM MCQ generation (core system novelty)}
-            \begin{itemize}
-                \item \textit{Stage:} Stage-10: MCQ Generation (Initial draft and Context-Aware)
-                \item \textit{Explicit:} First system to use retrieval-augmented generation specifically for personalized MCQ creation from educational content \textbf{[EXPLICIT]}
-                \item \textit{Inferred:} Operational API call structure using combined prompt \textcolor{red}{\textbf{[INFERRED]}}
-            \end{itemize}
-
             \item \textbf{Chain-of-Thought (CoT) prompt engineering tailored for MCQ generation}
             \begin{itemize}
                 \item \textit{Stage:} Stage-11: Prompt Construction for Chain-of-Thought
-                \item \textit{Explicit:} Explicit use of CoT prompting to improve reasoning quality in question stem creation, correct answer identification, and distractor plausibility \textbf{[EXPLICIT]}
+                \item \textit{Explicit:} Explicit use of CoT prompting to improve reasoning quality in MCQ creation.  Enable LLM to "think step-by-step" \textbf{[EXPLICIT]}
                 \item \textit{Inferred:} Separate prompt construction step before CoT LLM call \textcolor{red}{\textbf{[INFERRED]}}
             \end{itemize}
 
             \item \textbf{Two-stage LLM generation (initial $\rightarrow$ CoT-refined MCQs)}
             \begin{itemize}
-                \item \textit{Stage:} Stage-12: MCQ Generation (refined using Chain-of-Thought Guided)
-                \item \textit{Explicit:} Iterative refinement using CoT prompting produces measurably better MCQs than single-pass generation \textbf{[EXPLICIT]}
+                \item \textit{Stage:} Stage 10 and 12: MCQ Generation (refined using Chain-of-Thought Guided)
+                \item \textit{Explicit:} Created MCQ in 2 passes. First pass generated initial draft and second pass refined them using CoT. \textbf{[EXPLICIT]}
                 \item \textit{Inferred:} Specific implementation as separate API call with CoT prompt \textcolor{red}{\textbf{[INFERRED]}}
             \end{itemize}
 
             \item \textbf{Iterative self-critique and correction loop for MCQ quality (NEW STAGE)}
             \begin{itemize}
                 \item \textit{Stage:} Stage-13: Self-Refine MCQ Refinement \textbf{(NEW STAGE)}
-                \item \textit{Explicit:} LLM-based self-refinement using expert-designed scoring rubrics, cycling through critique $\rightarrow$ correction $\rightarrow$ re-evaluation \textbf{[EXPLICIT]}
+                \item \textit{Explicit:}  LLM cycled through critique $\rightarrow$ correction $\rightarrow$ re-evaluation. Used expert-designed scoring rubrics for self-refinement. \textbf{[EXPLICIT]}
                 \item \textit{Explicit:} Multiple iterations per MCQ until quality thresholds met \textbf{[EXPLICIT]}
                 \item \textit{Inferred:} Per-MCQ processing loop structure \textcolor{red}{\textbf{[INFERRED]}}
             \end{itemize}
 
-            \item \textbf{Multi-dimensional expert-aligned MCQ evaluation rubric (NEW COMPLETE STAGE)}
+            \item \textbf{Use of Rubric for MCQ validation and evaluation. Multi-dimensional expert-aligned rubric (NEW COMPLETE STAGE)}
             \begin{itemize}
                 \item \textit{Stage:} Stage-14: MCQ Validation and Evaluation \textbf{(NEW COMPLETE STAGE)}
                 \item \textit{Explicit:} 5-criteria scoring (clarity, relevance, difficulty, answer correctness, distractor quality) validated against human educators \textbf{[EXPLICIT]}
