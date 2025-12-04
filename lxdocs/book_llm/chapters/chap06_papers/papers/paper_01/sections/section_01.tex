@@ -31,10 +31,19 @@
         \item Stage-13: Self-Refine MCQ Refinement
     \end{enumerate}
     
+    \item \textbf{Self-Refinement Loop}
+    \begin{enumerate}
+        \item Stage-13: Prompt construction for LLM to generate scores and instructions
+        \item Stage-14: LLM generates scores and instructions (critique)
+        \item Stage-15: Prompt construction for LLM to refine the MCQs
+        \item Stage-16: LLM generates refined MCQs (revised stem, key unchanged)
+    \end{enumerate}
+
+    
     \item \textbf{Quality Assurance and Output}
     \begin{enumerate}
-        \item Stage-13: MCQ Validation and Evaluation
+        \item Stage-17: MCQ Validation and Evaluation
         
-        \item Stage-14: Final Output Formatting
+        \item Stage-18: Final Output Formatting
     \end{enumerate}
   \end{enumerate}

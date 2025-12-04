@@ -45,10 +45,28 @@
         
         \multicolumn{4}{|c|}{Iterative(loop) Self-Refine } \\ \hline
 
-       
+        \textbf{Self-Refine Critique Prompt Templates} & 
+        Current/refined MCQs (stem + key) \newline Self-refine critique templates \newline Difficulty scoring instructions (1-5) & 
+        Critique prompt & 
+        Asks LLM to score difficulty and suggest stem enhancements without changing key. [EXPLICIT] \\ \hline
 
+
+        \textbf{LLM} & 
+        Self-refine critique prompt & 
+        Difficulty scores (1-5) and critique instructions/suggestions for each MCQ & 
+        Generates scores and specific suggestions to refine stems while keeping keys unchanged. [EXPLICIT] \\ \hline
+
+
+        \textbf{Self-Refine Refinement Prompt Templates} & 
+        Current/refined MCQs + difficulty scores + critique instructions & 
+        Refinement prompt & 
+        Combines MCQs with critique feedback to guide LLM in revising stems for higher difficulty without changing keys. [EXPLICIT] \\ \hline
+
+        \textbf{LLM} & 
+        Refinement prompt & 
+        Refined MCQs with updated stems and unchanged keys & 
+        Revises stems for higher difficulty based on critique feedback. Loop continues until target difficulty reached or instructor approves. [EXPLICIT] \\ \hline
 
     \end{longtable}
-    
 \endgroup
     

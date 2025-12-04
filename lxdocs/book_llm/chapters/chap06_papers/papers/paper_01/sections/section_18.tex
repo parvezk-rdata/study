@@ -1,0 +1,17 @@
+\section{MCQGen Pipeline - Alternating Prompt-LLM Pattern}
+
+    The MCQGen framework follows a systematic \textbf{prompt $\rightarrow$ LLM $\rightarrow$ prompt $\rightarrow$ LLM} alternating pattern:
+
+    \begin{enumerate}
+        \item RAG $\rightarrow$ Semantic chunks
+        \item \textbf{PROMPT TEMPLATES} $\rightarrow$ Custom Combined Prompt  
+        \item LLM $\rightarrow$ Initial MCQ drafts
+        \item \textbf{CoT PROMPT TEMPLATES} $\rightarrow$ CoT enhanced prompt
+        \item LLM $\rightarrow$ Refined MCQs  
+        \item \textbf{SELF-REFINE PROMPT TEMPLATES} $\rightarrow$ Critique prompt
+        \item LLM (Critique) $\rightarrow$ Scores + suggestions
+        \item \textbf{SELF-REFINE PROMPT TEMPLATES} $\rightarrow$ Refinement prompt
+        \item LLM (Refinement) $\rightarrow$ Final refined stems
+    \end{enumerate}
+
+    This rhythmic architecture exemplifies production-grade prompt engineering pipelines. [file:1]
