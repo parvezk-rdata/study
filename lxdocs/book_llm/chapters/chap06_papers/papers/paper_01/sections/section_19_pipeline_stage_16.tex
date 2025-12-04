@@ -1,0 +1,12 @@
+\section{Stage-16: LLM Generates Refined MCQs}
+    \begin{enumerate}
+        \item \textbf{Description:} This stage sends the self-refine MCQ refinement prompt to the LLM via an API call, prompting it to revise the stem for higher difficulty while keeping the correct answer unchanged. Loop continues until LLM scores reach target difficulty OR instructor approves final stem. \textcolor{green}{\textbf{[EXPLICIT]}}
+
+        \item \textbf{Input:} The self-refine refinement prompt from Stage-15. \textcolor{red}{\textbf{[INFERRED]}}
+        
+        \item \textbf{Output:} \textcolor{green}{\textbf{[EXPLICIT]}} Refined MCQs with updated stems and unchanged keys.
+        
+        \item \textbf{Tool/Method/Algorithm:} LLM (GPT-4). \textcolor{red}{\textbf{[INFERRED]}}
+        
+        \item \textbf{Process:} Perform API call to LLM and send self-refine MCQ refinement prompt. \textcolor{red}{\textbf{[INFERRED]}}
+    \end{enumerate}

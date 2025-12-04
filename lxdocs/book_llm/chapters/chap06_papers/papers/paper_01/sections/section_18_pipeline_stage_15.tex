@@ -1,0 +1,21 @@
+\section{Stage-15: Prompt Construction for LLM to Refine the MCQs}
+    \begin{enumerate}
+        \item \textbf{Description:} This stage creates a special prompt that asks the LLM to integrate critique scores and suggestions to revise the stem while keeping the correct answer unchanged. \textcolor{green}{\textbf{[EXPLICIT]}}
+
+        \item \textbf{Input:} 
+        \begin{itemize}
+            \item The current/refined MCQs (stem + key). \textcolor{red}{\textbf{[INFERRED]}}
+            \item Scores (1-5 difficulty) and critique instructions/suggestions from Stage-14. \textcolor{green}{\textbf{[EXPLICIT]}}
+            \item Self-refine refinement prompt templates. \textcolor{green}{\textbf{[EXPLICIT]}}
+        \end{itemize}
+        
+        \item \textbf{Output:} \textcolor{red}{\textbf{[INFERRED]}} A refinement prompt to be sent to LLM in next stage.
+        
+        \item \textbf{Tool/Method/Algorithm:} Crafting text prompts to combine MCQs with critique feedback. \textcolor{red}{\textbf{[INFERRED]}}
+        
+        \item \textbf{Process:} 
+        \begin{itemize}
+            \item Combine current MCQs with scores, critique instructions, and self-refine refinement templates from Table 2. \textcolor{green}{\textbf{[EXPLICIT]}}
+            \item Format the combined prompt to guide LLM to revise stem for higher difficulty. \textcolor{red}{\textbf{[INFERRED]}}
+        \end{itemize}
+    \end{enumerate}

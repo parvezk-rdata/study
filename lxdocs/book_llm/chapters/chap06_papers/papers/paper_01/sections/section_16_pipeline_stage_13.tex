@@ -1,29 +1,22 @@
-\section{Stage-13: Self-Refine MCQ Refinement}
+\section{Stage-13: Prompt Construction for LLM to Generate Scores and Instructions}
     \begin{enumerate}
-        \item \textbf{Description:} This stage applies an iterative self-refinement process where the Large Language Model (LLM) critiques and improves its own previously generated MCQs. The MCQGen paper explicitly highlights the use of self-critique and correction to enhance question quality, clarity, difficulty, and distractor plausibility through cycles of feedback and revision, aligning with expert evaluations. \textcolor{green}{\textbf{[EXPLICIT]}}
-        
-        \item \textbf{Input:} 
-        \begin{itemize}
-            \item Refined MCQs generated in Stage-12. \textcolor{red}{\textbf{[INFERRED]}}
-            \item Expert-driven prompt engineering templates that guide the self-critique and correction process. \textcolor{green}{\textbf{[EXPLICIT]}}
-        \end{itemize}
-        
-        \item \textbf{Output:} 
-        \begin{itemize}
-            \item Iteratively improved MCQs rated higher for quality and educational value, ready for final validation. \textcolor{red}{\textbf{[INFERRED]}}
-        \end{itemize}
-        
-        \item \textbf{Tool/Method/Algorithm:} 
-        \begin{itemize}
-            \item Multiple iterative API calls to the LLM where each call provides feedback on previous output and requests corrections. \textcolor{red}{\textbf{[INFERRED]}}
-            \item Automatic metrics and expert-aligned scoring guides to evaluate and guide refinement. \textcolor{green}{\textbf{[EXPLICIT]}}
-        \end{itemize}
-        
-        \item \textbf{Process:} Extract an MCQ from the list and perform the following iterative steps:
-          \begin{itemize}  
-              \item Use scoring guides and expert prompts to solicit critique from the LLM on each MCQ component (question stem, correct answer, distractors). \textcolor{green}{\textbf{[EXPLICIT]}}
-              \item Generate corrections based on the LLM critique feedback via a separate API call. \textcolor{green}{\textbf{[EXPLICIT]}}
-              \item repeat above 2 steps until quality thresholds are met or maximum iterations reached. \textcolor{red}{\textbf{[INFERRED]}}
-          \end{itemize}
+        \item \textbf{Description:} This stage creates a special prompt that asks the LLM to critique its own generated stem and key for difficulty level without changing the correct answer. \textcolor{green}{\textbf{[EXPLICIT]}}
 
-      \end{enumerate}
+        \item \textbf{Input:} 
+            \begin{itemize}
+                \item The current/refined MCQs (stem + key). \textcolor{red}{\textbf{[INFERRED]}}
+                \item Self-refine critique prompt templates. \textcolor{green}{\textbf{[EXPLICIT]}}
+                \item Special instructions for LLM to score difficulty (1-5) and suggest enhancements. \textcolor{green}{\textbf{[EXPLICIT]}}
+            \end{itemize}
+
+        
+        \item \textbf{Output:} \textcolor{red}{\textbf{[INFERRED]}} A critique prompt to be sent to LLM in next stage.
+        
+        \item \textbf{Tool/Method/Algorithm:} Crafting text prompts to include self-critique instructions with current MCQs. \textcolor{red}{\textbf{[INFERRED]}}
+        
+        \item \textbf{Process:} 
+        \begin{itemize}
+            \item Combine the refined MCQs with self-refine critique prompt templates from Table 2. \textcolor{green}{\textbf{[EXPLICIT]}}
+            \item Format the combined prompt to guide LLM to generate scores + improvement suggestions. \textcolor{red}{\textbf{[INFERRED]}}
+        \end{itemize}
+    \end{enumerate}

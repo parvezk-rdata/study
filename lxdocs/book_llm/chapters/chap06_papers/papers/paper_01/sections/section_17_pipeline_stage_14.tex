@@ -1,31 +1,12 @@
-\section{Stage-14: MCQ Validation and Evaluation}
-        \begin{enumerate}
-            \item \textbf{Description:} This stage evaluates the quality of refined MCQs using both automatic metrics and human expert review. The MCQGen paper explicitly describes validation through expert scoring on criteria like clarity, difficulty, relevance, and distractor plausibility, comparing LLM-generated MCQs against human-created benchmarks. \textbf{[EXPLICIT]}
+\section{Stage-14: LLM Generates Scores and Instructions (Critique)}
+    \begin{enumerate}
+        \item \textbf{Description:} This stage sends the self-refine critique prompt to the LLM via API call to generate difficulty scores and improvement suggestions. \textcolor{green}{\textbf{[EXPLICIT]}}
 
-            \item \textbf{Input:} 
-            \begin{itemize}
-                \item Final refined MCQs from Stage-13 self-refinement process. \textcolor{red}{\textbf{[INFERRED]}}
-                \item Automated evaluation metrics (BLEU, ROUGE, perplexity) and expert scoring rubrics. \textbf{[EXPLICIT]}
-            \end{itemize}
-            
-            \item \textbf{Output:} 
-            \begin{itemize}
-                \item Quality scores and validation reports for each MCQ, with pass/fail status for final inclusion. \textcolor{red}{\textbf{[INFERRED]}}
-                \item Approved MCQs ready for formatting and delivery. \textbf{[EXPLICIT]}
-            \end{itemize}
-            
-            \item \textbf{Tool/Method/Algorithm:} 
-            \begin{itemize}
-                \item Automated metrics: BLEU, ROUGE, semantic similarity measures. \textbf{[EXPLICIT]}
-                \item Human expert evaluation using predefined rubrics aligned with educational standards. \textbf{[EXPLICIT]}
-            \end{itemize}
-            
-            \item \textbf{Process:} 
-            \begin{itemize}
-                \item Run automated metrics (BLEU, ROUGE, perplexity) against reference standards. \textbf{[EXPLICIT]}
-                \item Conduct expert human evaluation using scoring rubrics on key criteria (clarity, difficulty, relevance). \textbf{[EXPLICIT]}
-                \item Compare LLM-generated MCQs against human-created benchmarks for quality alignment. \textbf{[EXPLICIT]}
-                \item Flag MCQs failing thresholds for exclusion or additional refinement. \textcolor{red}{\textbf{[INFERRED]}}
-                \item Output validated MCQs approved for final formatting and use. \textcolor{red}{\textbf{[INFERRED]}}
-            \end{itemize}
-        \end{enumerate}
+        \item \textbf{Input:} The self-refine critique prompt from Stage-13. \textcolor{red}{\textbf{[INFERRED]}}
+        
+        \item \textbf{Output:} \textcolor{green}{\textbf{[EXPLICIT]}} For each MCQ, Scores (1-5 difficulty) and critique instructions/suggestions.
+        
+        \item \textbf{Tool/Method/Algorithm:} LLM (GPT-4). \textcolor{red}{\textbf{[INFERRED]}}
+        
+        \item \textbf{Process:} Perform API call to LLM and send self-refine critique prompt. \textcolor{red}{\textbf{[INFERRED]}}
+    \end{enumerate}
