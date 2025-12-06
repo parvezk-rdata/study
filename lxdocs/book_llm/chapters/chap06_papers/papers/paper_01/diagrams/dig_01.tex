@@ -1,61 +1,5 @@
 
 
-\tikzstyle{startstop} = [rectangle, rounded corners, 
-minimum width=3cm, 
-minimum height=1cm,
-text centered, 
-draw=black, 
-fill=red!30]
-
-\tikzstyle{io} = [trapezium, 
-trapezium stretches=true, % A later addition
-trapezium left angle=70, 
-trapezium right angle=110, 
-minimum width=3cm, 
-minimum height=1cm, text centered, 
-draw=black, fill=blue!30]
-
-\tikzstyle{process} = [rectangle, 
-    minimum width=3cm, 
-    minimum height=1cm, 
-    text centered, 
-    text width=3cm, 
-    text=white,
-    draw=black, 
-    fill={rgb,255:red,146; green,168; blue,209}  
-    % fill=orange!30
-]
-
-\tikzstyle{decision} = [diamond, 
-minimum width=3cm, 
-minimum height=1cm, 
-text centered, 
-draw=black, 
-fill=green!30]
-
-\tikzstyle{db} = [cylinder, 
-    draw = violet, 
-    text = purple,
-    cylinder uses custom fill, 
-    cylinder body fill = magenta!10, 
-    cylinder end fill = magenta!40,
-    minimum height=2cm,
-    aspect = 0.2, 
-    shape border rotate = 90, 
-    text centered]
-
-\tikzstyle{cld} = [cloud,
-	draw =blue,
-	text=cyan,
-	% fill = gray!10,
-	% minimum width = 3cm,
-	% minimum height = 2cm, 
-    text centered]
-
-\tikzstyle{arrow} = [thick,->,>=stealth]
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -64,20 +8,23 @@ fill=green!30]
 
 \begin{tikzpicture}[node distance=1.5cm]
 
-% Nodes with explicit positioning to prevent overlap
-\node[process] (ui) {User input};
-\node[process, right=of ui] (emb) {Embeddings};
-\node[db, text width=1.8cm, right=of emb] (db) {Vector\\Database};
-\node[cld, text width=1.8cm, right=of db] (chunks) {Relevant\\Chunks};
+\node[rectangle_a_blue] (n1) {Docs};
 
-% \node[process, right=of prompt] (rag) {RAG System};
-% \node[db, text width=1.8cm, right=of rag] (db) {Vector\\Database};
-% \node[startstop, below=3cm of rag] (chunks) {Relevant\\Chunks};
-% \node[startstop, right=of rag] (chunks) {Relevant\\Chunks};
+\node[rec_b_pink, right=of n1] (n2) {pre-processing};
 
-% Arrows
-\draw[arrow] (ui) -- (emb);
-\draw[arrow] (emb) -- (db);
-\draw[arrow] (db) -- (chunks);
+\node[rec_b_pink, right=of n2] (n3) {tokenizaton};
+
+\node[rec_b_pink, right=of n3] (n4) {Chunking};
+
+\node[rec_b_pink, below=of n4] (n5) {Emb Model};
+
+\node[cylinder_a_db, text width=1.8cm, left=3cm of n5] (n6) {Vector\\Database};
+
+
+\draw[arrow] (n1) -- (n2);
+\draw[arrow] (n2) -- (n3);
+\draw[arrow] (n3) -- (n4);
+\draw[arrow] (n4) -- node[anchor=west] {Chunks} (n5);
+\draw[arrow] (n5) -- node[anchor=south] {Vectors} (n6);
 
 \end{tikzpicture}

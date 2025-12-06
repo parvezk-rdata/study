@@ -1,0 +1,14 @@
+
+
+\begin{tikzpicture}[node distance=1.5cm]
+
+    % Nodes with explicit positioning to prevent overlap
+    \node[rectangle_a_blue, align=left, text width=3cm] (ip) {RAG chunks\\User Input-\\Topic\\Difficulty\\Blooms level};
+    \node[rec_b_pink, right=3cm of ui] (llm) {LLM};
+    \node[cloud_a, text width=1.8cm, right=2cm of llm] (op) {Initial MCQs};
+    
+    % Arrows
+    \draw[arrow] (ip) -- node[anchor=south] {Prompt} (llm);
+    \draw[arrow] (llm) -- (op);
+    
+\end{tikzpicture}
