@@ -1,14 +1,22 @@
 
-
-\begin{tikzpicture}[node distance=1.5cm]
+\begin{tikzpicture}[node distance=1.5cm, framed, background rectangle/.style={draw=black, thick}]
 
     % Nodes with explicit positioning to prevent overlap
-    \node[rectangle_a_blue, align=left, text width=6cm] (ip) {Initial MCQ drafts\\CoT reasoning instructions};
-    \node[rec_b_pink, right=3cm of ui] (llm) {LLM};
-    \node[cloud_a, text width=1.8cm, right=2cm of llm] (op) {Refined MCQs};
+    \node[rectangle_a_blue, align=left, text width=6cm] (ip) {Current MCQs\\Self-refine critique templates\\Difficulty scoring instructions};
+    \node[rec_b_pink_a, right=3cm of ip] (llm) {LLM};
+    \node[rec_c_green, align=left, text width=4cm, right=2cm of llm] (op) {Difficulty scores\\critique instructions};
     
     % Arrows
-    \draw[arrow] (ip) -- node[anchor=south] {Prompt} (llm);
+    \draw[arrow] (ip) -- node[align=center, text width=2cm] {Critique Prompt} (llm);
     \draw[arrow] (llm) -- (op);
+
+    % Nodes with explicit positioning to prevent overlap
+    \node[rectangle_a_blue, align=left, text width=6cm, below=of ip] (ip2) {Current MCQ drafts\\Difficulty scores\\critique instructions};
+    \node[rec_b_pink_a, right=3cm of ip2] (llm2) {LLM};
+    \node[cloud_a, aspect=1.7, text width=3cm, right=2cm of llm2] (op2) {Refine MCQs\\Stem Updated};
+    
+    % Arrows
+    \draw[arrow] (ip2) -- node[align=center, text width=2cm] {Refining Prompt} (llm2);
+    \draw[arrow] (llm2) -- (op2);
     
 \end{tikzpicture}

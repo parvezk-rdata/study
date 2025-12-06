@@ -1,12 +1,12 @@
 
 
-\begin{tikzpicture}[node distance=1.5cm]
+\begin{tikzpicture}[node distance=1.5cm, scale=0.95, transform shape, framed, background rectangle/.style={draw=black, thick}]
 
 % Nodes with explicit positioning to prevent overlap
 \node[rectangle_a_blue] (ui) {User input};
 \node[rec_b_pink, right=of ui] (emb) {Emb Model};
 \node[cylinder_a_db, text width=1.8cm, right=3cm of emb] (db) {Vector\\Database};
-\node[cloud_a, text width=1.8cm, right=of db] (chunks) {Relevant\\Chunks};
+\node[cloud_a, aspect=1.7, text width=2cm, right=of db] (chunks) {Relevant\\Chunks};
 
 % Arrows
 \draw[arrow] (ui) -- (emb);
