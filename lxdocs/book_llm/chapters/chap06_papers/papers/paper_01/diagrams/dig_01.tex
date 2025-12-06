@@ -1,0 +1,83 @@
+
+
+\tikzstyle{startstop} = [rectangle, rounded corners, 
+minimum width=3cm, 
+minimum height=1cm,
+text centered, 
+draw=black, 
+fill=red!30]
+
+\tikzstyle{io} = [trapezium, 
+trapezium stretches=true, % A later addition
+trapezium left angle=70, 
+trapezium right angle=110, 
+minimum width=3cm, 
+minimum height=1cm, text centered, 
+draw=black, fill=blue!30]
+
+\tikzstyle{process} = [rectangle, 
+    minimum width=3cm, 
+    minimum height=1cm, 
+    text centered, 
+    text width=3cm, 
+    text=white,
+    draw=black, 
+    fill={rgb,255:red,146; green,168; blue,209}  
+    % fill=orange!30
+]
+
+\tikzstyle{decision} = [diamond, 
+minimum width=3cm, 
+minimum height=1cm, 
+text centered, 
+draw=black, 
+fill=green!30]
+
+\tikzstyle{db} = [cylinder, 
+    draw = violet, 
+    text = purple,
+    cylinder uses custom fill, 
+    cylinder body fill = magenta!10, 
+    cylinder end fill = magenta!40,
+    minimum height=2cm,
+    aspect = 0.2, 
+    shape border rotate = 90, 
+    text centered]
+
+\tikzstyle{cld} = [cloud,
+	draw =blue,
+	text=cyan,
+	% fill = gray!10,
+	% minimum width = 3cm,
+	% minimum height = 2cm, 
+    text centered]
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tikzpicture}[node distance=1.5cm]
+
+% Nodes with explicit positioning to prevent overlap
+\node[process] (ui) {User input};
+\node[process, right=of ui] (emb) {Embeddings};
+\node[db, text width=1.8cm, right=of emb] (db) {Vector\\Database};
+\node[cld, text width=1.8cm, right=of db] (chunks) {Relevant\\Chunks};
+
+% \node[process, right=of prompt] (rag) {RAG System};
+% \node[db, text width=1.8cm, right=of rag] (db) {Vector\\Database};
+% \node[startstop, below=3cm of rag] (chunks) {Relevant\\Chunks};
+% \node[startstop, right=of rag] (chunks) {Relevant\\Chunks};
+
+% Arrows
+\draw[arrow] (ui) -- (emb);
+\draw[arrow] (emb) -- (db);
+\draw[arrow] (db) -- (chunks);
+
+\end{tikzpicture}
