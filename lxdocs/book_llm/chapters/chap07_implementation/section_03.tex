@@ -1,0 +1,27 @@
+\section{Setup 02: Local Open-Source LLM Server}
+
+This setup describes a fully self-hosted development and inference environment where both the application code and the Large Language Model (LLM) run on the same cloud compute instance. Unlike external LLM providers, all model inference is performed locally using open-source LLM software.
+
+\begin{enumerate}
+	\item \textbf{Cloud Compute Instance (AWS EC2)}  
+	A remote virtual machine identified by a public IP address or DNS URL, running a Linux operating system such as Ubuntu.  
+	The instance hosts the development environment, application runtime, and the local LLM server.
+
+	\item \textbf{Web-Based Code Editor (VS Code Server)}  
+	An open-source VS Code–compatible server (e.g., \texttt{code-server}) running on the EC2 instance and accessed through a web browser using a URL and port number.  
+	It provides a full development environment without requiring local IDE installation.
+
+	\item \textbf{User Application Code (LLM Client)}  
+	Application code written in Python, JavaScript, or similar languages and executed on the EC2 instance.  
+	This code constructs prompts and communicates with the locally hosted LLM server using HTTP or IPC-based APIs.
+
+	\item \textbf{Local Open-Source LLM Server}  
+	A self-hosted LLM inference server such as Ollama, llama.cpp server, or vLLM, running on the same EC2 instance.  
+	The server loads open-source models and exposes a local API endpoint for inference requests.
+
+	\item \textbf{Client Interface (Web Browser)}  
+	A standard web browser running on the user’s local machine.  
+	It connects only to the VS Code Server and does not directly interact with the LLM server.
+\end{enumerate}
+
+In this architecture, both development and AI inference are fully controlled by the user. No external LLM services or third-party APIs are involved, enabling greater privacy, offline capability, and reproducibility at the cost of higher compute requirements.

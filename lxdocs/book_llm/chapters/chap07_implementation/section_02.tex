@@ -1,0 +1,42 @@
+\section{AWS Machine Configuration External LLM Providers}
+
+\begin{enumerate}	
+	\item \textbf{AWS Machine Configuration}
+		\begin{enumerate}
+			\item \textbf{Instance Type}  
+			A general-purpose CPU-based EC2 instance is sufficient. Typical instance families include \texttt{t3}, \texttt{t4g}, or \texttt{c6} series.
+	
+			\item \textbf{CPU and Memory}  
+			\begin{itemize}
+				\item vCPUs: 2--4 vCPUs
+				\item Memory (RAM): 8--16\,GB
+			\end{itemize}
+			This configuration comfortably supports the VS Code Server, application runtime, and concurrent API requests without performance bottlenecks.
+	
+			\item \textbf{Operating System}  
+			A Linux-based operating system such as Ubuntu Server (20.04 LTS or newer) is recommended for stability and broad toolchain support.
+	
+			\item \textbf{Storage}  
+			Elastic Block Store (EBS) is used for persistent storage with the following recommendations:
+			\begin{itemize}
+				\item Root volume size: 30--50\,GB
+				\item Volume type: General Purpose SSD
+			\end{itemize}
+			This is sufficient for source code, dependencies, logs, and development artifacts, as large model files are not stored locally.
+	
+			\item \textbf{Networking and Access}  
+			The instance is assigned a public IP address or DNS name and configured with appropriate security groups. Inbound access to the VS Code Server port (HTTP/HTTPS).SSH access for administration (optional). Outbound internet access for calling external LLM APIs
+	
+			\item \textbf{Software Stack}  
+			The EC2 instance runs: Open-source VS Code Server. Language runtimes such as Python and/or Node.js.
+	
+			\item \textbf{API Credentials Management}  
+			API keys for external LLM providers are stored securely using environment variables or protected configuration files, avoiding hard-coded credentials in source code.
+	
+			\item \textbf{Resource Characteristics and Scalability}  
+			The workload is dominated by lightweight computation and network I/O rather than heavy numerical processing.  
+			As a result, this setup scales efficiently by increasing instance count or memory rather than adding GPUs.
+		\end{enumerate}
+	
+	
+\end{enumerate}

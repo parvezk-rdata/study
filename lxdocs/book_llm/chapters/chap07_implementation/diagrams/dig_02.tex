@@ -1,0 +1,29 @@
+\begin{tikzpicture}[
+	node distance=2.2cm,
+	scale=0.95,
+	transform shape,
+	framed,
+	background rectangle/.style={draw=black, thick}
+]
+
+% Nodes
+\node[rectangle_a_blue] (browser) {Web \\ Browser};
+
+\node[rec_c_green, right=3cm of browser] (vscode) {VS Code Server\\(on AWS EC2)};
+
+\node[rec_b_pink, right=3cm of vscode] (app) {User \\ Application \\(LLM Client)};
+
+\node[cylinder_a_db, text width=3cm, below=of app] (llmserver) {Local\\LLM Server\\ Open Source};
+
+\node[cloud_a, aspect=1.7, text width=2.5cm, left=3cm of llmserver] (model) {Open-Source\\LLM Models};
+
+% Arrows
+\draw[arrow] (browser) -- node[anchor=south] {HTTPS} (vscode);
+
+\draw[arrow] (vscode) -- node[anchor=south] {Runs Code} (app);
+
+\draw[arrow] (app) -- node[anchor=east] {Local API Calls} (llmserver);
+
+\draw[arrow] (llmserver) -- node[anchor=south] {Loads} (model);
+
+\end{tikzpicture}

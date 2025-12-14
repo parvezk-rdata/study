@@ -1,0 +1,31 @@
+\section{Setup 01: External LLM Providers}
+
+This setup describes a cloud-based development environment in which application code is written and executed on a remote server, while Large Language Model (LLM) capabilities are accessed through external API-based services.
+
+\begin{enumerate}
+	\item Components 
+		\begin{enumerate}
+			\item \textbf{Cloud Compute Instance (AWS EC2)}  
+			A remote virtual machine hosted on Amazon Web Services, identified by a public IP address or DNS URL.  
+			The instance runs a Linux operating system (e.g., Ubuntu) and serves as the execution environment for all server-side components, including the code editor and application runtime.
+
+			\item \textbf{Web-Based Code Editor (VS Code Server)}  
+			An open-source VS Code–compatible server (e.g., \texttt{code-server}) running on the EC2 instance.  
+			It is accessed through a web browser using a URL and port number, providing a full-featured development environment without requiring a local IDE installation.
+
+			\item \textbf{User Application Code (LLM Client)}  
+			Application code written in languages such as Python or JavaScript and executed on the EC2 instance.  
+			This component acts as an LLM client by constructing prompts, making HTTP API requests to external LLM providers, handling authentication via API keys, and processing the returned responses.
+
+			\item \textbf{External LLM Provider (API-based)}  
+			A third-party cloud service that hosts large language models and exposes them through RESTful APIs.  
+			The LLM models and inference infrastructure are managed externally, and interaction occurs exclusively through network-based API calls.
+
+			\item \textbf{Client Interface (Web Browser)}  
+			A standard web browser running on the user’s local machine.  
+			It serves as the client interface for accessing the VS Code Server over HTTP/HTTPS and does not directly interact with the LLM provider.
+		\end{enumerate}
+	
+\end{enumerate}
+
+In this architecture, the VS Code Server functions solely as a development interface, while all intelligent behavior is provided by the external LLM services accessed through the application code. This clear separation allows flexible integration of different LLM providers without modifying the development environment itself.

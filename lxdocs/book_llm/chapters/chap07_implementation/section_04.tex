@@ -1,0 +1,38 @@
+\section{AWS Machine Configuration Local Open-Source LLM Server}
+
+\begin{enumerate}
+    \item \textbf{Instance Type}  
+    A compute- or GPU-accelerated EC2 instance is required, as LLM inference is performed locally.  
+    Typical instance families include \texttt{g4dn}, \texttt{g5}, or \texttt{p}-series depending on model size and performance requirements.
+
+    \item \textbf{CPU and Memory}  
+    \begin{itemize}
+        \item vCPUs: 4--16 vCPUs
+        \item Memory (RAM): 16--64\,GB
+    \end{itemize}
+
+    \item \textbf{GPU and VRAM}  
+    A dedicated GPU  with  8--24\,GB (depending on model size and quantization)
+
+    \item \textbf{Operating System}  
+    A Linux-based operating system such as Ubuntu Server (20.04 LTS or newer) is recommended.
+
+    \item \textbf{Storage}  
+    Elastic Block Store (EBS) is used for persistent storage with the following recommendations:
+    \begin{itemize}
+        \item Root volume size: 100--300\,GB
+        \item Volume type: General Purpose or Provisioned IOPS SSD
+    \end{itemize}
+    Additional storage is required for model weights, tokenizer files, and intermediate caches.
+
+    \item \textbf{Networking and Access}  
+    The instance is assigned a public IP address or DNS name and configured with appropriate security groups. Inbound access to the VS Code Server port (HTTP/HTTPS). Inbound access to the local LLM server API (restricted to localhost or private network). SSH access for administration (optional). Outbound internet access is required primarily for downloading models and system updates.
+
+    \item \textbf{Software Stack}  
+    The EC2 instance runs Open-source VS Code Server, Language runtimes such as Python and/or Node.js, A local open-source LLM server (e.g., Ollama, llama.cpp, or vLLM), GPU drivers and inference libraries where applicable
+    
+    \item \textbf{Resource Characteristics and Scalability}  
+    The workload is dominated by GPU compute, memory bandwidth, and disk I/O rather than network latency.  
+    Scalability is achieved by upgrading GPU resources, optimizing model size, or deploying multiple inference instances rather than increasing API throughput.
+
+\end{enumerate}
