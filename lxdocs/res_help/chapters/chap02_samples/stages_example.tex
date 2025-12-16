@@ -1,0 +1,36 @@
+
+\section{Stage-11: Prompt Construction for Chain-of-Thought}
+    \begin{enumerate}
+        \item \textbf{Description:} This stage creates a special prompt that helps LLM to show its thought process while making questions. This method helps the LLM make better, clearer, and more thoughtful questions.  \textcolor{green}{\textbf{[EXPLICIT]}}
+
+        \item \textbf{Input:} 
+        \begin{itemize}
+            \item The initial MCQs generated. \textcolor{red}{\textbf{[INFERRED]}}
+            \item Special instructions or templates that tell the LLM to explain its reasoning step-by-step (chain-of-thought). \textcolor{green}{\textbf{[EXPLICIT]}}
+        \end{itemize}
+        
+        \item \textbf{Output:} \textcolor{red}{\textbf{[INFERRED]}} A special prompt to be send to LLM in next stage.
+        
+        \item \textbf{Tool/Method/Algorithm:}  Crafting or merging text prompts to include reasoning instructions with existing MCQs. \textcolor{red}{\textbf{[INFERRED]}}
+        
+        \item \textbf{Process:} 
+        \begin{itemize}
+            \item Combine the initial MCQs with chain-of-thought prompt templates that encourage step-by-step explanation. \textcolor{red}{\textbf{[INFERRED]}}
+            \item Format the combined prompt to guide the LLM to generate improved MCQs with explicit reasoning. \textcolor{red}{\textbf{[INFERRED]}}
+        \end{itemize}
+    \end{enumerate}
+
+
+
+\section{Stage-12: MCQ Generation (Refined using Chain-of-Thought) }
+    \begin{enumerate}
+        \item \textbf{Description:} This stage sends the chain-of-thought (CoT) enhanced prompt to the Large Language Model (LLM) via an API call \textcolor{green}{\textbf{[EXPLICIT]}}
+
+        \item \textbf{Input:} The CoT-enhanced combined prompt \textcolor{red}{\textbf{[INFERRED]}}
+        
+        \item \textbf{Output:} \textcolor{green}{\textbf{[EXPLICIT]}} Refined MCQs
+        
+        \item \textbf{Tool/Method/Algorithm:} LLM \textcolor{red}{\textbf{[INFERRED]}}
+        
+        \item \textbf{Process:} Perform API call to LLM and sendCoT-enhanced Prompt \textcolor{red}{\textbf{[INFERRED]}}
+    \end{enumerate}
