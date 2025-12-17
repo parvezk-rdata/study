@@ -1,0 +1,17 @@
+\section{Prompt Construction for SCC}
+\begin{enumerate}
+    \item Input: 
+      \begin{enumerate}
+          \item Code that passed tests \textcolor{blue}{[INFERRED]}
+          \item \textcolor{green}{[EXPLICIT]} 4 quality criteria from SCC template:
+          \begin{itemize}
+              \item Unnecessary code
+              \item Requirement not met 
+              \item Hard coding
+              \item Computation error
+          \end{itemize}
+      \end{enumerate}
+    \item Output: SCC prompt for GPT-4o \textcolor{blue}{[INFERRED]}
+    \item Tool: LangChain \textcolor{green}{[EXPLICIT]}
+    \item Process: LangChain fills template with code + quality instructions \textcolor{blue}{[INFERRED]}
+\end{enumerate}
