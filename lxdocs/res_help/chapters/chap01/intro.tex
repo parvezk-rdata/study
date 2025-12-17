@@ -6,6 +6,33 @@
 I am a beginner trying to read research papers with the aim of identifying research gaps so I can publish my own papers.\par However, I have no prior experience with research or reading academic papers, and I find it quite challenging due to several issues.\newline These include difficult English, complex paper structures, poorly explained content, and limited background knowledge on the topics discussed.\par Currently, I have decided to focus my research on AI/ML, specifically the use of large language models (LLMs) in education.\par I would like to discuss how you can assist me in understanding research papers.\newline It would be helpful if you could provide me with a list of clear, well-structured prompts that I can use to gradually build my comprehension---from the basics to a thorough understanding of any research paper.\par 
 \clearpage
 
+\section{Prompts to understand a paper}
+	
+  \begin{enumerate}
+    \item part 01 : GPT-Based Code Review System. \\ i have attached  a paper with this. I have also attached a sample latex file named(stages\_example.tex) to describe pipeline stage. Will be you be able to answer questions so that i will not have to attache it with every new prompt of this thread? Link to both files.
+    \item summerize the abstract for me in easy language for a novice in very easy sentences. 
+    \item What is the the initial input and final output of the work proposed by this paper. your content should be in easy language aimed at a novice beginner.
+    \item fill following empty latex structure with input and output of the papers proposed work. Marks the lines as explicit or infered.
+      \begin{verbatim}
+        \item Input
+          \begin{enumerate}
+            \item zzz
+          \end{enumerate}
+        \item output
+          \begin{enumerate}
+            \item zzz
+          \end{enumerate}
+      \end{verbatim}
+      \item My goal is to know the step by step alogorithm that transform input to output and create a flowchart that transforms input to output. There are various stages that will convert input to final output, just like the a pipeline, where each stage takes some input uses a tool/method to convert it to output and this output acts as input to next stage. These stages shoud be considered as methods/function whose arguments are the inputs of the stage and its return value is the output of the stage. This process goes on and finally the final output is created. search the the paper to extract(identify) all explicitly mentioned tools/methods/algorithms, arrange them in order, and present them as a list before we start creating individual stages. to understand what a stage looks like refer to the the file i attached in previous prompt named stages\_example.tex. Creating of prompt to be sent to llm should be treated as one separate stage and invoking LLM using that prompt should be a separate stage. First stage should take the initial input and the last stage should generate the final output you mentioned above. Do not write any latex code now. Your first line of response should tell me if you are able to access the file stages\_example.tex and then show show go ahead with your response.
+    \clearpage
+    \item Lets start with the stage. give its explanation in easy language  for a novice in very easy sentences.   
+    \item generate latex section for this stage. You can refer previously attached file stages\_example.tex for reference. Anything that comes directly from the paper is marked as explicit, write the word explicit in green color. Anything that is not written in the paper but is normally done in such systems should be marked as inferred(Blue). When uncertain, it is safer to mark something as inferred rather than claiming that the paper said it. Use visual distinction (e.g., Blue color, [INFERRED] tags) to differentiate these in all sections. i want to keep it simple and short.
+    \item what should be our next stage?
+    \item generate latex section for next stage
+    \item check following for correctness.
+  \end{enumerate}
+
+\clearpage
 \section{Prompts to create pipeline stages}
 	
   \begin{enumerate}
