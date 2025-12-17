@@ -1,36 +1,28 @@
+\section{ Prompt Construction for CVM}
+  \begin{enumerate}
 
-\section{Stage-11: Prompt Construction for Chain-of-Thought}
+      \item Input : Submitted Python code \textcolor{green}{[EXPLICIT]}
+
+      \item Output : CVM validation prompt for GPT-4o \textcolor{blue}{[INFERRED]}
+
+      \item Tool/Method/Algorithm : LangChain \textcolor{green}{[EXPLICIT]}
+
+      \item Process :  LangChain fills template with code and adds validation instructions, system role. \textcolor{blue}{[INFERRED]}. Authors created these templates in the prompt design phase. 
+  \end{enumerate}
+
+
+\section{Code Validation (CVM) using LLM}
+  \begin{enumerate}
+      \item Input: CVM prompt for GPT-4o \textcolor{blue}{[INFERRED]}
+      \item Output: Valid/invalid Python flag \textcolor{blue}{[INFERRED]}
+      \item Tool: GPT-4o \textcolor{green}{[EXPLICIT]}
+      \item Process: GPT-4o checks if code is valid Python program \textcolor{green}{[EXPLICIT]}
+  \end{enumerate}
+
+\section{Answer Check (Server-side)}
     \begin{enumerate}
-        \item \textbf{Description:} This stage creates a special prompt that helps LLM to show its thought process while making questions. This method helps the LLM make better, clearer, and more thoughtful questions.  \textcolor{green}{\textbf{[EXPLICIT]}}
-
-        \item \textbf{Input:} 
-        \begin{itemize}
-            \item The initial MCQs generated. \textcolor{red}{\textbf{[INFERRED]}}
-            \item Special instructions or templates that tell the LLM to explain its reasoning step-by-step (chain-of-thought). \textcolor{green}{\textbf{[EXPLICIT]}}
-        \end{itemize}
-        
-        \item \textbf{Output:} \textcolor{red}{\textbf{[INFERRED]}} A special prompt to be send to LLM in next stage.
-        
-        \item \textbf{Tool/Method/Algorithm:}  Crafting or merging text prompts to include reasoning instructions with existing MCQs. \textcolor{red}{\textbf{[INFERRED]}}
-        
-        \item \textbf{Process:} 
-        \begin{itemize}
-            \item Combine the initial MCQs with chain-of-thought prompt templates that encourage step-by-step explanation. \textcolor{red}{\textbf{[INFERRED]}}
-            \item Format the combined prompt to guide the LLM to generate improved MCQs with explicit reasoning. \textcolor{red}{\textbf{[INFERRED]}}
-        \end{itemize}
-    \end{enumerate}
-
-
-
-\section{Stage-12: MCQ Generation (Refined using Chain-of-Thought) }
-    \begin{enumerate}
-        \item \textbf{Description:} This stage sends the chain-of-thought (CoT) enhanced prompt to the Large Language Model (LLM) via an API call \textcolor{green}{\textbf{[EXPLICIT]}}
-
-        \item \textbf{Input:} The CoT-enhanced combined prompt \textcolor{red}{\textbf{[INFERRED]}}
-        
-        \item \textbf{Output:} \textcolor{green}{\textbf{[EXPLICIT]}} Refined MCQs
-        
-        \item \textbf{Tool/Method/Algorithm:} LLM \textcolor{red}{\textbf{[INFERRED]}}
-        
-        \item \textbf{Process:} Perform API call to LLM and sendCoT-enhanced Prompt \textcolor{red}{\textbf{[INFERRED]}}
+        \item Input: Valid Python code + test cases \textcolor{blue}{[INFERRED]}
+        \item Output: Pass/fail results + syntax errors \textcolor{green}{[EXPLICIT]}
+        \item Tool: Server-side test execution \textcolor{green}{[EXPLICIT]}
+        \item Process:  Runs test cases and checks compilation errors \textcolor{green}{[EXPLICIT]}. If passes → Strict Code Check \textcolor{blue}{[INFERRED]}
     \end{enumerate}
