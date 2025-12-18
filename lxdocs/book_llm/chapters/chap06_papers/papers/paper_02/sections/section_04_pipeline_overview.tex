@@ -1,2 +1,37 @@
-\section{Pipeline stages which convert input to final output.}
-  
+\section{Pipeline Stages: Input to Final Output}
+\begin{enumerate}
+    \item \textbf{Code Validation (CVM)}
+    \begin{enumerate}
+        \item Stage-1: Prompt Construction for CVM
+        \item Stage-2: Code Validation (GPT-4o)
+    \end{enumerate}
+    
+    \item \textbf{Answer Correctness Check (CCM Part 1)}
+    \begin{enumerate}
+        \item Stage-3: Server-side Test Execution
+    \end{enumerate}
+    
+    \item \textbf{Quality Verification (CCM Part 2)}
+    \begin{enumerate}
+        \item Stage-4: Prompt Construction for SCC
+        \item Stage-5: Strict Code Check Chain (GPT-4o)
+    \end{enumerate}
+    
+    \item \textbf{Review Necessity Check (CRM - RNC)}
+    \begin{enumerate}
+        \item Stage-6: Prompt Construction for RNC
+        \item Stage-7: RNC Execution (GPT-4o)
+        \item Stage-8: Decision Branch on reviewLabel
+    \end{enumerate}
+    
+    \item \textbf{Code Review Generation (CRM - Review Generation)}
+    \begin{enumerate}
+        \item Stage-9: Prompt Construction for Review Generation
+        \item Stage-10: Review Generation Chain (GPT-4o)
+    \end{enumerate}
+    
+    \item \textbf{Final Output Rendering}
+    \begin{enumerate}
+        \item Stage-11: UI Output Generation (Next.js)
+    \end{enumerate}
+\end{enumerate}
