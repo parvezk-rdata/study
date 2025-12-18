@@ -3,10 +3,10 @@
 \begin{tikzpicture}[node distance=1.5cm, scale=0.95, transform shape, framed, background rectangle/.style={draw=black, thick}]
 
     % Nodes with explicit positioning to prevent overlap
-    \node[rectangle_a_blue] (ui) {Python code\\CVM template};
+    \node[rectangle_a_blue] (ui) {Problem\\Code\\Solution\\Review template};
     \node[rec_b_pink, right=of ui] (emb) {LangChain};
     \node[cylinder_a_db, text width=1.8cm, right=2cm of emb] (db) {GPT-4o\\LLM};
-    \node[cloud_a, aspect=1.7, text width=2cm, right=of db] (chunks) {Valid/invalid\\ Code};
+    \node[cloud_a, aspect=1.7, text width=2cm, right=of db] (chunks) {comments\\ highlighted lines};
     
     % Arrows
     \draw[arrow] (ui) -- (emb);

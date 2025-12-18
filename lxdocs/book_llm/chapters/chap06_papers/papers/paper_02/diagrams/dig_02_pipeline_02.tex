@@ -1,0 +1,14 @@
+
+
+\begin{tikzpicture}[node distance=1.5cm, scale=0.95, transform shape, framed, background rectangle/.style={draw=black, thick}]
+
+    % Nodes with explicit positioning to prevent overlap
+    \node[rectangle_a_blue] (ui) {Valid code\\Test cases};
+    \node[rec_b_pink, right=of ui] (emb) {Server};
+    \node[cloud_a, aspect=1.7, text width=2cm, right=of emb] (chunks) {Pass\\ Fail};
+    
+    % Arrows
+    \draw[arrow] (ui) -- (emb);
+    \draw[arrow] (emb) -- (chunks);
+    
+    \end{tikzpicture}
