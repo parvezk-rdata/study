@@ -1,0 +1,68 @@
+\begingroup
+
+    % ---------- Headers ----------
+    \def\cellOneA{\textbf{Tool}}
+    \def\cellOneB{\textbf{Input}}
+    \def\cellOneC{\textbf{Output}}
+    \def\cellOneD{\textbf{Description}}
+    
+    \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{4.5cm}|>{\raggedright\arraybackslash}p{6cm}|} \hline
+        \cellOneA & \cellOneB & \cellOneC & \cellOneD \\ \hline
+        
+        \textbf{CVM Prompt Templates} & 
+        Submitted Python code & 
+        CVM prompt for GPT-4o & 
+        LangChain fills template to check valid Python \textcolor{green}{[EXPLICIT]} \\ \hline
+        
+        \textbf{GPT-4o} & 
+        CVM prompt & 
+        Valid/invalid Python flag & 
+        Validates code syntax \textcolor{green}{[EXPLICIT]} \\ \hline
+        
+        \textbf{Server-side Tests} & 
+        Valid code + test cases & 
+        Pass/fail results + syntax errors & 
+        Runs test cases + compilation check \textcolor{green}{[EXPLICIT]} \\ \hline
+        
+        \textbf{SCC Prompt Templates} & 
+        Code that passed tests + 4 quality criteria & 
+        SCC prompt for GPT-4o & 
+        LangChain adds quality check instructions \textcolor{green}{[EXPLICIT]} \\ \hline
+        
+        \textbf{GPT-4o (SCC)} & 
+        SCC prompt & 
+        Quality issues or "No issues found" & 
+        Checks unnecessary code, hardcoding, etc. \textcolor{green}{[EXPLICIT]} \\ \hline
+        
+        \textbf{RNC Prompt Templates} & 
+        Problem + code + solution & 
+        RNC prompt for GPT-4o & 
+        LangChain + Algorithm 1 creates review necessity prompt \textcolor{green}{[EXPLICIT]} \\ \hline
+        
+        \textbf{GPT-4o (RNC)} & 
+        RNC prompt & 
+        reviewLabel (yes/nocorrect/nomeaningless) & 
+        Decides if review needed (temp=0.2) \textcolor{green}{[EXPLICIT]} \\ \hline
+        
+        \textbf{System Logic} & 
+        reviewLabel & 
+        Predefined message OR proceed & 
+        Branches: congratulate/complete/continue \textcolor{green}{[EXPLICIT]} \\ \hline
+        
+        \textbf{Review Prompt Templates} & 
+        Problem + code + solution (if yes) & 
+        Review Generation prompt & 
+        LangChain fills review comment template \textcolor{green}{[EXPLICIT]} \\ \hline
+        
+        \textbf{GPT-4o (Review)} & 
+        Review Generation prompt & 
+        Markdown review comments + line highlights & 
+        Generates learner-friendly "Code to fix" feedback \textcolor{green}{[EXPLICIT]} \\ \hline
+        
+        \textbf{Next.js UI} & 
+        All results + comments & 
+        Final student interface & 
+        Renders Monaco Editor with annotations \textcolor{green}{[EXPLICIT]} \\ \hline
+        
+    \end{longtable}
+\endgroup

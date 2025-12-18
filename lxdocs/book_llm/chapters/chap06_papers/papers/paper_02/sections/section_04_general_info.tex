@@ -1,0 +1,17 @@
+\section{Code Review Pipeline - LangChain Prompt-LLM Pattern}
+
+The Code Review system follows a systematic \textbf{prompt $\rightarrow$ LLM $\rightarrow$ server $\rightarrow$ prompt $\rightarrow$ LLM} pattern using LangChain:
+
+  \begin{enumerate}
+      \item \textbf{CVM prompt $\rightarrow$ GPT-4o} $\rightarrow$ Valid Python code
+      \item \textbf{Server-side tests} $\rightarrow$ Pass/fail results
+      \item \textbf{SCC prompt $\rightarrow$ GPT-4o} $\rightarrow$ Quality issues
+      \item \textbf{LangChain RNC PROMPT TEMPLATES} $\rightarrow$ RNC prompt  
+      \item \textbf{GPT-4o} $\rightarrow$ reviewLabel (yes/nocorrect/nomeaningless)
+      \item \textbf{Decision Branch} $\rightarrow$ (if yes)
+      \item \textbf{LangChain REVIEW PROMPT TEMPLATES} $\rightarrow$ Review Generation prompt
+      \item \textbf{GPT-4o} $\rightarrow$ Learner-friendly review comments
+      \item Next.js $\rightarrow$ Final UI output
+  \end{enumerate}
+
+\textcolor{green}{[EXPLICIT]} LangChain-orchestrated LLM calls with server-side filtering. [file:1]
