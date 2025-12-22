@@ -2,42 +2,28 @@ from langchain_openai           import ChatOpenAI
 from langchain.prompts          import PromptTemplate
 from langchain.output_parsers   import StructuredOutputParser, ResponseSchema
 
-
-llm             =   ChatOpenAI(temperature=0)
-
-pro_template    =   PromptTemplate(
-                        input_variables=["question"],
-                        template="{question}"
-                    )
-
-
-
-
-
-
 schemas = [
-    ResponseSchema(name="definition", description="Short definition"),
-    ResponseSchema(name="use_case", description="Where it is used"),
-    ResponseSchema(name="example", description="Simple example"),
+                ResponseSchema(name="definition", description="Short definition"),
+                ResponseSchema(name="use_case", description="Where it is used"),
+                ResponseSchema(name="example", description="Simple example"),
 ]
 
-parser = StructuredOutputParser.from_response_schemas(schemas)
+parser          =   StructuredOutputParser.from_response_schemas(schemas)
+format_instrn   =   parser.get_format_instructions()
+var_map         =   { "format_instructions": format_instrn}
+temp_stm        =   """
+                        Explain {topic}.
 
-prompt = PromptTemplate(
-    template="""
-Explain {topic}.
+                        {format_instructions}
+                    """
+temp_var        =   ["topic"]
 
-{format_instructions}
-""",
-    input_variables=["topic"],
-    partial_variables={
-        "format_instructions": parser.get_format_instructions()
-    }
-)
+pro_template    =   PromptTemplate( template=temp_stm, input_variables=temp_var, partial_variables=var_map)
+final_prompt    =   pro_template.format( topic="LangChain" )
 
-response = llm.invoke(prompt.format(topic="LangChain"))
-
-parsed_output = parser.parse(response.content)
+llm             =   ChatOpenAI(temperature=0)
+response        =   llm.invoke(final_prompt)
+parsed_output   =   parser.parse(response.content)
 print(parsed_output)
 
 
