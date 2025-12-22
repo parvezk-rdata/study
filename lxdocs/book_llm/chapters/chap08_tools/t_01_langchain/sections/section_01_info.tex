@@ -1,0 +1,22 @@
+\section{ Introduction  }
+\begin{enumerate}
+	\item Organizes how prompts are created, sent, and processed.
+	\item Automates a series of LLM interactions As follows \\
+	% Prompt A → LLM → Output A → Prompt B → LLM → Output B
+	\item PromptTemplate : Reusable prompt with variables
+	\item Chain : Connect steps together
+	\item Tools : Allow LLM to Search internet, run python code, read files
+	\item Without Memory
+		\begin{lstlisting}[language=Python]
+			User: What is LangChain?	AI: Explanation... 
+			
+			User: Give an example		AI: Example of what? (forgot context)
+		\end{lstlisting}
+	\item With Memory
+		\begin{lstlisting}[language=Python]
+			User: What is LangChain?	AI: Explanation...
+			
+			User: Give an example		AI: Example.. (remembers context)
+		\end{lstlisting}
+	\item zzz
+\end{enumerate}

@@ -51,6 +51,7 @@
 \usepackage{listings}       % Core package for syntax-highlighted code listings
 \usepackage{lstautogobble}  % Automatically remove common indentation in code blocks
 \usepackage{newfloat}       % Define custom float environments (e.g., for code listings)
+\usepackage{upquote}        % ensures straight ASCII quotes in verbatim/listings.
 
 % ==================================================
 % Tikz figures flowcharts
@@ -129,4 +130,9 @@
     {[}{{\textcolor{codedelim}{[}}}1
     {]}{{\textcolor{codedelim}{]}}}1
     {,}{{\textcolor{codedelim}{,}}}1
+    % {"}{{\texttt{"}}}1                      % needed in windows to display double quotes properly 
 }
+
+
+% to style pyhton code in lstinputlisting, define following
+% \lstdefinelanguage{PythonCustom}{
