@@ -1,0 +1,73 @@
+
+
+\section{ Architecture }
+\begin{enumerate}
+    \item Python only
+    \item FAISS first then Chroma later
+    \item OpenAI API first (simpler), later local LLM
+    \item LangChain DocumentLoader directly
+    \item Start with only .txt loader implemented
+    \item i want to expose each module as a python module or as an API.
+    \item DocumentLoaderModule
+        \begin{enumerate}
+            \item Load raw documents from disk and return clean text along with metadata
+            \item Provide a standard structure usable by other modules
+            \item Directory name: \texttt{document\_loader}
+            \item Classes and Methods:
+                \begin{enumerate}
+                    \item \texttt{BaseDocumentLoader}: \texttt{load\_file(path)}, \texttt{load\_directory(path)}
+                    \item \texttt{TextDocumentLoader}: \texttt{load\_file(path)}, \texttt{load\_directory(path)}
+                    \item \texttt{PDFDocumentLoader}: \texttt{load\_file(path)}, \texttt{load\_directory(path)}
+                    \item \texttt{DocumentLoaderManager}: \texttt{load(path)}
+                \end{enumerate}
+        \end{enumerate}
+    \item TextChunkingModule
+        \begin{enumerate}
+            \item Split raw documents into smaller overlapping text chunks suitable for embedding generation
+            \item Preserve document metadata across chunks for traceability during retrieval
+            \item Directory name: \texttt{text\_chunking}
+            \item Classes and Methods:
+                \begin{enumerate}
+                    \item \texttt{BaseTextChunker}  
+                    Defines a common interface for all text chunking strategies to ensure consistent behavior across implementations.  
+                    Methods: \texttt{chunk\_text(text, chunk\_size, overlap)}, \texttt{chunk\_document(document)}
+
+                    \item \texttt{SimpleTextChunker}  
+                    Implements basic text splitting logic using plain Python, suitable for simple experimentation and understanding chunking fundamentals.  
+                    Methods: \texttt{chunk\_text(text, chunk\_size, overlap)}, \texttt{chunk\_document(document)}
+
+                    \item \texttt{RecursiveTextChunker}  
+                    Uses LangChain’s recursive character-based splitting to intelligently break text while respecting natural language boundaries.  
+                    Methods: \texttt{chunk\_text(text, chunk\_size, overlap)}, \texttt{chunk\_document(document)}
+
+                    \item \texttt{TextChunkingManager}  
+                    Acts as a unified entry point that applies the selected chunking strategy to a list of documents and returns chunked outputs.  
+                    Methods: \texttt{chunk(documents, chunk\_size=1000, overlap=100)}
+                \end{enumerate}
+        \end{enumerate}
+    \clearpage
+    \item EmbeddingGenerationModule
+        \begin{enumerate}
+            \item Generate vector embeddings from text chunks using an embedding model
+            \item Abstract embedding provider details to support multiple backends
+            \item Ensure embeddings are compatible with vector databases
+            \item Directory name: \texttt{embedding\_generation}
+            \item Classes and Methods:
+                \begin{enumerate}
+                    \item \texttt{BaseEmbeddingGenerator}  
+                    Defines a standard interface for embedding generation to allow easy switching between embedding providers.  
+                    Methods: \texttt{embed\_text(text)}, \texttt{embed\_documents(documents)}
+
+                    \item \texttt{OpenAIEmbeddingGenerator}  
+                    Uses OpenAI embedding APIs to generate high-quality vector representations for text chunks.  
+                    Methods: \texttt{embed\_text(text)}, \texttt{embed\_documents(documents)}
+
+                    \item \texttt{EmbeddingManager}  
+                    Acts as a single access point that applies the selected embedding generator to a list of chunked documents.  
+                    Methods: \texttt{generate\_embeddings(documents)}
+                \end{enumerate}
+        \end{enumerate}
+    \item zzz
+    \item Data bases : 
+\end{enumerate}
+
