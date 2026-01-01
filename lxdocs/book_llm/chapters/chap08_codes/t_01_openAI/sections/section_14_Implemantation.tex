@@ -48,26 +48,109 @@
     \clearpage
     \item EmbeddingGenerationModule
         \begin{enumerate}
-            \item Generate vector embeddings from text chunks using an embedding model
-            \item Abstract embedding provider details to support multiple backends
-            \item Ensure embeddings are compatible with vector databases
+            \item Generate vector embeddings for both document chunks and user queries
+            \item Abstract embedding provider logic to allow easy switching between APIs and local models
+            \item Ensure embedding outputs are compatible with downstream vector databases
             \item Directory name: \texttt{embedding\_generation}
             \item Classes and Methods:
                 \begin{enumerate}
                     \item \texttt{BaseEmbeddingGenerator}  
-                    Defines a standard interface for embedding generation to allow easy switching between embedding providers.  
+                    Defines a common interface for embedding providers and enforces consistent embedding behavior.  
                     Methods: \texttt{embed\_text(text)}, \texttt{embed\_documents(documents)}
 
                     \item \texttt{OpenAIEmbeddingGenerator}  
-                    Uses OpenAI embedding APIs to generate high-quality vector representations for text chunks.  
+                    Uses OpenAI embedding APIs to generate dense vector representations for both documents and user queries.  
                     Methods: \texttt{embed\_text(text)}, \texttt{embed\_documents(documents)}
 
                     \item \texttt{EmbeddingManager}  
-                    Acts as a single access point that applies the selected embedding generator to a list of chunked documents.  
-                    Methods: \texttt{generate\_embeddings(documents)}
+                    Acts as a unified entry point for embedding generation and routes requests to the selected embedding provider.  
+                    Methods: \texttt{embed\_query(text)}, \texttt{embed\_documents(documents)}
                 \end{enumerate}
         \end{enumerate}
-    \item zzz
-    \item Data bases : 
+
+    \item VectorDatabaseModule
+        \begin{enumerate}
+            \item Manage vector database operations including indexing, persistence, and similarity search
+            \item Store embeddings along with document metadata in a backend-agnostic manner
+            \item Abstract vector database implementations to allow easy backend replacement
+            \item Directory name: \texttt{vector\_database}
+            \item Classes and Methods:
+                \begin{enumerate}
+                    \item \texttt{BaseVectorDatabase}  
+                    Defines a standard interface for all vector database backends to ensure consistent indexing and retrieval behavior.  
+                    Methods: \texttt{add\_documents(documents, embeddings)}, \texttt{similarity\_search(query\_embedding, k)}, \texttt{save(path)}, \texttt{load(path)}
+
+                    \item \texttt{FAISSVectorDatabase}  
+                    Implements vector storage, persistence, and similarity search using FAISS for efficient nearest-neighbor retrieval.  
+                    Methods: \texttt{add\_documents(documents, embeddings)}, \texttt{similarity\_search(query\_embedding, k)}, \texttt{save(path)}, \texttt{load(path)}
+
+                    \item \texttt{VectorDatabaseManager}  
+                    Acts as a unified access layer to initialize, query, persist, and restore vector databases during indexing and querying workflows.  
+                    Methods: \texttt{index\_documents(documents, embeddings)}, \texttt{search(query\_embedding, k)}, \texttt{persist(path)}, \texttt{restore(path)}
+                \end{enumerate}
+        \end{enumerate}
+    \clearpage
+
+    \item PromptManagementModule
+        \begin{enumerate}
+            \item Assemble final prompts using user queries and retrieved contextual documents
+            \item Encapsulate prompt engineering logic and formatting rules
+            \item Enable flexible prompt strategies without modifying LLM or retrieval modules
+            \item Directory name: \texttt{prompt\_management}
+            \item Classes and Methods:
+                \begin{enumerate}
+                    \item \texttt{BasePromptBuilder}  
+                    Defines a standard interface for building prompts to ensure consistent prompt structure across strategies.  
+                    Methods: \texttt{build\_prompt(query, context\_documents)}
+
+                    \item \texttt{RAGPromptBuilder}  
+                    Implements a retrieval-augmented prompt by combining user queries with relevant document context.  
+                    Methods: \texttt{build\_prompt(query, context\_documents)}
+
+                    \item \texttt{PromptManager}  
+                    Acts as a unified access point to select and apply the appropriate prompt-building strategy.  
+                    Methods: \texttt{create\_prompt(query, context\_documents)}
+                \end{enumerate}
+        \end{enumerate}
+
+    \item LLMInteractionModule
+        \begin{enumerate}
+            \item Interact with large language models using pre-assembled prompts
+            \item Abstract LLM provider details to support both API-based and local models
+            \item Return generated responses without modifying prompt content
+            \item Directory name: \texttt{llm\_interaction}
+            \item Classes and Methods:
+                \begin{enumerate}
+                    \item \texttt{BaseLLMClient}  
+                    Defines a standard interface for interacting with language models to ensure backend independence.  
+                    Methods: \texttt{generate(prompt)}
+
+                    \item \texttt{OpenAILLMClient}  
+                    Implements LLM interaction using OpenAI APIs to generate responses from supplied prompts.  
+                    Methods: \texttt{generate(prompt)}
+
+                    \item \texttt{LLMClientManager}  
+                    Acts as a unified access layer for selecting and invoking the configured LLM backend.  
+                    Methods: \texttt{generate\_response(prompt)}
+                \end{enumerate}
+        \end{enumerate}
+    \item RAGOrchestratorModule
+        \begin{enumerate}
+            \item Coordinate and manage end-to-end retrieval-augmented generation workflows
+            \item Define separate indexing and query execution pipelines
+            \item Integrate document loading, chunking, embedding, vector storage, prompt construction, and LLM interaction
+            \item Directory name: \texttt{rag\_orchestrator}
+            \item Classes and Methods:
+                \begin{enumerate}
+                    \item \texttt{BaseRAGOrchestrator}  
+                    Defines the standard interface for orchestrating indexing and querying workflows.  
+                    Methods: \texttt{index\_documents(source\_path)}, \texttt{answer\_query(query)}
+
+                    \item \texttt{RAGOrchestrator}  
+                    Implements the complete RAG workflow by coordinating all modular components in the correct sequence.  
+                    Methods: \texttt{index\_documents(source\_path)}, \texttt{answer\_query(query)}
+                \end{enumerate}
+        \end{enumerate}
+    \item zzz : 
 \end{enumerate}
 
