@@ -5,6 +5,13 @@
         \item Jiju: record interview and genearte fairness score as per the rubrics.
         \item Jiju: record viva and generate score for non tech skills like communication skills, soft skills, english fluency, grammer.
         \item Jiju: Educative chatbots
+        \item generate list of classes given pipeline stage for a task. This will help coding
+        \begin{enumerate}
+            \item Vector DB Indexing pipeline\\
+            Load file $\rightarrow$  Extract raw text $\rightarrow$  Normalize text $\rightarrow$  Create document (text + metadata) $\rightarrow$  Chunk document $\rightarrow$  Enrich chunks with metadata $\rightarrow$  Generate embeddings for chunks $\rightarrow$  Store embeddings in vector store 
+            \item Vector DB Indexing pipeline\\
+            Receive user query $\rightarrow$ Normalize / preprocess query $\rightarrow$ Generate embedding for query $\rightarrow$ Retrieve top-K relevant chunks $\rightarrow$ Assemble context from retrieved chunks $\rightarrow$ Build prompt (context + question) $\rightarrow$ Call LLM $\rightarrow$ Post-process LLM response $\rightarrow$ Return final answer (optionally with sources)
+        \end{enumerate}
         \item Jiju: Ask chatgpt about - generative AI projects in education.
         \item Technique to create distractors for mcq. 
         \item Use the technique presented in MCQ gen paper to create(generate) explanation/tutorial of a research paper. 
