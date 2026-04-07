@@ -14,21 +14,19 @@ need large storage: raw files, normalized files, chunk files, embedding files
 
 PROJECT ROOT
 │
-├── raw/
-│
-├── normalized/
-│
-├── chunks/
+├── data/
 │   │
-│   ├── chunk_0001.txt
-│   ├── chunk_0002.txt
-│   │
-│   └── embeddings/
-│       │
-│       ├── embedding_0001.json
-│       ├── embedding_0002.json
-│
-├── vector_db/
+│   ├── raw/
+│   ├── normalized/
+│   ├── chunks/
+│   │   ├── chunk_0001.txt
+│   |   ├── chunk_0002.txt
+│   │   │
+│   │   └── embeddings/
+│   │       ├── embedding_0001.json
+│   |       └── embedding_0002.json
+│   |
+│   └── vector_db/
 │
 ├── config/
 │   │
@@ -37,8 +35,6 @@ PROJECT ROOT
 │   ├── config_03_embeddings.py
 │   ├── config_04_vectorDB.py
 │   ├── project_config.py
-│
-│
 │
 ├── code/
 │   │
