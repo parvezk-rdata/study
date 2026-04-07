@@ -1,4 +1,4 @@
-# config/config.py
+# config/embeddings.py
 
 from __future__ import annotations
 from dataclasses import dataclass
@@ -13,16 +13,6 @@ from typing import Literal, Optional
 class EmbeddingConfig:
     enabled: bool = True
     # Turns Phase 3 embedding generation on or off.
-
-    input_dir: str = "chunks"
-    # Directory that contains chunk files created in Phase 2.
-
-    output_dir: str = "embeddings"
-    # Directory where generated embedding files will be stored.
-
-    temp_dir: str = "/tmp/pipeline"
-    # Temporary working directory used during embedding generation.
-    # Useful for intermediate files, request payloads, or temporary artifacts.
 
     supported_extensions: tuple[str, ...] = (".txt",)
     # File extensions that Phase 3 is allowed to read.
@@ -45,8 +35,15 @@ class EmbeddingConfig:
     # If True, normalize embedding vectors before storing them.
     # This is often useful for cosine-similarity-based retrieval.
 
-    include_metadata: bool = True
-    # If True, include chunk and source metadata in the embedding output.
+
+    # store_text: bool = False
+    # If True, store the original chunk text along with the generated embedding.
+    # Useful for debugging, inspection, and later traceability.
+
+    store_metadata: bool = True
+    # If True, store chunk and source metadata along with the generated embedding.
+    # (e.g., source_id, chunk_id, chunk_path)
+    # Useful for filtering, traceability, and Phase 4 vector database storage.
 
     output_format: Literal["json", "npy"] = "json"
     # File format used to store generated embedding artifacts.
@@ -61,3 +58,15 @@ class EmbeddingConfig:
     overwrite: bool = False
     # If True, replace existing embedding files with newly generated ones.
     # If False, keep existing output and avoid accidental replacement.
+
+    timeout: int = 30
+    # Maximum time in seconds to wait for one embedding request.
+    # If the request takes longer than this, it is treated as failed.
+
+    retry_attempts: int = 3
+    # Number of times to retry a failed embedding request.
+    # Useful for handling temporary network or service issues.
+
+    retry_delay: int = 5
+    # Time in seconds to wait between retry attempts.
+    # Helps avoid immediate repeated failures when the service is temporarily unavailable.

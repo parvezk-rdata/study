@@ -9,19 +9,66 @@ multi-stage offline data processing
 raw --> normalized --> chunks --> embeddings --> vector db
 
 need large storage: raw files, normalized files, chunk files, embedding files
+
 -----------------------------------------------------------------------------
 
-PROJECT_ROOT/
-    raw/            :     file1.txt, file2.txt ... etc
-    normalized/     :     file1.txt, file2.txt ... etc
-    chunks/
-        file1/
-            chunk_001.txt
-            chunk_002.txt
-            embeddings/
-                chunk_001.json
-                chunk_002.json
-    logs/
+PROJECT ROOT
+│
+├── raw/
+│
+├── normalized/
+│
+├── chunks/
+│   │
+│   ├── chunk_0001.txt
+│   ├── chunk_0002.txt
+│   │
+│   └── embeddings/
+│       │
+│       ├── embedding_0001.json
+│       ├── embedding_0002.json
+│
+├── vector_db/
+│
+├── config/
+│   │
+│   ├── config_01_normalizations.py
+│   ├── config_02_chunking.py
+│   ├── config_03_embeddings.py
+│   ├── config_04_vectorDB.py
+│   ├── project_config.py
+│
+│
+│
+├── code/
+│   │
+│   ├── normalization
+│   ├── chunking
+│   ├── vector_generator
+│   ├── vectorDB_filler
+│   ├── utils
+│
+│
+└── main.py
+
+-----------------------------------------------------------------------------
+
+Each  record in vectorDB should look like:
+
+ID:         file1_chunk_001
+
+VECTOR:     [0.12, 0.44, 0.91, ...]
+
+TEXT:       "Artificial intelligence is transforming..."
+
+METADATA:   {
+                source_file: "file1.pdf",
+                normalized_file: "file1.txt",
+                chunk_file: "chunks/file1/chunk_001.txt",
+                chunk_index: 1,
+                chunk_size: 1000,
+                embedding_model: "text-embedding-3-small"
+            }
 
 -------------------------------------------------------------------------------------------
 

@@ -1,4 +1,4 @@
-# config/config.py
+# config/chunking.py
 
 from __future__ import annotations
 from dataclasses import dataclass
@@ -14,16 +14,6 @@ from typing import Literal
 class ChunkingConfig:
     enabled: bool = True
     # Turns Phase 2 chunk creation on or off.
-
-    input_dir: str = "normalized"
-    # Directory that contains normalized text files created in Phase 1.
-
-    output_dir: str = "chunks"
-    # Directory where generated chunk files will be stored.
-
-    temp_dir: str = "/tmp/pipeline"
-    # Temporary working directory used during chunk creation.
-    # Useful for intermediate processing or temporary chunk artifacts.
 
     supported_extensions: tuple[str, ...] = (".txt",)
     # File extensions that Phase 2 is allowed to read.

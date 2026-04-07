@@ -1,0 +1,57 @@
+PROJECT ROOT
+│
+├── raw/
+│
+├── normalized/
+│
+├── chunks/
+│   │
+│   ├── chunk_0001.txt
+│   ├── chunk_0002.txt
+│   │
+│   └── embeddings/
+│       │
+│       ├── embedding_0001.json
+│       ├── embedding_0002.json
+│   
+├── vector_db/
+│
+├── config/
+│   │
+│   ├── config_01_normalizations.py
+│   ├── config_02_chunking.py
+│   ├── config_03_embeddings.py
+│   ├── config_04_vectorDB.py
+│   ├── project_config.py
+│
+├── code/
+│   ├── normalization/
+│   │
+│   ├── chunking/
+│   │
+│   ├── embeddings/
+│   │
+│   ├── embedding_models/
+│   │    ├── openai
+│   │    └── huggingface
+│   │
+│   ├── vectordb/
+│   │    ├── openai
+│   │    └── huggingface
+│   │
+│   ├── llm_clients/
+│   │    ├── openai
+│   │    └── huggingface
+│   │
+│   ├── rag/
+│   │   └── rag.py
+│   │
+│   ├── utils/
+│   │    ├── prompt_builder.py
+│   │    └── response_parser.py
+│   │
+│   ├── common/
+│
+│
+├── main.py
+└── README.md

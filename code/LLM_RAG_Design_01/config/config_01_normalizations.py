@@ -3,7 +3,7 @@
 # Phase 1: Normalized File Creation
 # ================================
 
-# config/config.py
+# config/normalizations.py
 
 from __future__ import annotations
 from dataclasses import dataclass
@@ -15,16 +15,6 @@ from typing import Literal, Optional
 class NormalizationConfig:
     enabled: bool = True
     # Turns Phase 1 normalization on or off.
-
-    input_dir: str = "raw"
-    # Directory that contains the raw input files to be normalized.
-
-    output_dir: str = "normalized"
-    # Directory where normalized text files will be written.
-
-    temp_dir: str = "/tmp/pipeline"
-    # Temporary working directory used during normalization.
-    # Useful for intermediate files, extracted text, or temporary processing.
 
     supported_extensions: tuple[str, ...] = (".txt", ".md", ".html", ".pdf", ".docx")
     # File extensions that Phase 1 is allowed to process.
