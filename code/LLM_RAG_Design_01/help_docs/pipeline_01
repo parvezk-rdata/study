@@ -1,0 +1,22 @@
+-------------------------- Document Ingestion and Indexing ----------------------------------------
+
+01) Load file
+02) Extract raw text
+03) Normalize text
+04) Create document with text + metadata
+05) Chunk document
+06) Enrich chunks with metadata
+07) Generate embeddings for chunks
+08) Store embeddings in vector store
+
+------------------------------- Query and Answer Generation Pipeline -------------------------------------
+
+01) Receive user query
+02) Normalize / preprocess query
+03) Generate embedding for query
+04) Retrieve top-K relevant chunks
+05) Assemble context from retrieved chunks
+06) Build prompt (context + question)
+07) Call LLM
+08) Post-process LLM response
+09) Return final answer (optionally with sources)

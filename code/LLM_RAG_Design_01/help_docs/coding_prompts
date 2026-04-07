@@ -1,0 +1,38 @@
+
+1). Directories for modules
+
+rag_project/
+├── config/                 # Centralized app settings using Python dataclasses
+├── ingestion/              # Loads raw documents by file type
+├── chunking/               # Splits text into embeddable chunks
+├── embeddings/             # Generates vectors from text
+├── vector_store/           # Manages vector indexing and search
+├── prompting/              # Builds LLM-ready prompts
+├── llm/                    # Handles LLM API calls
+├── main_controller/        # Orchestrates indexing and querying
+└── utils/                  # Shared helpers (optional)
+
+----------------------------------------------------------------------------------------------
+
+2).     Start with config/config.py file containing dataclass
+
+----------------------------------------------------------------------------------------------
+
+3.1).   Decide the classes needed for ingestion module 
+
+3.2).   BaseDocumentLoader Abstract class details
+            - Abstract method to load a file
+            - Abstract method to load files in directory
+            - For other functionality needed, we will add classes in utils directory and use that class. for example for normalization or cleaning text etc.
+            - most of the error handling will be done from the outside class which calls its methods like validate path of file or directory, proper file size. Write these insormation as comments in this class about what expernal caller need to validate before calling the methods of this class.
+            - Our code shoud not hard code things. we will put necessary settings in config file.   The constructor/methods will receive these settings as one or more basic arguments like int, string, float.
+            - connstructs/methods will not config in the form of class object.
+            - create a class Document for page_content, metadata etc.
+ 
+
+3.3).   TextDocumentLoader  class details
+            - This class for normalization or cleaning text etc will utilize other classes in utils directory for other general functionality. for example .
+            - most of the error handling will be done from the outside class which calls its methods like validate path of file or directory, proper file size. Write these insormation as comments in this class about what expernal caller need to validate before calling the methods of this class.
+ 
+
+

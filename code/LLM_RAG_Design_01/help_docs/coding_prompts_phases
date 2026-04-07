@@ -1,0 +1,23 @@
+i want to design  python classes(Data structures) that stores relevant data after we finalize following design strategies. Such that each stage modifies data so that finally embeddings are stored in vector DB.  before it we need to discuss some design decisions. Following are some that i have thought, tell me what are your design decisions. Do not write code now.
+
+Option A: Process 1 file → Extract all text -> normalize --> create chunks → generate embeddings → store
+Problem: Large files crash due to full memory load.
+
+----------------------------------------
+
+Option B: Normalized files file
+	  For each file create a copy with normalized text
+	  Choose any on the above 3 options A, C, D without normalization as the file alread have normalized text
+----------------------------------------------------------------------------
+
+Option C: Stream chunks from 1 file
+	  Process File1(part1): → Extract small text to fill one chunk -> normalize --> create one chunk → generate its embedding → store one chunk
+	  Process File1(part2): → Extract small text to fill one chunk-> normalize --> create one chunk → generate its embedding → store one chunk
+Good: Memory safe, processes huge files.
+----------------------------------------------------------------------------
+
+Option D: Process all files → Extract all text from all files -> normalize --> create chunks → generate embeddings → store
+Problem: Memory explosion with many/large files.
+
+------------------------------------------------------
+

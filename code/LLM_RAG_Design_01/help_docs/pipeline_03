@@ -1,0 +1,137 @@
+
+LLMs - openAI
+
+Idea : design an experiment and compare various stratgies based on above 4 phases
+
+------------------------------------------------------------------------
+multi-stage offline data processing
+        Phase 1        Phase 2     Phase 3       Phase 4
+raw --> normalized --> chunks --> embeddings --> vector db
+
+need large storage: raw files, normalized files, chunk files, embedding files
+-----------------------------------------------------------------------------
+
+PROJECT_ROOT/
+    raw/            :     file1.txt, file2.txt ... etc
+    normalized/     :     file1.txt, file2.txt ... etc
+    chunks/
+        file1/
+            chunk_001.txt
+            chunk_002.txt
+            embeddings/
+                chunk_001.json
+                chunk_002.json
+    logs/
+
+-------------------------------------------------------------------------------------------
+
+PHASE 1: Normalized File Creation
+
+01) Validate file/directory attributes
+02) Create normalized file and write metadata header
+03) Extract text from source file incrementally
+04) Normalize extracted text incrementally
+05) Write normalized text incrementally to normalized file
+06) Finalize and close normalized file
+
+---------------------------------------------------------------------------------------------
+
+PHASE 2: Chunk Creation
+
+01). Validate normalized file/directory attributes
+02). Create chunk directory for the normalized file
+03). Read normalized file incrementally (fixed-size reads)
+04). Accumulate text in chunk buffer based on chunk strategy
+05). Split buffer into semantic chunks when size/strategy condition is met
+06). Create chunk file and write metadata header
+07). Write chunk text to chunk file
+08). Finalize and close chunk file
+09). Repeat until entire normalized file is processed
+
+---------------------------------------------------------------------------------------------
+
+PHASE 3: Embedding Generation
+
+01). Validate chunk file/directory attributes
+02). Create embeddings directory for the chunk file
+03). Read chunk file and extract metadata header
+04). Read chunk text from chunk file
+05). Prepare embedding request (attach metadata and model configuration)
+06). Accumulate chunk requests into embedding batch
+07). Generate embeddings using embedding model (batched)
+08). Create embedding file and write metadata header
+09). Write embedding vector and chunk metadata to embedding file
+10). Finalize and close embedding file
+11). Repeat until all chunk files are processed
+
+---------------------------------------------------------------------------------------------
+
+PHASE 4: Vector DB Storage
+
+01). Validate embedding file/directory attributes
+02). Initialize vector database connection and configuration
+03). Read embedding file and extract metadata header
+04). Read embedding vector and associated chunk metadata
+05). Prepare vector DB record (id, vector, metadata, source information)
+06). Accumulate embedding records into storage batch
+07). Store embeddings in vector database (batched insert/upsert)
+08). Capture vector DB response (vector id, status, errors if any)
+09). Update embedding file with vector DB storage metadata (optional)
+10). Finalize and close database transaction/batch
+11). Repeat until all embedding files are processed
+
+------------------------------- Query and Answer Generation PHASE ------------------------
+
+01) Receive user query
+02) Normalize / preprocess query
+03) Generate embedding for query
+04) Retrieve top-K relevant chunks
+05) Assemble context from retrieved chunks
+06) Build prompt (context + question)
+07) Call LLM
+08) Post-process LLM response
+09) Return final answer (optionally with sources)
+
+---------------------------------------------------------------------------------------------------
+
+
+The pipeline is designed around normalized-text–based chunking, streaming execution, and incremental enrichment. Memory safety, embedding quality, and long-term maintainability are prioritized over convenience. Normalized file copies are supported when necessary but are not imposed as a default constraint.
+
+Normalization is treated as a logical transformation. Normalized text may be materialized to disk when required, but it is not mandatory by default. Allows streaming pipelines to remain memory-safe. One approach is to normalize the entire file and save it as a separate copy before chunking. While effective, this doubles storage and increases I/O overhead.
+
+The system may optionally create a fully normalized copy of a file and chunk from that copy. Certain document types (OCR-heavy PDFs, noisy scans) benefit significantly from full normalization before chunking.
+
+Text is read incrementally, normalized incrementally, and accumulated in a rolling normalized buffer. A chunk is emitted only when the normalized buffer reaches the desired size. Normalizing entire files upfront can be expensive, while chunking raw text first leads to poor semantic chunks.
+
+Chunk boundaries are determined only after text has been normalized. Raw text must never be used to decide chunk size. Extracting fixed-size text segments from unnormalized content can produce chunks dominated by whitespace, OCR artifacts, or invalid symbols. Normalizing such chunks afterward can dramatically shrink them and destroy semantic meaning, resulting in poor-quality embeddings.
+
+The smallest unit of processing in the pipeline is a chunk, not a file or a document. Processing entire files or documents as a single unit fails for large inputs. Memory usage must never scale with file size.
+
+File-level and document-level entities store metadata only (path, size, identifiers, source). Text content exists only transiently at the chunk level. No class or structure is required to hold an entire document’s text in memory.
+
+Each chunk carries sufficient metadata to uniquely identify its source, position, normalization version, and embedding model. Vector databases require rich metadata for filtering, re-indexing, and model migration.
+
+Each stage adds new information (normalized text, chunk metadata, embeddings) rather than destructively replacing earlier data. Overwriting data at each stage makes debugging difficult and prevents partial recovery after failures.
+
+The pipeline must operate correctly with a batch size of one. Batching is treated strictly as an optional optimization. Batch size can be tuned based on environment and API constraints. Core correctness must never depend on batching. This avoids memory-heavy designs and simplifies portability.
+
+
+
+The system must support chunk-level resume semantics. Transient failures are expected in large-scale ingestion pipelines. The system must be able to resume from the last successfully processed chunk. Reprocessing entire files due to minor failures is unacceptable.
+
+This Design, rejected file-centric processing, identified normalization as a boundary-defining operation, enforced chunk-level atomicity, and designed for failure, scale, and re-indexing from day one.
+
+---------------------------------------------------------------------------------------------------
+
+
+Phase 1: Normalized File Creation
+Raw files are validated and processed to produce clean, normalized text files. Each raw file is read, cleaned, and converted into a standardized text format, which is stored in the normalized directory for consistent downstream processing.
+
+Phase 2: Chunk Creation
+Normalized text files are read and split into semantic chunks based on the chosen chunking strategy. Each chunk is stored as a separate file inside a file-specific directory to ensure clear traceability and deterministic processing.
+
+Phase 3: Embedding Generation
+Chunk files are processed to generate embeddings using the selected embedding model. Each chunk produces a corresponding embedding file stored in the embeddings directory, preserving metadata and vector information.
+
+Phase 4: Vector Database Storage
+Embedding files are read and stored in the vector database. Each embedding is indexed with its metadata, enabling efficient semantic search, filtering, and retrieval.
