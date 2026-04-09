@@ -1,0 +1,207 @@
+Setup Python virtual environment
+Install LangChain and cloud LLM dependencies
+Configure API keys using environment variables
+Send a basic prompt to a cloud LLM
+Use temperature and max_tokens settings
+Create reusable PromptTemplate
+Build a simple LLMChain
+Use ChatPromptTemplate with system & user roles
+Control output format using instructions
+Implement conversation memory and Observe behavior with and without memory
+Generate structured JSON output
+Parse LLM output into Python objects
+
+
+Load documents (PDF / text)
+Clean & normalize text
+Split text into chunks
+Convert chunks → vectors (embeddings)
+Store vectors (vector database)
+Search vectors using question
+Select most relevant chunks
+Send chunks + question to LLM
+Metadata Page number, source file
+Prompt stuffing : retrieved text is sent to LLM
+Context window limits
+Evaluation & debugging
+Chunking strategies
+Cost optimization		
+
+----------------------------------------------------------------------------------
+
+PRACTICAL 1: ENVIRONMENT & BASIC LLM ACCESS
+    Setup Python virtual environment
+    Install LangChain and cloud LLM dependencies
+    Configure API keys using environment variables
+	Send a basic prompt to a cloud LLM
+	Use temperature and max_tokens settings
+
+PRACTICAL 2: PROMPT & CHAIN BASICS
+	Create reusable PromptTemplate
+	Build a simple LLMChain
+	Use ChatPromptTemplate with system & user roles
+	Control output format using instructions
+
+PRACTICAL 3: MEMORY & STRUCTURED OUTPUT
+	Implement conversation memory
+	Observe behavior with and without memory
+	Generate structured JSON output
+	Parse LLM output into Python objects
+
+PRACTICAL 4: TOOL USAGE
+	Create a calculator tool
+	Create a file reading tool
+	Bind multiple tools to an LLM
+	Guide the LLM to select the correct tool
+
+PRACTICAL 5: DOCUMENT LOADING
+	Load plain text documents
+	Load PDF documents
+	Inspect raw extracted text
+	Compare PDF vs text extraction quality
+
+PRACTICAL 6: TEXT CLEANING & NORMALIZATION
+	Remove headers, footers, and noise
+	Normalize whitespace and line breaks
+	Handle encoding and special characters
+	Prepare clean text for chunking
+
+PRACTICAL 7: TEXT SPLITTING & CHUNKING
+	Split text using fixed-size chunks
+	Apply chunk overlap
+	Use recursive text splitters
+	Compare chunking strategies
+	Visualize chunk boundaries
+
+PRACTICAL 8: EMBEDDINGS GENERATION
+	Generate embeddings for text chunks
+	Inspect embedding vector dimensions
+	Compare embeddings for similar text
+	Measure embedding generation cost
+
+PRACTICAL 9: VECTOR DATABASE STORAGE
+	Store embeddings in FAISS / Chroma
+	Attach metadata (page number, source file)
+	Persist vector database to disk
+	Reload vector database from storage
+
+PRACTICAL 10: VECTOR SEARCH & RETRIEVAL
+	Convert user question into embedding
+	Perform similarity search
+	Retrieve top-K matching chunks
+	Inspect similarity scores
+	Debug poor retrieval results
+
+PRACTICAL 11: CONTEXT CONSTRUCTION (PROMPT STUFFING)
+	Combine retrieved chunks into context
+	Design RAG prompt templates
+	Inject context + question into LLM
+	Handle context window limits
+
+PRACTICAL 12: END-TO-END DOCUMENT Q&A
+	Build a single-document Q&A pipeline
+	Add source citations in answers
+	Test with factual and ambiguous questions
+
+PRACTICAL 13: QUALITY & OPTIMIZATION
+	Tune chunk size and overlap
+	Reduce hallucinations using grounding prompts
+	Optimize token usage and cost
+	Add basic logging and debugging
+
+PRACTICAL 14: MINI PROJECT
+	Multi-document knowledge base
+	Persistent vector store
+	Question answering with source references
+	Simple CLI or minimal UI interface
+
+=====================================
+END OF PRACTICALS LIST
+=====================================
+
+
+---------------------------------------------------------
+
+
+==============================
+LANGCHAIN + LLM LEARNING ROADMAP
+(Cloud LLMs, Python, Beginner → Advanced)
+==============================
+
+PHASE 1: LLM & PROMPT FUNDAMENTALS (FOUNDATION)
+	What is an LLM (capabilities & limitations)
+	Tokens, context window, temperature, max tokens
+	Cloud LLMs overview (OpenAI, Gemini, Claude)
+	API keys, authentication, environment variables
+	Sending a basic prompt to an LLM
+	Prompt engineering basics (clear instructions, constraints)
+	System, human, assistant roles (chat-style prompts)
+
+PHASE 2: LANGCHAIN CORE BUILDING BLOCKS
+	LangChain architecture & mental model
+	ChatOpenAI and LLM configuration
+	PromptTemplate (reusable & parameterized prompts)
+	ChatPromptTemplate (role-based prompting)
+	Chains (LLMChain and why chaining matters)
+	Controlling creativity vs determinism
+	Error handling & retries (basic)
+
+PHASE 3: MEMORY & STRUCTURED OUTPUT
+	Conversation memory (why LLMs forget)
+	ConversationBufferMemory
+	Memory summarization (token-aware memory)
+	Structured output problem (text vs JSON)
+	JSON prompting pitfalls
+	Output parsers (StructuredOutputParser)
+	Validating and consuming structured output in Python
+
+PHASE 4: TOOLS & FUNCTION CALLING
+	What tools are and why LLMs need them
+	Designing safe Python tools
+	Calculator tool (deterministic computation)
+	File reader tools (controlled access)
+	Multi-tool selection by LLM
+	Prompting LLMs to use tools reliably
+	Security considerations with tools
+
+PHASE 5: DOCUMENT Q&A / RAG (CORE TARGET)
+	What is Document Q&A
+	What is RAG (Retrieval-Augmented Generation)
+	Why LLMs cannot read large documents directly
+	Loading documents (PDF / TXT / Markdown)
+	Text extraction challenges (PDF noise, headers, footers)
+	Cleaning & normalizing extracted text
+	Text splitting fundamentals
+	Chunk size vs overlap (trade-offs)
+	Chunking strategies (fixed, recursive, semantic)
+	Converting chunks → embeddings
+	What embeddings are (intuition + math-lite)
+	Choosing an embedding model
+	Vector databases (FAISS, Chroma, etc.)
+	Storing embeddings with metadata
+	Metadata: page number, source file, section
+	Similarity search using a question
+	Selecting top-K relevant chunks
+	Prompt stuffing (injecting retrieved context)
+	Designing RAG prompts (grounding & citations)
+	Context window limits and truncation issues
+
+PHASE 6: QUALITY, COST & DEBUGGING
+	Hallucination causes in RAG systems
+	Evaluation strategies for Document Q&A
+	Debugging retrieval vs generation failures
+	Chunking and retrieval tuning
+	Cost optimization strategies
+	Latency optimization
+	Caching embeddings and responses
+
+PHASE 7: MINI PROJECTS & REAL-WORLD PATTERNS
+	Single PDF Q&A system
+	Multi-document knowledge base
+	Source-cited answers
+	Study assistant / tutor bot
+	Production checklist & best practices
+
+==============================
+END OF ROADMAP
+==============================
