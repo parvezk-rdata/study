@@ -1,51 +1,18 @@
 
 LLMs - openAI
 
-Idea : design an experiment and compare various stratgies based on above 4 phases
+Idea    : design an experiment and compare various stratgies based on above 4 phases
+        : generate images, flowcharts
+        : generate rubrics and questions for practical 
+        : ixl AI application
 
 ------------------------------------------------------------------------
+
 multi-stage offline data processing
         Phase 1        Phase 2     Phase 3       Phase 4
 raw --> normalized --> chunks --> embeddings --> vector db
 
 need large storage: raw files, normalized files, chunk files, embedding files
-
------------------------------------------------------------------------------
-
-PROJECT ROOT
-│
-├── data/
-│   │
-│   ├── raw/
-│   ├── normalized/
-│   ├── chunks/
-│   │   ├── chunk_0001.txt
-│   |   ├── chunk_0002.txt
-│   │   │
-│   │   └── embeddings/
-│   │       ├── embedding_0001.json
-│   |       └── embedding_0002.json
-│   |
-│   └── vector_db/
-│
-├── config/
-│   │
-│   ├── config_01_normalizations.py
-│   ├── config_02_chunking.py
-│   ├── config_03_embeddings.py
-│   ├── config_04_vectorDB.py
-│   ├── project_config.py
-│
-├── code/
-│   │
-│   ├── normalization
-│   ├── chunking
-│   ├── vector_generator
-│   ├── vectorDB_filler
-│   ├── utils
-│
-│
-└── main.py
 
 -----------------------------------------------------------------------------
 
