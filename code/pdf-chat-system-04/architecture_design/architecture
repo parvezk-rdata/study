@@ -1,0 +1,15 @@
+
+
+
+# 🧱 Design Principles
+
+* Each class has **one responsibility**. Clear separation of concerns
+* State is centralized. State is **explicit and structured**
+* All State classes should be safe to inspect, log, and pass to UI. Anything containing real credentials must stay outside state/
+* Use Pydantic for config objects, state objects, request/response schemas, persisted JSON structures
+* Use regular classes for managers, stores, services, controllers, OAuth flow/network handlers
+* A top-level Controller orchestrates everything.  Controller owns decisions
+* Services stay dumb/stateless
+* LLM clients only talk to providers
+* UI is **dumb rendering only**. UI emits events and renders state
+* Backends are fully separated:
