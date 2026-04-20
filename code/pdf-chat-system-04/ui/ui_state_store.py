@@ -22,6 +22,8 @@ from pdf_extractor import ExtractedDoc
 
 class UIStateStore:
     def init_state(self) -> None:
+        # first run :   key does not exist then create them
+        # re-run    :   key already exists then retain old keys
         st.session_state.setdefault("history", [])
         st.session_state.setdefault("uploader_key", 0)
         st.session_state.setdefault("doc", None)
