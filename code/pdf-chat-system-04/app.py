@@ -12,11 +12,13 @@ class App:
         self.controller = MainController(self.store)
 
     def setup_page(self) -> None:
+        # this shoud move to UI controller 
         st.set_page_config(page_title="PDF Chat", page_icon="📄")
         st.title("Chat with a PDF")
 
     def run(self) -> None:
         self.setup_page()
+        # this shoud be moved inside stores constructor
         self.store.init_state()
 
         top_events = self.ui.collect_top_events(
@@ -26,6 +28,7 @@ class App:
         for event in top_events:
             self.controller.handle_event(event)
 
+        # for re-run : render existing PDF details
         doc = self.store.get_doc()
         if doc is not None:
             self.ui.render_document_info(
@@ -34,8 +37,10 @@ class App:
                 is_truncated=self.store.get_is_truncated(),
             )
 
+        # for re-run : render updated chat history
         self.ui.render_chat_history(self.store.get_history())
 
+        # why chat_event is handled seprately
         chat_event = self.ui.collect_chat_event(
             has_document=doc is not None,
         )
