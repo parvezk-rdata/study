@@ -26,6 +26,22 @@ llm input variables : client, model, messages, user_msg, response, history
 
 --------------------------------------------------------------------------------
 
+
+move Streamlit session_state handling into one small state manager
+centralized state design
+
+introduce simple Pydantic models for chat/document state
+
+add a real MainController
+
+service/controller separation
+
+move PDF flow into a small DocumentController
+
+move chat/LLM flow into a small ChatController
+
+--------------------------------------------------------------------------------
+
 use cases, activity flow
 
 UI events ---> functiion call(main controller)  ----> change state/data  ---> UI controller update UI

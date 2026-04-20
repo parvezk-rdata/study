@@ -1,0 +1,83 @@
+| State Key      | Type         | Purpose                                                   |
+|----------------|------------  |-----------------------------------------------------------|
+| history        | list         | display chat messages, send past conversation to LLM      |
+|----------------|------------  |-----------------------------------------------------------|
+| uploader_key   | int          | Forces file uploader to reset when PDF is removed         |
+|----------------|------------  |-----------------------------------------------------------|
+| doc            | ExtractedDoc | Stores PDF data(text, total page). pass text to LLM       |
+|----------------|------------  |-----------------------------------------------------------|
+| doc_hash       | str          | PDF hash. detects new PDF. triggers reset when PDF changes|
+|----------------|------------  |-----------------------------------------------------------|
+| doc_name       | str          | Used to display filename in UI                            |
+|----------------|------------  |-----------------------------------------------------------|
+
+
+|----------------------------------history--------------------------------------------------|
+
+    [
+        {"role": "user", "content": "What is this PDF about?"},
+        {"role": "assistant", "content": "This PDF explains..."}
+    ]
+
+|-------------------------------------------------------------------------------------------|
+
+
+rerun → read store → render widget → handle widget output → save state → render current UI
+
+User changes a widget
+    ---> Streamlit reruns the script from top to bottom
+    ---> Normal Python variables are recreated
+    ---> Widget state and st.session_state persist across reruns
+    ---> The UI is rebuilt from the latest state
+
+User changes something in UI
+    ---> Streamlit reruns app.py from top to bottom. 
+    ---> main() runs again
+    ---> all UI render methods are called again. 
+         widget values are remembered by Streamlit/session state
+    ---> the widget that received input now returns a value/event
+         whichever widget the user interacted with will now produce a changed return value.
+    ---> that value travels back to main()
+    ---> main() decides what to do
+    ---> state is updated
+    ---> UI is shown again from updated state
+
+
+For example 
+User types prompt and presses enter
+    ---> Streamlit reruns app.py
+    ---> main() runs again
+    ---> sidebar renders again
+    ---> uploader renders again
+    ---> chat history renders again
+    ---> chat input render() now returns the submitted prompt
+    ---> main() receives that prompt
+    ---> main() calls handle_user_prompt(...)
+|-------------------------------------------------------------------------------------------|
+
+Main Controller + Event-driven flows + typed state/models
+
+rerun → read state → detect event → handle event → save state → render again
+
+|-------------------------------------------------------------------------------------------|
+
+Fully generic event bus system
+
+UI emits event
+-> EventBus.publish(event)
+-> bus finds all subscribers/handlers
+-> matching handlers run automatically
+-> handlers may emit more events
+-> more handlers may run
+
+Compared to simple event-driven, it usually adds:
+
+-> EventBus class
+-> subscribe/unsubscribe mechanism
+-> handler registry
+-> event dispatch rules
+-> possibly sync vs async handling
+-> maybe event priorities
+-> maybe chained events
+
+|-------------------------------------------------------------------------------------------|

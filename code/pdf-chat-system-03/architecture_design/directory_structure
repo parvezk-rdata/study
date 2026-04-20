@@ -1,0 +1,37 @@
+pdf_chat/
+│
+├── .env
+├── requirements.txt
+├── main.py                         # wiring only ~30 lines
+├── config.py                       # Pydantic BaseSettings
+│
+├── models/
+│   ├── auth.py                     # StoredAuth, LoginHandle
+│   ├── chat.py                     # Message
+│   ├── doc.py                      # ExtractedDoc
+│   └── ui.py                       # SidebarEvent
+│
+├── state/
+│   ├── auth_state.py               # auth_mode, oauth_model, login_handle, login_started_at
+│   ├── doc_state.py                # doc, doc_hash, uploader_key
+│   └── chat_state.py               # history: list[Message]
+│
+├── controller/
+│   ├── app_controller.py           # run() + wires logic classes
+│   ├── auth_controller_logic.py    # login/logout/poll/sidebar auth events
+│   ├── chat_controller_logic.py    # prompt building + client selection + chat flow
+│   └── doc_controller_logic.py     # upload + hash check + truncation
+│
+├── llm/
+│   ├── openai_client.py            # chat(messages: list[Message]) → str
+│   └── oauth_client.py             # chat(instructions, input_items) → str
+│
+├── services/
+│   ├── auth_service.py             # login / logout / refresh / poll
+│   └── pdf_service.py              # extract(bytes) → ExtractedDoc
+│
+└── ui/
+    ├── page.py
+    ├── sidebar.py                  # → SidebarEvent
+    ├── pdf_panel.py
+    └── chat_panel.py

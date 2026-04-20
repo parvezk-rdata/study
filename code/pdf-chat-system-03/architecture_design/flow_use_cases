@@ -1,0 +1,53 @@
+1. Application startup flow
+         App starts 
+    ---> Main Controller    :  initialize default state
+    ---> UI controller      :  renders initial screen
+
+2. PDF upload flow
+         User uploads PDF
+    ---> Main Controller    :  receives file event
+    ---> XXXX Controller    :  extract and store file information
+    ---> UI controller      :  UI updates PDF info panel
+
+3. Question submit flow
+         User submits a question(prompt)
+    ---> Main Controller    :  receives file event
+    ---> XXXX Controller    :  validates that PDF exists
+    ---> XXXX Controller    :  user message is appended to chat state
+    ---> UI controller      :  UI renders user message
+    ---> XXXX Controller    :  LLM flow starts
+
+4. LLM request flow
+         MainController starts LLM response generation
+    ---> XXXX Controller    :  perform LLM call (history + PDF text + user prompt)
+    ---> XXXX Controller    :  appends assistant message to chat state
+    ---> UI controller      :  UI updates PDF info panel
+
+
+5. Error handling flow
+         Any extraction or LLM operation fails
+    ---> controller catches exception
+    ---> UI renders error message
+
+6. Remove PDF flow
+         User clicks remove PDF
+    ---> controller clears document-related state
+    ---> uploader state changes
+    ---> UI re-renders empty upload screen.
+
+
+7. PDF replacement flow
+         User uploads a different PDF
+    ---> controller detects changed file hash
+    ---> old document/chat state is cleared
+    ---> new extraction runs
+    ---> UI updates PDF info panel.
+
+8. Clear conversation flow
+         User clicks clear conversation
+    ---> controller resets chat history only
+    ---> UI re-renders chat area empty while keeping PDF state.
+
+9. PDF extraction flow
+
+10. Context-fit / truncation flow : If PDF text doe not fits context budget
