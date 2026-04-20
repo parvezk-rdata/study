@@ -71,21 +71,16 @@ class MainController:
         prior_history = list(self.store.get_history())
         self.store.append_message("user", prompt)
 
-        with st.chat_message("user"):
-            st.markdown(prompt)
-
-        with st.chat_message("assistant"):
-            with st.spinner("Thinking..."):
-                try:
-                    reply = chat(prior_history, doc.text, prompt)
-                except RuntimeError as e:
-                    reply = f"**Error:** {e}"
-                except Exception as e:
-                    reply = f"**Error calling OpenAI:** {e}"
-
-            st.markdown(reply)
+        with st.spinner("Thinking..."):
+            try:
+                reply = chat(prior_history, doc.text, prompt)
+            except RuntimeError as e:
+                reply = f"**Error:** {e}"
+            except Exception as e:
+                reply = f"**Error calling OpenAI:** {e}"
 
         self.store.append_message("assistant", reply)
+        st.rerun()
 
     @staticmethod
     def _file_hash(data: bytes) -> str:

@@ -5,7 +5,6 @@ from ui.components.document_info_component import DocumentInfoComponent
 from ui.components.sidebar_component import SidebarComponent
 from ui.components.uploader_component import UploaderComponent
 from ui.events import PdfUploadedEvent, UserMessageSubmittedEvent
-from ui.ui_state_store import UIStateStore
 
 
 class UIController:
@@ -16,14 +15,14 @@ class UIController:
         self.chat_history = ChatHistoryComponent()
         self.chat_input = ChatInputComponent()
 
-    def collect_events(self, has_document: bool) -> list:
+    def collect_top_events(self, uploader_key: int) -> list:
         events = []
 
         sidebar_event = self.sidebar.render()
         if sidebar_event is not None:
             events.append(sidebar_event)
 
-        uploaded_file = self.uploader.render(UIStateStore().get_uploader_key())
+        uploaded_file = self.uploader.render(uploader_key)
         if uploaded_file is not None:
             events.append(
                 PdfUploadedEvent(
@@ -32,11 +31,13 @@ class UIController:
                 )
             )
 
+        return events
+
+    def collect_chat_event(self, has_document: bool):
         prompt = self.chat_input.render(has_document=has_document)
         if prompt:
-            events.append(UserMessageSubmittedEvent(message=prompt))
-
-        return events
+            return UserMessageSubmittedEvent(message=prompt)
+        return None
 
     def render_document_info(
         self,
