@@ -1,0 +1,49 @@
+from PyQt6.QtCore import QTimer
+from PyQt6.QtWidgets import QScrollArea, QVBoxLayout, QWidget
+
+from components.chat.chat_message_component import ChatMessageComponent
+from models.chat_models import ChatMessage
+
+
+class ChatHistoryComponent(QWidget):
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.scroll_area = QScrollArea()
+        self.scroll_area.setWidgetResizable(True)
+
+        self.container = QWidget()
+        self.messages_layout = QVBoxLayout(self.container)
+        self.messages_layout.setContentsMargins(8, 8, 8, 8)
+        self.messages_layout.setSpacing(10)
+        self.messages_layout.addStretch(1)
+
+        self.scroll_area.setWidget(self.container)
+
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.addWidget(self.scroll_area)
+
+    def set_messages(self, messages: list[ChatMessage]) -> None:
+        self._clear_messages()
+
+        for message in messages:
+            widget = ChatMessageComponent(message)
+            self.messages_layout.insertWidget(self.messages_layout.count() - 1, widget)
+
+        self._scroll_to_bottom()
+
+    def _clear_messages(self) -> None:
+        while self.messages_layout.count() > 1:
+            item = self.messages_layout.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+
+    def _scroll_to_bottom(self) -> None:
+        QTimer.singleShot(
+            0,
+            lambda: self.scroll_area.verticalScrollBar().setValue(
+                self.scroll_area.verticalScrollBar().maximum()
+            ),
+        )

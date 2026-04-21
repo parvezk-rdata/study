@@ -1,0 +1,42 @@
+pdf_chat_app/
+│
+├── main.py                             # Entry point (starts QApplication)
+├── app.py                              # App bootstrap (wires controllers, state, UI)
+│
+├── controllers/                        # Business logic (no UI code)
+│   ├── main_controller.py              # App-level orchestration
+│   ├── document_controller.py          # PDF upload, extraction, reset logic
+│   └── chat_controller.py              # Chat flow, LLM calls
+│
+├── components/                         # Pure UI (PyQt widgets)
+│   ├── layout/
+│   │   └── main_window.py              # Main window (sidebar + chat layout)
+│   │
+│   ├── document/
+│   │   ├── pdf_upload_component.py     # Upload button / file picker
+│   │   ├── pdf_info_component.py       # PDF metadata display
+│   │   └── pdf_summary_component.py    # (optional future use)
+│   │
+│   └── chat/
+│       ├── chat_history_component.py   # Scrollable message list
+│       ├── chat_input_component.py     # Input box + send button
+│       └── chat_message_component.py   # Single message renderer (simple text)
+│
+├── state/                              # Central state management
+│   ├── app_state.py                    # Data structure (dataclasses)
+│   └── app_state_store.py              # Store + PyQt signals
+│
+├── services/                           # External logic (pure functions)
+│   ├── pdf_extraction_service.py       # wraps extract() logic
+│   └── llm_service.py                  # wraps chat() + context fitting
+│
+├── models/                             # Typed models (optional but clean)
+│   ├── chat_models.py
+│   └── document_models.py
+│
+├── assets/                             # (optional) icons, styles later
+│
+├── .env                                # API key + model config
+├── requirements.txt
+│
+└── README.md
