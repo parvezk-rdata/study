@@ -1,0 +1,39 @@
+pdf_chat_app/
+│
+├── main.py
+├── app.py
+│
+├── controllers/
+│   ├── main_controller.py
+│   ├── document_controller.py
+│   └── chat_controller.py
+│
+├── components/
+│   ├── layout/
+│   │   └── main_window.py
+│   │
+│   ├── document/
+│   │   └── pdf_panel_component.py
+│   │
+│   └── chat/
+│       ├── chat_history_component.py
+│       ├── chat_input_component.py
+│       └── chat_message_component.py
+│
+├── state/
+│   ├── app_state.py
+│   └── app_state_store.py
+│
+├── services/
+│   ├── pdf_extraction_service.py
+│   └── llm_service.py
+│
+├── models/
+│   ├── chat_models.py
+│   └── document_models.py
+│
+├── assets/
+│
+├── .env
+├── requirements.txt
+└── README.md
