@@ -1,37 +1,23 @@
-pdf_chat/
+project/
 │
-├── .env
-├── requirements.txt
-├── main.py                         # wiring only ~30 lines
-├── config.py                       # Pydantic BaseSettings
+├── app.py                         # Entry point (App class + run flow)
+├── llm_client.py                  # LLM API interaction (unchanged)
+├── pdf_extractor.py               # PDF extraction + OCR fallback (unchanged)
 │
-├── models/
-│   ├── auth.py                     # StoredAuth, LoginHandle
-│   ├── chat.py                     # Message
-│   ├── doc.py                      # ExtractedDoc
-│   └── ui.py                       # SidebarEvent
-│
-├── state/
-│   ├── auth_state.py               # auth_mode, oauth_model, login_handle, login_started_at
-│   ├── doc_state.py                # doc, doc_hash, uploader_key
-│   └── chat_state.py               # history: list[Message]
-│
-├── controller/
-│   ├── app_controller.py           # run() + wires logic classes
-│   ├── auth_controller_logic.py    # login/logout/poll/sidebar auth events
-│   ├── chat_controller_logic.py    # prompt building + client selection + chat flow
-│   └── doc_controller_logic.py     # upload + hash check + truncation
-│
-├── llm/
-│   ├── openai_client.py            # chat(messages: list[Message]) → str
-│   └── oauth_client.py             # chat(instructions, input_items) → str
-│
-├── services/
-│   ├── auth_service.py             # login / logout / refresh / poll
-│   └── pdf_service.py              # extract(bytes) → ExtractedDoc
+├── controllers/
+│   ├── __init__.py
+│   └── main_controller.py         # Central event handler (business logic)
 │
 └── ui/
-    ├── page.py
-    ├── sidebar.py                  # → SidebarEvent
-    ├── pdf_panel.py
-    └── chat_panel.py
+    ├── __init__.py
+    ├── events.py                  # Event classes (UI → Controller)
+    ├── ui_controller.py           # Connects components + collects events
+    ├── ui_state_store.py          # Wrapper over st.session_state
+    │
+    └── components/
+        ├── __init__.py
+        ├── sidebar_component.py       # Sidebar buttons
+        ├── uploader_component.py      # PDF upload widget
+        ├── document_info_component.py # PDF summary + warnings
+        ├── chat_history_component.py  # Chat messages rendering
+        └── chat_input_component.py    # Chat input box
