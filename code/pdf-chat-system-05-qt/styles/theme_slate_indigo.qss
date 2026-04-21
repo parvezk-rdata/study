@@ -1,0 +1,489 @@
+/* ============================================================
+   THEME A — SLATE + INDIGO
+   PDF Chat · PyQt6 QSS
+   
+   Color tokens
+   ─────────────────────────────────────────────
+   Sidebar bg          #2D3E52   navy-700  (lifted from #1C2333)
+   Sidebar surface     #364C63   navy-600  (button resting)
+   Sidebar border      #455E78   navy-500
+   Sidebar text        #E2E8F0   slate-200
+   Sidebar muted       #94A3B8   slate-400
+   
+   Canvas bg           #F8FAFC   slate-50
+   Surface             #F1F5F9   slate-100  (AI bubble, inputs)
+   Border              #E2E8F0   slate-200
+   Border focus        #6366F1   indigo-500
+   
+   Text primary        #0F172A   slate-900
+   Text secondary      #475569   slate-600
+   Text muted          #94A3B8   slate-400
+   
+   Accent              #6366F1   indigo-500
+   Accent hover        #4F46E5   indigo-600
+   Accent pressed      #4338CA   indigo-700
+   Accent surface      #EEF2FF   indigo-50   (user bubble bg)
+   Accent text         #3730A3   indigo-800  (user bubble text)
+   
+   Danger              #EF4444
+   Danger hover        #DC2626
+   Success             #10B981
+   Warning             #F59E0B
+   ============================================================ */
+
+
+/* ── WINDOW ─────────────────────────────────────────────── */
+
+QMainWindow {
+    background-color: #F8FAFC;
+}
+
+QWidget {
+    font-family: "Inter", "Segoe UI", "SF Pro Text", system-ui, sans-serif;
+    font-size: 13px;
+    color: #0F172A;
+}
+
+
+/* ── SIDEBAR FRAME ──────────────────────────────────────── */
+/*
+   Usage: give your sidebar QFrame the objectName "sidebar"
+   so these rules don't bleed into every QFrame in the app.
+   In Python: self.sidebar.setObjectName("sidebar")
+*/
+
+QFrame#sidebar {
+    background-color: #2D3E52;
+    border: none;
+    border-radius: 0px;
+}
+
+QFrame#sidebar QLabel {
+    color: #94A3B8;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    background: transparent;
+}
+
+QFrame#sidebar QLabel#sidebar_title {
+    color: #E2E8F0;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0em;
+}
+
+QFrame#sidebar QLabel#doc_info {
+    color: #475569;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+
+/* ── LABELS (main content area) ─────────────────────────── */
+
+QLabel {
+    color: #0F172A;
+    font-size: 13px;
+    background: transparent;
+}
+
+QLabel#section_label {
+    color: #475569;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+QLabel#warning_label {
+    color: #92400E;
+    background-color: #FEF3C7;
+    border: 1px solid #FDE68A;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+QLabel#error_label {
+    color: #991B1B;
+    background-color: #FEE2E2;
+    border: 1px solid #FECACA;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+QLabel#success_label {
+    color: #065F46;
+    background-color: #D1FAE5;
+    border: 1px solid #A7F3D0;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+
+/* ── PRIMARY BUTTON (indigo) ─────────────────────────────── */
+
+QPushButton {
+    background-color: #6366F1;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    min-height: 32px;
+}
+
+QPushButton:hover {
+    background-color: #4F46E5;
+}
+
+QPushButton:pressed {
+    background-color: #4338CA;
+}
+
+QPushButton:disabled {
+    background-color: #C7D2FE;
+    color: #A5B4FC;
+}
+
+
+/* ── SECONDARY BUTTON (ghost / outline) ─────────────────── */
+/*
+   Usage: self.btn.setObjectName("secondary")
+*/
+
+QPushButton#secondary {
+    background-color: transparent;
+    color: #475569;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    min-height: 32px;
+}
+
+QPushButton#secondary:hover {
+    background-color: #F1F5F9;
+    border-color: #CBD5E1;
+    color: #0F172A;
+}
+
+QPushButton#secondary:pressed {
+    background-color: #E2E8F0;
+}
+
+QPushButton#secondary:disabled {
+    color: #CBD5E1;
+    border-color: #F1F5F9;
+}
+
+
+/* ── DANGER BUTTON ───────────────────────────────────────── */
+/*
+   Usage: self.btn.setObjectName("danger")
+*/
+
+QPushButton#danger {
+    background-color: #EF4444;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-weight: 500;
+    min-height: 32px;
+}
+
+QPushButton#danger:hover {
+    background-color: #DC2626;
+}
+
+QPushButton#danger:pressed {
+    background-color: #B91C1C;
+}
+
+
+/* ── SIDEBAR BUTTONS ─────────────────────────────────────── */
+/*
+   Usage: self.btn.setObjectName("sidebar_primary")
+          self.btn.setObjectName("sidebar_ghost")
+*/
+
+QPushButton#sidebar_primary {
+    background-color: #6366F1;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-weight: 500;
+    min-height: 32px;
+}
+
+QPushButton#sidebar_primary:hover {
+    background-color: #4F46E5;
+}
+
+QPushButton#sidebar_primary:pressed {
+    background-color: #4338CA;
+}
+
+QPushButton#sidebar_ghost {
+    background-color: #364C63;
+    color: #94A3B8;
+    border: 1px solid #455E78;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-weight: 400;
+    min-height: 32px;
+}
+
+QPushButton#sidebar_ghost:hover {
+    background-color: #3F5672;
+    color: #E2E8F0;
+    border-color: #547088;
+}
+
+QPushButton#sidebar_ghost:pressed {
+    background-color: #2D3E52;
+}
+
+
+/* ── TEXT INPUT ──────────────────────────────────────────── */
+
+QLineEdit {
+    background-color: #FFFFFF;
+    color: #0F172A;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 13px;
+    selection-background-color: #C7D2FE;
+    selection-color: #1E1B4B;
+    min-height: 32px;
+}
+
+QLineEdit:hover {
+    border-color: #CBD5E1;
+}
+
+QLineEdit:focus {
+    border: 1.5px solid #6366F1;
+    background-color: #FFFFFF;
+}
+
+QLineEdit:disabled {
+    background-color: #F8FAFC;
+    color: #94A3B8;
+    border-color: #F1F5F9;
+}
+
+QLineEdit::placeholder {
+    color: #94A3B8;
+}
+
+
+/* ── TEXT EDIT (multi-line) ──────────────────────────────── */
+
+QTextEdit, QPlainTextEdit {
+    background-color: #FFFFFF;
+    color: #0F172A;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 13px;
+    selection-background-color: #C7D2FE;
+    selection-color: #1E1B4B;
+}
+
+QTextEdit:focus, QPlainTextEdit:focus {
+    border: 1.5px solid #6366F1;
+}
+
+
+/* ── CHAT SCROLL AREA ────────────────────────────────────── */
+
+QScrollArea {
+    background-color: #F8FAFC;
+    border: none;
+}
+
+QScrollArea > QWidget > QWidget {
+    background-color: #F8FAFC;
+}
+
+
+/* ── SCROLLBARS ──────────────────────────────────────────── */
+
+QScrollBar:vertical {
+    background: transparent;
+    width: 6px;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical {
+    background: #CBD5E1;
+    border-radius: 3px;
+    min-height: 32px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #94A3B8;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0;
+    background: none;
+}
+
+QScrollBar:horizontal {
+    background: transparent;
+    height: 6px;
+    margin: 0;
+}
+
+QScrollBar::handle:horizontal {
+    background: #CBD5E1;
+    border-radius: 3px;
+    min-width: 32px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #94A3B8;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    width: 0;
+    background: none;
+}
+
+
+/* ── CHAT MESSAGE BUBBLES ────────────────────────────────── */
+/*
+   Usage:
+     user bubble frame:  setObjectName("bubble_user")
+     ai bubble frame:    setObjectName("bubble_ai")
+     user text label:    setObjectName("bubble_user_text")
+     ai text label:      setObjectName("bubble_ai_text")
+*/
+
+QFrame#bubble_user {
+    background-color: #EEF2FF;
+    border-radius: 12px;
+    border-bottom-right-radius: 4px;
+    border: none;
+}
+
+QFrame#bubble_ai {
+    background-color: #F1F5F9;
+    border-radius: 12px;
+    border-bottom-left-radius: 4px;
+    border: none;
+}
+
+QLabel#bubble_user_text {
+    color: #3730A3;
+    font-size: 13px;
+    background: transparent;
+}
+
+QLabel#bubble_ai_text {
+    color: #1E293B;
+    font-size: 13px;
+    background: transparent;
+}
+
+QLabel#bubble_timestamp {
+    color: #94A3B8;
+    font-size: 11px;
+    background: transparent;
+}
+
+
+/* ── COMBO BOX ───────────────────────────────────────────── */
+
+QComboBox {
+    background-color: #FFFFFF;
+    color: #0F172A;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+    min-height: 32px;
+}
+
+QComboBox:hover {
+    border-color: #CBD5E1;
+}
+
+QComboBox:focus {
+    border: 1.5px solid #6366F1;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 24px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    color: #0F172A;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    selection-background-color: #EEF2FF;
+    selection-color: #4338CA;
+    outline: none;
+}
+
+
+/* ── PROGRESS BAR ────────────────────────────────────────── */
+
+QProgressBar {
+    background-color: #E2E8F0;
+    border: none;
+    border-radius: 4px;
+    height: 6px;
+    text-align: center;
+    font-size: 11px;
+    color: transparent;
+}
+
+QProgressBar::chunk {
+    background-color: #6366F1;
+    border-radius: 4px;
+}
+
+
+/* ── SEPARATOR ───────────────────────────────────────────── */
+
+QFrame[frameShape="4"],
+QFrame[frameShape="5"] {
+    color: #E2E8F0;
+    background-color: #E2E8F0;
+}
+
+
+/* ── TOOLTIP ─────────────────────────────────────────────── */
+
+QToolTip {
+    background-color: #1E293B;
+    color: #E2E8F0;
+    border: 1px solid #334155;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+
+/* ── STATUS BAR ──────────────────────────────────────────── */
+
+QStatusBar {
+    background-color: #F1F5F9;
+    color: #475569;
+    border-top: 1px solid #E2E8F0;
+    font-size: 12px;
+}
