@@ -1,8 +1,23 @@
-from PyQt6.QtCore import QTimer
+from PyQt6.QtCore import QEvent, QObject, QTimer
 from PyQt6.QtWidgets import QScrollArea, QVBoxLayout, QWidget
 
 from components.chat.chat_message_component import ChatMessageComponent
 from models.chat_models import ChatMessage
+
+
+class _BottomScrollEventFilter(QObject):
+    def __init__(self, owner: "ChatHistoryComponent") -> None:
+        super().__init__()
+        self.owner = owner
+
+    def eventFilter(self, watched, event):
+        if event.type() in (
+            QEvent.Type.Resize,
+            QEvent.Type.LayoutRequest,
+            QEvent.Type.Show,
+        ):
+            self.owner._do_scroll_to_bottom()
+        return super().eventFilter(watched, event)
 
 
 class ChatHistoryComponent(QWidget):
@@ -24,6 +39,9 @@ class ChatHistoryComponent(QWidget):
         layout.setContentsMargins(0, 0, 0, 0)
         layout.addWidget(self.scroll_area)
 
+        self._event_filter = _BottomScrollEventFilter(self)
+        self.container.installEventFilter(self._event_filter)
+
     def set_messages(self, messages: list[ChatMessage]) -> None:
         self._clear_messages()
 
@@ -41,9 +59,10 @@ class ChatHistoryComponent(QWidget):
                 widget.deleteLater()
 
     def _scroll_to_bottom(self) -> None:
-        QTimer.singleShot(
-            0,
-            lambda: self.scroll_area.verticalScrollBar().setValue(
-                self.scroll_area.verticalScrollBar().maximum()
-            ),
-        )
+        QTimer.singleShot(0, self._do_scroll_to_bottom)
+        QTimer.singleShot(50, self._do_scroll_to_bottom)
+        QTimer.singleShot(150, self._do_scroll_to_bottom)
+
+    def _do_scroll_to_bottom(self) -> None:
+        scrollbar = self.scroll_area.verticalScrollBar()
+        scrollbar.setValue(scrollbar.maximum())
