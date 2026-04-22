@@ -1,4 +1,5 @@
 from components.layout.main_window import MainWindow
+from components.system.file_dialog_component import FileDialogComponent
 from controllers.component_controllers.chat_history_controller import (
     ChatHistoryController,
 )
@@ -11,6 +12,8 @@ from controllers.domain_controllers.llm_controller import LLMController
 from controllers.domain_controllers.pdf_controller import PDFController
 from models.chat_models import ChatMessage
 from models.document_models import DocumentInfo
+from services.llm_service import LLMService
+from services.pdf_extraction_service import PDFExtractionService
 from state.app_state_store import AppStateStore
 
 
@@ -19,21 +22,34 @@ class MainController:
         self,
         window: MainWindow,
         store: AppStateStore,
-        pdf_controller: PDFController,
-        llm_controller: LLMController,
-        pdf_panel_controller: PDFPanelController,
-        chat_history_controller: ChatHistoryController,
-        chat_input_controller: ChatInputController,
-        file_dialog_controller: FileDialogController,
+        llm_service: LLMService,
+        pdf_extraction_service: PDFExtractionService,
     ) -> None:
         self.window = window
         self.store = store
-        self.pdf_controller = pdf_controller
-        self.llm_controller = llm_controller
-        self.pdf_panel_controller = pdf_panel_controller
-        self.chat_history_controller = chat_history_controller
-        self.chat_input_controller = chat_input_controller
-        self.file_dialog_controller = file_dialog_controller
+
+        self.pdf_controller = PDFController(
+            pdf_service=pdf_extraction_service,
+            llm_service=llm_service,
+        )
+        self.llm_controller = LLMController(
+            llm_service=llm_service,
+        )
+
+        self.pdf_panel_controller = PDFPanelController(
+            component=self.window.get_pdf_panel_component()
+        )
+        self.chat_history_controller = ChatHistoryController(
+            component=self.window.get_chat_history_component()
+        )
+        self.chat_input_controller = ChatInputController(
+            component=self.window.get_chat_input_component()
+        )
+
+        self.file_dialog_component = FileDialogComponent()
+        self.file_dialog_controller = FileDialogController(
+            component=self.file_dialog_component
+        )
 
     def initialize(self) -> None:
         self._connect_component_events()
@@ -50,7 +66,7 @@ class MainController:
         pdf_panel.remove_pdf_requested.connect(self.handle_remove_pdf_requested)
         chat_input.send_requested.connect(self.handle_send_message_requested)
 
-        self.file_dialog_controller.component.file_selected.connect(
+        self.file_dialog_component.file_selected.connect(
             self.handle_pdf_file_selected
         )
 
