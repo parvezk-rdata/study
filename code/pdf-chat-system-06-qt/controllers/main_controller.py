@@ -75,6 +75,7 @@ class MainController:
 
     def handle_send_message(self, text: str) -> None:
         self.chat_controller.send_message(text)
+        self.window.get_chat_input_component().clear_input()
 
     def handle_clear_chat(self) -> None:
         self.store.clear_chat()
