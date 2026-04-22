@@ -34,9 +34,9 @@ class PDFPanelComponent(QWidget):
         self._layout.addWidget(self._title_label)
         self._layout.addWidget(self._file_label)
         self._layout.addWidget(self._upload_button)
+        self._layout.addWidget(self._info_label)
         self._layout.addWidget(self._clear_chat_button)
         self._layout.addWidget(self._remove_pdf_button)
-        self._layout.addWidget(self._info_label)
         self._layout.addStretch(1)
 
     def _connect_signals(self) -> None:
