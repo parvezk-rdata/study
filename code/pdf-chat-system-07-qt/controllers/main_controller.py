@@ -1,10 +1,11 @@
-from PyQt6.QtWidgets import QFileDialog
-
 from components.layout.main_window import MainWindow
 from controllers.component_controllers.chat_history_controller import (
     ChatHistoryController,
 )
 from controllers.component_controllers.chat_input_controller import ChatInputController
+from controllers.component_controllers.file_dialog_controller import (
+    FileDialogController,
+)
 from controllers.component_controllers.pdf_panel_controller import PDFPanelController
 from controllers.domain_controllers.llm_controller import LLMController
 from controllers.domain_controllers.pdf_controller import PDFController
@@ -23,6 +24,7 @@ class MainController:
         pdf_panel_controller: PDFPanelController,
         chat_history_controller: ChatHistoryController,
         chat_input_controller: ChatInputController,
+        file_dialog_controller: FileDialogController,
     ) -> None:
         self.window = window
         self.store = store
@@ -31,6 +33,7 @@ class MainController:
         self.pdf_panel_controller = pdf_panel_controller
         self.chat_history_controller = chat_history_controller
         self.chat_input_controller = chat_input_controller
+        self.file_dialog_controller = file_dialog_controller
 
     def initialize(self) -> None:
         self._connect_component_events()
@@ -47,23 +50,25 @@ class MainController:
         pdf_panel.remove_pdf_requested.connect(self.handle_remove_pdf_requested)
         chat_input.send_requested.connect(self.handle_send_message_requested)
 
+        self.file_dialog_controller.component.file_selected.connect(
+            self.handle_pdf_file_selected
+        )
+
     def _connect_store_events(self) -> None:
         self.store.document_changed.connect(self.handle_document_changed)
         self.store.chat_changed.connect(self.handle_chat_changed)
         self.store.status_changed.connect(self.handle_status_changed)
 
     def _initialize_static_ui(self) -> None:
-        self.pdf_panel_controller.set_static_texts(
+        self.pdf_panel_controller.initialize_component(
             title_text="PDF",
             upload_button_text="Upload PDF",
             clear_chat_button_text="Clear conversation",
             remove_pdf_button_text="Remove PDF",
-        )
-        self.pdf_panel_controller.apply_title_style(
-            "font-weight: bold; font-size: 14px;"
+            title_style="font-weight: bold; font-size: 14px;",
         )
 
-        self.chat_input_controller.set_static_texts(
+        self.chat_input_controller.initialize_component(
             send_button_text="Send",
         )
 
@@ -77,15 +82,9 @@ class MainController:
         self._render_status_section(state.status_message or "Ready")
 
     def handle_upload_pdf_requested(self) -> None:
-        file_path, _ = QFileDialog.getOpenFileName(
-            self.window,
-            "Select PDF",
-            "",
-            "PDF Files (*.pdf)",
-        )
-        if not file_path:
-            return
+        self.file_dialog_controller.handle_open_pdf_dialog(self.window)
 
+    def handle_pdf_file_selected(self, file_path: str) -> None:
         current_document = self.store.get_state().document
         self.store.set_status("Extracting text from PDF...")
 
@@ -104,11 +103,27 @@ class MainController:
     def handle_clear_chat_requested(self) -> None:
         self.store.clear_chat()
         self.store.set_status("Conversation cleared.")
+        self.chat_input_controller.handle_chat_cleared()
+
+        current_document = self.store.get_state().document
+        if current_document is not None:
+            self.pdf_panel_controller.handle_chat_cleared(
+                file_text=current_document.filename,
+                info_text=self._build_document_info_text(current_document),
+            )
 
     def handle_remove_pdf_requested(self) -> None:
         self.store.clear_document()
         self.store.clear_chat()
         self.store.set_status(self.pdf_controller.remove_pdf())
+
+        self.pdf_panel_controller.handle_pdf_removed(
+            file_text="No PDF selected",
+            info_text="Upload a PDF to start chatting.",
+        )
+        self.chat_input_controller.handle_pdf_removed(
+            placeholder_text="Upload a PDF to start",
+        )
 
     def handle_send_message_requested(self, text: str) -> None:
         state = self.store.get_state()
@@ -128,7 +143,7 @@ class MainController:
             self.store.add_chat_message(
                 ChatMessage(role="assistant", content=result.assistant_message)
             )
-            self.chat_input_controller.clear_input()
+            self.chat_input_controller.handle_message_sent()
 
         self.store.set_status(result.status_message)
 
@@ -143,34 +158,22 @@ class MainController:
 
     def _render_document_section(self, document: DocumentInfo | None) -> None:
         if document is None:
-            self.pdf_panel_controller.render_file_text("No PDF selected")
-            self.pdf_panel_controller.render_info_text(
-                "Upload a PDF to start chatting."
+            self.pdf_panel_controller.handle_no_pdf_state(
+                file_text="No PDF selected",
+                info_text="Upload a PDF to start chatting.",
             )
-            self.pdf_panel_controller.set_clear_chat_enabled(False)
-            self.pdf_panel_controller.set_remove_pdf_enabled(False)
-            self.pdf_panel_controller.set_file_visible(True)
-            self.pdf_panel_controller.set_info_visible(True)
-
-            self.chat_input_controller.set_placeholder_text("Upload a PDF to start")
-            self.chat_input_controller.set_input_enabled(False)
-            self.chat_input_controller.set_send_enabled(False)
+            self.chat_input_controller.handle_no_pdf_state(
+                placeholder_text="Upload a PDF to start",
+            )
             return
 
-        self.pdf_panel_controller.render_file_text(document.filename)
-        self.pdf_panel_controller.render_info_text(
-            self._build_document_info_text(document)
+        self.pdf_panel_controller.handle_pdf_loaded(
+            file_text=document.filename,
+            info_text=self._build_document_info_text(document),
         )
-        self.pdf_panel_controller.set_clear_chat_enabled(True)
-        self.pdf_panel_controller.set_remove_pdf_enabled(True)
-        self.pdf_panel_controller.set_file_visible(True)
-        self.pdf_panel_controller.set_info_visible(True)
-
-        self.chat_input_controller.set_placeholder_text(
-            "Ask a question about the PDF"
+        self.chat_input_controller.handle_pdf_loaded(
+            placeholder_text="Ask a question about the PDF",
         )
-        self.chat_input_controller.set_input_enabled(True)
-        self.chat_input_controller.set_send_enabled(True)
 
     def _render_chat_history_section(self, history: list[ChatMessage]) -> None:
         items: list[dict[str, str]] = []

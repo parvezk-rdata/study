@@ -5,17 +5,27 @@ class ChatInputController:
     def __init__(self, component: ChatInputComponent) -> None:
         self.component = component
 
-    def set_static_texts(self, send_button_text: str) -> None:
+    def initialize_component(self, send_button_text: str) -> None:
         self.component.set_send_button_text(send_button_text)
 
-    def set_placeholder_text(self, text: str) -> None:
-        self.component.set_placeholder_text(text)
+    def handle_no_pdf_state(self, placeholder_text: str) -> None:
+        self.component.set_placeholder_text(placeholder_text)
+        self.component.get_input().setEnabled(False)
+        self.component.get_send_button().setEnabled(False)
 
-    def set_input_enabled(self, enabled: bool) -> None:
-        self.component.get_input().setEnabled(enabled)
+    def handle_pdf_loaded(self, placeholder_text: str) -> None:
+        self.component.set_placeholder_text(placeholder_text)
+        self.component.get_input().setEnabled(True)
+        self.component.get_send_button().setEnabled(True)
 
-    def set_send_enabled(self, enabled: bool) -> None:
-        self.component.get_send_button().setEnabled(enabled)
+    def handle_pdf_removed(self, placeholder_text: str) -> None:
+        self.component.set_placeholder_text(placeholder_text)
+        self.component.get_input().setEnabled(False)
+        self.component.get_send_button().setEnabled(False)
+        self.component.clear_input()
 
-    def clear_input(self) -> None:
+    def handle_message_sent(self) -> None:
+        self.component.clear_input()
+
+    def handle_chat_cleared(self) -> None:
         self.component.clear_input()

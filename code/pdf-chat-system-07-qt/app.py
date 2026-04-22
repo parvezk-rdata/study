@@ -1,8 +1,12 @@
 from components.layout.main_window import MainWindow
+from components.system.file_dialog_component import FileDialogComponent
 from controllers.component_controllers.chat_history_controller import (
     ChatHistoryController,
 )
 from controllers.component_controllers.chat_input_controller import ChatInputController
+from controllers.component_controllers.file_dialog_controller import (
+    FileDialogController,
+)
 from controllers.component_controllers.pdf_panel_controller import PDFPanelController
 from controllers.domain_controllers.llm_controller import LLMController
 from controllers.domain_controllers.pdf_controller import PDFController
@@ -20,6 +24,7 @@ class PDFChatApplication:
         self.pdf_extraction_service = PDFExtractionService()
 
         self.window = MainWindow()
+        self.file_dialog_component = FileDialogComponent()
 
         self.llm_controller = LLMController(llm_service=self.llm_service)
         self.pdf_controller = PDFController(
@@ -36,6 +41,9 @@ class PDFChatApplication:
         self.chat_input_controller = ChatInputController(
             component=self.window.get_chat_input_component()
         )
+        self.file_dialog_controller = FileDialogController(
+            component=self.file_dialog_component
+        )
 
         self.main_controller = MainController(
             window=self.window,
@@ -45,6 +53,7 @@ class PDFChatApplication:
             pdf_panel_controller=self.pdf_panel_controller,
             chat_history_controller=self.chat_history_controller,
             chat_input_controller=self.chat_input_controller,
+            file_dialog_controller=self.file_dialog_controller,
         )
 
     def start(self) -> None:
