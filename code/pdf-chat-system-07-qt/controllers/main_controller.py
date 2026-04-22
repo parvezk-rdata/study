@@ -18,18 +18,14 @@ from state.app_state_store import AppStateStore
 
 
 class MainController:
-    def __init__(
-        self,
-        window: MainWindow,
-        store: AppStateStore,
-        llm_service: LLMService,
-        pdf_extraction_service: PDFExtractionService,
-    ) -> None:
+    def __init__( self, window: MainWindow ) -> None:
         self.window = window
-        self.store = store
+        self.store = AppStateStore()
+
+        llm_service = LLMService();
 
         self.pdf_controller = PDFController(
-            pdf_service=pdf_extraction_service,
+            pdf_service=PDFExtractionService(),
             llm_service=llm_service,
         )
         self.llm_controller = LLMController(
