@@ -1,35 +1,44 @@
 from PyQt6.QtWidgets import QLabel, QVBoxLayout, QWidget
 
-from models.chat_models import ChatMessage
-
 
 class ChatMessageComponent(QWidget):
-    def __init__(self, message: ChatMessage) -> None:
+    def __init__(self) -> None:
         super().__init__()
-        self.message = message
+        self._create_widgets()
+        self._build_layout()
 
-        self.role_label = QLabel(self._display_role(message.role))
-        self.content_label = QLabel(message.content)
+    def _create_widgets(self) -> None:
+        self._header_label = QLabel()
+        self._content_label = QLabel()
 
-        self._build_ui()
-
-    def _build_ui(self) -> None:
-        layout = QVBoxLayout(self)
-        layout.setContentsMargins(8, 8, 8, 8)
-        layout.setSpacing(4)
-
-        self.role_label.setStyleSheet("font-weight: bold;")
-        self.content_label.setWordWrap(True)
-        self.content_label.setTextInteractionFlags(
-            self.content_label.textInteractionFlags()
+        self._header_label.setWordWrap(True)
+        self._content_label.setWordWrap(True)
+        self._content_label.setTextInteractionFlags(
+            self._content_label.textInteractionFlags()
         )
 
-        layout.addWidget(self.role_label)
-        layout.addWidget(self.content_label)
+    def _build_layout(self) -> None:
+        self._layout = QVBoxLayout(self)
+        self._layout.setContentsMargins(8, 8, 8, 8)
+        self._layout.setSpacing(4)
 
-    def _display_role(self, role: str) -> str:
-        if role == "user":
-            return "You"
-        if role == "assistant":
-            return "Assistant"
-        return role.capitalize()
+        self._layout.addWidget(self._header_label)
+        self._layout.addWidget(self._content_label)
+
+    def get_header_label(self) -> QLabel:
+        return self._header_label
+
+    def get_content_label(self) -> QLabel:
+        return self._content_label
+
+    def set_header_text(self, text: str) -> None:
+        self._header_label.setText(text)
+
+    def set_content_text(self, text: str) -> None:
+        self._content_label.setText(text)
+
+    def get_header_text(self) -> str:
+        return self._header_label.text()
+
+    def get_content_text(self) -> str:
+        return self._content_label.text()

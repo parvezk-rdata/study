@@ -1,4 +1,24 @@
 
+Design decision for the APP
+
+The component :
+    --> Should have setters and getters for all its widgets
+    --> have a seprate method for layout related work.
+    --> should be a dum renderer
+    --> shoud not take decisions as to what to display.
+    --> shoud not decide how to format data
+    --> should not hardcode any default text — not even placeholder strings
+    --> The component should emit signals/events for user actions, nothing more.
+
+The caller of the component becomes responsible for:
+    --> Deciding what text to put in each label based on current state
+    --> initial/default state of the component at construction time.
+    --> Deciding which buttons should be enabled or disabled
+    --> Deciding whether to show a warning and what it says
+    --> Providing all the initial/default label text too
+    --> the caller decides widget visibility, not just enabled/disabled state. 
+    --> Showing or hiding sections of the component based on state is also a caller decision.
+
 
 --------------------------------------------------------------------------------
 

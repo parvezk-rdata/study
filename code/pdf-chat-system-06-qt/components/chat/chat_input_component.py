@@ -7,37 +7,47 @@ class ChatInputComponent(QWidget):
 
     def __init__(self) -> None:
         super().__init__()
+        self._create_widgets()
+        self._build_layout()
+        self._connect_signals()
 
-        self.input = QLineEdit()
-        self.send_button = QPushButton("Send")
+    def _create_widgets(self) -> None:
+        self._input = QLineEdit()
+        self._send_button = QPushButton()
 
-        self._build_ui()
-        self.set_has_document(False)
+    def _build_layout(self) -> None:
+        self._layout = QHBoxLayout(self)
+        self._layout.setContentsMargins(0, 0, 0, 0)
+        self._layout.setSpacing(8)
 
-    def _build_ui(self) -> None:
-        layout = QHBoxLayout(self)
-        layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(8)
+        self._layout.addWidget(self._input, 1)
+        self._layout.addWidget(self._send_button, 0)
 
-        layout.addWidget(self.input, 1)
-        layout.addWidget(self.send_button, 0)
-
-        self.send_button.clicked.connect(self._emit_send)
-        self.input.returnPressed.connect(self._emit_send)
+    def _connect_signals(self) -> None:
+        self._send_button.clicked.connect(self._emit_send)
+        self._input.returnPressed.connect(self._emit_send)
 
     def _emit_send(self) -> None:
-        text = self.input.text().strip()
-        if not text:
-            return
-
+        text = self._input.text()
         self.send_requested.emit(text)
-        self.input.clear()
 
-    def set_has_document(self, has_document: bool) -> None:
-        self.input.setEnabled(has_document)
-        self.send_button.setEnabled(has_document)
+    def get_input(self) -> QLineEdit:
+        return self._input
 
-        if has_document:
-            self.input.setPlaceholderText("Ask a question about the PDF")
-        else:
-            self.input.setPlaceholderText("Upload a PDF to start")
+    def get_send_button(self) -> QPushButton:
+        return self._send_button
+
+    def set_input_text(self, text: str) -> None:
+        self._input.setText(text)
+
+    def get_input_text(self) -> str:
+        return self._input.text()
+
+    def clear_input(self) -> None:
+        self._input.clear()
+
+    def set_placeholder_text(self, text: str) -> None:
+        self._input.setPlaceholderText(text)
+
+    def set_send_button_text(self, text: str) -> None:
+        self._send_button.setText(text)

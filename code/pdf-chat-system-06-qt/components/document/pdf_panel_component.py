@@ -1,8 +1,6 @@
 from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtWidgets import QLabel, QPushButton, QVBoxLayout, QWidget
 
-from models.document_models import DocumentInfo
-
 
 class PDFPanelComponent(QWidget):
     upload_requested = pyqtSignal()
@@ -11,57 +9,73 @@ class PDFPanelComponent(QWidget):
 
     def __init__(self) -> None:
         super().__init__()
+        self._create_widgets()
+        self._build_layout()
+        self._connect_signals()
 
-        self.title_label = QLabel("PDF")
-        self.file_label = QLabel("No PDF selected")
+    def _create_widgets(self) -> None:
+        self._title_label = QLabel()
+        self._file_label = QLabel()
+        self._info_label = QLabel()
 
-        self.upload_button = QPushButton("Upload PDF")
-        self.info_label = QLabel("Upload a PDF to start chatting.")
+        self._upload_button = QPushButton()
+        self._clear_chat_button = QPushButton()
+        self._remove_pdf_button = QPushButton()
 
-        self.clear_chat_button = QPushButton("Clear conversation")
-        self.remove_pdf_button = QPushButton("Remove PDF")
+        self._title_label.setWordWrap(True)
+        self._file_label.setWordWrap(True)
+        self._info_label.setWordWrap(True)
 
-        self._build_ui()
+    def _build_layout(self) -> None:
+        self._layout = QVBoxLayout(self)
+        self._layout.setContentsMargins(0, 0, 0, 0)
+        self._layout.setSpacing(8)
 
-    def _build_ui(self) -> None:
-        layout = QVBoxLayout(self)
-        layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(8)
+        self._layout.addWidget(self._title_label)
+        self._layout.addWidget(self._file_label)
+        self._layout.addWidget(self._upload_button)
+        self._layout.addWidget(self._clear_chat_button)
+        self._layout.addWidget(self._remove_pdf_button)
+        self._layout.addWidget(self._info_label)
+        self._layout.addStretch(1)
 
-        self.title_label.setStyleSheet("font-weight: bold; font-size: 14px;")
-        self.file_label.setWordWrap(True)
-        self.info_label.setWordWrap(True)
+    def _connect_signals(self) -> None:
+        self._upload_button.clicked.connect(self.upload_requested.emit)
+        self._clear_chat_button.clicked.connect(self.clear_chat_requested.emit)
+        self._remove_pdf_button.clicked.connect(self.remove_pdf_requested.emit)
 
-        layout.addWidget(self.title_label)
-        layout.addWidget(self.file_label)
-        layout.addWidget(self.upload_button)
-        layout.addWidget(self.info_label)
-        layout.addWidget(self.clear_chat_button)
-        layout.addWidget(self.remove_pdf_button)
-        layout.addStretch(1)
+    def get_title_label(self) -> QLabel:
+        return self._title_label
 
-        self.upload_button.clicked.connect(self.upload_requested.emit)
-        self.clear_chat_button.clicked.connect(self.clear_chat_requested.emit)
-        self.remove_pdf_button.clicked.connect(self.remove_pdf_requested.emit)
+    def get_file_label(self) -> QLabel:
+        return self._file_label
 
-    def set_document(self, document: DocumentInfo | None) -> None:
-        if document is None:
-            self.file_label.setText("No PDF selected")
-            self.info_label.setText("Upload a PDF to start chatting.")
-            return
+    def get_info_label(self) -> QLabel:
+        return self._info_label
 
-        self.file_label.setText(document.filename)
+    def get_upload_button(self) -> QPushButton:
+        return self._upload_button
 
-        warning = ""
-        if document.truncated:
-            warning = (
-                "\n\nWarning: PDF exceeds the context budget. "
-                "Later pages will be truncated during chat."
-            )
+    def get_clear_chat_button(self) -> QPushButton:
+        return self._clear_chat_button
 
-        self.info_label.setText(
-            f"Pages: {document.page_count}\n"
-            f"Method: {document.extraction_method}\n"
-            f"Characters: {document.char_count:,}"
-            f"{warning}"
-        )
+    def get_remove_pdf_button(self) -> QPushButton:
+        return self._remove_pdf_button
+
+    def set_title_text(self, text: str) -> None:
+        self._title_label.setText(text)
+
+    def set_file_text(self, text: str) -> None:
+        self._file_label.setText(text)
+
+    def set_info_text(self, text: str) -> None:
+        self._info_label.setText(text)
+
+    def set_upload_button_text(self, text: str) -> None:
+        self._upload_button.setText(text)
+
+    def set_clear_chat_button_text(self, text: str) -> None:
+        self._clear_chat_button.setText(text)
+
+    def set_remove_pdf_button_text(self, text: str) -> None:
+        self._remove_pdf_button.setText(text)
