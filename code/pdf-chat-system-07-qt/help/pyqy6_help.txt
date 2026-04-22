@@ -1,0 +1,32 @@
+
+
+
+QLabel : A widget that displays text.
+QWidget is base class to create a panel or box
+
+
+Widget          --->    Layout          --->     Widget 
+QWidget         --->    QVBoxLayout     --->     QLabel 
+
+
+┌────────── QWidget (Box or panel)──────────┐
+│                                           │
+│        [8px padding all around]           │
+│                                           │
+│  ┌─── QVBoxLayout ─────────────────────┐  │
+│  │  📝 QLabel : " message "            │  │
+│  │                                     │  │
+│  │                                     │  │
+│  │                                     │  │
+│  │                                     │  │
+│  │                                     │  │
+│  └─────────────────────────────────────┘  │
+│                                           │
+└───────────────────────────────────────────┘
+
+------------------------------------------------------------------------------
+
+
+Layout
+
+QVBoxLayout         :       vertically stacks the child widgets  (V = Vertical)

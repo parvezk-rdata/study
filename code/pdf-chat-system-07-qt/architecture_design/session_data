@@ -1,0 +1,33 @@
+App State Design (Central Store)
+
+
+| State Name      | Type                | Purpose                                                                                     |
+| --------------- | ------------------- | ------------------------------------------------------------------------------------------- |
+| document        | ExtractedDoc / None | Stores the currently loaded PDF document including extracted text, page count, and OCR flag |
+| document_hash   | str / None          | Stores SHA256 hash of the uploaded PDF to detect if the same file is re-uploaded            |
+| chat_history    | list of dict        | Stores the full chat conversation as a list of messages (each message has role and content) |
+| is_loading      | bool                | Indicates whether the app is currently processing (PDF extraction or LLM response)          |
+| error_message   | str / None          | Stores any error message from PDF extraction or LLM call to display in UI                   |
+| pdf_metadata    | dict                | Stores derived PDF info such as page count, extraction method, character count              |
+| is_truncated    | bool                | Indicates whether PDF text was truncated due to context size limits                         |
+| input_text      | str                 | Stores the current user input in the chat input box                                         |
+| has_document    | bool                | Indicates whether a valid PDF is currently loaded                                           |
+| last_user_query | str / None          | Stores the last question asked by the user (useful for debugging or retry)                  |                                                                              |
+| --------------- | ------------------- | ------------------------------------------------------------------------------------------- |
+
+
+Notes:
+
+* chat_history format:
+  [
+  {"role": "user", "content": "..."},
+  {"role": "assistant", "content": "..."}
+  ]
+
+* document is the core state used by chat_controller and document_controller
+
+* pdf_metadata is derived from document but stored separately for easy UI binding
+
+* has_document is a convenience flag to simplify UI logic (enable/disable input)
+
+* is_loading can be used later for spinners or disabled UI even in synchronous version
