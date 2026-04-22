@@ -6,14 +6,20 @@ from models.document_models import DocumentInfo
 
 class PDFPanelComponent(QWidget):
     upload_requested = pyqtSignal()
+    clear_chat_requested = pyqtSignal()
+    remove_pdf_requested = pyqtSignal()
 
     def __init__(self) -> None:
         super().__init__()
 
         self.title_label = QLabel("PDF")
         self.file_label = QLabel("No PDF selected")
+
         self.upload_button = QPushButton("Upload PDF")
         self.info_label = QLabel("Upload a PDF to start chatting.")
+
+        self.clear_chat_button = QPushButton("Clear conversation")
+        self.remove_pdf_button = QPushButton("Remove PDF")
 
         self._build_ui()
 
@@ -30,8 +36,13 @@ class PDFPanelComponent(QWidget):
         layout.addWidget(self.file_label)
         layout.addWidget(self.upload_button)
         layout.addWidget(self.info_label)
+        layout.addWidget(self.clear_chat_button)
+        layout.addWidget(self.remove_pdf_button)
+        layout.addStretch(1)
 
         self.upload_button.clicked.connect(self.upload_requested.emit)
+        self.clear_chat_button.clicked.connect(self.clear_chat_requested.emit)
+        self.remove_pdf_button.clicked.connect(self.remove_pdf_requested.emit)
 
     def set_document(self, document: DocumentInfo | None) -> None:
         if document is None:

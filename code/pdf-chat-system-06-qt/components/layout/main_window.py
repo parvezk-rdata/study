@@ -23,9 +23,6 @@ class MainWindow(QMainWindow):
         self.chat_history_component = ChatHistoryComponent()
         self.chat_input_component = ChatInputComponent()
 
-        self.clear_chat_button = QPushButton("Clear conversation")
-        self.remove_pdf_button = QPushButton("Remove PDF")
-
         self._build_ui()
 
     def _build_ui(self) -> None:
@@ -54,8 +51,6 @@ class MainWindow(QMainWindow):
         layout.setSpacing(12)
 
         layout.addWidget(self.pdf_panel_component)
-        layout.addWidget(self.clear_chat_button)
-        layout.addWidget(self.remove_pdf_button)
         layout.addStretch(1)
 
         return sidebar

@@ -1,10 +1,10 @@
 from PyQt6.QtWidgets import QFileDialog
 
+from components.layout.main_window import MainWindow
 from controllers.chat_controller import ChatController
 from controllers.document_controller import DocumentController
 from models.document_models import DocumentInfo
 from state.app_state_store import AppStateStore
-from components.layout.main_window import MainWindow
 
 
 class MainController:
@@ -26,10 +26,15 @@ class MainController:
         self._render_initial_state()
 
     def _connect_ui_events(self) -> None:
-        self.window.pdf_panel_component.upload_requested.connect(self.handle_upload_pdf)
-        self.window.chat_input_component.send_requested.connect(self.handle_send_message)
-        self.window.clear_chat_button.clicked.connect(self.handle_clear_chat)
-        self.window.remove_pdf_button.clicked.connect(self.handle_remove_pdf)
+        panel = self.window.pdf_panel_component
+
+        panel.upload_requested.connect(self.handle_upload_pdf)
+        panel.clear_chat_requested.connect(self.handle_clear_chat)
+        panel.remove_pdf_requested.connect(self.handle_remove_pdf)
+
+        self.window.chat_input_component.send_requested.connect(
+            self.handle_send_message
+        )
 
     def _connect_store_events(self) -> None:
         self.store.document_changed.connect(self.on_document_changed)
