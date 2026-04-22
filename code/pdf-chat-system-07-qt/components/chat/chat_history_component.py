@@ -19,6 +19,8 @@ class _BottomScrollEventFilter(QObject):
         return super().eventFilter(watched, event)
 
 
+# QWidget -->  QScrollArea  -->  QWidget
+
 class ChatHistoryComponent(QWidget):
     def __init__(self) -> None:
         super().__init__()
@@ -73,14 +75,14 @@ class ChatHistoryComponent(QWidget):
         self.clear_messages()
 
         for item in items:
-            self.add_message_item(
-                header_text=item.get("header", ""),
-                content_text=item.get("content", ""),
-            )
+            header  =   item.get("header", "")
+            content =   item.get("content", "")
+            self.add_message_item(  header_text=header, content_text=content)
 
         self.scroll_to_bottom()
 
     def scroll_to_bottom(self) -> None:
+        # scroll to bottom 3 times. set timers
         QTimer.singleShot(0, self._do_scroll_to_bottom)
         QTimer.singleShot(50, self._do_scroll_to_bottom)
         QTimer.singleShot(150, self._do_scroll_to_bottom)

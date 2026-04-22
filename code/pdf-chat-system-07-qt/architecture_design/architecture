@@ -37,6 +37,9 @@ MainController
 The component :
     --> is a dumb renderer
     --> Create and own UI widgets (labels, buttons, inputs, layouts).
+    --> should have a method to create all child widgets.
+    --> shoud have a method(build_layout) to position its child widgets.
+    --> if it is possible then it should have a method to create widget tree.   
     --> Expose setters to update UI elements.
     --> Expose getters to access widget state if needed.
     --> Emit signals/events for user interactions.
@@ -50,17 +53,13 @@ The component :
 The component_controller :
     --> manages only one component.
     --> acts as a UI adapter between MainController and the component.
-    --> It should call setters on the component to update UI.
-    --> It should never directly manipulate layout structure.
-    --> It should not hardcode business assumptions — only reflect what is passed from MainController.
-    --> It does not contain business logic.
-    --> It does not access or mutate global state directly (state is owned by MainController)
-    --> controlls widget text, visibility, enabled/disabled states
+    --> It should be have event-oriented methods which calls one or many setters of component.
     --> It should be reusable with its component. 
     --> It should not depend on other components, controllers and application-wide logic.
-    --> Must NOT: call services, perform API calls, compute domain logic, decide workflows.
-    --> A ComponentController must never call another ComponentController.
-    --> It does not subscribe to store directly.
+    --> It should never directly manipulate layout structure.
+    --> it can only call methods of the component for which it is designed for.
+    --> it can not call other API, other component method, other controller methods.
+    --> Shoud not access/mutate global state directlytroller.
     --> It only reacts when MainController calls its methods.
 
 Only create a method in a ComponentController if that component is affected by that event. Also very important, some times it is difficult to have just one method in component_controller for a certain event because main_controller takes some decisions in between. So in such cases ther can be multiple methods in component_conrollers for such event handling.
