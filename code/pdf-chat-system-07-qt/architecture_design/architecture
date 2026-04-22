@@ -1,4 +1,5 @@
 
+
 Data Flow  (MainController, ComponentController, component)
 
 Component --> emits signal --> MainController --> ComponentController methods --> UI Updates

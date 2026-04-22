@@ -1,30 +1,69 @@
 
-01).  PDFUploadComponent
+01).  PDFPanelComponent
 
-              ┌─────────────────────── QWidget (box or panel) ───────────────────┐
-              │                                                                  │
-              │                                                                  │
-              │     ┌──────── QVBoxLayout [spacing=8, margin=0]───────────┐      │                                                       │
-              │     │                                                     │      │                                                       │
-              │     │                                                     │      │                                                       │
-              │     │  QLabel       : "PDF"                               │      │                                                       │
-              │     │  QLabel       : "No PDF selected"                   │      │                                                       │
-              │     │                                                     │      │                                                       │
-              │     │  QPushButton  : Upload PDF                          │      │                                                       │
-              │     │  QLabel       : "Upload a PDF to Chat"              │      │                                                       │
-              │     │                                                     │      │                                                       │
-              │     │                                                     │      │                                                      │
-              │     │  QPushButton  : Clear Chat                          │      │                                                       │
-              │     │                                                     │      │  
-              │     │  QPushButton  : Remove Pdf                          │      │  
-              │     │                                                     │      │  
-              │     └─────────────────────────────────────────────────────┘      │
-              │                                                                  │
-              └──────────────────────────────────────────────────────────────────┘  
+
+                ┌────────── QWidget :  (box or panel) ──────────────┐
+                │                                                   │
+                │  ┌─── QVBoxLayout [spacing=8, margin=0]──────┐    │
+                │  │                                           │    │
+                │  │  📝 QLabel        _title_label            │    │
+                │  │  📝 QLabel        _file_label             │    │
+                │  │  [ QPushButton ]  _upload_button          │    │
+                │  │  📝 QLabel        _info_label             │    │
+                │  │  [ QPushButton ]  _clear_chat_button      │    │ 
+                │  │  [ QPushButton ]  _remove_pdf_button      │    │
+                │  │                                           │    │
+                │  │  ~ ~ ~ ~ ~ ~ ~  addStretch(1)  ~ ~ ~ ~ ~  │    │
+                │  └───────────────────────────────────────────┘    │
+                │                                                   │
+                └───────────────────────────────────────────────────┘
                   
                
-
 ----------------------------------------------------------------------------------------------------
  
- 
- 04).
+02). ChatHistoryComponent
+
+        ┌────────── QWidget : (box or panel) ────────────────────────────────────────┐
+        │                                                                            │
+        │  ┌─── QVBoxLayout (_layout) [margins: 0,0,0,0] ─────────────────────────┐  │
+        │  │                                                                      │  │
+        │  │  ┌─── QScrollArea (_scroll_area) ───────────────────────────────┐    │  │
+        │  │  │  setWidgetResizable(True)                                    │    │  │
+        │  │  │                                                              │    │  │
+        │  │  │  ┌─── QWidget (_container) ───────────────────────────────┐  │    │  │
+        │  │  │  │                                                        │  │    │  │
+        │  │  │  │  ┌─── QVBoxLayout (_messages_layout) [8px margins] ─┐  │  │    │  │
+        │  │  │  │  │  [spacing: 10px]                                 │  │  │    │  │
+        │  │  │  │  │                                                  │  │  │    │  │
+        │  │  │  │  │  ~ ~ ~ ~ ~ ~ addStretch(1) ~ ~ ~ ~ ~ ~ ~         │  │  │    │  │
+        │  │  │  │  │  ┌── ChatMessageComponent ───────────────────┐   │  │  │    │  │
+        │  │  │  │  │  │  header_text                              │   │  │  │    │  │
+        │  │  │  │  │  │  content_text                             │   │  │  │    │  │
+        │  │  │  │  │  └───────────────────────────────────────────┘   │  │  │    │  │
+        │  │  │  │  │  ┌── ChatMessageComponent ──────────────────┐    │  │  │    │  │
+        │  │  │  │  │  │  header_text                             │    │  │  │    │  │
+        │  │  │  │  │  │  content_text                            │    │  │  │    │  │
+        │  │  │  │  │  └──────────────────────────────────────────┘    │  │  │    │  │
+        │  │  │  │  │  ┌── ChatMessageComponent ──────────────────┐    │  │  │    │  │
+        │  │  │  │  │  │  header_text                             │    │  │  │    │  │
+        │  │  │  │  │  │  content_text                            │    │  │  │    │  │
+        │  │  │  │  │  └──────────────────────────────────────────┘    │  │  │    │  │
+        │  │  │  │  │                                                  │  │  │    │  │
+        │  │  │  │  └──────────────────────────────────────────────────┘  │  │    │  │
+        │  │  │  └────────────────────────────────────────────────────────┘  │    │  │
+        │  │  └──────────────────────────────────────────────────────────────┘    │  │
+        │  │                                                                      │  │
+        │  └──────────────────────────────────────────────────────────────────────┘  │
+        │                                                                            │
+        └────────────────────────────────────────────────────────────────────────────┘
+
+        _BottomScrollEventFilter (installed on _container)
+        ┌─────────────────────────────────────────────────────────┐
+        │  Watches for:  Resize / LayoutRequest / Show events     │
+        │  Reacts with:  _do_scroll_to_bottom()                   │
+        └─────────────────────────────────────────────────────────┘
+
+        scroll_to_bottom() fires _do_scroll_to_bottom() 3 times:
+        ├── QTimer  0ms   (immediate, next event loop tick)
+        ├── QTimer  50ms  (after layout settles)
+        └── QTimer 150ms  (after rendering fully completes)

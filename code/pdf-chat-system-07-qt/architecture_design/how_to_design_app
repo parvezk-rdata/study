@@ -1,0 +1,17 @@
+
+
+01).    Design the GUI pages on paper.
+
+02).    List the events that will occur
+
+03).    For each event write steps that will happen
+
+04).    Write components based on GUI design.
+
+05).    Write main_controll with blank methods(event handling). one method for each event.
+
+06).    Write comments/tasks as per step-03 in these blank method.    
+
+07).    Decide tasks(methods) that will be done by component_controllers.
+
+08).    Decide what domani_controllers are needed that controll outside/other services.
