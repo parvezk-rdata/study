@@ -22,6 +22,21 @@ The caller of the component becomes responsible for:
 
 --------------------------------------------------------------------------------
 
+Main --->  App  ---> controller --->  component controller   --->  component
+
+MainController      =   brain / workflow coordinator
+ComponentController =   manages one component or one UI region
+Component           =   dumb renderer only
+
+Main controller is the orchestrator. It reads store state, decides what should happen, and then calls the relevant component controllers in sequence.  Only MainController should access the global store. MainController own store interaction, so component controllers stay even thinner.
+
+Each component controller becomes responsible only for one UI area and its component, but it does not coordinate with other component controllers. That keeps dependencies one-way and prevents cross-controller coupling.
+
+
+
+
+--------------------------------------------------------------------------------
+
 
 Generate a list of variable/data and then we will group them in classes/models. Then util services will be written to set values to these variables.
 
