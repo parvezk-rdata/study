@@ -1,204 +1,166 @@
 # Chat PDF App — Requirements Document
 
-> This document captures all requirements gathered during Step 01 of the development process.
-> For each decision point, the options presented are listed alongside the choice made.
+## Project Overview
+
+A Python desktop application that lets a user upload a PDF file and have a conversational Q&A session with its contents, powered by the OpenAI API.
 
 ---
 
-## 1. Project Overview
+## Requirement Gathering — Questions & Decisions
 
-A Python desktop application that lets a user upload a PDF file and have a conversation with its contents using an AI language model. The loaded PDF filename is shown in the UI, and all chat history is held in memory for the duration of the session.
-
----
-
-## 2. Decision Log
-
-Each question asked during requirements gathering, the options offered, and the choice made.
+This section documents every design question asked during requirements gathering, the options presented, and the final decision made.
 
 ---
 
-### 2.1 Primary Use Case
+### Q1. What is the primary use case?
 
-**Question:** What's the primary use case?
+| Option | Description |
+|--------|-------------|
+| ✅ **Upload & chat with a single PDF at a time** | One PDF loaded at a time; must re-upload to change |
+| Upload & chat with multiple PDFs simultaneously | Multiple PDFs open and queryable at once |
+| Both — switch between PDFs or query across them | Hybrid mode with cross-PDF queries |
 
-| Option | Description | Chosen |
-|--------|-------------|--------|
-| Upload & chat with a single PDF at a time | One PDF loaded at a time; replace to switch | ✅ |
-| Upload & chat with multiple PDFs simultaneously | Several PDFs open in parallel, query across all | |
-| Both — switch between PDFs or query across them | Single or multi-PDF with switching support | |
-
-**Decision:** Single PDF at a time — keeps the architecture simple and the UX focused.
+**Decision:** Upload & chat with a single PDF at a time.
 
 ---
 
-### 2.2 AI / Backend
+### Q2. What AI/backend will power the chat?
 
-**Question:** What AI/backend will power the chat?
+| Option | Description |
+|--------|-------------|
+| Claude API (Anthropic) | Anthropic's Claude models via API |
+| ✅ **OpenAI API** | OpenAI's GPT models via API |
+| Local model (Ollama etc.) | Locally hosted model, no internet required |
+| Undecided — suggest best option | Let the assistant recommend |
 
-| Option | Description | Chosen |
-|--------|-------------|--------|
-| Claude API (Anthropic) | Anthropic's Claude models via API | |
-| OpenAI API | OpenAI GPT models via API | ✅ |
-| Local model (Ollama etc.) | Offline model, no API key needed | |
-| Undecided — suggest best option | Let the assistant recommend | |
-
-**Decision:** OpenAI API — widely supported, straightforward Python SDK, good documentation.
+**Decision:** OpenAI API.
 
 ---
 
-### 2.3 Target Platform / Tech Stack
+### Q3. What is the target platform / tech stack?
 
-**Question:** What's the target platform / tech stack?
+| Option | Description |
+|--------|-------------|
+| React (web app) | Browser-based SPA |
+| ✅ **Python desktop (Tkinter / PyQt)** | Native desktop app using Python GUI framework |
+| Python web (Streamlit / Gradio) | Python-powered web UI, runs in browser |
+| React Native (mobile) | Cross-platform mobile app |
 
-| Option | Description | Chosen |
-|--------|-------------|--------|
-| React (web app) | Browser-based SPA | |
-| Python desktop (Tkinter / PyQt) | Native desktop app via Python GUI framework | ✅ |
-| Python web (Streamlit / Gradio) | Python-first web UI, runs in browser | |
-| React Native (mobile) | Cross-platform mobile app | |
-
-**Decision:** Python desktop — keeps everything in a single language, no browser or server needed.
+**Decision:** Python desktop (PyQt6).
 
 ---
 
-### 2.4 Python Desktop Framework
+### Q4. Which Python desktop framework do you prefer?
 
-**Question:** Which Python desktop framework do you prefer?
+| Option | Description |
+|--------|-------------|
+| ✅ **PyQt6** | Latest Qt6 bindings for Python; modern, feature-rich |
+| PyQt5 | Older Qt5 bindings; widely used but superseded by PyQt6 |
+| Tkinter | Python's built-in GUI; simpler but limited styling |
+| No preference — suggest best | Let the assistant recommend |
 
-| Option | Description | Chosen |
-|--------|-------------|--------|
-| PyQt5 | Mature, Qt5-based, slightly older API | |
-| PyQt6 | Latest Qt6 bindings, modern API | ✅ |
-| Tkinter | Built-in standard library, basic widgets | |
-| No preference — suggest best | Let the assistant recommend | |
-
-**Decision:** PyQt6 — modern Qt6 bindings, rich widget set, good support for threading.
+**Decision:** PyQt6.
 
 ---
 
-### 2.5 Chat History Persistence
+### Q5. Should chat history be persisted?
 
-**Question:** Should chat history be persisted?
+| Option | Description |
+|--------|-------------|
+| ✅ **Keep chat history only in memory (lost on close)** | Simplest approach; no disk I/O or session management |
+| Save chat history to disk (persist across sessions) | History saved to a file and reloaded on next launch |
+| Save both PDF + chat history as a named session | Full session management with named saves/loads |
 
-| Option | Description | Chosen |
-|--------|-------------|--------|
-| Keep chat history only in memory (lost on close) | Simple; no disk I/O or file management | ✅ |
-| Save chat history to disk (persist across sessions) | History survives app restarts | |
-| Save both PDF + chat history as a named session | Full session save/restore with a name | |
-
-**Decision:** In-memory only — reduces complexity; acceptable for v1.
+**Decision:** In-memory only — history is lost when the app closes.
 
 ---
 
-### 2.6 AI Response Display
+### Q6. How should AI responses be displayed?
 
-**Question:** How should AI responses be displayed?
+| Option | Description |
+|--------|-------------|
+| Stream tokens as they arrive (typewriter effect) | Response appears word-by-word as the API streams it |
+| ✅ **Show full response at once when ready** | Wait for the full API response, then display it |
 
-| Option | Description | Chosen |
-|--------|-------------|--------|
-| Stream tokens as they arrive (typewriter effect) | Live token streaming, more responsive feel | |
-| Show full response at once when ready | Wait for complete response, then display | ✅ |
-
-**Decision:** Full response at once — simpler threading model, no streaming API needed.
+**Decision:** Show full response at once when ready.
 
 ---
 
-### 2.7 OpenAI Model
+### Q7. Which OpenAI model should be used?
 
-**Question:** Which OpenAI model should be used?
+| Option | Description |
+|--------|-------------|
+| GPT-4o (best quality) | Highest capability; higher cost and latency |
+| ✅ **GPT-4o-mini (faster, cheaper)** | Good quality at lower cost; suitable for document Q&A |
+| Let user pick model in settings | Expose a model selector in the UI |
 
-| Option | Description | Chosen |
-|--------|-------------|--------|
-| GPT-4o (best quality) | Highest capability, higher cost & latency | |
-| GPT-4o-mini (faster, cheaper) | Good quality, lower cost, faster responses | ✅ |
-| Let user pick model in settings | Runtime model selection in the UI | |
-
-**Decision:** GPT-4o-mini — best balance of quality and cost for a PDF chat use case.
+**Decision:** GPT-4o-mini.
 
 ---
 
-### 2.8 PDF-to-AI Strategy
+### Q8. How should PDF content be sent to the AI?
 
-**Question:** How should PDF content be sent to the AI?
+| Option | Description |
+|--------|-------------|
+| ✅ **Send entire PDF text with every message (simple, costly)** | Full extracted text included in every API call as system context |
+| Chunk PDF + use vector search / RAG (scalable, accurate) | Split PDF into chunks; retrieve relevant chunks per query |
+| Summarise PDF once, chat against summary (fast, lossy) | One-time summarisation; chat is based on the summary only |
 
-| Option | Description | Chosen |
-|--------|-------------|--------|
-| Send entire PDF text with every message (simple, costly) | Full text in system prompt each call; simple but token-heavy | ✅ |
-| Chunk PDF + use vector search / RAG (scalable, accurate) | Embed chunks, retrieve relevant ones per query | |
-| Summarise PDF once, chat against summary (fast, lossy) | One-time summary; fast but loses detail | |
-
-**Decision:** Full text per message — simplest implementation for v1; acceptable for typical PDF sizes.
+**Decision:** Send entire PDF text with every message.
 
 ---
 
-### 2.9 Main UI Layout
+### Q9. What should the main UI look like?
 
-**Question:** What should the main UI look like?
+| Option | Description |
+|--------|-------------|
+| ✅ **Just a chat window + PDF filename shown** | Minimal UI: toolbar with filename, chat history area, input box |
+| Embedded PDF viewer alongside chat | Split-pane: PDF rendered on one side, chat on the other |
+| Separate panel showing extracted PDF text | Raw extracted text visible in a side panel |
 
-| Option | Description | Chosen |
-|--------|-------------|--------|
-| Just a chat window + PDF filename shown | Minimal UI: toolbar with filename, chat area, input box | ✅ |
-| Embedded PDF viewer alongside chat | Split pane: rendered PDF on left, chat on right | |
-| Separate panel showing extracted PDF text | Raw extracted text panel alongside chat | |
-
-**Decision:** Minimal UI — focused UX, faster to build, easier to maintain.
+**Decision:** Minimal UI — chat window with PDF filename shown.
 
 ---
 
-## 3. Functional Requirements
+## Functional Requirements
 
-| ID | Requirement |
-|----|-------------|
-| FR-01 | User can upload exactly one PDF at a time |
-| FR-02 | PDF text is extracted and held in memory |
-| FR-03 | Loaded PDF filename is displayed in the toolbar/header |
-| FR-04 | User types messages in an input box and sends via button or Enter key |
-| FR-05 | Full PDF text is included as system context in every API call |
-| FR-06 | Entire conversation history is sent with each API call |
-| FR-07 | AI response is displayed in full once the API call completes |
-| FR-08 | Chat history is in-memory only — lost when the app closes |
-| FR-09 | A loading/busy indicator is shown while waiting for the AI response |
-| FR-10 | Errors are shown inline in the chat area or via a dialog |
-| FR-11 | A "Clear" action resets chat history and unloads the current PDF |
-
----
-
-## 4. Non-Functional Requirements
-
-| ID | Requirement |
-|----|-------------|
-| NF-01 | Built with **PyQt6** |
-| NF-02 | AI powered by **OpenAI GPT-4o-mini** |
-| NF-03 | OpenAI API key read from a `.env` file (never hardcoded) |
-| NF-04 | API call runs on a **background thread** so the UI never freezes |
-| NF-05 | PDF text extracted using **PyMuPDF (fitz)** or **pdfplumber** |
+| ID | Requirement | Source |
+|----|-------------|--------|
+| FR-01 | User can upload exactly one PDF at a time | Q1 |
+| FR-02 | PDF text is extracted and held in memory | Q8 |
+| FR-03 | Loaded PDF filename is shown in the toolbar/header | Q9 |
+| FR-04 | User types messages in an input box and sends via button or Enter key | Q9 |
+| FR-05 | Full PDF text is included as system context in every API call | Q8 |
+| FR-06 | Entire conversation history is sent with each API call | Q5, Q8 |
+| FR-07 | AI response is displayed in full once the API call completes | Q6 |
+| FR-08 | Chat history is in-memory only — lost when app closes | Q5 |
+| FR-09 | A loading/busy indicator is shown while waiting for AI response | Q6 |
+| FR-10 | Errors are shown inline in the chat or via a dialog | General |
+| FR-11 | A "Clear" action resets chat history and unloads the PDF | General |
 
 ---
 
-## 5. Use Cases
+## Non-Functional Requirements
 
-### UC-01 — Load a PDF
-User clicks the "Open PDF" button to browse and select a PDF file from disk. The app extracts the full text and stores it in memory. The PDF filename is shown in the header.
+| ID | Requirement | Decision | Alternatives Considered |
+|----|-------------|----------|--------------------------|
+| NF-01 | Built with **PyQt6** | PyQt6 | PyQt5, Tkinter |
+| NF-02 | AI powered by **OpenAI GPT-4o-mini** | GPT-4o-mini | GPT-4o, Local model (Ollama), Claude API |
+| NF-03 | API key read from a `.env` file (not hardcoded) | .env file | Hardcoded, OS keychain |
+| NF-04 | API call runs on the **main thread** — UI will freeze while waiting for response | Main thread (blocking) | Background thread (non-blocking, more complex) |
+| NF-05 | PDF text extracted using **PdfReader**, **PyMuPDF (fitz)**, or **pdfplumber** — to be finalised during implementation | TBD | PdfReader (pypdf), PyMuPDF (fitz), pdfplumber |
 
-### UC-02 — Ask a Question
-User types a question in the input field and submits it (button click or Enter key). The app sends the full PDF text + full conversation history + new question to GPT-4o-mini. The response is displayed in the chat window once the API call completes.
+> **Note on NF-04:** The API call is intentionally kept on the main thread for simplicity. This means the UI will be unresponsive while the AI response is being fetched. A background thread approach (e.g. using `QThread`) would prevent freezing but adds architectural complexity — deferred to a future iteration.
 
-### UC-03 — View Conversation History
-All prior user messages and AI responses are visible in the chat window in chronological order for the duration of the session.
-
-### UC-04 — Clear / Reset
-User clicks "Clear" to wipe the chat history and unload the current PDF, returning the app to its initial state.
-
-### UC-05 — Handle Errors
-If no PDF is loaded, the API call fails, or the PDF cannot be parsed, a clear error message is shown in the UI without crashing the app.
+> **Note on NF-05:** All three PDF libraries are viable. Final choice will be made during implementation based on extraction quality for the test PDF. PyMuPDF (fitz) is generally the fastest; pdfplumber handles complex layouts best; PdfReader (pypdf) is the lightest dependency.
 
 ---
 
-## 6. Out of Scope (v1)
+## Out of Scope
 
 - Multiple PDFs open simultaneously
 - Persisting chat history to disk
 - RAG / vector search / chunking strategies
 - Streaming token output (typewriter effect)
-- Embedded PDF viewer or raw text panel
-- Model selection in the UI
+- Embedded PDF viewer
+- Background threading for API calls (NF-04)
