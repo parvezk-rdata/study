@@ -7,9 +7,9 @@
 03. Identify the components needed for each GUI page
 04. Design the component hierarchy — decide which components are smart vs dumb, and their parent/child relationships
 05. For each component, identify what data it needs to display correctly
-06. Represent that data as state — each piece of component data becomes a member of the app state
+06. Map that data to application state
 07. Model the state using appropriate classes/models
-08. Decide if any events should fire reactively on state change
+08. Decide if state changes should trigger events (state-driven UI updates) or not.
 09. List all user events that can occur across the app. Each use case typically maps to one or more user events.
 10. For each event, define the steps that will happen (refer: Generic Event Flow)
 11. Identify domain controllers needed to handle business logic or external services
