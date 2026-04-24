@@ -58,9 +58,9 @@ class MainController:
         chat_input = self.window.get_chat_input_component()
 
         pdf_panel.upload_requested.connect(self.handle_upload_pdf_requested)
-        pdf_panel.clear_chat_requested.connect(self.handle_clear_chat_requested)
         pdf_panel.remove_pdf_requested.connect(self.handle_remove_pdf_requested)
         chat_input.send_requested.connect(self.handle_send_message_requested)
+        pdf_panel.clear_chat_requested.connect(self.handle_clear_chat_requested)
 
         self.file_dialog_component.file_selected.connect(
             self.handle_pdf_file_selected

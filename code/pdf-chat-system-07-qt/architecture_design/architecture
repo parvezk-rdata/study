@@ -74,7 +74,10 @@ UI State Modeling.
 
 --------------------------------------------------------------------------------
 
-
+App: creates services, store, UIController, MainController
+UIController: owns window, components, component controllers, UI event hookup
+MainController: owns workflow and store decisions
+Domain controllers: perform domain actions and return results
 
 --------------------------------------------------------------------------------
 

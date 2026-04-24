@@ -1,5 +1,0 @@
-
-UI NEVER calls services directly
-UI NEVER modifies state directly
-
-UI → Controller → State → UI
