@@ -13,6 +13,7 @@
 09. List all user events that can occur across the app. Each use case typically maps to one or more user events.
 10. For each event, define the steps that will happen (refer: Generic Event Flow)
 11. Identify domain controllers needed to handle business logic or external services
+13. Identify directory structure for the app.
 12. Write components based on the GUI design
 13. Write main_controller with one blank method per event
 14. Inside each blank method, add comments describing the steps from step 10
