@@ -12,6 +12,9 @@
 ---
 
 
+## 📂 Project Structure
+
+```
 
 pdf_chat_app/
 │
@@ -100,3 +103,5 @@ pdf_chat_app/
 │
 └── .env
     # stores API keys and environment variables
+
+```
