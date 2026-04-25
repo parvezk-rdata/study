@@ -6,6 +6,60 @@ A Python desktop application that lets a user upload a PDF file and have a conve
 
 ---
 
+
+## Functional Requirements
+
+| ID | Requirement | Source |
+|----|-------------|--------|
+| FR-01 | User can upload exactly one PDF at a time | Q1 |
+| FR-02 | PDF text is extracted and held in memory | Q8 |
+| FR-03 | Loaded PDF filename is shown in the toolbar/header | Q9 |
+| FR-04 | User types messages in an input box and sends via button or Enter key | Q9 |
+| FR-05 | Full PDF text is included as system context in every API call | Q8 |
+| FR-06 | Entire conversation history is sent with each API call | Q5, Q8 |
+| FR-07 | AI response is displayed in full once the API call completes | Q6 |
+| FR-08 | Chat history is in-memory only — lost when app closes | Q5 |
+| FR-09 | A loading/busy indicator is shown while waiting for AI response | Q6 |
+| FR-10 | Errors are shown inline in the chat or via a dialog | General |
+| FR-11 | A "Clear" action resets chat history and unloads the PDF | General |
+
+---
+
+## Architectural Decisions
+
+| ID | Requirement | Decision | Alternatives Considered |
+|----|-------------|----------|--------------------------|
+| AD-01 | state change events  | NO | Yes : events from state change triggers UI Updates |
+
+---
+
+## Non-Functional Requirements
+
+| ID | Requirement | Decision | Alternatives Considered |
+|----|-------------|----------|--------------------------|
+| NF-01 | Built with **PyQt6** | PyQt6 | PyQt5, Tkinter |
+| NF-02 | AI powered by **OpenAI GPT-4o-mini** | GPT-4o-mini | GPT-4o, Local model (Ollama), Claude API |
+| NF-03 | API key read from a `.env` file (not hardcoded) | .env file | Hardcoded, OS keychain |
+| NF-04 | API call runs on the **main thread** — UI will freeze while waiting for response | Main thread (blocking) | Background thread (non-blocking, more complex) |
+| NF-05 | PDF text extracted using **PdfReader**, **PyMuPDF (fitz)**, or **pdfplumber** — to be finalised during implementation | TBD | PdfReader (pypdf), PyMuPDF (fitz), pdfplumber |
+
+> **Note on NF-04:** The API call is intentionally kept on the main thread for simplicity. This means the UI will be unresponsive while the AI response is being fetched. A background thread approach (e.g. using `QThread`) would prevent freezing but adds architectural complexity — deferred to a future iteration.
+
+> **Note on NF-05:** All three PDF libraries are viable. Final choice will be made during implementation based on extraction quality for the test PDF. PyMuPDF (fitz) is generally the fastest; pdfplumber handles complex layouts best; PdfReader (pypdf) is the lightest dependency.
+
+---
+
+## Out of Scope
+
+- Multiple PDFs open simultaneously
+- Persisting chat history to disk
+- RAG / vector search / chunking strategies
+- Streaming token output (typewriter effect)
+- Embedded PDF viewer
+- Background threading for API calls (NF-04)
+
+---
+
 ## Requirement Gathering — Questions & Decisions
 
 This section documents every design question asked during requirements gathering, the options presented, and the final decision made.
@@ -121,46 +175,3 @@ This section documents every design question asked during requirements gathering
 **Decision:** Minimal UI — chat window with PDF filename shown.
 
 ---
-
-## Functional Requirements
-
-| ID | Requirement | Source |
-|----|-------------|--------|
-| FR-01 | User can upload exactly one PDF at a time | Q1 |
-| FR-02 | PDF text is extracted and held in memory | Q8 |
-| FR-03 | Loaded PDF filename is shown in the toolbar/header | Q9 |
-| FR-04 | User types messages in an input box and sends via button or Enter key | Q9 |
-| FR-05 | Full PDF text is included as system context in every API call | Q8 |
-| FR-06 | Entire conversation history is sent with each API call | Q5, Q8 |
-| FR-07 | AI response is displayed in full once the API call completes | Q6 |
-| FR-08 | Chat history is in-memory only — lost when app closes | Q5 |
-| FR-09 | A loading/busy indicator is shown while waiting for AI response | Q6 |
-| FR-10 | Errors are shown inline in the chat or via a dialog | General |
-| FR-11 | A "Clear" action resets chat history and unloads the PDF | General |
-
----
-
-## Non-Functional Requirements
-
-| ID | Requirement | Decision | Alternatives Considered |
-|----|-------------|----------|--------------------------|
-| NF-01 | Built with **PyQt6** | PyQt6 | PyQt5, Tkinter |
-| NF-02 | AI powered by **OpenAI GPT-4o-mini** | GPT-4o-mini | GPT-4o, Local model (Ollama), Claude API |
-| NF-03 | API key read from a `.env` file (not hardcoded) | .env file | Hardcoded, OS keychain |
-| NF-04 | API call runs on the **main thread** — UI will freeze while waiting for response | Main thread (blocking) | Background thread (non-blocking, more complex) |
-| NF-05 | PDF text extracted using **PdfReader**, **PyMuPDF (fitz)**, or **pdfplumber** — to be finalised during implementation | TBD | PdfReader (pypdf), PyMuPDF (fitz), pdfplumber |
-
-> **Note on NF-04:** The API call is intentionally kept on the main thread for simplicity. This means the UI will be unresponsive while the AI response is being fetched. A background thread approach (e.g. using `QThread`) would prevent freezing but adds architectural complexity — deferred to a future iteration.
-
-> **Note on NF-05:** All three PDF libraries are viable. Final choice will be made during implementation based on extraction quality for the test PDF. PyMuPDF (fitz) is generally the fastest; pdfplumber handles complex layouts best; PdfReader (pypdf) is the lightest dependency.
-
----
-
-## Out of Scope
-
-- Multiple PDFs open simultaneously
-- Persisting chat history to disk
-- RAG / vector search / chunking strategies
-- Streaming token output (typewriter effect)
-- Embedded PDF viewer
-- Background threading for API calls (NF-04)
