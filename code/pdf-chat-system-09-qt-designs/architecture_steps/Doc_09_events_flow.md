@@ -77,7 +77,7 @@ Trigger: User clicks Send button or presses Enter in the input field.
 | 3 | Update State  | Set is_loading to True                    | AppState |
 | 4 | Update UI     | Show loading indicator                    | ChatArea |
 | 5 | Update UI     | Disable input and Send button             | InputBar |
-| 6 | Invoke LLM    | Invoke LLM                                | LLMService |
+| 6 | Invoke LLM    | Send question, text, chat histroy         | LLMService |
 |   | On Error      | `api_call_failed`                         |    —     |
 | 7 | Create Obj    | Create `ChatMessage` with role: assistant, content: response | — |
 | 8 | Update State  | Append user message to chat history       | AppState |
