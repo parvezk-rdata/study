@@ -50,35 +50,42 @@ To build a "Chat PDF" App and following is the workflow steps. we will discuss  
     - Description column : describes what that step does
     - Target column :  logical name of component, service, or state (short, survives refactoring)
 
-10. **Identify domain controllers** - Determine business logic and external service handlers.
+10. **Identify domain controllers** 
+    - Determine business logic and external service handlers.
+    - create models based on what parameters are send to methods of domain controllers.
+    - create models based on what is returned by methods of domain controllers.
 
-11. **Assign responsibilities to**  
+11. **Identify Components and Component Controllers** 
+
+12. **Identify MainController and its responsibilities**
+
+13. **Define directory structure**  
     - MainController  
     - ComponentController  
     - DomainController  
     - Components  
+    - Othere utilities
+    - Organize the application into logical folders and modules.
 
-12. **Define directory structure**  - Organize the application into logical folders and modules.
-
-13. **Implement UI components**
+14. **Implement UI components**
     - For each component identify the Ui widgets and other applicaiton it needs  
     - identify the layout needed for the component.
     - methods : create widgets, createLayout  
     - Build application components based on the GUI design.
 
-14. **Create MainController skeleton** - Add one method per user event.
+15. **Create MainController skeleton** - Add one method per user event.
 
-15. **Document event logic inside methods**   - Add comments describing event flow steps.
+16. **Document event logic inside methods**   - Add comments describing event flow steps.
 
-16. **Identify methods in domain_controllers and component_controllers**  - Add comments describing task to be done.
+17. **Identify methods in domain_controllers and component_controllers**  - Add comments describing task to be done.
 
-17. **Implement DomainControllers**  
+18. **Implement DomainControllers**  
 
-18. **Implement ComponentControllers**  
+19. **Implement ComponentControllers**  
     - initialize the component and stores its reference
     - has method to bind component widgets to events 
 
-19. **Implement MainController**
+20. **Implement MainController**
     - has variables representing UI state(can use centralized class/model for this)
     - holds refrences to all controllers
     - has method to handle each events  
