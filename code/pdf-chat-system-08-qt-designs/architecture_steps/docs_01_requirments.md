@@ -1,27 +1,27 @@
 # Chat PDF App — Requirements Document
 
-## Project Overview
-
 A Python desktop application that lets a user upload a PDF file and have a conversational Q&A session with its contents, powered by the OpenAI API.
 
 ---
 
-
 ## Functional Requirements
 
-| ID | Requirement | Source |
-|----|-------------|--------|
-| FR-01 | User can upload exactly one PDF at a time | Q1 |
-| FR-02 | PDF text is extracted and held in memory | Q8 |
-| FR-03 | Loaded PDF filename is shown in the toolbar/header | Q9 |
-| FR-04 | User types messages in an input box and sends via button or Enter key | Q9 |
-| FR-05 | Full PDF text is included as system context in every API call | Q8 |
-| FR-06 | Entire conversation history is sent with each API call | Q5, Q8 |
-| FR-07 | AI response is displayed in full once the API call completes | Q6 |
-| FR-08 | Chat history is in-memory only — lost when app closes | Q5 |
-| FR-09 | A loading/busy indicator is shown while waiting for AI response | Q6 |
-| FR-10 | Errors are shown inline in the chat or via a dialog | General |
-| FR-11 | A "Clear" action resets chat history and unloads the PDF | General |
+| ID | Requirement | 
+|----|-------------|
+| FR-01 | User can upload exactly one PDF at a time |
+| FR-02 | PDF text is extracted and held in memory |
+| FR-03 | Loaded PDF filename is shown in the toolbar/header |
+| FR-04 | User types messages in an input box and sends via button or Enter key |
+| FR-05 | Full PDF text is included as system context in every API call |
+| FR-06 | Entire conversation history is sent with each API call |
+| FR-07 | AI response is displayed in full once the API call completes |
+| FR-08 | Chat history is in-memory only — lost when app closes |
+| FR-09 | Chat history is visible and scrollable |
+| FR-10 | A loading/busy indicator is shown while waiting for AI response |
+| FR-11 | Errors are shown inline in the chat or via a dialog (bad PDF, API failure, empty query)|
+| FR-12 | A "Clear" action resets chat history. | 
+| FR-13 | User can load a new PDF (replaces the current one, resets chat) |
+| FR-14 | Chat messages must be clearly distinguished (User vs AI bubble style) |
 
 ---
 
@@ -29,23 +29,30 @@ A Python desktop application that lets a user upload a PDF file and have a conve
 
 | ID | Requirement | Decision | Alternatives Considered |
 |----|-------------|----------|--------------------------|
-| AD-01 | state change events  | NO | Yes : events from state change triggers UI Updates |
+| AD-01 | state change events  | NO    | Yes : events from state change triggers UI Updates |
+| AD-02 | Session State        | In-memory only |  |
+| AD-03 | GUI Framework        | PyQt6 | PySide, Tkinter |
+| AD-04 | LLM Provider         | GPT-4o-mini | GPT-4o, Local model (Ollama), Claude API |
+| AD-05 | PDF Parsing          | PyMuPDF (fitz) | PdfReader, pdfplumber |
+| AD-06 | API key Storage      | `.env` file    | Hardcoded, OS keychain |
+| AD-07 | Context Strategy     | Not used | Chunk + cosine similarity (numpy) |
+| AD-08 | Vector DB            | Not used |  |
+| AD-09 | Embeddings           | Not used | text-embedding-3-small |
 
 ---
 
 ## Non-Functional Requirements
 
+
+## ⚙️ Non-Functional Requirements
+
 | ID | Requirement | Decision | Alternatives Considered |
 |----|-------------|----------|--------------------------|
-| NF-01 | Built with **PyQt6** | PyQt6 | PyQt5, Tkinter |
-| NF-02 | AI powered by **OpenAI GPT-4o-mini** | GPT-4o-mini | GPT-4o, Local model (Ollama), Claude API |
-| NF-03 | API key read from a `.env` file (not hardcoded) | .env file | Hardcoded, OS keychain |
-| NF-04 | API call runs on the **main thread** — UI will freeze while waiting for response | Main thread (blocking) | Background thread (non-blocking, more complex) |
-| NF-05 | PDF text extracted using **PdfReader**, **PyMuPDF (fitz)**, or **pdfplumber** — to be finalised during implementation | TBD | PdfReader (pypdf), PyMuPDF (fitz), pdfplumber |
+| NFR-01 | Handling API call | on main thread(blocking) | Background thread (non-blocking, more complex) |
 
-> **Note on NF-04:** The API call is intentionally kept on the main thread for simplicity. This means the UI will be unresponsive while the AI response is being fetched. A background thread approach (e.g. using `QThread`) would prevent freezing but adds architectural complexity — deferred to a future iteration.
 
-> **Note on NF-05:** All three PDF libraries are viable. Final choice will be made during implementation based on extraction quality for the test PDF. PyMuPDF (fitz) is generally the fastest; pdfplumber handles complex layouts best; PdfReader (pypdf) is the lightest dependency.
+> **Note** The API call is intentionally kept on the main thread for simplicity. This means the UI will be unresponsive while the AI response is being fetched. A background thread approach (e.g. using `QThread`) would prevent freezing but adds architectural complexity — deferred to a future iteration.
+
 
 ---
 
@@ -56,7 +63,8 @@ A Python desktop application that lets a user upload a PDF file and have a conve
 - RAG / vector search / chunking strategies
 - Streaming token output (typewriter effect)
 - Embedded PDF viewer
-- Background threading for API calls (NF-04)
+- Background threading for API calls 
+- Context retrieval via chunking + embedding search (FAISS or simple cosine similarity)
 
 ---
 

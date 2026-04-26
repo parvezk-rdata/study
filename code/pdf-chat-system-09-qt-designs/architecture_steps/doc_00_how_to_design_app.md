@@ -1,8 +1,9 @@
 
+To build a "Chat PDF" App and following is the workflow steps. we will discuss  and complete one step at a time till we complete the code. Use python, openai key
 
 ### 🧭 GUI App Development Workflow
 
-01. **Gather requirements**  - Define use cases and expected functionality.
+01. **Gather requirements**  - Define use cases, expected functionality, functional and non-functional requirements, and make initial architectural decisions.
 
 02. **Define controller architecture(roles of):**  
    
@@ -30,9 +31,9 @@
     - Data required for rendering  
     - Data type  
     - Domain data or UI state  
-    - Mapping to models 
+    - Mapping to models  
 
-    Note : Table needs to be prepared for  application component and not for UI widgets.  
+    Note : Table needs to be prepared for  application component and not for UI widgets.
 
 07. **Derive models from component data**  
     - Domain models  
