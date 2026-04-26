@@ -1,15 +1,6 @@
 
 ## ⚡ User Events
 
-| No.| Event Name               | Description                                                                                   |
-| ---| ------------------------ | --------------------------------------------------------------------------------------------- |
-| 2  | `upload_pdf_requested`   | Open a file picker dialog box.|
-| 3  | `remove_pdf_requested`   | User removes selected PDF |
-| 4  | `send_message_requested` | User ask a question to llm based on uploaded PDF and receives answer|
-| 5  | `clear_chat_requested`   | Clear all Question and theor answers from UI.|
-| 6  | `pdf_file_selected`      | Select a pdf and upload its information in UI.|
-
----
 
 ## Generic Event Flow
 
@@ -25,115 +16,146 @@
 
 ---
 
-## `Event` : `upload_pdf_requested`
+> Event-01 : upload_pdf_requested
 
-Trigger: User clicks "Upload PDF"
+Trigger: User clicks **Upload PDF** button.
 
-|No | Label        | Description                                                                 |
-|-- |--------------|-----------------------------------------------------------------------------|
-|1  | Update UI    | Render PDF file picker                                                      |
+| No | Label | Description | Target |
+|---|---|---|---|
+| 1 | Update UI | Open native file picker filtered to `.pdf` files | — |
+
+---
+<br>
+
+> Event-02 : pdf_loaded
+
+Method: load_new_doc()
+
+Trigger: User selects a valid `.pdf` file from the file picker.
+
+| No | Label | Description | Target |
+|---|---|---|---|
+| 1 | Read Data | Read file path returned by event | — |
+| 2 | Parse PDF | Extract full text from PDF file | PDFService |
+|   | On Error  | pdf_load_failed | PDFService |
+| 3 | Update State | Store PDF info (filename, text, no of pages) | AppState |
+| 4 | Update State | Clear chat history | AppState |
+| 5 | Update State | Clear errors | AppState |
+| 6 | Update UI | Render PDF details | Toolbar |
+| 7 | Update UI | Render chat history (empty) | ChatArea |
+| 8 | Update UI | Dismiss any previous error | StatusBar |
+| 9 | Update UI | Enable question input | InputBar |
+
+---
+<br>
+
+> Event-03 : status_bar_dismissed
+
+Method: remove_status_bar()
+
+Trigger: User clicks × on the error status bar.
+
+| No | Label | Description | Target |
+|---|---|---|---|
+| 1 | Update State | Clear error from state | AppState |
+| 2 | Update UI | Hide error banner | StatusBar |
+
+---
+<br>
+
+> Event-04 : message_send_requested
+
+Method: invokeLLM(), addNewMessage()
+
+Trigger: User clicks Send button or presses Enter in the input field.
+
+| No | Label | Description | Target |
+|---|---|---|---|
+| 1 | Read Data     | Read question text                        | InputBar |
+|   | On Error      | `empty_query_submitted`                   |    —     |
+| 2 | Create Obj    | Create `ChatMessage` with role: user, content: input text | — |
+| 3 | Update State  | Set is_loading to True                    | AppState |
+| 4 | Update UI     | Show loading indicator                    | ChatArea |
+| 5 | Update UI     | Disable input and Send button             | InputBar |
+| 6 | Invoke LLM    | Invoke LLM                                | LLMService |
+|   | On Error      | `api_call_failed`                         |    —     |
+| 7 | Create Obj    | Create `ChatMessage` with role: assistant, content: response | — |
+| 8 | Update State  | Append user message to chat history       | AppState |
+| 9 | Update State  | Append assistant message to chat history  | AppState |
+|10 | Update State  | Set is_loading to False                   | AppState |
+|11 | Update UI     | Hide loading indicator                    | ChatArea |
+|12 | Update UI     | Render user message bubble                | ChatArea |
+|13 | Update UI     | Render assistant message bubble           | ChatArea |
+|14 | Update UI     | Enable input and Send button              | InputBar |
+|15 | Update UI     | Clear input field                         | InputBar |
+
+---
+<br>
+
+> Event-05 : chat_cleared
+
+Method: clear_chat_history()
+
+Trigger: User clicks the Clear button in the toolbar.
+
+|No | Label         | Description                   | Target   |
+|---|---|---|---|
+| 1 | Update State  | Clear chat history            | AppState |
+| 2 | Update State  | Clear errors                  | AppState |
+| 3 | Update UI     | Remove all message bubbles    | ChatArea |
+| 4 | Update UI     | Hide error banner             | StatusBar |
 
 ---
 
-### E-02 · `pdf_loaded`
-User selects a valid `.pdf` file from the file picker.
-
-| No | Label | Description |
-|---|---|---|
-| 1 | Read Data | Read file path return by event |
-| 2 | Parse PDF | Extract full text from PDF file using PyMuPDF |
-| 3 | Update State | PDF information(text, page count, truncation)|
-| 4 | Update State | Clear chat history |
-| 5 | Update State | Clear errors |
-| 7 | Update UI | Render PDF details |
-| 8 | Update UI | Render chat history (empty) |
-| 9 | Update UI | Dismiss any previous error |
-|10 | Update UI | Render component to ask question |
-
------
-
-
-## `Event` : `pdf_file_selected`
-
-Trigger: User selects a PDF file from the file picker
-
-|No | Label        | Description                                                                 |
-|-- |--------------|-----------------------------------------------------------------------------|
-|1  | Read Data    | PDF file path                                                               |
-|2  | Decide       | If the file is the same as previous, set status message and end flow |
-|1  | Validate     | Check and generate errors before text extraction                            |
-|3  | Create Obj   | PDFDocument(text, page count, truncation) from PDF                          |
-|4  | Update State | Set current document data                                                   |
-|5  | Update State | Clear chat history                                                          |
-|6  | Update UI    | Render chat history (empty)                                                 |
-|7  | Update UI    | Render PDF details                                                          |
-|8  | Update UI    | Indicate PDF is loaded (status/message)                                     |
-
----
-
-## `Event` : `remove_pdf_requested`
-
-Trigger: User clicks "Remove PDF"
-
-|No | Label        | Description                                      |
-|---|--------------|--------------------------------------------------|
-|1  | Update State | Clear current document                           |
-|2  | Update State | Clear chat history                               |
-|3  | Update UI    | Render chat history (empty)                      |
-|4  | Update UI    | Render PDF section (no PDF selected state)       |
-|5  | Update UI    | Disable chat input                               |
-|6  | Update UI    | Indicate PDF is removed (status/message)         |
-
----
-
-## `Event` : `clear_chat_requested`
-
-Trigger: User clicks "Clear conversation"
-
-|No | Label        | Description                              |
-|---|--------------|------------------------------------------|
-|1  | Update State | Clear chat history                       |
-|2  | Update UI    | Render chat history (empty)              |
-|3  | Update UI    | Clear chat input                         |
-|4  | Update UI    | Indicate chat is cleared (status/message)|
----
-
-## `Event` : `send_message_requested`
-
-
-Trigger: User submits a message
-
-| Index | Label        | Description                                                                 |
-|------:|-------------|-----------------------------------------------------------------------------|
-| 1     | Input       | User message text                                                           |
-| 2     | Decide      | If message is empty, set status message and end flow                        |
-| 3     | Decide      | If no PDF is loaded, set status message and end flow                        |
-| 4     | Update State| Add user message to chat history                                            |
-| 5     | Update UI   | Render chat history (with user message)                                     |
-| 6     | Update UI   | Indicate processing (e.g., "Thinking...")                                   |
-| 7     | Invoke LLM  | Generate response using current document and chat history                   |
-| 8     | Update State| Add assistant response to chat history                                      |
-| 9     | Update UI   | Render chat history (with assistant response)                               |
-| 10    | Update UI   | Clear chat input                                                            |
-| 11    | Update UI   | Indicate response is ready (status/message)                                 |
-
----
-
-## 🔄 state change reactions
-
-| Reactions          | Description                                                                 |
-| ------------------ | --------------------------------------------------------------------------- |
-| `document_changed` | Document updated or cleared → UI updates document panel and input state.    |
-| `chat_changed`     | Chat history updated → chat UI re-renders message list.                     |
-| `status_changed`   | Status message updated → status bar reflects current operation.             |
-
----
 
 ## ❗ System / Internal Reactions
 
-| Event Name         | Description                                                                 |
-| ------------------ | --------------------------------------------------------------------------- |
-| `pdf_load_failed`  | PDF loading fails → status updated → UI remains in previous stable state.   |
+> Error-01 : pdf_load_failed
+
+Method: handlePDFLoadError()
+
+Trigger: Selected file fails to parse (corrupt or password-protected).
+
+| No | Label | Description | Target |
+|---|---|---|---|
+| 1 | Update State  | Store error info (kind: PDF_LOAD, message)    | AppState |
+| 2 | Update UI     | Show error banner with message                | StatusBar|
+| 3 | Update UI     | Keep question input disabled                  | InputBar |
+
+---
+<br>
+
+> Error-02 : api_call_failed
+
+Method: handleLLMCallError()
+
+Trigger: OpenAI API call raises an exception (network error, timeout, invalid key).
+
+| No | Label | Description | Target |
+|---|---|---|---|
+| 1 | Update State  | Store error info (kind: API_FAILURE, message) | AppState |
+| 2 | Update State  | Set is_loading to False                       | AppState |
+| 3 | Update UI     | Hide loading indicator                        | ChatArea |
+| 4 | Update UI     | Render red error bubble with message          | ChatArea |
+| 5 | Update UI     | Enable input and Send button                  | InputBar |
+
+---
+<br>
+
+> Error-03 : empty_query_submitted
+
+Trigger: User attempts to send an empty input field.
+
+| No | Label | Description | Target |
+|---|---|---|---|
+| 1 | Update State  | Store error info (kind: EMPTY_QUERY, message) | AppState |
+| 2 | Update UI     | Render inline red error bubble with message   | ChatArea |
+
+
+## 🔄 state change reactions
+
+> we do not use State-driven event updates
+---
 
 
 ---

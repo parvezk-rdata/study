@@ -72,11 +72,17 @@ To build a "Chat PDF" App and following is the workflow steps. we will discuss  
 
 16. **Identify methods in domain_controllers and component_controllers**  - Add comments describing task to be done.
 
-17. **Implement**  
-    - DomainControllers  
-    - MainController  
-    - ComponentControllers  
-    - Final component wiring if any
+17. **Implement DomainControllers**  
+
+18. **Implement ComponentControllers**  
+    - initialize the component and stores its reference
+    - has method to bind component widgets to events 
+
+19. **Implement MainController**
+    - has variables representing UI state(can use centralized class/model for this)
+    - holds refrences to all controllers
+    - has method to handle each events  
+    - has method to handle errors when processing events 
 
 ---
 
