@@ -17,31 +17,38 @@ To build a "Chat PDF" App and following is the workflow steps. we will discuss  
 03. **Design GUI pages on paper**  
     Decide how many pages/screens are needed and what each page does.
 
-04. **Group UI widgets into application components**  
+04. Each page is created with various built in widgets like buttons, labels, input type, containers etc. Group these widgets and create application(custom) components for each page.   
    
-    - Identify application components needed for each GUI page.  
+    - Identify application components needed for each GUI page.
+    - Each application component will be represented by a class and have a seprate controller.  
     - UI Widgets are basic elements(Button, Input).  
-    - Application components are UI units built using widgets, just like react components we make. 
+    - Application components are UI units built using widgets, just like react components we make.
+    - For each component create a table. one row for each widget used,  its purpose 
+    - Page → Components → Data needed → Models/Classes → State
 
 05. **Design component hierarchy**  - Decide parent/child relationships and smart vs dumb components.
 
-06. **For each application component, prepare a table:**  
+06. **Skip for now :For each application component, prepare a table for variables:**  
    
     - Type: Input / Output / Static  
     - Data required for rendering  
     - Data type  
-    - Domain data or UI state  
-    - Mapping to models  
+    - Group Name (help identify related variables) 
 
     Note : Table needs to be prepared for  application component and not for UI widgets.
 
 07. **Derive models from component data**  
-    - Domain models  
-    - State models  
+    - Domain models  : hold business data
+    - State models   : hold UI state, what the app currently looks like and what mode it's in. 
 
-08. List all user events that can occur across the app. Each use case typically maps to one or more user events.
+08. List all user events that can occur across the app. 
 
-09. **Define event flow for each event** - Describe step-by-step what happens when each event occurs.
+09. **Define event flow for each event in a table**
+    - Table columns  : No, Label, Description, Target
+    - Label  examples: Update State, Update UI, Create Obj, Invoke LLM, Create Obj, read data 
+    - Label names will eventually help create methods for domain controllers and component controllers. 
+    - Description column : describes what that step does
+    - Target column :  logical name of component, service, or state (short, survives refactoring)
 
 10. **Identify domain controllers** - Determine business logic and external service handlers.
 
@@ -53,7 +60,11 @@ To build a "Chat PDF" App and following is the workflow steps. we will discuss  
 
 12. **Define directory structure**  - Organize the application into logical folders and modules.
 
-13. **Implement UI components** - Build application components based on the GUI design.
+13. **Implement UI components**
+    - For each component identify the Ui widgets and other applicaiton it needs  
+    - identify the layout needed for the component.
+    - methods : create widgets, createLayout  
+    - Build application components based on the GUI design.
 
 14. **Create MainController skeleton** - Add one method per user event.
 

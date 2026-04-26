@@ -1,21 +1,3 @@
-## 📁 Architecture Overview Of PDF Chat App
-
-| No.| Component Type          | Description                                                                           |
-| ---| ----------------------- | ------------------------------------------------------------------------------------- |
-| 1  | `MainController`        | Composition root and orchestrator; coordinates all event flows and updates the store. |
-| 2  | `Component Controllers` | Event-based UI handlers; update components based on instructions from MainController. |
-| 3  | `Components`            | Dumb renderers; only display data and emit user interaction signals.                  |
-| 4  | `File Dialog`           | Treated as a component; encapsulates file selection UI as a reusable abstraction.     |
-| 5  | `Store`                 | Single source of truth; maintains application state and emits change events.          |
-| 6  | `Domain Controllers`    | Handle pure business logic (no UI interaction, no direct store updates).              |
-
----
-## ⚡ Application Lifecycle
-
-| No. | Step Name        | Description                                                        |
-| --- | ---------------- | ------------------------------------------------------------------ |
-| 1   | `app_initialize` | Initializes controllers, connects signals, and renders initial UI. |
-
 
 ## ⚡ User Events
 
@@ -41,27 +23,6 @@
 8. **Render affected components**
 9. **Show status/result**
 
-
-# Chat PDF App — High-Level Event Flows
-
----
-
-## `app_initialize`
-
-1. Start application
-2. Create shared application state
-3. Create services
-4. Create main window
-5. Create orchestrator
-6. Create domain controllers
-7. Create component controllers
-8. Connect user events
-9. Connect store events
-10. Set static UI text
-11. Read current state
-12. Render initial UI
-13. Show ready status
-
 ---
 
 ## `Event` : `upload_pdf_requested`
@@ -73,6 +34,24 @@ Trigger: User clicks "Upload PDF"
 |1  | Update UI    | Render PDF file picker                                                      |
 
 ---
+
+### E-02 · `pdf_loaded`
+User selects a valid `.pdf` file from the file picker.
+
+| No | Label | Description |
+|---|---|---|
+| 1 | Read Data | Read file path return by event |
+| 2 | Parse PDF | Extract full text from PDF file using PyMuPDF |
+| 3 | Update State | PDF information(text, page count, truncation)|
+| 4 | Update State | Clear chat history |
+| 5 | Update State | Clear errors |
+| 7 | Update UI | Render PDF details |
+| 8 | Update UI | Render chat history (empty) |
+| 9 | Update UI | Dismiss any previous error |
+|10 | Update UI | Render component to ask question |
+
+-----
+
 
 ## `Event` : `pdf_file_selected`
 
