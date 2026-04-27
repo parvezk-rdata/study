@@ -14,6 +14,7 @@ chat_pdf/
 │   └── models/
 │       ├── services/
 │       │   ├── pdf_document.py          # PDFDocument dataclass
+│       │   ├── llm_request.py           # LLMRequest dataclass
 │       │   └── chat_message.py          # ChatMessage dataclass
 │       └── state/
 │           ├── app_state.py             # AppState dataclass

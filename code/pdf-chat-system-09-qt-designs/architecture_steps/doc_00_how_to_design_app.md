@@ -64,10 +64,10 @@ To build a "Chat PDF" App and following is the workflow steps. we will discuss  
     - ComponentController  
     - DomainController  
     - Components
-    - UIComposer 
-    - DomainComposer  
-    - AppControllers Frozen dataclass 
-    - DomainControllers Frozen dataclass  
+    - UIComposer(ui_composer) 
+    - DomainComposer(ServiceComposer)  
+    - AppControllers(ui_bundle) Frozen dataclass 
+    - DomainControllers(service_bundle) Frozen dataclass  
     - Modals 
     - Othere utilities
     - Organize the application into logical folders and modules. 
