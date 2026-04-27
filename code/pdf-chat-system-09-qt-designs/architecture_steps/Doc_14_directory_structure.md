@@ -1,49 +1,47 @@
 # Step 13 — Directory Structure
 
 ```
+
 chat_pdf/
 │
-├── main.py                        # Entry point — creates QApplication, MainWindow, MainController
-├── .env                           # OpenAI API key (not committed to version control)
-├── requirements.txt               # All dependencies
+├── main.py                          # Entry point — creates MainController, starts app
+│
+├── .env                             # API key (not committed to version control)
+├── requirements.txt
 │
 ├── controllers/
-│   ├── __init__.py
-│   ├── main_controller.py         # MainController — orchestrates all event flows
-│   │
-│   ├── component_controllers/
-│   │   ├── __init__.py
-│   │   ├── toolbar_controller.py      # ToolbarController
-│   │   ├── status_bar_controller.py   # StatusBarController
-│   │   ├── chat_area_controller.py    # ChatAreaController
-│   │   └── input_bar_controller.py    # InputBarController
-│   │
-│   └── domain_controllers/
-│       ├── __init__.py
-│       ├── pdf_service.py             # PDFService — PyMuPDF text extraction
-│       └── llm_service.py             # LLMService — OpenAI API calls
+│   ├── main_controller.py           # MainController — orchestrates all event flows
+│   ├── ui_composer.py               # UIComposer — builds UI, returns AppControllers bundle
+│   └── domain_composer.py           # DomainComposer — loads .env, returns DomainControllers bundle
 │
 ├── components/
-│   ├── __init__.py
-│   ├── toolbar_component.py           # ToolbarComponent — Upload, filename, Clear
-│   ├── status_bar_component.py        # StatusBarComponent — error banner
-│   ├── chat_area_component.py         # ChatAreaComponent — scrollable bubble area
-│   ├── input_bar_component.py         # InputBarComponent — text input + Send
-│   │
+│   ├── toolbar_component.py         # ToolbarComponent [SMART]
+│   ├── status_bar_component.py      # StatusBarComponent [SMART]
+│   ├── chat_area_component.py       # ChatAreaComponent [SMART]
+│   ├── input_bar_component.py       # InputBarComponent [SMART]
 │   └── widgets/
-│       ├── __init__.py
-│       ├── message_bubble_widget.py   # MessageBubbleWidget — single chat bubble (dumb)
-│       ├── loading_bubble_widget.py   # LoadingBubbleWidget — • • • indicator (dumb)
-│       └── placeholder_widget.py      # PlaceholderWidget — empty state (dumb)
+│       ├── message_bubble_widget.py # MessageBubbleWidget [DUMB]
+│       ├── loading_bubble_widget.py # LoadingBubbleWidget [DUMB]
+│       └── placeholder_widget.py   # PlaceholderWidget [DUMB]
+│
+├── component_controllers/
+│   ├── toolbar_controller.py        # ToolbarController
+│   ├── status_bar_controller.py     # StatusBarController
+│   ├── chat_area_controller.py      # ChatAreaController
+│   └── input_bar_controller.py      # InputBarController
+│
+├── domain/
+│   ├── pdf_service.py               # PDFService — PyMuPDF text extraction
+│   └── llm_service.py               # LLMService — OpenAI API calls
 │
 ├── models/
-│   ├── __init__.py
-│   ├── domain_models.py               # PDFDocument, ChatMessage
-│   └── state_models.py                # AppState, AppError, ErrorKind
+│   ├── domain_models.py             # PDFDocument, ChatMessage
+│   └── state_models.py              # AppState, AppError, ErrorKind
 │
-└── utils/
-    ├── __init__.py
-    └── config.py                      # Load .env, expose OPENAI_API_KEY
+└── bundles/
+    ├── app_controllers.py           # AppControllers frozen dataclass
+    └── domain_controllers.py        # DomainControllers frozen dataclass
+
 ```
 
 ---

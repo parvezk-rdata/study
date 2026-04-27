@@ -59,22 +59,15 @@ To build a "Chat PDF" App and following is the workflow steps. we will discuss  
     - create models based on what parameters are send to methods of domain controllers.
     - create models based on what is returned by methods of domain controllers.
 
-11. **Design dependency tree** 
-    - Identify the names of all MainController, Business Controllers, Utility classes, Components and Component Controllers
-    - Decide who instantiates What.
-    - Decide if APP state class use module-level singleton pattern.
-    - Decide if application components use module-level singleton pattern.
-    - Decide who will add all application components to main window.
-    - Who will bind events to Ui widgets of the components.
-    - Method names will not be identifies now.
-    - if class A hold refrence to other class B, then an arrow is made from A to B 
-    - Note : this step is tightly coupled with the GUI framework used for the app.
-
-12. **Define directory structure**  
+11. **Define directory structure**  
     - MainController  
     - ComponentController  
     - DomainController  
-    - Components  
+    - Components
+    - UIComposer 
+    - DomainComposer  
+    - AppControllers Frozen dataclass 
+    - DomainControllers Frozen dataclass   
     - Othere utilities
     - Organize the application into logical folders and modules. 
 
