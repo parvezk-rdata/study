@@ -59,7 +59,7 @@ To build a "Chat PDF" App and following is the workflow steps. we will discuss  
     - create models based on what parameters are send to methods of domain controllers.
     - create models based on what is returned by methods of domain controllers.
 
-11. **Define directory structure**  
+11. **Define directory structure and a table for file responsibilities**  
     - MainController  
     - ComponentController  
     - DomainController  
@@ -67,7 +67,8 @@ To build a "Chat PDF" App and following is the workflow steps. we will discuss  
     - UIComposer 
     - DomainComposer  
     - AppControllers Frozen dataclass 
-    - DomainControllers Frozen dataclass   
+    - DomainControllers Frozen dataclass  
+    - Modals 
     - Othere utilities
     - Organize the application into logical folders and modules. 
 
