@@ -10,7 +10,11 @@ To build a "Chat PDF" App and following is the workflow steps. we will discuss  
     - MainController  
     - ComponentController  
     - DomainController  
-    - Components  
+    - Components
+    - UIComposer 
+    - DomainComposer  
+    - AppControllers Frozen dataclass 
+    - DomainControllers Frozen dataclass 
 
     Also define communication via signals and whether state change trigger events or not(state-driven UI updates)
 
@@ -55,37 +59,49 @@ To build a "Chat PDF" App and following is the workflow steps. we will discuss  
     - create models based on what parameters are send to methods of domain controllers.
     - create models based on what is returned by methods of domain controllers.
 
-11. **Identify Components and Component Controllers** 
+11. **Design dependency tree** 
+    - Identify the names of all MainController, Business Controllers, Utility classes, Components and Component Controllers
+    - Decide who instantiates What.
+    - Decide if APP state class use module-level singleton pattern.
+    - Decide if application components use module-level singleton pattern.
+    - Decide who will add all application components to main window.
+    - Who will bind events to Ui widgets of the components.
+    - Method names will not be identifies now.
+    - if class A hold refrence to other class B, then an arrow is made from A to B 
+    - Note : this step is tightly coupled with the GUI framework used for the app.
 
-12. **Identify MainController and its responsibilities**
-
-13. **Define directory structure**  
+12. **Define directory structure**  
     - MainController  
     - ComponentController  
     - DomainController  
     - Components  
     - Othere utilities
-    - Organize the application into logical folders and modules.
+    - Organize the application into logical folders and modules. 
 
-14. **Implement UI components**
+12. **Identify methods of Components and Component Controllers** 
+    - .
+
+13. **Identify MainController and its responsibilities**
+
+15. **Implement UI components**
     - For each component identify the Ui widgets and other applicaiton it needs  
     - identify the layout needed for the component.
     - methods : create widgets, createLayout  
     - Build application components based on the GUI design.
 
-15. **Create MainController skeleton** - Add one method per user event.
+16. **Create MainController skeleton** - Add one method per user event.
 
-16. **Document event logic inside methods**   - Add comments describing event flow steps.
+17. **Document event logic inside methods**   - Add comments describing event flow steps.
 
-17. **Identify methods in domain_controllers and component_controllers**  - Add comments describing task to be done.
+18. **Identify methods in domain_controllers and component_controllers**  - Add comments describing task to be done.
 
-18. **Implement DomainControllers**  
+19. **Implement DomainControllers**  
 
-19. **Implement ComponentControllers**  
+20. **Implement ComponentControllers**  
     - initialize the component and stores its reference
     - has method to bind component widgets to events 
 
-20. **Implement MainController**
+21. **Implement MainController**
     - has variables representing UI state(can use centralized class/model for this)
     - holds refrences to all controllers
     - has method to handle each events  
