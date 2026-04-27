@@ -1,24 +1,27 @@
-
 # Directory Structure
+> Note : the name domain is being replaced with services
 
 ```
 chat_pdf/
 │
-├── main.py                              # Entry point — creates MainController, starts app
+├── main.py                              # Entry point — creates QApplication, MainWindow, 
+│                                          MainController
 ├── .env                                 # API key (not committed to version control)
 ├── requirements.txt
 │
-├── core/
+├── app/
 │   ├── main_controller.py               # MainController — orchestrates all event flows
-│   ├── models/
-│   │   ├── domain_models.py             # PDFDocument, ChatMessage
-│   │   └── state_models.py              # AppState, AppError, ErrorKind
-│   └── bundles/
-│       ├── app_controllers.py           # AppControllers frozen dataclass
-│       └── domain_controllers.py        # DomainControllers frozen dataclass
+│   └── models/
+│       ├── services/
+│       │   ├── pdf_document.py          # PDFDocument dataclass
+│       │   └── chat_message.py          # ChatMessage dataclass
+│       └── state/
+│           ├── app_state.py             # AppState dataclass
+│           └── app_error.py             # AppError dataclass, ErrorKind enum
 │
 ├── ui/
-│   ├── ui_composer.py                   # UIComposer — builds all UI, returns AppControllers bundle
+│   ├── ui_composer.py                   # UIComposer — builds all UI, returns UIBundle
+│   ├── ui_bundle.py                     # UIBundle frozen dataclass
 │   ├── toolbar/
 │   │   ├── toolbar_component.py         # ToolbarComponent [SMART]
 │   │   └── toolbar_controller.py        # ToolbarController
@@ -36,30 +39,16 @@ chat_pdf/
 │       ├── input_bar_component.py       # InputBarComponent [SMART]
 │       └── input_bar_controller.py      # InputBarController
 │
-└── domain/
-    ├── domain_composer.py               # DomainComposer — loads .env, returns DomainControllers bundle
-    ├── pdf_service.py                   # PDFService — PyMuPDF text extraction
-    └── llm_service.py                   # LLMService — OpenAI API calls
-```
-
----
-
-## Bundle Definitions
-
-```python
-# core/bundles/app_controllers.py
-@dataclass(frozen=True)
-class AppControllers:
-    toolbar:    ToolbarController
-    status_bar: StatusBarController
-    chat_area:  ChatAreaController
-    input_bar:  InputBarController
-
-# core/bundles/domain_controllers.py
-@dataclass(frozen=True)
-class DomainControllers:
-    pdf: PDFService
-    llm: LLMService
+├── services/
+│   ├── service_composer.py              # ServiceComposer — instantiates services, returns ServiceBundle
+│   ├── service_bundle.py                # ServiceBundle frozen dataclass
+│   ├── pdf_service.py                   # PDFService — PyMuPDF text extraction
+│   └── llm_service.py                   # LLMService — OpenAI API calls
+│
+├── config/
+│   └── settings.py                      # Loads .env, exposes OPENAI_API_KEY and config constants
+│
+└── utils/                               # Shared helpers (empty for now)
 ```
 
 ---
@@ -69,12 +58,13 @@ class DomainControllers:
 | File | Contains |
 |---|---|
 | `main.py` | App entry point. Creates `QApplication`, `MainWindow`, instantiates `MainController` |
-| `core/main_controller.py` | All event handlers, signal wiring, `AppState` ownership |
-| `core/models/domain_models.py` | `PDFDocument`, `ChatMessage` dataclasses |
-| `core/models/state_models.py` | `AppState`, `AppError`, `ErrorKind` enum |
-| `core/bundles/app_controllers.py` | `AppControllers` frozen dataclass |
-| `core/bundles/domain_controllers.py` | `DomainControllers` frozen dataclass |
-| `ui/ui_composer.py` | Builds all components + controllers, returns `AppControllers` bundle |
+| `app/main_controller.py` | All event handlers, signal wiring, `AppState` ownership |
+| `app/models/services/pdf_document.py` | `PDFDocument` dataclass |
+| `app/models/services/chat_message.py` | `ChatMessage` dataclass |
+| `app/models/state/app_state.py` | `AppState` dataclass |
+| `app/models/state/app_error.py` | `AppError` dataclass, `ErrorKind` enum |
+| `ui/ui_bundle.py` | `UIBundle` frozen dataclass — holds refs to all component controllers |
+| `ui/ui_composer.py` | Builds all components + controllers, returns `UIBundle` |
 | `ui/toolbar/toolbar_component.py` | Toolbar UI — Upload button, filename label, Clear button |
 | `ui/toolbar/toolbar_controller.py` | File picker, filename display, Clear button state |
 | `ui/status_bar/status_bar_component.py` | Error banner UI — icon, message label, dismiss button |
@@ -86,6 +76,9 @@ class DomainControllers:
 | `ui/chat_area/widgets/placeholder_widget.py` | Empty state icon + hint text [DUMB] |
 | `ui/input_bar/input_bar_component.py` | Input field + Send button UI |
 | `ui/input_bar/input_bar_controller.py` | Read input, clear input, enable/disable |
-| `domain/domain_composer.py` | Loads `.env`, instantiates domain services, returns `DomainControllers` bundle |
-| `domain/pdf_service.py` | PyMuPDF extraction, returns `PDFDocument` or raises `PDFLoadError` |
-| `domain/llm_service.py` | Builds OpenAI payload, returns response text or raises `LLMCallError` |
+| `services/service_bundle.py` | `ServiceBundle` frozen dataclass — holds refs to all services |
+| `services/service_composer.py` | Instantiates all services, returns `ServiceBundle` |
+| `services/pdf_service.py` | PyMuPDF extraction, returns `PDFDocument` or raises `PDFLoadError` |
+| `services/llm_service.py` | Builds OpenAI payload, returns response text or raises `LLMCallError` |
+| `config/settings.py` | Loads `.env` via python-dotenv, exposes `OPENAI_API_KEY` constant |
+| `utils/` | Shared helpers — empty for now |

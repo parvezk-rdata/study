@@ -1,4 +1,4 @@
-> Step 06: Controller Architecture
+> Controller Architecture
 ---
 
 ```
