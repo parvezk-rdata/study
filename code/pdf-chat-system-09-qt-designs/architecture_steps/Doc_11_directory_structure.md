@@ -40,7 +40,8 @@ chat_pdf/
 │       └── input_bar_controller.py      # InputBarController
 │
 ├── services/
-│   ├── service_composer.py              # ServiceComposer — instantiates services, returns ServiceBundle
+│   ├── service_composer.py              # ServiceComposer — instantiates services, returns 
+│   │                                      ServiceBundle
 │   ├── service_bundle.py                # ServiceBundle frozen dataclass
 │   ├── pdf_service.py                   # PDFService — PyMuPDF text extraction
 │   └── llm_service.py                   # LLMService — OpenAI API calls

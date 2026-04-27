@@ -72,34 +72,38 @@ To build a "Chat PDF" App and following is the workflow steps. we will discuss  
     - Othere utilities
     - Organize the application into logical folders and modules. 
 
-12. **Identify methods of Components and Component Controllers** 
-    - .
-
-13. **Identify MainController and its responsibilities**
-
-15. **Implement UI components**
+12. **Identify methods of Components and Implement** 
     - For each component identify the Ui widgets and other applicaiton it needs  
     - identify the layout needed for the component.
     - methods : create widgets, createLayout  
     - Build application components based on the GUI design.
 
-16. **Create MainController skeleton** - Add one method per user event.
+13. **Implement all models** 
+	- all models of app/models/services
+	- all models of app/models/state
 
-17. **Document event logic inside methods**   - Add comments describing event flow steps.
+14. **Identify methods of Component Controllers and Implement** 
+    - Add one or more methods needed to handle each user(UI) event.
+    - Decide : if it has method to bind component widgets to events 
+    
+15. **Implement ui_bundle Implement** 
 
-18. **Identify methods in domain_controllers and component_controllers**  - Add comments describing task to be done.
+16. **Identify methods of ui_composer and implement** 
+    - single place where all components and component controllers are created
+    - Creates MainWindow and adds all components to it with correct layout
+    - Returns refrences of all component controllers as a frozen bundle
 
-19. **Implement DomainControllers**  
+17. **Implement all files inside services/ directory** 
+	- all services
+	- service_bundle
+	- service_composer, 
 
-20. **Implement ComponentControllers**  
-    - initialize the component and stores its reference
-    - has method to bind component widgets to events 
+18. **Identify methods of MainController** 
+    - Add one method per user event in step 9.
+    - Add one method to bind Events to Handlers
+    - Add methods for to  handle each error in step 9
 
-21. **Implement MainController**
-    - has variables representing UI state(can use centralized class/model for this)
-    - holds refrences to all controllers
-    - has method to handle each events  
-    - has method to handle errors when processing events 
+19. Write code for rest of the files: main.py, requirements.txt, config/settings.py
 
 ---
 

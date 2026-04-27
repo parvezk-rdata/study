@@ -15,7 +15,9 @@
 
 | # | Error Name | Trigger | 
 |---|---|---|
-| E-01 | `pdf_load_failed` | Selected file fails to parse (corrupt / password-protected) | 
+| E-01 | `pdf_load_failed`       | Selected file fails to parse (corrupt / password-protected) |
+| E-01 | `api_call_failed`       | LLM call failed |  
+| E-01 | `empty_query_submitted` | used submited empty question for llm to answer |  
 
 ## Notes
 
