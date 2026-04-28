@@ -51,6 +51,9 @@
 | `kind` | `ErrorKind` | `PDF_LOAD` or `API_FAILURE` or `EMPTY_QUERY` |
 | `message` | `str` | Human-readable error text shown in UI |
 
+> AppState.error is written but never read back.
+> AppError, AppState.error and ErrorKind  may be unnecessary.
+
 ---
 
 ### `ErrorKind` (Enum)

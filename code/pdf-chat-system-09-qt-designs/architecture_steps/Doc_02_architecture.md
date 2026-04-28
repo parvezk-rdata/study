@@ -139,7 +139,7 @@ MainController
 - Never communicate with other `ComponentController`s directly
 ---
 
-## DomainController (Key responsibilities)
+## DomainController or ServiceControllers (Key responsibilities)
 
 - A plain class that **handles one domain of business logic or one external service**
 - Contains only operation methods that are called during event handling
@@ -185,6 +185,9 @@ MainController
 - Handle errors and decide how to surface them
 - Do not contain low-level UI code. Delegate to `ComponentController`
 - Do not contain business logic (no PDF parsing, no API calls). Delegate to `DomainController`
+
+> we have try catch to handle same error in both DomainController and MainController. DomainController catches Raw library exceptions and raises clean domain error. MainController catches Clean domain errors and decides what to do next. This is the standard pattern for layered architectures. Each layer only speaks the language of the layer above it.
+
 ---
 
 
