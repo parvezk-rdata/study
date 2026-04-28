@@ -20,13 +20,14 @@
 
 ---
 
-### `LLMRequest`
+### `LLMTransaction`
 
 | Field | Type | Description |
 |---|---|---|
-| `pdf_text` | `str` | Full extracted PDF text sent as system context |
-| `history` | `list[ChatMessage]` | Conversation history so far (excludes new user message) |
-| `user_message` | `ChatMessage` | The new user message to be sent |
+| `pdf_text`        | `str`                 | Full extracted PDF text sent as system context |
+| `history`         | `list[ChatMessage]`   | Conversation history so far (excludes new user message) |
+| `user_message`    | `ChatMessage`         | The new user message to be sent |
+| `response`        | `ChatMessage`         | Reply sent by LLM |
 
 ---
 

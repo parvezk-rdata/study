@@ -14,7 +14,7 @@ chat_pdf/
 │   └── models/
 │       ├── services/
 │       │   ├── pdf_document.py          # PDFDocument dataclass
-│       │   ├── llm_request.py           # LLMRequest dataclass
+│       │   ├── llm_transction.py        # LLMTransaction dataclass
 │       │   └── chat_message.py          # ChatMessage dataclass
 │       └── state/
 │           ├── app_state.py             # AppState dataclass
@@ -53,7 +53,7 @@ chat_pdf/
 │   │                                      simple types only
 │   │  
 │   └── llm/
-│       ├── llm_controller.py            # LLMController — receives LLMRequest,  
+│       ├── llm_controller.py            # LLMController — receives LLMTransaction,  
 │       |                                  calls LLMService, returns str
 │       └── llm_service.py               # LLMService: raw OpenAI API call, simple types only
 │
@@ -73,7 +73,7 @@ chat_pdf/
 | `app/main_controller.py` | All event handlers, signal wiring, `AppState` ownership |
 | `app/models/services/pdf_document.py` | `PDFDocument` dataclass |
 | `app/models/services/chat_message.py` | `ChatMessage` dataclass |
-| `app/models/services/llm_request.py` | `LLMRequest` dataclass |
+| `app/models/services/llm_transction.py` | `LLMTransaction` dataclass |
 | `app/models/state/app_state.py` | `AppState` dataclass |
 | `app/models/state/app_error.py` | `AppError` dataclass, `ErrorKind` enum |
 | `ui/ui_bundle.py` | `UIBundle` frozen dataclass — holds refs to all component controllers |
@@ -93,7 +93,7 @@ chat_pdf/
 | `services/service_composer.py` | Instantiates all controllers and services, returns `ServiceBundle` |
 | `services/pdf/pdf_controller.py` | `PDFController` — receives file path, calls `PDFService`, returns `PDFDocument` |
 | `services/pdf/pdf_service.py` | `PDFService` — raw PyMuPDF text extraction, simple types only |
-| `services/llm/llm_controller.py` | `LLMController` — receives `LLMRequest`, calls `LLMService`, returns `str` |
+| `services/llm/llm_controller.py` | `LLMController` — receives `LLMTransaction`, calls `LLMService`, returns `str` |
 | `services/llm/llm_service.py` | `LLMService` — raw OpenAI API call, simple types only |
 | `config/settings.py` | Loads `.env` via python-dotenv, exposes `OPENAI_API_KEY` constant |
 | `utils/` | Shared helpers — empty for now |
