@@ -40,12 +40,22 @@ chat_pdf/
 │       ├── input_bar_component.py       # InputBarComponent [SMART]
 │       └── input_bar_controller.py      # InputBarController
 │
+│
 ├── services/
-│   ├── service_composer.py              # ServiceComposer — instantiates services, returns 
-│   │                                      ServiceBundle
+│   ├── service_composer.py              # ServiceComposer — instantiates controllers and 
+│   │                                      services, returns ServiceBundle
 │   ├── service_bundle.py                # ServiceBundle frozen dataclass
-│   ├── pdf_service.py                   # PDFService — PyMuPDF text extraction
-│   └── llm_service.py                   # LLMService — OpenAI API calls
+│   │                                      holds PDFController, LLMController
+│   ├── pdf/
+│   │   ├── pdf_controller.py            # PDFController — receives file path, 
+│   │   |                                  calls PDFService, returns PDFDocument
+│   │   └── pdf_service.py               # PDFService — raw PyMuPDF text extraction, 
+│   │                                      simple types only
+│   │  
+│   └── llm/
+│       ├── llm_controller.py            # LLMController — receives LLMRequest,  
+│       |                                  calls LLMService, returns str
+│       └── llm_service.py               # LLMService: raw OpenAI API call, simple types only
 │
 ├── config/
 │   └── settings.py                      # Loads .env, exposes OPENAI_API_KEY and config constants
@@ -63,6 +73,7 @@ chat_pdf/
 | `app/main_controller.py` | All event handlers, signal wiring, `AppState` ownership |
 | `app/models/services/pdf_document.py` | `PDFDocument` dataclass |
 | `app/models/services/chat_message.py` | `ChatMessage` dataclass |
+| `app/models/services/llm_request.py` | `LLMRequest` dataclass |
 | `app/models/state/app_state.py` | `AppState` dataclass |
 | `app/models/state/app_error.py` | `AppError` dataclass, `ErrorKind` enum |
 | `ui/ui_bundle.py` | `UIBundle` frozen dataclass — holds refs to all component controllers |
@@ -78,9 +89,11 @@ chat_pdf/
 | `ui/chat_area/widgets/placeholder_widget.py` | Empty state icon + hint text [DUMB] |
 | `ui/input_bar/input_bar_component.py` | Input field + Send button UI |
 | `ui/input_bar/input_bar_controller.py` | Read input, clear input, enable/disable |
-| `services/service_bundle.py` | `ServiceBundle` frozen dataclass — holds refs to all services |
-| `services/service_composer.py` | Instantiates all services, returns `ServiceBundle` |
-| `services/pdf_service.py` | PyMuPDF extraction, returns `PDFDocument` or raises `PDFLoadError` |
-| `services/llm_service.py` | Builds OpenAI payload, returns response text or raises `LLMCallError` |
+| `services/service_bundle.py` | `ServiceBundle` frozen dataclass — holds refs to `PDFController`, `LLMController` |
+| `services/service_composer.py` | Instantiates all controllers and services, returns `ServiceBundle` |
+| `services/pdf/pdf_controller.py` | `PDFController` — receives file path, calls `PDFService`, returns `PDFDocument` |
+| `services/pdf/pdf_service.py` | `PDFService` — raw PyMuPDF text extraction, simple types only |
+| `services/llm/llm_controller.py` | `LLMController` — receives `LLMRequest`, calls `LLMService`, returns `str` |
+| `services/llm/llm_service.py` | `LLMService` — raw OpenAI API call, simple types only |
 | `config/settings.py` | Loads `.env` via python-dotenv, exposes `OPENAI_API_KEY` constant |
 | `utils/` | Shared helpers — empty for now |
