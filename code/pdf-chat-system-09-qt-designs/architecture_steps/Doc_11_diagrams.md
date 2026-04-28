@@ -136,7 +136,7 @@
 
 +------------------+                   +---------------------+                   +--------------------+
 |                  |  error_msg(str)   |                     |  error_msg(str)   |                    |
-|  MainController  |------------------>| StatusBarController |------------------>| StatusBarComponent |
+|  MainController  |------------------>| ChatAreaController  |------------------>| ChatAreaComponent  |
 |                  |                   |                     |                   |                    |
 +------------------+                   +---------------------+                   +--------------------+
 
