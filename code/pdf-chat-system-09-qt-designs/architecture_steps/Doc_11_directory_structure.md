@@ -97,3 +97,8 @@ chat_pdf/
 | `services/llm/llm_service.py` | `LLMService` — raw OpenAI API call, simple types only |
 | `config/settings.py` | Loads `.env` via python-dotenv, exposes `OPENAI_API_KEY` constant |
 | `utils/` | Shared helpers — empty for now |
+
+
+## Models
+  - Use Pydantic only at boundaries where data comes from outside. Use dataclass for internal app models.
+  - Use Pydantic if data comes from: JSON files, .env/config validation, external request/response formats

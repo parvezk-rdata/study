@@ -186,6 +186,9 @@ MainController
 - Do not contain low-level UI code. Delegate to `ComponentController`
 - Do not contain business logic (no PDF parsing, no API calls). Delegate to `DomainController`
 
+## Models
+  - Use Pydantic only at boundaries where data comes from outside. Use dataclass for internal app models.
+
 > we have try catch to handle same error in both DomainController and MainController. DomainController catches Raw library exceptions and raises clean domain error. MainController catches Clean domain errors and decides what to do next. This is the standard pattern for layered architectures. Each layer only speaks the language of the layer above it.
 
 ---
