@@ -118,7 +118,7 @@ Trigger: Selected file fails to parse (corrupt or password-protected).
 
 | No | Label | Description | Target |
 |---|---|---|---|
-| 1 | Update State  | Store error info (kind: PDF_LOAD, message)    | AppState |
+| 1 | Update State  | Store error (str:message)                     | AppState |
 | 2 | Update UI     | Show error banner with message                | StatusBar|
 | 3 | Update UI     | Keep question input disabled                  | InputBar |
 
@@ -133,7 +133,7 @@ Trigger: OpenAI API call raises an exception (network error, timeout, invalid ke
 
 | No | Label | Description | Target |
 |---|---|---|---|
-| 1 | Update State  | Store error info (kind: API_FAILURE, message) | AppState |
+| 1 | Update State  | Store error (str:message)                     | AppState |
 | 2 | Update State  | Set is_loading to False                       | AppState |
 | 3 | Update UI     | Hide loading indicator                        | ChatArea |
 | 4 | Update UI     | Render red error bubble with message          | ChatArea |
@@ -148,7 +148,7 @@ Trigger: User attempts to send an empty input field.
 
 | No | Label | Description | Target |
 |---|---|---|---|
-| 1 | Update State  | Store error info (kind: EMPTY_QUERY, message) | AppState |
+| 1 | Update State  | Store error (str:message)                     | AppState |
 | 2 | Update UI     | Render inline red error bubble with message   | ChatArea |
 
 

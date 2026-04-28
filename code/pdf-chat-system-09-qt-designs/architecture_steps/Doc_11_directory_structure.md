@@ -14,11 +14,11 @@ chat_pdf/
 │   └── models/
 │       ├── services/
 │       │   ├── pdf_document.py          # PDFDocument dataclass
-│       │   ├── llm_transction.py        # LLMTransaction dataclass
+│       │   ├── llm_transaction.py        # LLMTransaction dataclass
 │       │   └── chat_message.py          # ChatMessage dataclass
 │       └── state/
 │           ├── app_state.py             # AppState dataclass
-│           └── app_error.py             # AppError dataclass, ErrorKind enum
+│           └── app_error.py             # This file not needed (AppError dataclass)
 │
 ├── ui/
 │   ├── ui_composer.py                   # UIComposer — builds all UI, returns UIBundle
@@ -54,7 +54,7 @@ chat_pdf/
 │   │  
 │   └── llm/
 │       ├── llm_controller.py            # LLMController — receives LLMTransaction,  
-│       |                                  calls LLMService, returns str
+│       |                                  calls LLMService, returns LLMTransaction
 │       └── llm_service.py               # LLMService: raw OpenAI API call, simple types only
 │
 ├── config/
@@ -73,7 +73,7 @@ chat_pdf/
 | `app/main_controller.py` | All event handlers, signal wiring, `AppState` ownership |
 | `app/models/services/pdf_document.py` | `PDFDocument` dataclass |
 | `app/models/services/chat_message.py` | `ChatMessage` dataclass |
-| `app/models/services/llm_transction.py` | `LLMTransaction` dataclass |
+| `app/models/services/llm_transaction.py` | `LLMTransaction` dataclass |
 | `app/models/state/app_state.py` | `AppState` dataclass |
 | `app/models/state/app_error.py` | `AppError` dataclass, `ErrorKind` enum |
 | `ui/ui_bundle.py` | `UIBundle` frozen dataclass — holds refs to all component controllers |
