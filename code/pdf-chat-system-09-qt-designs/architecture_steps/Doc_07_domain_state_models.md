@@ -40,23 +40,25 @@
 | `pdf` | `PDFDocument \| None` | `None` = no PDF loaded |
 | `messages` | `list[ChatMessage]` | Full conversation history (in-memory) |
 | `is_loading` | `bool` | `True` while waiting for API response |
-| `error` | `AppError \| None` | Current active error, or `None` |
+| `error` | `str` | Current active error, or `None` |
 
 ---
 
-### `AppError`
+### Removed following : AppError, AppState.error and ErrorKind.
+
+> Errors are just strings passed directly to component controllers. No model required.
+> Currently all errors are written but never read back.
+
+01. `AppError`
 
 | Field | Type | Description |
 |---|---|---|
 | `kind` | `ErrorKind` | `PDF_LOAD` or `API_FAILURE` or `EMPTY_QUERY` |
 | `message` | `str` | Human-readable error text shown in UI |
 
-> AppState.error is written but never read back.
-> AppError, AppState.error and ErrorKind  may be unnecessary.
-
 ---
 
-### `ErrorKind` (Enum)
+02. `ErrorKind` (Enum)
 
 | Value | Display Location | Description |
 |---|---|---|
