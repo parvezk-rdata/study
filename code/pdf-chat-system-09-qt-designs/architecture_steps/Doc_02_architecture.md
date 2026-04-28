@@ -6,7 +6,7 @@
                          │  Domain Controller   │
                          └────────────┬─────────┘                
    User Interaction               ▲   │   
-           │                      │   │           
+           │                      │   │ [Domain Models]        
            │                      │   │   
            ▼                      │   ▼   
       ┌─────────┐  event    ┌─────┴─────────┐        ┌────────────────────┐
@@ -18,16 +18,32 @@
 ```
 ---
 
-## **Six Types Of Class**
+> `Three Types Of Class for UI`
 
 | Class Type | Count | Responsibility |
 |---|---|---|
-| `Component` | Many | Render UI widgets. Emit signals. Nothing else. |
-| `ComponentController` | One per smart component | Handle UI-only actions for their component |
-| `DomainController` | One per service/domain | Handle business logic and external services |
-| `MainController` | Exactly one | Orchestrate the full event flow across the app |
-| `UIComposer` | Exactly one | Create `MainWindow`, instantiate and lay out all components, create all `ComponentControllers`, return `AppControllers` bundle |
-| `DomainComposer` | Exactly one | Instantiate all domain services, load API key from `.env`, return `DomainControllers` bundle |
+| **Component** | Many | Render UI widgets. Emit signals. Nothing else. |
+| **ComponentController** | One per smart component | Handle UI-only actions for their component |
+| **UIComposer** | Exactly one | Create **MainWindow**, instantiate and lay out all components, create all **ComponentControllers**, return **AppControllers** bundle |
+
+<br>
+
+> `Four Types Of Class for Services`
+
+| Class Type | Count | Responsibility |
+|---|---|---|
+| **Service** | Many | Perform one raw operation using simple data types |
+| **DomainController** | One per service/domain | Handle business logic and external services |
+| **ServiceComposer** | Exactly one | Instantiate all domain controllers, load API key from **.env**, return **DomainControllers** bundle |
+| **Domain Models** | Many | MainController and  DomainController exchange information using these models|
+
+<br>
+
+> `One MainController`
+
+| Class Type | Count | Responsibility |
+|---|---|---|
+| **MainController** | Exactly one | Orchestrate the full event flow across the app |
 
 ---
 
@@ -130,6 +146,9 @@ MainController
 - It knows nothing about the UI. Never update the UI directly
 - Perform a specific business operation when called
 - Return a result or raise a descriptive exception
+- Receive a domain model, unpack it into simple types, call the raw service
+- Assemble the result into domain model and returns back to main_controller
+  back into a domain model to return
 - Communicates only via MainController
 - Never communicate with other `DomainController`s directly
 - Never communicate with other `ComponentController`s directly

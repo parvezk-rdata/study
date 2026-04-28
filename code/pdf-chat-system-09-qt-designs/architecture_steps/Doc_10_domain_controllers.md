@@ -21,6 +21,5 @@
 
 | Method | Input | Output | Raises |
 |---|---|---|---|
-| `ask(pdf_text, history, user_message)` | `str`, `list[ChatMessage]`, `ChatMessage` | `str` — assistant response text | `LLMCallError` if API fails |
-
+| `ask(request)` | `LLMRequest` | `str` — assistant response text | `LLMCallError` if API fails |
 ---
