@@ -72,7 +72,7 @@ class MainController:
         self._ui.status_bar.hide_error()
         self._ui.chat_area.clear_bubbles()
         self._ui.chat_area.hide_placeholder()
-        self._ui.input_bar.set_enabled(True)
+        self._ui.input_bar.enableInput()
 
     def _on_status_bar_dismissed(self):
         # E-03: status_bar_dismissed
@@ -94,7 +94,7 @@ class MainController:
         # Step 3-5 — Update state and UI for loading
         self._state.is_loading = True
         self._ui.chat_area.show_loading()
-        self._ui.input_bar.set_enabled(False)
+        self._ui.input_bar.disableInput()
 
         # Step 6 — Build LLMTransaction and invoke LLM
         transaction = LLMTransaction(
@@ -119,7 +119,7 @@ class MainController:
         self._ui.chat_area.add_message_bubble(transaction.user_message)
         self._ui.chat_area.add_message_bubble(transaction.response)
         self._ui.toolbar.on_chat_updated()
-        self._ui.input_bar.set_enabled(True)
+        self._ui.input_bar.enableInput()
         self._ui.input_bar.clear_input()
 
     def _on_clear_clicked(self):
@@ -138,7 +138,7 @@ class MainController:
     def _on_pdf_load_failed(self, message: str):
         self._state.error = message
         self._ui.status_bar.show_error(message)
-        self._ui.input_bar.set_enabled(False)
+        self._ui.input_bar.disableInput()
 
     def _on_llm_call_failed(self, message: str):
         self._state.is_loading = False
@@ -146,7 +146,7 @@ class MainController:
         self._ui.chat_area.hide_loading()
         self._ui.chat_area.add_error_bubble(message)
         self._ui.toolbar.on_llm_call_failed()
-        self._ui.input_bar.set_enabled(True)
+        self._ui.input_bar.enableInput()
 
     def _on_empty_query(self):
         self._ui.chat_area.add_error_bubble(
