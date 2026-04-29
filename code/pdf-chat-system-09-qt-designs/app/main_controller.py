@@ -70,8 +70,7 @@ class MainController:
         # Update UI
         self._ui.toolbar.on_pdf_loaded(pdf)
         self._ui.status_bar.hide_error()
-        self._ui.chat_area.clear_bubbles()
-        self._ui.chat_area.hide_placeholder()
+        self._ui.chat_area.emptyAllChats()
         self._ui.input_bar.enableInput()
 
     def _on_status_bar_dismissed(self):
@@ -85,7 +84,6 @@ class MainController:
         # Step 1 — Read input
         text = self._ui.input_bar.get_text()
         if not text:
-            self._on_empty_query()
             return
 
         # Step 2 — Create user ChatMessage
@@ -93,7 +91,7 @@ class MainController:
 
         # Step 3-5 — Update state and UI for loading
         self._state.is_loading = True
-        self._ui.chat_area.show_loading()
+        self._ui.chat_area.waitForLLMCall()
         self._ui.input_bar.disableInput()
 
         # Step 6 — Build LLMTransaction and invoke LLM
@@ -115,7 +113,7 @@ class MainController:
         self._state.is_loading = False
 
         # Steps 11-15 — Update UI
-        self.ui.chat_area.handleNewChatMessage(transaction.user_message, transaction.response)
+        self._ui.chat_area.handleNewMessage(transaction.user_message, transaction.response)
         self._ui.toolbar.on_chat_updated()
         self._ui.input_bar.enableInput()
         self._ui.input_bar.clear_input()
@@ -124,8 +122,7 @@ class MainController:
         # E-05: chat_cleared
         self._state.messages = []
         self._state.error = None
-        self._ui.chat_area.clear_bubbles()
-        self._ui.chat_area.show_placeholder()
+        self._ui.chat_area.emptyAllChats()
         self._ui.status_bar.hide_error()
         self._ui.toolbar.on_chat_cleared()
 
@@ -141,10 +138,6 @@ class MainController:
     def _on_llm_call_failed(self, message: str):
         self._state.is_loading = False
         self._state.error = message
-        self._ui.chat_area.add_error_bubble(message)
+        self._ui.chat_area.handleFailedLLMCall(message)
         self._ui.toolbar.on_llm_call_failed()
         self._ui.input_bar.enableInput()
-
-    def _on_empty_query(self):
-        self._ui.chat_area.add_error_bubble(
-            "Please enter a question before sending.")
