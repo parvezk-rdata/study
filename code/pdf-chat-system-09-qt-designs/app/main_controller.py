@@ -115,9 +115,7 @@ class MainController:
         self._state.is_loading = False
 
         # Steps 11-15 — Update UI
-        self._ui.chat_area.hide_loading()
-        self._ui.chat_area.add_message_bubble(transaction.user_message)
-        self._ui.chat_area.add_message_bubble(transaction.response)
+        self.ui.chat_area.handleNewChatMessage(transaction.user_message, transaction.response)
         self._ui.toolbar.on_chat_updated()
         self._ui.input_bar.enableInput()
         self._ui.input_bar.clear_input()
@@ -143,7 +141,6 @@ class MainController:
     def _on_llm_call_failed(self, message: str):
         self._state.is_loading = False
         self._state.error = message
-        self._ui.chat_area.hide_loading()
         self._ui.chat_area.add_error_bubble(message)
         self._ui.toolbar.on_llm_call_failed()
         self._ui.input_bar.enableInput()

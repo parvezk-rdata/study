@@ -26,7 +26,12 @@ class ChatAreaController:
     def hide_loading(self):
         self._component.get_loading_bubble().setVisible(False)
 
-    def add_message_bubble(self, message: ChatMessage):
+    def handleNewChatMessage(self, usrMessage: ChatMessage, llmMessage: ChatMessage):
+        self.hide_loading()
+        self._add_message_bubble(usrMessage)
+        self._add_message_bubble(llmMessage)
+
+    def _add_message_bubble(self, message: ChatMessage):
         bubble = MessageBubbleWidget(
             role=message.role,
             content=message.content
@@ -39,6 +44,7 @@ class ChatAreaController:
         self._scroll_to_bottom()
 
     def add_error_bubble(self, message: str):
+        self.hide_loading()
         bubble = MessageBubbleWidget(role="error", content=message)
         layout = self._component.get_scroll_layout()
         loading_bubble = self._component.get_loading_bubble()
