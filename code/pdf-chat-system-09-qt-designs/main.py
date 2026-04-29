@@ -10,15 +10,24 @@ def main():
     app.setStyle("Fusion")
 
     window = QMainWindow()
-    apply_styles(window)
-    controller = MainController(window)
-    window.show()
+    apply_theme(app, "theme_04_light_rose.qss")
 
+    controller = MainController(window)
+
+    # Wire theme signal to app-level theme switcher
+    controller.ui.toolbar._component.theme_changed.connect( lambda filename: apply_theme(app, filename) )
+
+    window.show()
     sys.exit(app.exec())
 
-def apply_styles(window) -> None:
-    with open("styles/theme_01_slate_indigo.qss", "r") as f:
-        window.setStyleSheet(f.read())
+
+def apply_theme(app: QApplication, filename: str) -> None:
+    try:
+        with open(f"styles/{filename}", "r") as f:
+            app.setStyleSheet(f.read())
+    except FileNotFoundError:
+        print(f"Theme file not found: {filename}")
+
 
 if __name__ == "__main__":
     main()
