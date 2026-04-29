@@ -1,6 +1,6 @@
 # ui/chat_area/chat_area_controller.py
 
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import QTimer
 from ui.chat_area.chat_area_component import ChatAreaComponent
 from ui.chat_area.widgets.message_bubble_widget import MessageBubbleWidget
 from app.models.services.chat_message import ChatMessage
@@ -61,4 +61,9 @@ class ChatAreaController:
     def _scroll_to_bottom(self):
         scroll_area = self._component.get_scroll_area()
         scroll_bar = scroll_area.verticalScrollBar()
-        scroll_bar.setValue(scroll_bar.maximum())
+
+        def on_range_changed(min, max):
+            scroll_bar.setValue(max)
+            scroll_bar.rangeChanged.disconnect(on_range_changed)
+
+        scroll_bar.rangeChanged.connect(on_range_changed)
