@@ -27,17 +27,20 @@ class ToolbarController:
         )
         return file_path if file_path else None
 
-    def show_pdf(self, pdf: PDFDocument):
+    # --- Event handlers ---
+
+    def on_pdf_loaded(self, pdf: PDFDocument):
         self._component.set_filename(pdf.filename)
         self._component.set_clear_enabled(True)
+        self._component.set_clear_state("default")
 
-    def show_no_pdf(self):
+    def on_chat_updated(self):
+        self._component.set_clear_state("active")
+
+    def on_chat_cleared(self):
         self._component.set_no_pdf()
         self._component.set_clear_enabled(False)
         self._component.set_clear_state("default")
 
-    def set_clear_active(self):
+    def on_llm_call_failed(self):
         self._component.set_clear_state("active")
-
-    def set_clear_default(self):
-        self._component.set_clear_state("default")

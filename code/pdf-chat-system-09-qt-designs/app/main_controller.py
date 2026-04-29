@@ -31,12 +31,11 @@ class MainController:
     # -------------------------------------------------------------------------
     # Signal Binding
     # -------------------------------------------------------------------------
-# Add this property to MainController class
 
     @property
     def ui(self) -> UIBundle:
         return self._ui
-    
+
     def _bind_signals(self):
         self._ui.toolbar.bind_upload_requested( self._on_upload_clicked )
         self._ui.toolbar.bind_clear_clicked( self._on_clear_clicked )
@@ -69,8 +68,7 @@ class MainController:
         self._state.error = None
 
         # Update UI
-        self._ui.toolbar.show_pdf(pdf)
-        self._ui.toolbar.set_clear_default()
+        self._ui.toolbar.on_pdf_loaded(pdf)
         self._ui.status_bar.hide_error()
         self._ui.chat_area.clear_bubbles()
         self._ui.chat_area.hide_placeholder()
@@ -120,7 +118,7 @@ class MainController:
         self._ui.chat_area.hide_loading()
         self._ui.chat_area.add_message_bubble(transaction.user_message)
         self._ui.chat_area.add_message_bubble(transaction.response)
-        self._ui.toolbar.set_clear_active()
+        self._ui.toolbar.on_chat_updated()
         self._ui.input_bar.set_enabled(True)
         self._ui.input_bar.clear_input()
 
@@ -131,7 +129,7 @@ class MainController:
         self._ui.chat_area.clear_bubbles()
         self._ui.chat_area.show_placeholder()
         self._ui.status_bar.hide_error()
-        self._ui.toolbar.set_clear_default()
+        self._ui.toolbar.on_chat_cleared()
 
     # -------------------------------------------------------------------------
     # Error Handlers
@@ -147,7 +145,7 @@ class MainController:
         self._state.error = message
         self._ui.chat_area.hide_loading()
         self._ui.chat_area.add_error_bubble(message)
-        self._ui.toolbar.set_clear_active()
+        self._ui.toolbar.on_llm_call_failed()
         self._ui.input_bar.set_enabled(True)
 
     def _on_empty_query(self):
