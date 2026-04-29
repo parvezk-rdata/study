@@ -1,6 +1,18 @@
 > Controller Architecture
 ---
 
+### General flow of any GUI APP
+
+- User interact with UI
+- Event is genarated
+- Update UI before performing domain action(service call)
+- Perform domain action(servcice call)
+- Update UI
+
+interaction --->  event --->  update UI   --->  service call  ---> update UI
+ 
+---
+
 ```
                          ┌──────────────────────┐
                          │  Domain Controller   │
