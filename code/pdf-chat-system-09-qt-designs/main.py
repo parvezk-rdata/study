@@ -10,7 +10,7 @@ def main():
     app.setStyle("Fusion")
 
     window = QMainWindow()
-    apply_theme(app, "theme_04_light_rose.qss")
+    apply_theme(app, "theme_06_ocean_blue.qss")
 
     controller = MainController(window)
 
