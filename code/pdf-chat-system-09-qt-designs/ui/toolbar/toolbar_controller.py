@@ -34,3 +34,10 @@ class ToolbarController:
     def show_no_pdf(self):
         self._component.set_no_pdf()
         self._component.set_clear_enabled(False)
+        self._component.set_clear_state("default")
+
+    def set_clear_active(self):
+        self._component.set_clear_state("active")
+
+    def set_clear_default(self):
+        self._component.set_clear_state("default")

@@ -116,6 +116,7 @@ MainController
 - Emit a external signal when a user interaction occurs
 - Handle internal signals (scrolling, focus, hover, animations)
 - Manage Internal UI State
+- If possible prefer external styling over inline(internal) styling of UI Widgets.
 - Never call the controller directly
 - Never read from or write to another component
 - do not decide what happens after an event

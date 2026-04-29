@@ -63,10 +63,9 @@ class MainController:
 
         # Update UI
         self._ui.toolbar.show_pdf(pdf)
+        self._ui.toolbar.set_clear_default()
         self._ui.status_bar.hide_error()
         self._ui.chat_area.clear_bubbles()
-        self._ui.chat_area.show_placeholder() if not self._state.messages \
-            else self._ui.chat_area.hide_placeholder()
         self._ui.chat_area.hide_placeholder()
         self._ui.input_bar.set_enabled(True)
 
@@ -114,6 +113,7 @@ class MainController:
         self._ui.chat_area.hide_loading()
         self._ui.chat_area.add_message_bubble(transaction.user_message)
         self._ui.chat_area.add_message_bubble(transaction.response)
+        self._ui.toolbar.set_clear_active()
         self._ui.input_bar.set_enabled(True)
         self._ui.input_bar.clear_input()
 
@@ -124,6 +124,7 @@ class MainController:
         self._ui.chat_area.clear_bubbles()
         self._ui.chat_area.show_placeholder()
         self._ui.status_bar.hide_error()
+        self._ui.toolbar.set_clear_default()
 
     # -------------------------------------------------------------------------
     # Error Handlers
@@ -139,6 +140,7 @@ class MainController:
         self._state.error = message
         self._ui.chat_area.hide_loading()
         self._ui.chat_area.add_error_bubble(message)
+        self._ui.toolbar.set_clear_active()
         self._ui.input_bar.set_enabled(True)
 
     def _on_empty_query(self):
