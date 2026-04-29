@@ -31,10 +31,17 @@ class MainController:
     # -------------------------------------------------------------------------
     # Signal Binding
     # -------------------------------------------------------------------------
+# Add this property to MainController class
 
+    @property
+    def ui(self) -> UIBundle:
+        return self._ui
+    
     def _bind_signals(self):
         self._ui.toolbar.bind_upload_requested( self._on_upload_clicked )
         self._ui.toolbar.bind_clear_clicked( self._on_clear_clicked )
+        # theme_changed
+        # self._ui.toolbar.bind_theme_changed( )
         self._ui.status_bar.bind_dismissed( self._on_status_bar_dismissed )
         self._ui.input_bar.bind_send_clicked( self._on_send_clicked )
 
