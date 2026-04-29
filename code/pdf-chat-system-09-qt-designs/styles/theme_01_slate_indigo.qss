@@ -35,7 +35,6 @@ QPushButton#uploadBtn:pressed {
     background-color: #3730A3;
 }
 
-/* Clear button — default state (outlined indigo) */
 QPushButton#clearBtn {
     background-color: transparent;
     color: #4F46E5;
@@ -51,7 +50,6 @@ QPushButton#clearBtn:hover {
     background-color: #EEF2FF;
 }
 
-/* Clear button — active state (outlined red, has messages) */
 QPushButton#clearBtn[state="active"] {
     background-color: transparent;
     color: #DC2626;
@@ -62,7 +60,6 @@ QPushButton#clearBtn[state="active"]:hover {
     background-color: #FEF2F2;
 }
 
-/* Clear button — disabled state */
 QPushButton#clearBtn:disabled {
     color: #A0A8C0;
     border-color: #D0D5E8;
@@ -73,6 +70,47 @@ QLabel#filenameLabel {
     color: #5A6480;
     font-size: 13px;
     padding-left: 6px;
+}
+
+/* ── Theme Selector ──────────────────────────────────────────── */
+QComboBox#themeCombo {
+    background-color: transparent;
+    color: #4F46E5;
+    border: 1px solid #4F46E5;
+    border-radius: 6px;
+    padding: 4px 28px 4px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    min-width: 120px;
+}
+
+QComboBox#themeCombo:hover {
+    background-color: #EEF2FF;
+}
+
+QComboBox#themeCombo::drop-down {
+    border: none;
+    width: 20px;
+}
+
+QComboBox#themeCombo::down-arrow {
+    image: none;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid #4F46E5;
+    width: 0px;
+    height: 0px;
+}
+
+QComboBox#themeCombo QAbstractItemView {
+    background-color: #FFFFFF;
+    color: #1E1E2E;
+    border: 1px solid #4F46E5;
+    border-radius: 6px;
+    selection-background-color: #EEF2FF;
+    selection-color: #4F46E5;
+    padding: 4px;
+    outline: none;
 }
 
 /* ── Status Bar ──────────────────────────────────────────────── */

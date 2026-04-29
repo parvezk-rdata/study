@@ -35,7 +35,8 @@ class ToolbarController:
         self._component.set_clear_state("default")
 
     def on_chat_updated(self):
-        self._component.set_clear_state("active")
+        # self._component.set_clear_state("active")
+        pass
 
     def on_chat_cleared(self):
         self._component.set_no_pdf()
@@ -43,4 +44,5 @@ class ToolbarController:
         self._component.set_clear_state("default")
 
     def on_llm_call_failed(self):
-        self._component.set_clear_state("active")
+        # self._component.set_clear_state("active")
+        pass

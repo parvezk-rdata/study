@@ -72,6 +72,47 @@ QLabel#filenameLabel {
     padding-left: 6px;
 }
 
+/* ── Theme Selector ──────────────────────────────────────────── */
+QComboBox#themeCombo {
+    background-color: transparent;
+    color: #D97706;
+    border: 1.5px solid #D97706;
+    border-radius: 6px;
+    padding: 4px 28px 4px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    min-width: 120px;
+}
+
+QComboBox#themeCombo:hover {
+    background-color: #FFFBEB;
+}
+
+QComboBox#themeCombo::drop-down {
+    border: none;
+    width: 20px;
+}
+
+QComboBox#themeCombo::down-arrow {
+    image: none;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid #D97706;
+    width: 0px;
+    height: 0px;
+}
+
+QComboBox#themeCombo QAbstractItemView {
+    background-color: #FFFBF5;
+    color: #1C1917;
+    border: 1.5px solid #D97706;
+    border-radius: 6px;
+    selection-background-color: #FFFBEB;
+    selection-color: #D97706;
+    padding: 4px;
+    outline: none;
+}
+
 /* ── Status Bar ──────────────────────────────────────────────── */
 StatusBarComponent {
     background-color: #FEF2F2;
