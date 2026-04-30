@@ -67,15 +67,9 @@ class MainController:
         self._state.error = None
         self._ui.status_bar.hide_error()
 
-    def _on_send_clicked(self):
-        # E-04: message_send_requested
+    def _on_send_clicked(self, text: str):   # ← text arrives via the signal
 
-        # Step 1 — Read input
-        text = self._ui.input_bar.get_text()
-        if not text:
-            return
-
-        # Step 2 — Create user ChatMessage
+        # Step 1-2 — Create user ChatMessage
         user_message = ChatMessage(role="user", content=text)
 
         # Step 3-5 — Update state and UI for loading
