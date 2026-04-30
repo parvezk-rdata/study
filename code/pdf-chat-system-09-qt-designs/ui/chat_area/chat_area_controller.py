@@ -14,9 +14,6 @@ class ChatAreaController:
     def emptyAllChats(self):
         self._component.clear_messages()
 
-    def waitForLLMCall(self):
-        pass
-
     def handleNewMessage(self, usrMessage: ChatMessage, llmMessage: ChatMessage):
         self._component.add_message(usrMessage.role, usrMessage.content)
         self._component.add_message(llmMessage.role, llmMessage.content)

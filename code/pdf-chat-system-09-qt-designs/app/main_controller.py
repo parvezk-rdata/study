@@ -74,7 +74,6 @@ class MainController:
 
         # Step 3-5 — Update state and UI for loading
         self._state.is_loading = True
-        self._ui.chat_area.waitForLLMCall()
         self._ui.input_bar.disableInput()
 
         # Step 6 — Build LLMTransaction and invoke LLM
