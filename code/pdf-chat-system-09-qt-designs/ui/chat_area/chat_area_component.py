@@ -3,8 +3,6 @@
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QScrollArea)
 from PyQt6.QtCore import Qt
 from ui.chat_area.widgets.placeholder_widget import PlaceholderWidget
-from ui.chat_area.widgets.message_bubble_widget import MessageBubbleWidget
-from ui.chat_area.widgets.loading_bubble_widget import LoadingBubbleWidget
 
 
 class ChatAreaComponent(QWidget):
@@ -31,12 +29,9 @@ class ChatAreaComponent(QWidget):
 
         # Dumb child widgets
         self._placeholder = PlaceholderWidget()
-        self._loading_bubble = LoadingBubbleWidget()
-        self._loading_bubble.setVisible(False)
 
         # Add placeholder to scroll layout
         self._scroll_layout.addWidget(self._placeholder)
-        self._scroll_layout.addWidget(self._loading_bubble)
 
         self._scroll_area.setWidget(self._scroll_content)
 
@@ -56,6 +51,3 @@ class ChatAreaComponent(QWidget):
 
     def get_placeholder(self) -> PlaceholderWidget:
         return self._placeholder
-
-    def get_loading_bubble(self) -> LoadingBubbleWidget:
-        return self._loading_bubble
