@@ -15,10 +15,10 @@ from app.models.state.app_state import AppState
 class MainController:
 
     def __init__(self, window: QMainWindow):
-        self._ui: UIBundle = UIComposer().build(window)         # Build UI 
-        self._svc: ServiceBundle = ServiceComposer().build()    # Build Services 
-        self._state = AppState()                                # Initialize state 
-        self._bind_signals()                                    # Bind signals to handlers 
+        self._ui: UIBundle = UIComposer().build(window)         # Build UI
+        self._svc: ServiceBundle = ServiceComposer().build()    # Build Services
+        self._state = AppState()                                # Initialize state
+        self._bind_signals()                                    # Bind signals to handlers
 
     @property
     def ui(self) -> UIBundle:
@@ -26,22 +26,23 @@ class MainController:
 
     # Bind all signals(events to controller methods)
     def _bind_signals(self):
-        self._ui.toolbar.bind_upload_requested( self._on_upload_clicked )
-        self._ui.toolbar.bind_clear_clicked( self._on_clear_clicked )
-        self._ui.status_bar.bind_dismissed( self._on_status_bar_dismissed )
-        self._ui.input_bar.bind_send_clicked( self._on_send_clicked )
+        self._ui.toolbar.bind_upload_requested(self._on_upload_clicked)
+        self._ui.toolbar.bind_clear_clicked(self._on_clear_clicked)
+        self._ui.status_bar.bind_dismissed(self._on_status_bar_dismissed)
+        self._ui.input_bar.bind_send_clicked(self._on_send_clicked)
+        self._ui.file_picker.bind_pdf_selected(self._load_pdf)
+        # self._ui.file_picker.bind_dialog_canceled(self._on_pdf_dialog_canceled)
+        
         # theme_changed
-        # self._ui.toolbar.bind_theme_changed( )
+        # self._ui.toolbar.bind_theme_changed()
 
     # -------------------------------------------------------------------------
     # Event Handlers
     # -------------------------------------------------------------------------
 
     def _on_upload_clicked(self):
-        # E-01: open file picker
-        file_path = self._ui.toolbar.open_file_picker()
-        if file_path:
-            self._load_pdf(file_path)
+        # E-01: delegate file picking to its own controller
+        self._ui.file_picker.open_pdf()
 
     def _load_pdf(self, file_path: str):
         # E-02: pdf_loaded
@@ -67,8 +68,7 @@ class MainController:
         self._state.error = None
         self._ui.status_bar.hide_error()
 
-    def _on_send_clicked(self, text: str):   # ← text arrives via the signal
-
+    def _on_send_clicked(self, text: str):
         # Step 1-2 — Create user ChatMessage
         user_message = ChatMessage(role="user", content=text)
 
