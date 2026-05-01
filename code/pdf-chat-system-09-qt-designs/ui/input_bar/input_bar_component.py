@@ -41,7 +41,7 @@ class InputBarComponent(QWidget):
         text = self._message_input.get_text()
         if text:
             self.send_clicked.emit(text)
-            self._message_input.clear()
+            # self._message_input.clear()
 
     def set_enabled(self, enabled: bool):
         self._message_input.setEnabled(enabled)

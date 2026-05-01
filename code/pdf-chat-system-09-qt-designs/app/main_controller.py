@@ -41,7 +41,7 @@ class MainController:
     # -------------------------------------------------------------------------
 
     def _on_upload_clicked(self):
-        # E-01: delegate file picking to its own controller
+        # Open file picker: user will select a pdf to chat
         self._ui.file_picker.open_pdf()
 
     def _load_pdf(self, file_path: str):
@@ -113,5 +113,6 @@ class MainController:
 
     def _on_llm_call_failed(self, message: str):
         self._state.error = message
-        self._ui.chat_area.handleFailedLLMCall(message)
+        # self._ui.chat_area.handleFailedLLMCall(message)
+        self._ui.status_bar.show_error(message)
         self._ui.toolbar.on_llm_call_failed()
