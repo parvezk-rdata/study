@@ -168,6 +168,7 @@ MainController
 ## DomainController or ServiceControllers (Key responsibilities)
 
 - A plain class that **handles one domain of business logic or one external service**
+- Can be a Singleton class?
 - Contains only operation methods that are called during event handling
 - It knows nothing about the UI. Never update the UI directly
 - Perform a specific business operation when called
@@ -218,6 +219,12 @@ MainController
 
 ## State of the app
   - if you can creats SQL tables for the data of entire app then it can help understand/manage state easily.
+  - to manage state shoud we create singleton class?
+
+## config files
+  - seprate config files for seprate work - llm, UI, data_base, etc
+  - use Pydantic class to read directly from env file
+  - keep all config in seprate objects and bundel all these objects into single main object.
 
 > we have try catch to handle same error in both DomainController and MainController. DomainController catches Raw library exceptions and raises clean domain error. MainController catches Clean domain errors and decides what to do next. This is the standard pattern for layered architectures. Each layer only speaks the language of the layer above it.
 

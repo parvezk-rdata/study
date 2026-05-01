@@ -65,10 +65,20 @@ chat_pdf/
 │       |                                  calls LLMService, returns LLMTransaction
 │       └── llm_service.py               # LLMService: raw OpenAI API call, simple types only
 │
+│
 ├── config/
-│   └── settings.py                      # Loads .env, exposes OPENAI_API_KEY and config constants
+│   ├── settings/
+│   │   ├── appConfig.py                  # shared/global config
+│   │   ├── openAI.py                     # LLM-specific
+│   │   └── settings.py                   # aggregates all settings
+│   │
+│   └── env/
+│       ├── .env.app                      # shared/global config
+│       └── .env.openAI                   # LLM-specific
+│
 │
 └── utils/                               # Shared helpers (empty for now)
+
 ```
 
 ---

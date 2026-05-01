@@ -11,7 +11,6 @@ from app.models.services.chat_message import ChatMessage
 from app.models.services.llm_transaction import LLMTransaction
 from app.models.state.app_state import AppState
 
-
 class MainController:
 
     def __init__(self, window: QMainWindow):
