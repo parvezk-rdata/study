@@ -224,6 +224,17 @@ MainController
 ---
 
 
+## Blocking Vs Async calls
+
+
+| Topic | Blocking Call | Async Call |
+|---|---|---|
+| Qt event loop | Frozen for the duration of the call | Stays alive |
+| User interaction | Impossible — UI cannot respond | Possible — user can still click/interact |
+| Widget guards needed | Usually no — freezing acts like an implicit lock | Yes — guards prevent duplicate/concurrent requests |
+| Spinner / progress feedback | Not renderable — UI is frozen| Works correctly |
+| UI enable/disable action | Usually not useful before the call, because UI freezes anyway | Enable/disable relevant elements before starting the async task |
+
 ## State Change Decision
 
 ### Decision: controller-driven UI updates (not state-driven / reactive)
