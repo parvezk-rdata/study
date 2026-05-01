@@ -5,3 +5,5 @@ __pycache__/
 *.pyc
 .DS_Store
 zz_temp/
+.env.openAI
+.env.openAI_bkp
