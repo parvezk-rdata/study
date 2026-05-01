@@ -69,14 +69,10 @@ class MainController:
         self._ui.status_bar.hide_error()
 
     def _on_send_clicked(self, text: str):
-        # Step 1-2 — Create user ChatMessage
+        # Create user ChatMessage
         user_message = ChatMessage(role="user", content=text)
 
-        # Step 3-5 — Update state and UI for loading
-        self._state.is_loading = True
-        self._ui.input_bar.disableInput()
-
-        # Step 6 — Build LLMTransaction and invoke LLM
+        # Build LLMTransaction and invoke LLM
         transaction = LLMTransaction(
             pdf_text=self._state.pdf.full_text,
             history=list(self._state.messages),
@@ -89,15 +85,13 @@ class MainController:
             self._on_llm_call_failed(str(e))
             return
 
-        # Steps 8-10 — Update state
+        # Update state
         self._state.messages.append(transaction.user_message)
         self._state.messages.append(transaction.response)
-        self._state.is_loading = False
 
-        # Steps 11-15 — Update UI
+        # Update UI
         self._ui.chat_area.handleNewMessage(transaction.user_message, transaction.response)
         self._ui.toolbar.on_chat_updated()
-        self._ui.input_bar.enableInput()
         self._ui.input_bar.clear_input()
 
     def _on_clear_clicked(self):
@@ -116,11 +110,8 @@ class MainController:
     def _on_pdf_load_failed(self, message: str):
         self._state.error = message
         self._ui.status_bar.show_error(message)
-        self._ui.input_bar.disableInput()
 
     def _on_llm_call_failed(self, message: str):
-        self._state.is_loading = False
         self._state.error = message
         self._ui.chat_area.handleFailedLLMCall(message)
         self._ui.toolbar.on_llm_call_failed()
-        self._ui.input_bar.enableInput()
