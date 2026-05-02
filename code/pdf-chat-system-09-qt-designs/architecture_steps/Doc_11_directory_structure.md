@@ -23,8 +23,9 @@ chat_pdf/
 ├── ui/
 │   ├── ui_composer.py                   # UIComposer — builds all UI, returns UIBundle
 │   ├── ui_bundle.py                     # UIBundle frozen dataclass
+│   │
 │   ├── toolbar/
-│   │   ├── toolbar_component.py         # ToolbarComponent [SMART]
+│   │   ├── toolbar_component.py         # ToolbarComponent 
 │   │   └── toolbar_controller.py        # ToolbarController
 │   │   └── widgets/
 │   │       ├── upload_button_widget.py
@@ -32,18 +33,24 @@ chat_pdf/
 │   │       ├── clear_button_widget.py
 │   │       └── theme_combo_widget.py
 │   │
+│   ├── file_picker/
+│   │   ├── file_picker.py                   # FilePickerController 
+│   │   └── file_picker_controller.py        # FilePickerComponent
+│   │
 │   ├── status_bar/
-│   │   ├── status_bar_component.py      # StatusBarComponent [SMART]
+│   │   ├── status_bar_component.py      # StatusBarComponent 
 │   │   └── status_bar_controller.py     # StatusBarController
+│   │
 │   ├── chat_area/
-│   │   ├── chat_area_component.py       # ChatAreaComponent [SMART]
+│   │   ├── chat_area_component.py       # ChatAreaComponent 
 │   │   ├── chat_area_controller.py      # ChatAreaController
 │   │   └── widgets/
-│   │       ├── message_bubble_widget.py # MessageBubbleWidget [DUMB]
-│   │       ├── loading_bubble_widget.py # LoadingBubbleWidget [DUMB]
-│   │       └── placeholder_widget.py   # PlaceholderWidget [DUMB]
+│   │       ├── message_bubble_widget.py # MessageBubbleWidget 
+│   │       ├── loading_bubble_widget.py # LoadingBubbleWidget 
+│   │       └── placeholder_widget.py   # PlaceholderWidget 
+│   │
 │   └── input_bar/
-│       ├── input_bar_component.py       # InputBarComponent [SMART]
+│       ├── input_bar_component.py       # InputBarComponent 
 │       ├── input_bar_controller.py      # InputBarController
 │       └── widgets/
 │           ├── button_widget.py 
@@ -51,7 +58,7 @@ chat_pdf/
 │
 ├── services/
 │   ├── service_composer.py              # ServiceComposer — instantiates controllers and 
-│   │                                      services, returns ServiceBundle
+│   │                                      services, config, returns ServiceBundle
 │   ├── service_bundle.py                # ServiceBundle frozen dataclass
 │   │                                      holds PDFController, LLMController
 │   ├── pdf/
@@ -102,9 +109,9 @@ chat_pdf/
 | `ui/status_bar/status_bar_controller.py` | Show/hide error banner |
 | `ui/chat_area/chat_area_component.py` | Scrollable chat area UI — bubble container |
 | `ui/chat_area/chat_area_controller.py` | Bubble management, scroll, placeholder, loading indicator |
-| `ui/chat_area/widgets/message_bubble_widget.py` | Single message bubble [DUMB] |
-| `ui/chat_area/widgets/loading_bubble_widget.py` | Animated `• • •` loading bubble [DUMB] |
-| `ui/chat_area/widgets/placeholder_widget.py` | Empty state icon + hint text [DUMB] |
+| `ui/chat_area/widgets/message_bubble_widget.py` | Single message bubble  |
+| `ui/chat_area/widgets/loading_bubble_widget.py` | Animated `• • •` loading bubble  |
+| `ui/chat_area/widgets/placeholder_widget.py` | Empty state icon + hint text  |
 | `ui/input_bar/input_bar_component.py` | Input field + Send button UI |
 | `ui/input_bar/input_bar_controller.py` | Read input, clear input, enable/disable |
 | `services/service_bundle.py` | `ServiceBundle` frozen dataclass — holds refs to `PDFController`, `LLMController` |
