@@ -110,7 +110,12 @@ root(chat pdf app)/
 | File | Contains |
 |---|---|
 | `main.py` | App entry point. Creates `QApplication`, `MainWindow`, instantiates `MainController` |
-| `app/main_controller.py` | All event handlers, signal wiring, `AppState` ownership |
+| `app/main_controller.py` | Slim orchestrator. Builds UI, services, and state. Instantiates all event handlers. Wires signals to handler methods via `_bind_signals`. Owns `AppState`. |
+| `app/event_handlers/pdf/upload_pdf_handler.py` | Handles the full PDF upload flow. Opens the file picker on upload click, calls `PDFService` via `PDFController`, updates `AppState`, refreshes toolbar, chat area, and input bar. Handles `PDFLoadError` and surfaces it to the status bar. |
+| `app/event_handlers/pdf/remove_pdf_handler.py` | Handles PDF removal. Clears `state.pdf`, resets message history and error, empties the chat area, and disables input. |
+| `app/event_handlers/chat/send_message_handler.py` | Handles a single chat turn. Builds an `LLMTransaction` from current state, calls `LLMController`, appends both the user message and the LLM response to `AppState`, and updates the chat area and toolbar. Handles `LLMCallError` and surfaces it to the status bar. |
+| `app/event_handlers/chat/clear_chat_handler.py` | Handles chat clear. Resets message history and error in `AppState`, empties the chat area, hides the status bar, and disables input. |
+| `app/event_handlers/ui/theme_changed_handler.py` | Stub handler for theme switching. Receives a `theme_name` string and will apply it to the app stylesheet when implemented. |
 | `app/models/services/pdf_document.py` | `PDFDocument` dataclass |
 | `app/models/services/chat_message.py` | `ChatMessage` dataclass |
 | `app/models/services/llm_transaction.py` | `LLMTransaction` dataclass |
