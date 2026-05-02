@@ -13,15 +13,15 @@ root(chat pdf app)/
 │   │
 │   ├── event_handlers/
 |   |   ├── pdf/
-|   |   │   ├── upload_pdf_handler.py
-|   |   │   └── remove_pdf_handler.py
+|   |   │   ├── upload_pdf_handler.py     # Full PDF upload flow
+|   |   │   └── remove_pdf_handler.py     # PDF removal
 |   |   │
 |   |   ├── chat/
-|   |   │   ├── send_message_handler.py
-|   |   │   └── clear_chat_handler.py
+|   |   │   ├── send_message_handler.py   # Single chat with llm 
+|   |   │   └── clear_chat_handler.py     # Clear all chats
 |   |   │
 |   |   └── ui/
-│   │       └── theme_changed_handler.py
+│   │       └── theme_changed_handler.py  # Stub — receives theme_name, will apply it
 │   │
 │   └── models/
 │       ├── services/
