@@ -76,7 +76,7 @@ root(chat pdf app)/
 │   ├── settings/
 │   │   ├── appConfig.py                  # shared/global config
 │   │   ├── openAI.py                     # LLM-specific
-│   │   └── settings.py                   # aggregates all settings
+│   │   └── config_bundle.py              # aggregates all settings
 │   │
 │   └── env/
 │       ├── .env.app                      # shared/global config 
@@ -123,7 +123,7 @@ root(chat pdf app)/
 | `services/llm/llm_service.py` | `LLMService` — raw OpenAI API call, simple types only |
 | `conf/env/.env.app` | Environment values for shared app settings used by `AppConfig` |
 | `conf/settings/openAI.py` | Defines `OpenAIConfig` settings loaded from `conf/env/.env.openAI` and `conf/env/.env.local` |
-| `conf/settings/settings.py` | Buldles objects into AppSettings. These objects expose .env files inside conf/env directory|
+| `conf/settings/config_bundle.py` | Buldles objects into AppSettings. These objects expose .env files inside conf/env directory|
 | `conf/settings/appConfig.py` | Defines `AppConfig` settings loaded from `conf/env/.env.app` |
 | `conf/env/.env.openAI` | Environment values for OpenAI settings used by `OpenAIConfig` |
 | `conf/env/.env.openAI.example` | Example OpenAI environment file template |
