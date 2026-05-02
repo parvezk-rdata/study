@@ -9,17 +9,30 @@ root(chat pdf app)/
 ├── requirements.txt
 │
 ├── app/
-│   ├── main_controller.py               # MainController — orchestrates all event flows
+│   ├── main_controller.py                # MainController:  orchestrates all event flows
+│   │
+│   ├── event_handlers/
+|   |   ├── pdf/
+|   |   │   ├── upload_pdf_handler.py
+|   |   │   └── remove_pdf_handler.py
+|   |   │
+|   |   ├── chat/
+|   |   │   ├── send_message_handler.py
+|   |   │   └── clear_chat_handler.py
+|   |   │
+|   |   └── ui/
+│   │       └── theme_changed_handler.py
+│   │
 │   └── models/
 │       ├── services/
-│       │   ├── pdf_document.py          # PDFDocument dataclass
+│       │   ├── pdf_document.py           # PDFDocument dataclass
 │       │   ├── llm_transaction.py        # LLMTransaction dataclass
-│       │   └── chat_message.py          # ChatMessage dataclass
+│       │   └── chat_message.py           # ChatMessage dataclass
 │       └── state/
-│           ├── app_state.py             # AppState dataclass
-│           ├── app_state_store.py       # future/planned only. Currently app is without store.
-│           └── app_error.py             # future/planned only. This file not needed (AppError dataclass)
-│
+│           ├── app_state.py              # AppState dataclass
+│           ├── app_state_store.py        # future/planned only. Currently app is without store.
+│           └── app_error.py              # future/planned only. This file not needed (AppError dataclass)
+│   
 ├── ui/
 │   ├── ui_composer.py                   # UIComposer — builds all UI, returns UIBundle
 │   ├── ui_bundle.py                     # UIBundle frozen dataclass
