@@ -45,9 +45,8 @@ chat_pdf/
 │   │   ├── chat_area_component.py       # ChatAreaComponent 
 │   │   ├── chat_area_controller.py      # ChatAreaController
 │   │   └── widgets/
-│   │       ├── message_bubble_widget.py # MessageBubbleWidget 
-│   │       ├── loading_bubble_widget.py # LoadingBubbleWidget 
-│   │       └── placeholder_widget.py   # PlaceholderWidget 
+│   │       ├── message_bubble_widget.py # MessageBubbleWidget
+│   │       └── placeholder_widget.py    # PlaceholderWidget 
 │   │
 │   └── input_bar/
 │       ├── input_bar_component.py       # InputBarComponent 
@@ -73,7 +72,7 @@ chat_pdf/
 │       └── llm_service.py               # LLMService: raw OpenAI API call, simple types only
 │
 │
-├── config/
+├── conf/
 │   ├── settings/
 │   │   ├── appConfig.py                  # shared/global config
 │   │   ├── openAI.py                     # LLM-specific
@@ -83,6 +82,8 @@ chat_pdf/
 │       ├── .env.app                      # shared/global config
 │       └── .env.openAI                   # LLM-specific
 │
+│
+├── styles/                               # contains qss files to style the PyQt6 widgets
 │
 └── utils/                               # Shared helpers (empty for now)
 
@@ -108,9 +109,8 @@ chat_pdf/
 | `ui/status_bar/status_bar_component.py` | Error banner UI — icon, message label, dismiss button |
 | `ui/status_bar/status_bar_controller.py` | Show/hide error banner |
 | `ui/chat_area/chat_area_component.py` | Scrollable chat area UI — bubble container |
-| `ui/chat_area/chat_area_controller.py` | Bubble management, scroll, placeholder, loading indicator |
+| `ui/chat_area/chat_area_controller.py` | Bubble management, scroll, placeholder |
 | `ui/chat_area/widgets/message_bubble_widget.py` | Single message bubble  |
-| `ui/chat_area/widgets/loading_bubble_widget.py` | Animated `• • •` loading bubble  |
 | `ui/chat_area/widgets/placeholder_widget.py` | Empty state icon + hint text  |
 | `ui/input_bar/input_bar_component.py` | Input field + Send button UI |
 | `ui/input_bar/input_bar_controller.py` | Read input, clear input, enable/disable |
@@ -118,9 +118,9 @@ chat_pdf/
 | `services/service_composer.py` | Instantiates all controllers and services, returns `ServiceBundle` |
 | `services/pdf/pdf_controller.py` | `PDFController` — receives file path, calls `PDFService`, returns `PDFDocument` |
 | `services/pdf/pdf_service.py` | `PDFService` — raw PyMuPDF text extraction, simple types only |
-| `services/llm/llm_controller.py` | `LLMController` — receives `LLMTransaction`, calls `LLMService`, returns `str` |
+| `services/llm/llm_controller.py` | `LLMController` — receives `LLMTransaction`, calls `LLMService`, returns `LLMTransaction` |
 | `services/llm/llm_service.py` | `LLMService` — raw OpenAI API call, simple types only |
-| `config/settings.py` | Loads `.env` via python-dotenv, exposes `OPENAI_API_KEY` constant |
+| `conf/settings/settings.py` | Loads `.env` via python-dotenv, exposes `OPENAI_API_KEY` constant |
 | `utils/` | Shared helpers — empty for now |
 
 
