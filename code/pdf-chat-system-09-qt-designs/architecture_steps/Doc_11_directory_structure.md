@@ -99,7 +99,8 @@ root(chat pdf app)/
 │
 ├── styles/                               # contains qss files to style the PyQt6 widgets
 │
-└── utils/                                # Shared helpers (empty for now)
+└── utils/ 
+      └── __init__.py
 
 ```
 
