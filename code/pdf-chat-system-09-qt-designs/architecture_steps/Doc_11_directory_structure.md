@@ -1,8 +1,8 @@
 # Directory Structure
-> Note : the name domain is being replaced with services
+> Note: the codebase now uses the word `services` instead of `domain`.
 
 ```
-chat_pdf/
+root(chat pdf app)/
 │
 ├── main.py                              # Entry point — creates QApplication, MainWindow, 
 │                                          MainController
@@ -17,8 +17,8 @@ chat_pdf/
 │       │   └── chat_message.py          # ChatMessage dataclass
 │       └── state/
 │           ├── app_state.py             # AppState dataclass
-│           ├── app_state_store.py       # Currently app is without store.
-│           └── app_error.py             # This file not needed (AppError dataclass)
+│           ├── app_state_store.py       # future/planned only. Currently app is without store.
+│           └── app_error.py             # future/planned only. This file not needed (AppError dataclass)
 │
 ├── ui/
 │   ├── ui_composer.py                   # UIComposer — builds all UI, returns UIBundle
@@ -79,13 +79,14 @@ chat_pdf/
 │   │   └── settings.py                   # aggregates all settings
 │   │
 │   └── env/
-│       ├── .env.app                      # shared/global config
+│       ├── .env.app                      # shared/global config 
+│       ├── .env.openAI.example           # example of file .env.openAI
 │       └── .env.openAI                   # LLM-specific
 │
 │
 ├── styles/                               # contains qss files to style the PyQt6 widgets
 │
-└── utils/                               # Shared helpers (empty for now)
+└── utils/                                # Shared helpers (empty for now)
 
 ```
 
@@ -101,11 +102,11 @@ chat_pdf/
 | `app/models/services/chat_message.py` | `ChatMessage` dataclass |
 | `app/models/services/llm_transaction.py` | `LLMTransaction` dataclass |
 | `app/models/state/app_state.py` | `AppState` dataclass |
-| `app/models/state/app_error.py` | `AppError` dataclass, `ErrorKind` enum |
 | `ui/ui_bundle.py` | `UIBundle` frozen dataclass — holds refs to all component controllers |
 | `ui/ui_composer.py` | Builds all components + controllers, returns `UIBundle` |
 | `ui/toolbar/toolbar_component.py` | Toolbar UI — Upload button, filename label, Clear button |
-| `ui/toolbar/toolbar_controller.py` | File picker, filename display, Clear button state |
+| `ui/toolbar/toolbar_controller.py` | filename display, Clear button state, signal binding |
+| `ui/file_picker/file_picker_controller.py` | Opens PDF picker dialog |
 | `ui/status_bar/status_bar_component.py` | Error banner UI — icon, message label, dismiss button |
 | `ui/status_bar/status_bar_controller.py` | Show/hide error banner |
 | `ui/chat_area/chat_area_component.py` | Scrollable chat area UI — bubble container |
@@ -120,8 +121,13 @@ chat_pdf/
 | `services/pdf/pdf_service.py` | `PDFService` — raw PyMuPDF text extraction, simple types only |
 | `services/llm/llm_controller.py` | `LLMController` — receives `LLMTransaction`, calls `LLMService`, returns `LLMTransaction` |
 | `services/llm/llm_service.py` | `LLMService` — raw OpenAI API call, simple types only |
-| `conf/settings/settings.py` | Loads `.env` via python-dotenv, exposes `OPENAI_API_KEY` constant |
-| `utils/` | Shared helpers — empty for now |
+| `conf/env/.env.app` | Environment values for shared app settings used by `AppConfig` |
+| `conf/settings/openAI.py` | Defines `OpenAIConfig` settings loaded from `conf/env/.env.openAI` and `conf/env/.env.local` |
+| `conf/settings/settings.py` | Buldles objects into AppSettings. These objects expose .env files inside conf/env directory|
+| `conf/settings/appConfig.py` | Defines `AppConfig` settings loaded from `conf/env/.env.app` |
+| `conf/env/.env.openAI` | Environment values for OpenAI settings used by `OpenAIConfig` |
+| `conf/env/.env.openAI.example` | Example OpenAI environment file template |
+| `utils/` | future/planned only. Shared helpers. Empty for now |
 
 
 ## Models
