@@ -34,8 +34,8 @@ chat_pdf/
 │   │       └── theme_combo_widget.py
 │   │
 │   ├── file_picker/
-│   │   ├── file_picker.py                   # FilePickerController 
-│   │   └── file_picker_controller.py        # FilePickerComponent
+│   │   ├── file_picker.py                   # FilePickerComponent  
+│   │   └── file_picker_controller.py        # FilePickerController
 │   │
 │   ├── status_bar/
 │   │   ├── status_bar_component.py      # StatusBarComponent 
