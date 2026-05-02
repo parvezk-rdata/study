@@ -6,7 +6,6 @@ chat_pdf/
 │
 ├── main.py                              # Entry point — creates QApplication, MainWindow, 
 │                                          MainController
-├── .env                                 # API key (not committed to version control)
 ├── requirements.txt
 │
 ├── app/
@@ -18,6 +17,7 @@ chat_pdf/
 │       │   └── chat_message.py          # ChatMessage dataclass
 │       └── state/
 │           ├── app_state.py             # AppState dataclass
+│           ├── app_state_store.py       # Currently app is without store.
 │           └── app_error.py             # This file not needed (AppError dataclass)
 │
 ├── ui/
