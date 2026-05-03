@@ -26,7 +26,13 @@ class ExtractPDFTextController:
             )
 
         path = Path(request.pdf_path).expanduser().resolve()
-        full_text, page_count = self._reader.read(path)
+        try:
+            full_text, page_count = self._reader.read(path)
+        except Exception as exc:
+            return ExtractPDFTextErrorResponse(
+                error_type="ExtractionError",
+                error_message=f"Failed to extract text from PDF: {exc}",
+            )
 
         return ExtractPDFTextSuccessResponse(
             path=str(path),

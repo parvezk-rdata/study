@@ -39,7 +39,7 @@ pdf_reader/
 │       └── extract_pdf_text_response.py  # ExtractPDFTextResponse, Success, Error
 │
 ├── utils/
-│   └── result.py                    # Result base class with ok() and fail() factories
+│   └── result.py                    # Not used : Result base class with ok() and fail() factories
 │
 └── conf/
     └── settings.py                  # SERVER_NAME, MAX_FILE_SIZE_MB, ALLOWED_EXTENSIONS
@@ -48,6 +48,14 @@ pdf_reader/
 ---
 
 ## Setup
+
+```bash
+python3 -m venv .venv
+```
+
+```bash
+source .venv/bin/activate
+```
 
 ```bash
 pip install -r requirements.txt
