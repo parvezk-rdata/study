@@ -31,9 +31,3 @@ def extract_pdf_text(pdf_path: str) -> dict:
             "full_text": response.full_text,
             "page_count": response.page_count,
         }
-
-    return {
-        "success": False,
-        "error_type": "UnknownError",
-        "error_message": "Unexpected response type from extract_pdf_text controller.",
-    }

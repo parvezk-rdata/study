@@ -14,6 +14,8 @@ from tools.extract_pdf_text_tool import extract_pdf_text
 
 TEST_DIR = os.path.dirname(__file__)
 VALID_PDF_PATH = os.path.join(TEST_DIR, "test_doc.pdf")
+VALID_TXT_PATH = os.path.join(TEST_DIR, "test_doc.txt")
+INVALID_FILE_PATH = os.path.join(TEST_DIR, "test.txt")
 DIRECTORY_PATH = TEST_DIR
 
 # ── Test cases ────────────────────────────────────────────────────────────────
@@ -42,13 +44,13 @@ run(
 # 2. File does not exist
 run(
     label="File not found",
-    pdf_path="/path/to/nonexistent.pdf"
+    pdf_path=INVALID_FILE_PATH
 )
 
 # 3. Not a PDF
 run(
     label="Wrong file type",
-    pdf_path="/path/to/your/file.txt"
+    pdf_path=VALID_TXT_PATH
 )
 
 # 4. Path is a directory
