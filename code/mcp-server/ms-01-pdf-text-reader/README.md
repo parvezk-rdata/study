@@ -77,6 +77,12 @@ ALLOWED_EXTENSIONS=[".pdf"]
 python main.py
 ```
 
+## Test the server
+```
+fastmcp inspect main.py
+
+```
+
 ---
 
 ## Tool reference
