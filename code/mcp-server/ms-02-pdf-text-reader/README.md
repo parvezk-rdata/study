@@ -74,7 +74,7 @@ ALLOWED_EXTENSIONS=[".pdf"]
 ## Running the server
 
 ```bash
-python main.py
+fastmcp run main.py
 ```
 
 ## Test the server
