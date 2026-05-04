@@ -3,7 +3,7 @@
 import asyncio
 from typing import Any
 
-from clients.mcp_connection_client import MCPConnectionClient
+from client_02_mcp import MCPConnectionClient
 
 """
     User-facing client for the PDF Reader MCP server.
@@ -53,7 +53,7 @@ class PDFReaderMCPClient:
     # Sync helper for simple scripts.
     def extract_pdf_text(self, pdf_path: str) -> dict[str, Any]:
         return asyncio.run( self._extract_pdf_text_sync_runner(pdf_path))
-        
+
     # --------------------------
     # Response parsing
     # --------------------------
