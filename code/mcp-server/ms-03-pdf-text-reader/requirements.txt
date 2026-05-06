@@ -1,3 +1,10 @@
-fastmcp
-pymupdf
+# requirements.txt
+
+# MCP server
+mcp[cli]
+
+# PDF reading
+PyMuPDF
+
+# Settings management
 pydantic-settings

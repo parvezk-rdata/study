@@ -2,34 +2,58 @@
 
 ```
 
-mcp_servers/
+mcp-server/
+├── README.md
+├── main.py
+├── requirements.txt
 │
-└── pdf_reader/
-    ├── main.py                     # Entry point
-    ├── requirements.txt
+├── server/
+│   └── pdf_reader_server.py
+│
+└── tools/
     │
-    ├── server/
-    │   └── pdf_reader_server.py   # FastMCP setup + tool registration
+    ├── extract_pdf_text/
+    |   ├── .env
+    │   ├── request.py
+    │   ├── response.py
+    │   ├── pdf_reader.py
+    │   ├── pdf_validator.py
+    │   ├── settings.py
+    │   ├── controller.py
+    │   ├── tool.py
+    │   └── test.py
     │
-    ├── tools/
-    │   └── extract_pdf_text_tool.py   # MCP tool (validation + orchestration)
+    ├── get_working_directory/
+    |   ├── .env
+    │   ├── response.py
+    │   ├── settings.py
+    │   ├── controller.py
+    │   ├── tool.py
+    │   └── test.py
     │
-    ├── services/
-    │   ├── pdf_reader.py          # Pure extraction (PyMuPDF)
-    │   └── pdf_validator.py       # Path + file validation
+    ├── list_pdfs_in_directory/
+    |   ├── .env
+    │   ├── request.py
+    │   ├── response.py
+    │   ├── directory_scanner.py
+    │   ├── settings.py
+    │   ├── controller.py
+    │   ├── tool.py
+    │   └── test.py
     │
-    ├── models/
-    │   ├── request/
-    │   │   └── extract_pdf_text_request.py
-    │   │
-    │   └── response/
-    │       └── extract_pdf_text_response.py
-    │
-    └── conf/
-        └── settings.py
+    └── read_pdf_content/
+        ├── .env
+        ├── request.py
+        ├── response.py
+        ├── pdf_reader.py
+        ├── pdf_validator.py
+        ├── settings.py
+        ├── controller.py
+    │   ├── tool.py
+    │   └── test.py
+
 
 ```
-
 
 ## File Responsibilities
 
