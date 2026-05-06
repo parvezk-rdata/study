@@ -7,14 +7,6 @@ mcp-server/
 ├── main.py
 ├── requirements.txt
 │
-├── architecture_steps/
-│   ├── correct_directory_tree.md
-│   ├── directory_tree.md
-│   ├── diagrams/
-│   │   ├── d_01_mcp_flow.svg
-│   │   └── mcp_controller_architecture.svg
-│   └── flow/
-│
 ├── conf/
 │   └── settings.py
 │
@@ -39,6 +31,14 @@ mcp-server/
 │
 ├── utils/
 │   └── result.py
+│
+├── architecture_steps/
+│   ├── correct_directory_tree.md
+│   ├── directory_tree.md
+│   ├── diagrams/
+│   │   ├── d_01_mcp_flow.svg
+│   │   └── mcp_controller_architecture.svg
+│   └── flow/
 │
 └── zz_test/
     ├── test_doc.pdf
