@@ -1,4 +1,4 @@
-# app/models/services/chat_message.py
+# app/models/services/llm_transaction/chat_message.py
 
 from dataclasses import dataclass
 

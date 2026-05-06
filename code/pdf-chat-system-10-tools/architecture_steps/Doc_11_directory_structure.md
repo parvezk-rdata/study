@@ -25,13 +25,17 @@ root(chat pdf app)/
 │   │
 │   └── models/
 │       ├── services/
-│       │   ├── pdf_document.py           # PDFDocument dataclass
-│       │   ├── llm_transaction.py        # LLMTransaction dataclass
-│       │   └── chat_message.py           # ChatMessage dataclass
+│       │   ├── pdf_document.py                 # PDFDocument dataclass
+│       │   │
+│       │   └── llm_transaction                 
+│       │         ├── llm_transaction.py        # LLMTransaction dataclass   
+│       │         ├── mcp_tool_definition.py    # MCPToolDefinition dataclass
+│       │         ├── tool_rounds.py            # ToolCall, ToolResult, ToolRound dataclass
+│       │         └── chat_message.py           # ChatMessage dataclass
 │       └── state/
 │           ├── app_state.py              # AppState dataclass
-│           ├── app_state_store.py        # future/planned only. Currently app is without store.
-│           └── app_error.py              # future/planned only. This file not needed (AppError dataclass)
+│           ├── app_state_store.py        # future/planned only. app is without store.
+│           └── app_error.py              # future/planned only. app is without AppError
 │   
 ├── ui/
 │   ├── ui_composer.py                   # UIComposer — builds all UI, returns UIBundle
