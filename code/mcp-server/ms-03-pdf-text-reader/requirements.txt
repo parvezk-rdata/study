@@ -1,5 +1,7 @@
 # requirements.txt
 
+fastmcp
+
 # MCP server
 mcp[cli]
 

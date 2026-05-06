@@ -54,7 +54,7 @@ run(
 # 2. Valid directory — always exists
 run(
     label="Valid directory (home dir)",
-    override_env=str(os.path.expanduser("~")),
+    override_env=str(os.path.expanduser("zz_test/work")),
 )
 
 # 3. Directory does not exist

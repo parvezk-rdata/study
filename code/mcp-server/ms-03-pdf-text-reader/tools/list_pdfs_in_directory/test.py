@@ -42,10 +42,10 @@ run(
     directory_path=TOOL_DIR,
 )
 
-# 2. Valid directory — home dir (may or may not have PDFs)
+# 2. Valid directory — (may or may not have PDFs)
 run(
-    label="Valid directory, home dir",
-    directory_path=HOME_DIR,
+    label="Valid directory",
+    directory_path="zz_test/work",
 )
 
 # 3. Directory does not exist

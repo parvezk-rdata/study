@@ -12,17 +12,6 @@ mcp-server/
 │
 └── tools/
     │
-    ├── extract_pdf_text/
-    |   ├── .env
-    │   ├── request.py
-    │   ├── response.py
-    │   ├── pdf_reader.py
-    │   ├── pdf_validator.py
-    │   ├── settings.py
-    │   ├── controller.py
-    │   ├── tool.py
-    │   └── test.py
-    │
     ├── get_working_directory/
     |   ├── .env
     │   ├── response.py

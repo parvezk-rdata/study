@@ -10,7 +10,6 @@ Exposes four MCP tools:
 
 | Tool | Description |
 |---|---|
-| `extract_pdf_text` | Extracts full text from a PDF file with metadata |
 | `get_working_directory` | Returns the configured working directory where PDF files are present |
 | `list_pdfs_in_directory` | Lists all PDF files in a given directory |
 | `read_pdf_content` | Reads and returns the full text content of a PDF file |
@@ -29,17 +28,6 @@ mcp-server/
 │   └── pdf_reader_server.py         # FastMCP instance and tool registration
 │
 └── tools/                           # Each tool is self-contained in its own directory
-    │
-    ├── extract_pdf_text/
-    │   ├── .env                     # Tool-specific environment variables
-    │   ├── settings.py              # MAX_FILE_SIZE_MB, ALLOWED_EXTENSIONS
-    │   ├── request.py               # ExtractPDFTextRequest
-    │   ├── response.py              # ExtractPDFTextResponse, Success, Error
-    │   ├── pdf_validator.py         # Path, type, size, and empty file checks
-    │   ├── pdf_reader.py            # Raw PyMuPDF extraction
-    │   ├── controller.py            # Orchestrates validator + reader, builds response
-    │   ├── tool.py                  # MCP boundary — validates input, calls controller
-    │   └── test.py                  # Manual test runner
     │
     ├── get_working_directory/
     │   ├── .env                     # WORKING_DIRECTORY
@@ -90,7 +78,6 @@ Each tool has its own `.env` file for configuration. Defaults are already set �
 ```
 tools/get_working_directory/.env
 tools/list_pdfs_in_directory/.env
-tools/extract_pdf_text/.env
 tools/read_pdf_content/.env
 ```
 
@@ -129,7 +116,6 @@ Each tool has its own `test.py`. Run from the project root:
 ```bash
 python -m tools.get_working_directory.test
 python -m tools.list_pdfs_in_directory.test
-python -m tools.extract_pdf_text.test
 python -m tools.read_pdf_content.test
 ```
 
@@ -191,35 +177,6 @@ Lists all PDF files present in a given directory.
 
 ---
 
-### `extract_pdf_text`
-
-Extracts all text from a PDF file.
-
-**Input**
-
-| Field | Type | Description |
-|---|---|---|
-| `pdf_path` | `str` | Absolute path to the PDF file |
-
-**Output — success**
-
-| Field | Type | Description |
-|---|---|---|
-| `success` | `bool` | `True` |
-| `pdf_path` | `str` | Resolved absolute path to the file |
-| `full_text` | `str` | All extracted text, whitespace trimmed |
-| `page_count` | `int` | Number of pages in the PDF |
-
-**Output — error**
-
-| Field | Type | Description |
-|---|---|---|
-| `success` | `bool` | `False` |
-| `error_type` | `str` | `ValidationError` or `UnexpectedError` |
-| `error_message` | `str` | Human-readable description of the failure |
-
----
-
 ### `read_pdf_content`
 
 Reads and returns the full text content of a PDF file.
@@ -251,7 +208,7 @@ Reads and returns the full text content of a PDF file.
 
 ## Validation rules
 
-Applied by `extract_pdf_text` and `read_pdf_content`:
+Applied by  `read_pdf_content`:
 
 - File must exist
 - Path must point to a file, not a directory

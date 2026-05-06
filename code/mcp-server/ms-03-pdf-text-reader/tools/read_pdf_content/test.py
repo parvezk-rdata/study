@@ -13,7 +13,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../.
 from tools.read_pdf_content.tool import read_pdf_content
 
 
-TOOL_DIR = os.path.dirname(__file__)
+# TOOL_DIR = os.path.dirname(__file__)
+TOOL_DIR = "zz_test/work"
 VALID_PDF_PATH = os.path.join(TOOL_DIR, "test_doc.pdf")
 INVALID_EXT_PATH = os.path.join(TOOL_DIR, "test_doc.txt")
 DIRECTORY_PATH = TOOL_DIR
