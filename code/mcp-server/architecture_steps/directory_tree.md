@@ -2,32 +2,68 @@
 
 ```
 
-mcp_servers/
+mcp-server/
+├── README.md
+├── main.py
+├── requirements.txt
 │
-└── pdf_reader/
-    ├── main.py                     # Entry point
-    ├── requirements.txt
-    │
-    ├── server/
-    │   └── pdf_reader_server.py   # FastMCP setup + tool registration
-    │
-    ├── tools/
-    │   └── extract_pdf_text_tool.py   # MCP tool (validation + orchestration)
-    │
-    ├── services/
-    │   ├── pdf_reader.py          # Pure extraction (PyMuPDF)
-    │   └── pdf_validator.py       # Path + file validation
-    │
-    ├── models/
-    │   ├── request/
-    │   │   └── extract_pdf_text_request.py
-    │   │
-    │   └── response/
-    │       └── extract_pdf_text_response.py
-    │
-    └── conf/
-        └── settings.py
+├── architecture_steps/
+│   ├── correct_directory_tree.md
+│   ├── directory_tree.md
+│   ├── diagrams/
+│   │   ├── d_01_mcp_flow.svg
+│   │   └── mcp_controller_architecture.svg
+│   └── flow/
+│
+├── conf/
+│   └── settings.py
+│
+├── controllers/
+│   └── extract_pdf_text_controller.py
+│
+├── models/
+│   ├── request/
+│   │   └── extract_pdf_text_request.py
+│   └── response/
+│       └── extract_pdf_text_response.py
+│
+├── server/
+│   └── pdf_reader_server.py
+│
+├── services/
+│   ├── pdf_reader.py
+│   └── pdf_validator.py
+│
+├── tools/
+│   └── extract_pdf_text_tool.py
+│
+├── utils/
+│   └── result.py
+│
+└── zz_test/
+    ├── test_doc.pdf
+    ├── test_doc.txt
+    └── test_extract.py
 
+
+```
+
+```
+get_documents_directory
+    input: none
+    output: directory path
+
+list_pdfs_in_directory
+    input: directory_path
+    output: list of PDF files
+
+read_pdf_content
+    input: pdf_path
+    output: PDF text
+
+search_pdf_content
+    --> returns only relevant pages/chunks from one or more PDFs
+    
 ```
 
 
