@@ -38,8 +38,8 @@ mcp-server/
         ├── pdf_validator.py
         ├── settings.py
         ├── controller.py
-    │   ├── tool.py
-    │   └── test.py
+        ├── tool.py
+        └── test.py
 
 
 ```

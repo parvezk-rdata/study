@@ -87,15 +87,31 @@ root(chat pdf app)/
 │   │   ├── llm_controller.py            # LLMController — receives LLMTransaction,  
 │   │   |                                  calls LLMService, returns LLMTransaction
 │   │   └── llm_service.py               # LLMService: raw OpenAI API call, simple types only
-│   │  
-│   └── mcp/
-│       ├── mcp_client_controller.py      #   
-│       |   
-│       ├── mcp_connection_client.py      # 
-|       |
-│       └── models
-│           └── mcp_tool_result.py
-│
+│   │
+|   |
+|   └── mcp/
+|       │
+|       ├── clients/
+|       │   ├── __init__.py
+|       │   ├── client.py
+|       │   └── base_controller.py
+|       │
+|       ├── list_pdf_tool/
+|       │   ├── __init__.py
+|       │   ├── request.py
+|       │   ├── response.py
+|       │   └── controller.py
+|       │
+|       ├── get_work_directory_tool/
+|       │   ├── __init__.py
+|       │   ├── response.py
+|       │   └── controller.py
+|       │
+|       └── read_pdf_content_tool/
+|           ├── __init__.py
+|           ├── request.py
+|           ├── response.py
+|           └── controller.py
 │
 ├── conf/
 │   ├── settings/
