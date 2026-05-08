@@ -3,7 +3,7 @@
 import asyncio
 from typing import Any
 
-from clients.client_async import MCPConnectionClient
+from services.mcp.clients.client_async import MCPConnectionClient
 
 
 class SyncConnection:

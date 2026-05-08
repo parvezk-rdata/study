@@ -1,10 +1,14 @@
-# mcp/get_work_directory_tool/controller.py
 
-from mcp.clients.base_controller import SyncConnection
-from mcp.clients.error_types import ErrorType
+# services/mcp/get_work_directory_tool/controller.py
 
-from mcp.get_work_directory_tool.response import (
+import json
+
+from services.mcp.clients.client_sync import SyncConnection
+from services.mcp.clients.error_types import ErrorType
+
+from services.mcp.get_work_directory_tool.response import (
     GetWorkingDirectoryResponse,
+    GetWorkingDirectorySuccessResponse,
     GetWorkingDirectoryErrorResponse,
 )
 
@@ -30,10 +34,13 @@ class GetWorkingDirectoryController(SyncConnection):
                 error_message=error_message,
             )
 
-        # Step 3: parse MCP result into response model
+        # Step 3: parse MCP result into correct subclass
         try:
-            content = result.content[0].text
-            return GetWorkingDirectoryResponse.model_validate_json(content)
+            data = json.loads(result.content[0].text)
+            if data["success"]:
+                return GetWorkingDirectorySuccessResponse.model_validate(data)
+            else:
+                return GetWorkingDirectoryErrorResponse.model_validate(data)
         except Exception as e:
             return GetWorkingDirectoryErrorResponse(
                 error_type="ParseError",

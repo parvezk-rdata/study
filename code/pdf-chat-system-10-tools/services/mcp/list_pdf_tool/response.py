@@ -3,7 +3,7 @@
 from typing import Literal
 from pydantic import BaseModel
 
-from mcp_connection.error_types import ErrorType
+from services.mcp.clients.error_types import ErrorType
 
 
 class ListPDFsResponse(BaseModel):

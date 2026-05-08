@@ -1,13 +1,16 @@
-# mcp/read_pdf_content_tool/controller.py
+# services/mcp/read_pdf_content_tool/controller.py
+
+import json
 
 from pydantic import ValidationError
 
-from mcp.clients.base_controller import SyncConnection
-from mcp.clients.error_types import ErrorType
+from services.mcp.clients.client_sync import SyncConnection
+from services.mcp.clients.error_types import ErrorType
 
-from mcp.read_pdf_content_tool.request import ReadPDFContentRequest
-from mcp.read_pdf_content_tool.response import (
+from services.mcp.read_pdf_content_tool.request import ReadPDFContentRequest
+from services.mcp.read_pdf_content_tool.response import (
     ReadPDFContentResponse,
+    ReadPDFContentSuccessResponse,
     ReadPDFContentErrorResponse,
 )
 
@@ -42,10 +45,13 @@ class ReadPDFContentController(SyncConnection):
                 error_message=error_message,
             )
 
-        # Step 4: parse MCP result into response model
+        # Step 4: parse MCP result into correct subclass
         try:
-            content = result.content[0].text
-            return ReadPDFContentResponse.model_validate_json(content)
+            data = json.loads(result.content[0].text)
+            if data["success"]:
+                return ReadPDFContentSuccessResponse.model_validate(data)
+            else:
+                return ReadPDFContentErrorResponse.model_validate(data)
         except Exception as e:
             return ReadPDFContentErrorResponse(
                 error_type="ParseError",

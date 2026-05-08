@@ -1,12 +1,15 @@
-# list_pdf_tool/controller.py
+
+# services/mcp/list_pdf_tool/controller.py
+
+import json
 
 from pydantic import ValidationError
 
-from clients.sync_connection import SyncConnection
-from clients.error_types import ErrorType
+from services.mcp.clients.client_sync import SyncConnection
+from services.mcp.clients.error_types import ErrorType
 
-from list_pdf_tool.request import ListPDFsRequest
-from list_pdf_tool.response import (
+from services.mcp.list_pdf_tool.request import ListPDFsRequest
+from services.mcp.list_pdf_tool.response import (
     ListPDFsResponse,
     ListPDFsSuccessResponse,
     ListPDFsErrorResponse,
@@ -43,10 +46,13 @@ class ListPDFsController(SyncConnection):
                 error_message=error_message,
             )
 
-        # Step 4: parse MCP result into response model
+        # Step 4: parse MCP result into correct subclass
         try:
-            content = result.content[0].text
-            return ListPDFsResponse.model_validate_json(content)
+            data = json.loads(result.content[0].text)
+            if data["success"]:
+                return ListPDFsSuccessResponse.model_validate(data)
+            else:
+                return ListPDFsErrorResponse.model_validate(data)
         except Exception as e:
             return ListPDFsErrorResponse(
                 error_type="ParseError",
