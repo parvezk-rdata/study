@@ -5,7 +5,7 @@ from typing import Any
 from services.llm.llm_service import LLMService
 from app.models.services.llm_transaction.chat_message import ChatMessage
 
-# transaction_history(request, response) can help make this class thin and light.
+# llm_transaction(request, response) can help make this class thin and light.
 
 class LLMController:
     """
