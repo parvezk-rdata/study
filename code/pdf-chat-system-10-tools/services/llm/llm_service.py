@@ -11,9 +11,18 @@ class LLMService:
         self._temperature = temperature
         self._max_tokens  = max_tokens
 
+    # call llm with messages without list of mcp tools
     def call(self, messages: list[dict]) -> str:
-        response = self._client.chat.completions.create(
-            model=self._model,
-            messages=messages
-        )
+        response = self._client.chat.completions.create( model=self._model, messages=messages)
         return response.choices[0].message.content
+
+    # call llm with messages with list of mcp tools
+    def call_with_tool_list( self, messages: list[dict], tools: list[dict]) -> dict:
+        
+        response = self._client.chat.completions.create(
+                            model=self._model,
+                            messages=messages,
+                            tools=tools,
+                            tool_choice="auto"
+        )
+        return response.choices[0].message.model_dump()

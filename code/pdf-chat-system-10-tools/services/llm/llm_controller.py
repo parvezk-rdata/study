@@ -28,9 +28,15 @@ class LLMController:
                 "Could not reach OpenAI API. Check your connection."
             ) from e
 
-    # -------------------------------------------------------------------------
-    # Helpers
-    # -------------------------------------------------------------------------
+    '''
+    _build_messages builds a message of following type
+    [
+        { "role": "system",    "content": "Role description Task description:\n\nPDF Text" },
+        { "role": "user",      "content": "Question 1" },
+        { "role": "assistant", "content": "Answer 1"   },
+        { "role": "user",      "content": "Question 2" }
+    ]
+    '''
 
     def _build_messages(self, transaction: LLMTransaction) -> list[dict]:
         messages = [{"role": "system", "content": self._get_system_prompt(transaction.pdf_text)}]
@@ -48,3 +54,16 @@ class LLMController:
             "Answer questions based on the following PDF document:\n\n"
             f"{pdf_text}"
         )
+
+'''
+
+[
+    { "role": "system",    "content": "Role description Task description:\n\nPDF Text" },
+    { "role": "user",      "content": "Question 1" },
+    { "role": "assistant", "tool_calls": [{tool_1 details}, {tool_2 details}, {tool_3 details}]   },
+    { "role": "tool",      "tool_call_id": "tool_1", "content": {tool_1 result} },
+    { "role": "tool",      "tool_call_id": "tool_2", "content": {tool_2 result} },
+    { "role": "tool",      "tool_call_id": "tool_3", "content": {tool_3 result} }
+]
+
+'''
