@@ -154,17 +154,19 @@ root(chat pdf app)/
 │   │   ├── __init__.py
 │   │   ├── appConfig.py                  # shared/global config
 │   │   ├── openAI.py                     # LLM-specific
+│   │   ├── mcp.py                        # MCP-specific
 │   │   └── config_bundle.py              # aggregates all settings
 │   │
-│   └── env/                             # NO __init__.py — contains only .env files
+│   └── env/                              # NO __init__.py — contains only .env files
 │       ├── .env.app                      # shared/global config 
 │       ├── .env.openAI.example           # example of file .env.openAI
-│       └── .env.openAI                   # LLM-specific
+│       ├── .env.openAI                   # LLM-specific
+│       └── .env.mcp                      # MCP Server
 │
 ├── styles/                               # NO __init__.py — contains only .qss files
 │
 └── utils/ 
-      ├── __init__.py
+      └── __init__.py
 
 
 ```
