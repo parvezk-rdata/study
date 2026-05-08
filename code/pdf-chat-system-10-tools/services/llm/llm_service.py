@@ -25,4 +25,7 @@ class LLMService:
                             tools=tools,
                             tool_choice="auto"
         )
+        # call_with_tool_list() returns full message dict
+        # return response.choices[0].message.model_dump()
+        
         return response.choices[0].message.model_dump()
