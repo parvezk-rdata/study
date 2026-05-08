@@ -43,11 +43,17 @@ root(chat pdf app)/
 │       │       ├── mcp_tool_definition.py    # MCPToolDefinition dataclass
 │       │       ├── tool_rounds.py            # ToolCall, ToolResult, ToolRound dataclass
 │       │       └── chat_message.py           # ChatMessage dataclass
+│       │
 │       └── state/
+│       │    ├── __init__.py
+│       │    ├── app_state.py              # AppState dataclass
+│       │    ├── app_state_store.py        # future/planned only. app is without store.
+│       │    └── app_error.py              # future/planned only. app is without AppError
+│       │
+│       └── transformers/
 │           ├── __init__.py
-│           ├── app_state.py              # AppState dataclass
-│           ├── app_state_store.py        # future/planned only. app is without store.
-│           └── app_error.py              # future/planned only. app is without AppError
+│           ├── base_formatter.py
+│           └── openai_formatter.py
 │   
 ├── ui/
 │   ├── __init__.py
