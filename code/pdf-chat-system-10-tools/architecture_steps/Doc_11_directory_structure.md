@@ -2,133 +2,164 @@
 > Note: the codebase now uses the word `services` instead of `domain`.
 
 ```
+
+
 root(chat pdf app)/
 │
 ├── main.py                              # Entry point — creates QApplication, MainWindow, 
 │                                          MainController
 ├── requirements.txt
+├── __init__.py
 │
 ├── app/
+│   ├── __init__.py
 │   ├── main_controller.py                # MainController:  orchestrates all event flows
 │   │
 │   ├── event_handlers/
-|   |   ├── pdf/
-|   |   │   ├── upload_pdf_handler.py     # Full PDF upload flow
-|   |   │   └── remove_pdf_handler.py     # PDF removal
-|   |   │
-|   |   ├── chat/
-|   |   │   ├── send_message_handler.py   # Single chat with llm 
-|   |   │   └── clear_chat_handler.py     # Clear all chats
-|   |   │
-|   |   └── ui/
+│   │   ├── __init__.py
+│   │   ├── pdf/
+│   │   │   ├── __init__.py
+│   │   │   ├── upload_pdf_handler.py     # Full PDF upload flow
+│   │   │   └── remove_pdf_handler.py     # PDF removal
+│   │   │
+│   │   ├── chat/
+│   │   │   ├── __init__.py
+│   │   │   ├── send_message_handler.py   # Single chat with llm 
+│   │   │   └── clear_chat_handler.py     # Clear all chats
+│   │   │
+│   │   └── ui/
+│   │       ├── __init__.py
 │   │       └── theme_changed_handler.py  # Stub — receives theme_name, will apply it
 │   │
 │   └── models/
+│       ├── __init__.py
 │       ├── services/
+│       │   ├── __init__.py
 │       │   ├── pdf_document.py                 # PDFDocument dataclass
 │       │   │
-│       │   └── llm_transaction                 
-│       │         ├── llm_transaction.py        # LLMTransaction dataclass   
-│       │         ├── mcp_tool_definition.py    # MCPToolDefinition dataclass
-│       │         ├── tool_rounds.py            # ToolCall, ToolResult, ToolRound dataclass
-│       │         └── chat_message.py           # ChatMessage dataclass
+│       │   └── llm_transaction/                 
+│       │       ├── __init__.py
+│       │       ├── llm_transaction.py        # LLMTransaction dataclass   
+│       │       ├── mcp_tool_definition.py    # MCPToolDefinition dataclass
+│       │       ├── tool_rounds.py            # ToolCall, ToolResult, ToolRound dataclass
+│       │       └── chat_message.py           # ChatMessage dataclass
 │       └── state/
+│           ├── __init__.py
 │           ├── app_state.py              # AppState dataclass
 │           ├── app_state_store.py        # future/planned only. app is without store.
 │           └── app_error.py              # future/planned only. app is without AppError
 │   
 ├── ui/
+│   ├── __init__.py
 │   ├── ui_composer.py                   # UIComposer — builds all UI, returns UIBundle
 │   ├── ui_bundle.py                     # UIBundle frozen dataclass
 │   │
 │   ├── toolbar/
+│   │   ├── __init__.py
 │   │   ├── toolbar_component.py         # ToolbarComponent 
-│   │   └── toolbar_controller.py        # ToolbarController
+│   │   ├── toolbar_controller.py        # ToolbarController
 │   │   └── widgets/
+│   │       ├── __init__.py
 │   │       ├── upload_button_widget.py
 │   │       ├── filename_label_widget.py
 │   │       ├── clear_button_widget.py
 │   │       └── theme_combo_widget.py
 │   │
 │   ├── file_picker/
+│   │   ├── __init__.py
 │   │   ├── file_picker.py                   # FilePickerComponent  
 │   │   └── file_picker_controller.py        # FilePickerController
 │   │
 │   ├── status_bar/
+│   │   ├── __init__.py
 │   │   ├── status_bar_component.py      # StatusBarComponent 
 │   │   └── status_bar_controller.py     # StatusBarController
 │   │
 │   ├── chat_area/
+│   │   ├── __init__.py
 │   │   ├── chat_area_component.py       # ChatAreaComponent 
 │   │   ├── chat_area_controller.py      # ChatAreaController
 │   │   └── widgets/
+│   │       ├── __init__.py
 │   │       ├── message_bubble_widget.py # MessageBubbleWidget
 │   │       └── placeholder_widget.py    # PlaceholderWidget 
 │   │
 │   └── input_bar/
+│       ├── __init__.py
 │       ├── input_bar_component.py       # InputBarComponent 
 │       ├── input_bar_controller.py      # InputBarController
 │       └── widgets/
+│           ├── __init__.py
 │           ├── button_widget.py 
 │           └── text_input_widget.py
 │
 ├── services/
+│   ├── __init__.py
 │   ├── service_composer.py              # ServiceComposer — instantiates controllers and 
 │   │                                      services, config, returns ServiceBundle
 │   ├── service_bundle.py                # ServiceBundle frozen dataclass
 │   │                                      holds PDFController, LLMController
 │   ├── pdf/
+│   │   ├── __init__.py
 │   │   ├── pdf_controller.py            # PDFController — receives file path, 
-│   │   |                                  calls PDFService, returns PDFDocument
+│   │   │                                  calls PDFService, returns PDFDocument
 │   │   └── pdf_service.py               # PDFService — raw PyMuPDF text extraction, 
 │   │                                      simple types only
 │   │  
 │   ├── llm/
+│   │   ├── __init__.py
 │   │   ├── llm_controller.py            # LLMController — receives LLMTransaction,  
-│   │   |                                  calls LLMService, returns LLMTransaction
+│   │   │                                  calls LLMService, returns LLMTransaction
 │   │   └── llm_service.py               # LLMService: raw OpenAI API call, simple types only
 │   │
-|   |
-|   └── mcp/
-|       │
-|       ├── clients/
-|       │   ├── __init__.py
-|       │   ├── client.py
-|       │   └── base_controller.py
-|       │
-|       ├── list_pdf_tool/
-|       │   ├── __init__.py
-|       │   ├── request.py
-|       │   ├── response.py
-|       │   └── controller.py
-|       │
-|       ├── get_work_directory_tool/
-|       │   ├── __init__.py
-|       │   ├── response.py
-|       │   └── controller.py
-|       │
-|       └── read_pdf_content_tool/
-|           ├── __init__.py
-|           ├── request.py
-|           ├── response.py
-|           └── controller.py
+│   └── mcp/
+│       ├── __init__.py
+│       ├── clients/
+│       │   ├── __init__.py
+│       │   ├── client.py
+│       │   └── sync_connection.py
+│       │
+│       ├── list_pdf_tool/
+│       │   ├── __init__.py
+│       │   ├── request.py
+│       │   ├── response.py
+│       │   └── controller.py
+│       │
+│       ├── get_work_directory_tool/
+│       │   ├── __init__.py
+│       │   ├── response.py
+│       │   └── controller.py
+│       │
+│       ├── read_pdf_content_tool/
+│       │   ├── __init__.py
+│       │   ├── request.py
+│       │   ├── response.py
+│       │   └── controller.py
+│       │
+│       └── zz_test/
+│           ├── __init__.py
+│           ├── test_get_work_directory.py
+│           ├── test_list_pdfs.py
+│           └── test_read_pdf_content.py
 │
 ├── conf/
+│   ├── __init__.py
 │   ├── settings/
+│   │   ├── __init__.py
 │   │   ├── appConfig.py                  # shared/global config
 │   │   ├── openAI.py                     # LLM-specific
 │   │   └── config_bundle.py              # aggregates all settings
 │   │
-│   └── env/
+│   └── env/                             # NO __init__.py — contains only .env files
 │       ├── .env.app                      # shared/global config 
 │       ├── .env.openAI.example           # example of file .env.openAI
 │       └── .env.openAI                   # LLM-specific
 │
-│
-├── styles/                               # contains qss files to style the PyQt6 widgets
+├── styles/                               # NO __init__.py — contains only .qss files
 │
 └── utils/ 
-      └── __init__.py
+      ├── __init__.py
+
 
 ```
 
