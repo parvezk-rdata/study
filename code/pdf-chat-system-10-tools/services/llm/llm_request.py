@@ -1,9 +1,10 @@
 # services/llm/llm_request.py
 
+from app.models.services.llm_transaction.chat_message import ChatMessage
 
 class LLMRequest:
 
-    def __init__(self, system_prompt: str, chat_history: list[dict], user_question: str):
+    def __init__(self, system_prompt: str, chat_history: list[ChatMessage], user_question: str):
         self._system_prompt   = system_prompt
         self.running_messages = self._build_initial_messages(chat_history, user_question)
 
@@ -11,7 +12,7 @@ class LLMRequest:
     #  Private helpers                                                     #
     # ------------------------------------------------------------------ #
 
-    def _build_initial_messages(self, chat_history: list[dict], user_question: str) -> list[dict]:
+    def _build_initial_messages(self, chat_history: list[ChatMessage], user_question: str) -> list[dict]:
         """Build the initial running_messages list:
            [system_prompt] + chat_history + [new user question]
         """
@@ -21,7 +22,9 @@ class LLMRequest:
         messages.append({"role": "system", "content": self._system_prompt})
 
         # Append previous conversation turns
-        messages.extend(chat_history)
+        # messages.extend(chat_history)
+        for msg in transaction.history:
+            messages.append({"role": msg.role, "content": msg.content})
 
         # Append the new user question
         messages.append({"role": "user", "content": user_question})
@@ -39,6 +42,14 @@ class LLMRequest:
           - the assistant tool-call message
           - individual tool result messages
         """
+        self.running_messages.append(message)
+
+    def add_tool_result(self, tool_call_id: str, result: dict) -> None:
+        message = {
+            "role": "tool",
+            "tool_call_id": tool_call_id,
+            "content": json.dumps(result),
+        }
         self.running_messages.append(message)
 
 
