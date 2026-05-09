@@ -19,7 +19,7 @@ class SyncConnection:
         self.tool_called = False
         self.closed = False
 
-    def _run(self, tool_name: str, arguments: dict[str, Any]) -> Any | None:
+    def run(self, tool_name: str, arguments: dict[str, Any]) -> Any | None:
         return asyncio.run(self._execute(tool_name, arguments))
 
     async def _execute(self, tool_name: str, arguments: dict[str, Any]) -> Any | None:

@@ -20,7 +20,7 @@ class MCPToolController:
         self._connection = connection
 
     def call(self, tool_name: str, arguments: dict[str, Any]) -> dict:
-        result = self._connection._run(tool_name=tool_name, arguments=arguments)
+        result = self._connection.run(tool_name=tool_name, arguments=arguments)
 
         if result is None:
             return self._resolve_error()
@@ -32,30 +32,21 @@ class MCPToolController:
     # ------------------------------------------------------------------
 
     def _resolve_error(self) -> dict:
-        """
-        Use SyncConnection state flags to identify exactly where the
-        call failed. All three cases are mutually exclusive.
-        """
+        
+        fail_message = {}
+        fail_message["success"] = False
+        
         if not self._connection.connected:
-            return {
-                "success": False,
-                "error_type": "ConnectionError",
-                "error_message": "MCP server is not reachable",
-            }
+            fail_message["error_type"] = "ConnectionError"
+            fail_message["error_message"] = "MCP server is not reachable"
+        elif not self._connection.tool_called:
+            fail_message["error_type"] = "ToolExecutionError"
+            fail_message["error_message"] = "Connected to MCP server but tool execution failed"
+        else:
+            fail_message["error_type"] = "EmptyResultError"
+            fail_message["error_message"] = "Tool was called but returned no content"
 
-        if not self._connection.tool_called:
-            return {
-                "success": False,
-                "error_type": "ToolExecutionError",
-                "error_message": "Connected to MCP server but tool execution failed",
-            }
-
-        # connected=True, tool_called=True, result is still None
-        return {
-            "success": False,
-            "error_type": "EmptyResultError",
-            "error_message": "Tool was called but returned no content",
-        }
+        return fail_message
 
     def _parse(self, result: Any) -> dict:
         """
