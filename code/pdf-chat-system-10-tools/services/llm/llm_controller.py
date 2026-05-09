@@ -1,107 +1,91 @@
 # services/llm/llm_controller.py
 
-from typing import Any
+from services.llm.llm_service  import LLMService
+from services.llm.llm_request  import LLMRequest
+from services.llm.llm_response import LLMResponse
 
-from services.llm.llm_service import LLMService
-from app.models.services.llm_transaction.chat_message import ChatMessage
-
-# llm_transaction(request, response) can help make this class thin and light.
 
 class LLMController:
-    """
-    Builds and manages OpenAI message payloads.
 
-    Responsibilities:
-    - build running conversation messages
-    - call LLMService with or without tools
-    - parse LLM response
-    - store error state if LLM call fails
+    def __init__(self, llm_service: LLMService, available_tools: list[dict]):
+        self._llm_service     = llm_service
+        self._available_tools = available_tools
 
-    Not responsible for:
-    - calling MCP server
-    - executing tools
-    """
+    # ------------------------------------------------------------------ #
+    #  Public API                                                          #
+    # ------------------------------------------------------------------ #
 
-    def __init__( self, llm_service: LLMService, mcp_tools: list[dict], system_prompt: str ):
-
-        self._llm_service = llm_service
-        self._mcp_tools = mcp_tools
-        self._system_prompt = system_prompt
+    def ask_with_tools(self, request: LLMRequest) -> LLMResponse:
+        """Send current running_messages to the LLM and return a parsed LLMResponse.
         
-        self._reset_turn_state()
+        The main controller calls this once per round:
+          1. First call  : initial user question
+          2. Subsequent  : after appending tool results via request.add_message()
+          3. Loop ends   : when response.has_answer() is True or response.has_error()
+        """
+        try:
+            raw_message = self._llm_service.call_with_tool_list(
+                messages=request.running_messages,
+                tools=self._available_tools
+            )
+            return self._parse_llm_message(raw_message)
 
-    def start_conversation( self, message_history: list[ChatMessage], user_question: str) -> None:
-        self._reset_turn_state()
+        except Exception as e:
+            response = LLMResponse()
+            response.add_error(str(e))
+            return response
 
-        initial_message = { "role": "system", "content": self._system_prompt}
-        self._running_messages.append(initial_message)
+    # ------------------------------------------------------------------ #
+    #  Private helpers                                                     #
+    # ------------------------------------------------------------------ #
 
-        for message in message_history:
-            self._running_messages.append({ "role": message.role, "content": message.content})
+    def _parse_llm_message(self, raw_message: dict) -> LLMResponse:
+        """Parse the raw message dict returned by LLMService.call_with_tool_list()
+        and populate a fresh LLMResponse.
 
-        self._running_messages.append({ "role": "user", "content": user_question})
-
-    def _reset_turn_state(self) -> None:
-        self._running_messages = []
-
-        self._requested_tool_calls = []
-        self._final_answer = None
-
-        self._error_message = None
-        self._error_type = None
-
-    def ask_with_tools(self) -> None:
-        self._requested_tool_calls = []
+        raw_message structure (model_dump output):
+          {
+            "role":       "assistant",
+            "content":    <str | None>,
+            "tool_calls": <list[dict] | None>
+          }
+        """
+        response = LLMResponse()
 
         try:
-            llm_message = self._llm_service.call_with_tool_list( messages=self._running_messages, tools=self._mcp_tools)
-            self._parse_llm_message(llm_message)
-        except Exception as exc:
-            self._set_error(exc)
+            tool_calls = raw_message.get("tool_calls")
+            content    = raw_message.get("content")
 
-    def add_message(self, message: dict) -> None:
-        self._running_messages.append(message)
+            if tool_calls:
+                # LLM is requesting one or more tool calls
+                response.add_tool_calls(tool_calls)
 
-    def add_tool_result( self, tool_call_id: str, tool_name: str, content: str) -> None:
-        tool_message =  { "role":"tool", "tool_call_id":tool_call_id, "name":tool_name, "content":content }
-        self._running_messages.append(tool_message)
+            elif content:
+                # LLM has produced a final text answer
+                response.add_answer(content)
 
-    def get_requested_tool_calls(self) -> list[dict]:
-        return self._requested_tool_calls
+            else:
+                # Neither tool_calls nor content — unexpected state
+                response.add_error("LLM returned an empty message: no content and no tool calls.")
 
-    def get_final_answer(self) -> str | None:
-        return self._final_answer
+        except Exception as e:
+            response.add_error(f"Failed to parse LLM message: {str(e)}")
 
-    def get_error_type(self) -> str | None:
-        return self._error_type
+        return response
 
-    def get_error_message(self) -> str | None:
-        return self._error_message
+'''
 
-    def _parse_llm_message(self, llm_message: dict) -> None:
-        
-        tool_calls = llm_message.get("tool_calls") or []
+[
+    { "role": "system",    "content": "Role description Task description" },
+    { "role": "user",      "content": "Question 1" },
+    { "role": "assistant", "content": "Answer 1"   },
+    { "role": "user",      "content": "Question 2" },
+    { "role": "assistant", "content": "Answer 2"   },
+    { "role": "user",      "content": "Question n" },
+    { "role": "assistant", "content": null, "tool_calls": [{tool_1 details}, {tool_2 details}, {tool_3 details}]   },
+    { "role": "tool",      "tool_call_id": "tool_1", "content": {tool_1 result} },
+    { "role": "tool",      "tool_call_id": "tool_2", "content": {tool_2 result} },
+    { "role": "tool",      "tool_call_id": "tool_3", "content": {tool_3 result} }
+]
 
-        if tool_calls:
-            self._requested_tool_calls = tool_calls
-            self._final_answer = None
-
-            # Important: assistant tool-call message must be added
-            # before tool results are added.
-            self._running_messages.append(llm_message)
-            return
-
-        content = llm_message.get("content")
-
-        if content and content.strip():
-            self._final_answer = content
-            return
-        
-        self._error_type = "LLMNoAnswerError"
-        self._error_message = "LLM returned neither tool calls nor a final answer."
-
-    def _set_error(self, exc: Exception) -> None:
-        self._error_type = exc.__class__.__name__
-        self._error_message = str(exc)
-
-        self._requested_tool_calls = []
+'''

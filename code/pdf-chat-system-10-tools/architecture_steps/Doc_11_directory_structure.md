@@ -37,12 +37,8 @@ root(chat pdf app)/
 │       │   ├── __init__.py
 │       │   ├── pdf_document.py                 # PDFDocument dataclass
 │       │   │
-│       │   └── llm_transaction/                 
-│       │       ├── __init__.py
-│       │       ├── llm_transaction.py        # LLMTransaction dataclass   
-│       │       ├── mcp_tool_definition.py    # MCPToolDefinition dataclass
-│       │       ├── tool_rounds.py            # ToolCall, ToolResult, ToolRound dataclass
-│       │       └── chat_message.py           # ChatMessage dataclass
+│       │   └── llm_transaction/
+│       │       └── chat_message.py           # ChatMessage
 │       │
 │       └── state/
 │       │    ├── __init__.py
@@ -116,10 +112,23 @@ root(chat pdf app)/
 │   │   ├── __init__.py
 │   │   ├── llm_controller.py            # LLMController — receives LLMTransaction,  
 │   │   │                                  calls LLMService, returns LLMTransaction
-│   │   └── llm_service.py               # LLMService: raw OpenAI API call, simple types only
+│   │   ├── llm_service.py               # LLMService: raw OpenAI API call, simple types only
+│   │   ├── request.py                   # send to llm controller by main controller
+│   │   ├── response.py                  # returned by llm controller to main controller
+│   │   └── formatters/
+│   │       ├── __init__.py
+│   │       ├── base_tool_formatter.py
+│   │       └── openai_tool_formatter.py
 │   │
 │   └── mcp/
 │       ├── __init__.py
+│       ├── tool_registry.py
+|       |
+│       ├── models/
+│       │   ├── __init__.py
+│       │   ├── tool_definition.py
+│       │   └── tool_parameter.py
+|       |
 │       ├── clients/
 │       │   ├── __init__.py
 │       │   ├── client.py

@@ -46,8 +46,10 @@ interaction --->  event --->  update UI   --->  service call  ---> update UI
 |---|---|---|
 | **Service** | Many | Perform one raw operation using simple data types |
 | **DomainController** | One per service/domain | Handle business logic and external services |
+| **Requests** | One per service/domain | send to DomainController by main controller |
+| **Response** | One per service/domain | returned by DomainController to main controller. If any error occur then it is not throws to the maincontroller and the error is saved in response object |
 | **ServiceComposer** | Exactly one | Instantiate all domain controllers, load API key from **.env**, return **DomainControllers** bundle |
-| **Domain Models** | Many | MainController and  DomainController exchange information using these models|
+| **Domain Models** | Many | (Requests, Response) MainController and  DomainController exchange information using these |
 
 <br>
 
@@ -215,6 +217,7 @@ MainController
 
 ## Models
   - Use Pydantic only at boundaries where data comes from outside. Use dataclass for internal app models.
+  - Request and response models for domain controllers: better design than using Event Models.
   - Event Models : created one for each event. Passes to various controllers. Stores everything. Lives as long as event lives. Type of notesheet that records everything from start of an event till event handling finishes.
 
 ## State of the app
