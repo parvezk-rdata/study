@@ -41,15 +41,10 @@ root(chat pdf app)/
 │       │       └── chat_message.py           # ChatMessage
 │       │
 │       └── state/
-│       │    ├── __init__.py
-│       │    ├── app_state.py              # AppState dataclass
-│       │    ├── app_state_store.py        # future/planned only. app is without store.
-│       │    └── app_error.py              # future/planned only. app is without AppError
-│       │
-│       └── transformers/
-│           ├── __init__.py
-│           ├── base_formatter.py
-│           └── openai_formatter.py
+│            ├── __init__.py
+│            ├── app_state.py              # AppState dataclass
+│            ├── app_state_store.py        # future/planned only. app is without store.
+│            └── app_error.py              # future/planned only. app is without AppError
 │   
 ├── ui/
 │   ├── __init__.py
@@ -115,10 +110,9 @@ root(chat pdf app)/
 │   │   ├── llm_service.py               # LLMService: raw OpenAI API call, simple types only
 │   │   ├── request.py                   # send to llm controller by main controller
 │   │   ├── response.py                  # returned by llm controller to main controller
-│   │   └── formatters/
+│   │   └── utils/
 │   │       ├── __init__.py
-│   │       ├── base_tool_formatter.py
-│   │       └── openai_tool_formatter.py
+│   │       └── openai_formatter.py
 │   │
 │   └── mcp/
 │       ├── __init__.py
