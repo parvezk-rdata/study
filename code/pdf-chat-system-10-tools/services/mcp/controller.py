@@ -4,7 +4,8 @@ import json
 from typing import Any
 
 from services.mcp.clients.sync_connection import SyncConnection
-
+from services.mcp.tool_registry import MCPToolRegistry
+from services.mcp.models.mcp_tool_definition import ToolDefinition
 
 class MCPToolController:
     """
@@ -18,6 +19,10 @@ class MCPToolController:
 
     def __init__(self, connection: SyncConnection) -> None:
         self._connection = connection
+        self.list_of_tools = MCPToolRegistry().getAllMCPTools()
+
+    def get_tools_list(self) -> list[ToolDefinition]:
+        return self.list_of_tools
 
     def call(self, tool_name: str, arguments: dict[str, Any]) -> dict:
         result = self._connection.run(tool_name=tool_name, arguments=arguments)

@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from services.mcp.models.tool_definition import ToolDefinition
+from services.mcp.models.mcp_tool_definition import ToolDefinition
 
 
 class MCPToolRegistry:
@@ -27,15 +27,16 @@ class MCPToolRegistry:
 
         return all_tools
 
-    def load_tools_from_directory(self, directory: Path) -> list[ToolDefinition]:
+    def load_tools_from_directory(self, directory: str) -> list[ToolDefinition]:
 
-        json_files = sorted(directory.glob("*.json"))
+        json_files = sorted(Path(directory).glob("*.json"))
 
         tools: list[ToolDefinition] = []
 
         for file_path in json_files:
 
-            json_text = Path(file_path).read_text(encoding="utf-8")
+            # json_text = Path(file_path).read_text(encoding="utf-8")
+            json_text = file_path.read_text(encoding="utf-8")
 
             tool_definition = ToolDefinition.model_validate_json(json_text)
 

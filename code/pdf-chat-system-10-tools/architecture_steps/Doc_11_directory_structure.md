@@ -124,40 +124,15 @@ root(chat pdf app)/
 │       ├── __init__.py
 │       ├── tool_registry.py              # MCPToolRegistry(returns list of tools)
 |       |
+|       ├── controller.py
 │       ├── models/
 │       │   ├── __init__.py
 │       │   └── mcp_tool_definition.py    # classes : ToolParameter, ToolDefinition 
 |       |
 │       ├── clients/
-│       │   ├── __init__.py
-│       │   ├── client.py
-│       │   └── sync_connection.py
-│       │
-│       ├── list_pdf_tool/
-│       │   ├── __init__.py
-│       │   ├── request.py
-│       │   ├── response.py
-│       │   ├── controller.py
-│       │   └── tool_definition.json
-│       │
-│       ├── get_work_directory_tool/
-│       │   ├── __init__.py
-│       │   ├── response.py
-│       │   ├── controller.py
-│       │   └── tool_definition.json
-│       │
-│       ├── read_pdf_content_tool/
-│       │   ├── __init__.py
-│       │   ├── request.py
-│       │   ├── response.py
-│       │   ├── controller.py
-│       │   └── tool_definition.json
-│       │
-│       └── zz_test/
 │           ├── __init__.py
-│           ├── test_get_work_directory.py
-│           ├── test_list_pdfs.py
-│           └── test_read_pdf_content.py
+│           ├── client.py
+│           └── sync_connection.py
 │
 ├── conf/
 │   ├── __init__.py
