@@ -8,3 +8,4 @@ zz_temp/
 .env.openAI
 .codex
 .codex_memory/
+services/mcp_01/
