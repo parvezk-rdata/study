@@ -8,6 +8,7 @@ from services.service_bundle import ServiceBundle
 from conf.settings.config_bundle import AppSettings
 from services.mcp.clients.client import MCPClient
 from services.mcp.controller import MCPToolController
+from services.llm.utils.openai_formatter import OpenAIFormatter
 
 class ServiceComposer:
 
@@ -23,7 +24,7 @@ class ServiceComposer:
         # --- Build MCP Client service and controller ---
         mcp_client     = MCPClient(settings.mcpConfig.mcp_server_url)
         mcp_controller = MCPToolController(mcp_client)
-        available_tools= mcp_controller.get_tools_list()
+        available_tools= OpenAIFormatter().format_tool_definitions(mcp_controller.get_tools_list())
         
         # --- Build LLM service and controller ---
         llm_service    = LLMService(

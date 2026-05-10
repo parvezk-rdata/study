@@ -12,7 +12,7 @@ class OpenAIFormatter:
             "content": message.content,
         }
 
-    def format_tool_definition(self, tool: ToolDefinition) -> dict:
+    def _format_tool_definition(self, tool: ToolDefinition) -> dict:
         return {
             "type": "function",
             "function": {
@@ -35,4 +35,4 @@ class OpenAIFormatter:
         }
 
     def format_tool_definitions(self, tools: list[ToolDefinition]) -> list[dict]:
-        return [self.format_tool_definition(tool) for tool in tools]
+        return [self._format_tool_definition(tool) for tool in tools]

@@ -105,11 +105,11 @@ root(chat pdf app)/
 │   │  
 │   ├── llm/
 │   │   ├── __init__.py
-│   │   ├── llm_controller.py            # LLMController — receives LLMTransaction,  
-│   │   │                                  calls LLMService, returns LLMTransaction
+│   │   ├── llm_controller.py            # LLMController — receives LLMRequest,  
+│   │   │                                  calls LLMService, returns LLMResponse
 │   │   ├── llm_service.py               # LLMService: raw OpenAI API call, simple types only
-│   │   ├── request.py                   # send to llm controller by main controller
-│   │   ├── response.py                  # returned by llm controller to main controller
+│   │   ├── request.py                   # LLMRequest: send to llm controller by main controller
+│   │   ├── response.py                  # LLMResponse: returned by llm controller to main controller
 │   │   └── utils/
 │   │       ├── __init__.py
 │   │       └── openai_formatter.py       # OpenAIFormatter class
