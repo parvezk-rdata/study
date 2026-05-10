@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 
 MAX_ROUNDS = 10
 
-SYSTEM_PROMPT = (
+_SYSTEM_PROMPT_NO_PDF = (
     "You are a helpful assistant with access to a PDF document library. "
     "You have tools to: find the documents directory, list PDF files in it, "
     "and read the full text of any PDF. "
@@ -22,6 +22,24 @@ SYSTEM_PROMPT = (
     "to locate and read the relevant PDF before answering. "
     "Always answer from the actual document content."
 )
+
+_SYSTEM_PROMPT_WITH_PDF = (
+    "You are a helpful assistant. "
+    "The user has uploaded a PDF document. Its full text is provided below. "
+    "Answer the user's question using this text as your primary source. "
+    "You also have tools to find and read other PDFs from the document library "
+    "if the uploaded PDF does not contain enough information to answer. "
+    "\n\n"
+    "=== UPLOADED PDF CONTENT ===\n"
+    "{pdf_text}\n"
+    "=== END OF UPLOADED PDF CONTENT ==="
+)
+
+
+def _build_system_prompt(pdf_text: str | None) -> str:
+    if pdf_text:
+        return _SYSTEM_PROMPT_WITH_PDF.format(pdf_text=pdf_text)
+    return _SYSTEM_PROMPT_NO_PDF
 
 
 class SendMessageHandler:
@@ -36,10 +54,17 @@ class SendMessageHandler:
     # ------------------------------------------------------------------
 
     def on_send_clicked(self, text: str):
+        pdf_text = self._state.pdf.full_text if self._state.pdf else None
+
+        if pdf_text:
+            log.info("PDF context available — injecting into system prompt")
+        else:
+            log.info("No PDF uploaded — LLM will use MCP tools")
+
         log.info("User question: %s", text)
 
         request = LLMRequest(
-            system_prompt = SYSTEM_PROMPT,
+            system_prompt = _build_system_prompt(pdf_text),
             chat_history  = list(self._state.messages),
             user_question = text,
         )
