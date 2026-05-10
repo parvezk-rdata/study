@@ -112,7 +112,7 @@ root(chat pdf app)/
 │   │   ├── response.py                  # returned by llm controller to main controller
 │   │   └── utils/
 │   │       ├── __init__.py
-│   │       └── openai_formatter.py
+│   │       └── openai_formatter.py       # OpenAIFormatter class
 │   │
 │   └── mcp/
 │       ├── __init__.py

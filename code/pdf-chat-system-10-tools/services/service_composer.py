@@ -6,7 +6,8 @@ from services.llm.llm_service import LLMService
 from services.llm.llm_controller import LLMController
 from services.service_bundle import ServiceBundle
 from conf.settings.config_bundle import AppSettings
-
+from services.mcp.clients.client import MCPClient
+from services.mcp.controller import MCPController
 
 class ServiceComposer:
 
@@ -28,8 +29,12 @@ class ServiceComposer:
         )
         llm_controller = LLMController(llm_service)
 
+        mcp_client     = MCPClient(settings.mcpConfig.mcp_server_url)
+        mcp_controller = MCPController(mcp_client)
+
         # --- Return frozen bundle ---
         return ServiceBundle(
             pdf=pdf_controller,
-            llm=llm_controller
+            llm=llm_controller,
+            mcp=mcp_controller
         )
