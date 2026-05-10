@@ -13,7 +13,7 @@ class MessageInputWidget(QLineEdit):
     def _setup(self):
         self.setPlaceholderText("Ask a question...")
         self.setFixedHeight(36)
-        self.setEnabled(False)
+        # self.setEnabled(False)
         self.setObjectName("messageInput")
 
     def get_text(self) -> str:

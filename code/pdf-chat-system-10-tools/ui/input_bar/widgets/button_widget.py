@@ -13,5 +13,5 @@ class SendButtonWidget(QPushButton):
     def _setup(self):
         self.setText("Send")
         self.setFixedSize(72, 36)
-        self.setEnabled(False)
+        #self.setEnabled(False)
         self.setObjectName("sendBtn")
