@@ -3,7 +3,7 @@
 import json
 from typing import Any
 
-from services.mcp.clients.sync_connection import SyncConnection
+from services.mcp.clients.client_sync import SyncConnection
 from services.mcp.tool_registry import MCPToolRegistry
 from services.mcp.models.mcp_tool_definition import ToolDefinition
 
