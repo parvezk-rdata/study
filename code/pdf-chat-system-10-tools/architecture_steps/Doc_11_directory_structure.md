@@ -118,7 +118,7 @@ root(chat pdf app)/
 │       ├── __init__.py
 │       ├── tool_registry.py              # MCPToolRegistry(returns list of tools)
 |       |
-|       ├── controller.py
+|       ├── controller.py                 # MCPToolController
 │       ├── models/
 │       │   ├── __init__.py
 │       │   └── mcp_tool_definition.py    # classes : ToolParameter, ToolDefinition 
