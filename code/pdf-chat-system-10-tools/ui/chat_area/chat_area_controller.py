@@ -1,7 +1,7 @@
 # ui/chat_area/chat_area_controller.py
 
 from ui.chat_area.chat_area_component import ChatAreaComponent
-from app.models.services.chat_message import ChatMessage
+from app.models.services.llm_transaction.chat_message import ChatMessage
 
 
 class ChatAreaController:

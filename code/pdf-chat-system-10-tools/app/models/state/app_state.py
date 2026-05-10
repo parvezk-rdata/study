@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass, field
 from app.models.services.pdf_document import PDFDocument
-from app.models.services.chat_message import ChatMessage
+from app.models.services.llm_transaction.chat_message import ChatMessage
 
 
 @dataclass
