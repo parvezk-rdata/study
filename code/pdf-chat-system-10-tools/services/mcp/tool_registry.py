@@ -9,7 +9,8 @@ class MCPToolRegistry:
 
     def __init__(self):
         # self._list_of_directories = [Path(directory) for directory in tool_directories]
-        self._list_of_directories = [ "services/mcp/tools_json"]
+        dir_01 = Path(__file__).parent / "tools_json"
+        self._list_of_directories = [ dir_01 ]
 
     def getAllMCPTools(self) -> list[ToolDefinition]:
 
