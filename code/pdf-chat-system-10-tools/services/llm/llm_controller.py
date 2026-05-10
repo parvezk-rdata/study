@@ -4,7 +4,7 @@ from services.llm.llm_service  import LLMService
 from services.llm.llm_request  import LLMRequest
 from services.llm.llm_response import LLMResponse
 
-
+# agentic loop from main controller
 class LLMController:
 
     def __init__(self, llm_service: LLMService, available_tools: list[dict]):

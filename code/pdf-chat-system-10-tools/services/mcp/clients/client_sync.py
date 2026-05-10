@@ -1,4 +1,4 @@
-# mcp_connection/client_sync.py
+# services/mcp/clients/client_sync.py
 
 import asyncio
 from typing import Any

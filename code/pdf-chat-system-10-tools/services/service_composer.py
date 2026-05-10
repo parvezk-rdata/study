@@ -6,7 +6,7 @@ from services.llm.llm_service import LLMService
 from services.llm.llm_controller import LLMController
 from services.service_bundle import ServiceBundle
 from conf.settings.config_bundle import AppSettings
-from services.mcp.clients.client import MCPClient
+from services.mcp.clients.client_sync import SyncConnection
 from services.mcp.controller import MCPToolController
 from services.llm.utils.openai_formatter import OpenAIFormatter
 
@@ -22,7 +22,7 @@ class ServiceComposer:
         pdf_controller = PDFController(pdf_service)
 
         # --- Build MCP Client service and controller ---
-        mcp_client     = MCPClient(settings.mcpConfig.mcp_server_url)
+        mcp_client     = SyncConnection(settings.mcpConfig.mcp_server_url)
         mcp_controller = MCPToolController(mcp_client)
         available_tools= OpenAIFormatter().format_tool_definitions(mcp_controller.get_tools_list())
         

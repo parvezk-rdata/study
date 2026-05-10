@@ -125,8 +125,8 @@ root(chat pdf app)/
 |       |
 │       ├── clients/
 │           ├── __init__.py
-│           ├── client.py
-│           └── sync_connection.py
+│           ├── client_async.py           # classes: MCPConnectionClient
+│           └── client_sync.py            # classes: SyncConnection
 │
 ├── conf/
 │   ├── __init__.py
