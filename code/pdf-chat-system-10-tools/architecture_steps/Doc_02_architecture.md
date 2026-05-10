@@ -14,19 +14,19 @@ interaction --->  event --->  update UI   --->  service call  ---> update UI
 ---
 
 ```
-                         ┌──────────────────────┐
-                         │  Domain Controller   │
-                         └────────────┬─────────┘                
-   User Interaction               ▲   │   
-           │                      │   │ [Domain Models]        
-           │                      │   │   
-           ▼                      │   ▼   
-      ┌─────────┐  event    ┌─────┴─────────┐        ┌────────────────────┐
-      │Component│ →→→→→→→→→ │Main Controller│ →→→→→→ │Component Controller│
-      └─────────┘           └───────────────┘        └─────────┬──────────┘
-           ▲                                                   │
-           │                                                   │           
-           └───────────────────────────────────────────────────┘
+                              ┌──────────────────────┐
+                              │  Domain Controller   │
+                              └────────────┬─────────┘                
+   User Interaction                    ▲   │   
+           │                           │   | [Response]        
+           │                 [Request] │   │   
+           ▼                           │   ▼         
+      ┌─────────┐      event     ┌─────┴─────────┐        ┌────────────────────┐
+      │Component│ →→→→→→→→→→→→→→ │Main Controller│ →→→→→→ │Component Controller│
+      └─────────┘                └───────────────┘        └─────────┬──────────┘
+           ▲                                                        │
+           │                                                        │           
+           └────────────────────────────────────────────────────────┘
 ```
 ---
 
@@ -40,14 +40,15 @@ interaction --->  event --->  update UI   --->  service call  ---> update UI
 
 <br>
 
-> `Four Types Of Class for Services`
+> `Seven Types Of Class for Services`
 
 | Class Type | Count | Responsibility |
 |---|---|---|
 | **Service** | Many | Perform one raw operation using simple data types |
 | **DomainController** | One per service/domain | Handle business logic and external services |
 | **Requests** | One per service/domain | send to DomainController by main controller |
-| **Response** | One per service/domain | returned by DomainController to main controller. If any error occur then it is not throws to the maincontroller and the error is saved in response object |
+| **Response** | One per service/domain | returns errors/result by DomainController to main controller. If any error occur then it is not throws to the maincontroller and the error is saved in response object |
+| **Transaction** | One per service/domain | packs request and respose objects and expose methods to upate them |
 | **ServiceComposer** | Exactly one | Instantiate all domain controllers, load API key from **.env**, return **DomainControllers** bundle |
 | **Domain Models** | Many | (Requests, Response) MainController and  DomainController exchange information using these |
 
@@ -121,7 +122,8 @@ MainController
    |
    ├── Error Handling & Routing
    |     |
-   |     └── catch errors inside event handlers and route to UI
+   |     ├── Receive error messages in response objects and update UI
+   |     └── erors are saved in response objects by domain controllers
    |
    ├── Manage App Lifecycle
    |     |
@@ -172,6 +174,8 @@ MainController
 - A plain class that **handles one domain of business logic or one external service**
 - Can be a Singleton class?
 - Contains only operation methods that are called during event handling
+- accepts a request object and returns a response object
+- never throw error to main controller. Errors are saved in thr response object.
 - It knows nothing about the UI. Never update the UI directly
 - Perform a specific business operation when called
 - Return a result or raise a descriptive exception
@@ -209,7 +213,8 @@ MainController
 - Only class that knows the full sequence of steps for every user event.
 - Connect all component signals to handler methods on startup
 - Define the complete step-by-step flow for every user event
-- Call `DomainController`s for business logic
+- Send request object and recieve response object from `DomainController`s for business logic
+- Never catches exception. Errors in domain controllers are saved in response objects
 - Call `ComponentController`s to update the UI
 - Handle errors and decide how to surface them
 - Do not contain low-level UI code. Delegate to `ComponentController`

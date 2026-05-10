@@ -118,15 +118,20 @@ root(chat pdf app)/
 │       ├── __init__.py
 │       ├── tool_registry.py              # MCPToolRegistry(returns list of tools)
 |       |
+│       ├── clients/
+│       |   ├── __init__.py
+│       |   ├── client_async.py           # classes: MCPConnectionClient
+│       |   └── client_sync.py            # classes: SyncConnection
+|       |
 |       ├── controller.py                 # MCPToolController
 │       ├── models/
 │       │   ├── __init__.py
 │       │   └── mcp_tool_definition.py    # classes : ToolParameter, ToolDefinition 
 |       |
-│       ├── clients/
-│           ├── __init__.py
-│           ├── client_async.py           # classes: MCPConnectionClient
-│           └── client_sync.py            # classes: SyncConnection
+│       └── tools_json/
+│           ├── tool_get_directory.json   # tool definition : get working directory path
+│           ├── tool_list_pdfs.json       # tool definition : get list of pdfs in dir
+│           └── tool_read_pdf             # tool definition : get content of pdf
 │
 ├── conf/
 │   ├── __init__.py

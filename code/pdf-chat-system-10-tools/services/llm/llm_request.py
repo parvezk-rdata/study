@@ -1,5 +1,5 @@
 # services/llm/llm_request.py
-
+import json
 from app.models.services.llm_transaction.chat_message import ChatMessage
 
 class LLMRequest:
@@ -23,7 +23,7 @@ class LLMRequest:
 
         # Append previous conversation turns
         # messages.extend(chat_history)
-        for msg in transaction.history:
+        for msg in chat_history:
             messages.append({"role": msg.role, "content": msg.content})
 
         # Append the new user question

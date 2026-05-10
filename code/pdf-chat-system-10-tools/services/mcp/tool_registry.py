@@ -8,18 +8,14 @@ from services.mcp.models.mcp_tool_definition import ToolDefinition
 class MCPToolRegistry:
 
     def __init__(self):
-        # self._tool_directories = [Path(directory) for directory in tool_directories]
-        self._tool_directories = [
-        "services/mcp/get_work_directory_tool",
-        "services/mcp/list_pdf_tool",
-        "services/mcp/read_pdf_content_tool",
-    ]
+        # self._list_of_directories = [Path(directory) for directory in tool_directories]
+        self._list_of_directories = [ "services/mcp/tools_json"]
 
     def getAllMCPTools(self) -> list[ToolDefinition]:
 
         all_tools: list[ToolDefinition] = []
 
-        for directory in self._tool_directories:
+        for directory in self._list_of_directories:
 
             tools_from_directory = self.load_tools_from_directory(directory)
 
