@@ -96,12 +96,24 @@ root(chat pdf app)/
 │   │                                      services, config, returns ServiceBundle
 │   ├── service_bundle.py                # ServiceBundle frozen dataclass
 │   │                                      holds PDFController, LLMController
-│   ├── pdf/
-│   │   ├── __init__.py
-│   │   ├── pdf_controller.py            # PDFController — receives file path, 
-│   │   │                                  calls PDFService, returns PDFDocument
-│   │   └── pdf_service.py               # PDFService — raw PyMuPDF text extraction, 
-│   │                                      simple types only
+│   ├── document_extractors/
+│   │   |
+│   │   ├── text
+│   │   |   └── plain
+|   |   |       ├── controller.py
+|   |   |       ├── service.py
+|   |   |       ├── request.py
+|   |   |       ├── response.py
+|   |   |       └── __init__.py  
+│   │   |                                     
+│   │   └── pdf/
+|   |       └── pymupdf/
+|   |           ├── controller.py
+|   |           ├── service.py
+|   |           ├── request.py
+|   |           ├── response.py
+|   |           └── __init__.py                            
+│   │                                      
 │   │  
 │   ├── llm/
 │   │   ├── __init__.py
