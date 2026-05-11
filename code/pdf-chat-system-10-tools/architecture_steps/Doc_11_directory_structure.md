@@ -127,43 +127,27 @@ root(chat pdf app)/
 │   │       └── openai_formatter.py       # OpenAIFormatter class
 |   |
 |   ├── mcp/
-|   |   ├── clients/
-|   |   │   ├── client_async.py          — unchanged
-|   |   │   └── client_sync.py           — unchanged
-|   |   │
-|   |   ├── models/
-|   |   │   ├── tool_parameter.py        — split from mcp_tool_definition.py
-|   |   │   └── tool_definition.py       — split from mcp_tool_definition.py
-|   |   │
-|   |   ├── registry/
-|   |   │   ├── tool_registry.py         — moved here, Path updated
-|   |   │   └── tools_json/              — moved with registry
-|   |   │
-|   |   └── executor/
-|   |   ├── request.py               — new: MCPToolRequest (Pydantic)
-|   |   ├── response.py              — new: MCPToolResponse (dataclass, has_error, has_result)
-|   |   ├── executor_service.py      — new: raw call + _resolve_error + _parse moved here
-|   |   └── controller.py            — slimmed down, registry injected, calls via request/response
-|
-│   └── mcp/
-│       ├── __init__.py
-│       ├── tool_registry.py              # MCPToolRegistry(returns list of tools)
-|       |
-│       ├── clients/
-│       |   ├── __init__.py
-│       |   ├── client_async.py           # classes: MCPConnectionClient
-│       |   └── client_sync.py            # classes: SyncConnection
-|       |
-|       ├── controller.py                 # MCPToolController
-│       ├── models/
-│       │   ├── __init__.py
-│       │   └── mcp_tool_definition.py    # classes : ToolParameter, ToolDefinition 
-|       |
-│       └── tools_json/
-│           ├── tool_get_directory.json   # tool definition : get working directory path
-│           ├── tool_list_pdfs.json       # tool definition : get list of pdfs in dir
-│           └── tool_read_pdf.json        # tool definition : get content of pdf
-│
+|       ├── clients/
+|       │   ├── __init__.py
+|       │   ├── client_async.py            # Class : MCPConnectionClient
+|       │   └── client_sync.py             # CLass : SyncConnection
+|       │
+|       ├── models/
+|       │   ├── tool_parameter.py        — CLass : ToolParameter
+|       │   └── tool_definition.py       — CLass : ToolDefinition
+|       │
+|       ├── registry/
+|       │   ├── tool_registry.py              # MCPToolRegistry(returns list of tools)
+|       │   └── tools_json/              
+│       |       ├── tool_get_directory.json   # tool definition : get working directory path
+│       |       ├── tool_list_pdfs.json       # tool definition : get list of pdfs in dir
+│       |       └── tool_read_pdf.json        # tool definition : get content of pdf
+|       │
+|       └── executor/
+|           ├── request.py               — new: MCPToolRequest (Pydantic)
+|           ├── response.py              — new: MCPToolResponse (dataclass, has_error, has_result)
+|           └── controller.py            — MCPToolController : calls via request/response
+│    
 ├── conf/
 │   ├── __init__.py
 │   ├── settings/
