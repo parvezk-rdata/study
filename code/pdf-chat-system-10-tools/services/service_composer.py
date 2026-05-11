@@ -9,7 +9,6 @@ from services.llm.utils.openai_formatter import OpenAIFormatter
 
 from services.mcp.clients.client_sync import SyncConnection
 from services.mcp.executor.controller import MCPToolController
-from services.mcp.registry.tool_registry import MCPToolRegistry
 
 from services.service_bundle import ServiceBundle
 from conf.settings.config_bundle import AppSettings
@@ -28,8 +27,7 @@ class ServiceComposer:
 
         # --- Build MCP client, service, registry and controller ---
         mcp_client     = SyncConnection(settings.mcpConfig.mcp_server_url)
-        mcp_registry   = MCPToolRegistry()
-        mcp_controller = MCPToolController(mcp_client, mcp_registry)
+        mcp_controller = MCPToolController(mcp_client)
 
         # --- Build LLM service and controller ---
         available_tools = OpenAIFormatter().format_tool_definitions(mcp_controller.get_tools_list())

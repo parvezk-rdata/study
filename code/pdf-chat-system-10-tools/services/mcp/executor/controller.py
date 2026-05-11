@@ -18,10 +18,9 @@ class MCPToolController:
     Never raises exceptions.
     """
 
-    def __init__(self, connection: SyncConnection, registry: MCPToolRegistry) -> None:
+    def __init__(self, connection: SyncConnection) -> None:
         self._connection = connection
-        self._registry = registry
-        self._tools = self._registry.getAllMCPTools()
+        self._tools = MCPToolRegistry().getAllMCPTools()
 
     # --- Called by MainController ---
 
