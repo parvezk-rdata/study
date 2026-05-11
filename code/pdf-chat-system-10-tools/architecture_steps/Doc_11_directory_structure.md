@@ -119,13 +119,32 @@ root(chat pdf app)/
 │   │   ├── __init__.py
 │   │   ├── llm_controller.py            # LLMController — receives LLMRequest,  
 │   │   │                                  calls LLMService, returns LLMResponse
-│   │   ├── llm_service.py               # LLMService: raw OpenAI API call, simple types only
-│   │   ├── request.py                   # LLMRequest: send to llm controller by main controller
-│   │   ├── response.py                  # LLMResponse: returned by llm controller to main controller
+│   │   ├── llm_service.py           # LLMService: raw OpenAI API call, simple types only
+│   │   ├── request.py               # LLMRequest: send to llm controller by main controller
+│   │   ├── response.py              # LLMResponse: returned by llmController to main controller
 │   │   └── utils/
 │   │       ├── __init__.py
 │   │       └── openai_formatter.py       # OpenAIFormatter class
-│   │
+|   |
+|   ├── mcp/
+|   |   ├── clients/
+|   |   │   ├── client_async.py          — unchanged
+|   |   │   └── client_sync.py           — unchanged
+|   |   │
+|   |   ├── models/
+|   |   │   ├── tool_parameter.py        — split from mcp_tool_definition.py
+|   |   │   └── tool_definition.py       — split from mcp_tool_definition.py
+|   |   │
+|   |   ├── registry/
+|   |   │   ├── tool_registry.py         — moved here, Path updated
+|   |   │   └── tools_json/              — moved with registry
+|   |   │
+|   |   └── executor/
+|   |   ├── request.py               — new: MCPToolRequest (Pydantic)
+|   |   ├── response.py              — new: MCPToolResponse (dataclass, has_error, has_result)
+|   |   ├── executor_service.py      — new: raw call + _resolve_error + _parse moved here
+|   |   └── controller.py            — slimmed down, registry injected, calls via request/response
+|
 │   └── mcp/
 │       ├── __init__.py
 │       ├── tool_registry.py              # MCPToolRegistry(returns list of tools)
